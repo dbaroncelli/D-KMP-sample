@@ -1,9 +1,7 @@
 //
 //  MasterBottomBar.swift
-//  iosApp
 //
 //  Created by Daniele Baroncelli on 16/03/21.
-//  Copyright © 2021 orgName. All rights reserved.
 //
 
 import SwiftUI

@@ -16,6 +16,7 @@ fun KMPViewModel.getDefaultAppState() : AppState {
     return AppState()
 }
 
+// this function notifies of any state changes
 // hopefully this code will eventually be provided by an official Kotlin function
 // https://youtrack.jetbrains.com/issue/KT-41953
 fun KMPViewModel.onChange(provideNewState: ((AppState) -> Unit)) : Closeable {
