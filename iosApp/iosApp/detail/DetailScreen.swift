@@ -18,8 +18,15 @@ struct DetailScreen: View {
             } else {
                 DetailContent(data: vm.appState.detailState.countryInfo)
             }
-        }.onAppear {
+        }
+        .onAppear {
             vm.coreModel.loadDetailItem(country: detailName)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(detailName).font(.headline).foregroundColor(.white)
+            }
         }
     }
 }
