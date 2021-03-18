@@ -49,8 +49,8 @@ struct MasterScreen: View {
                     }
                 }
             }
-            .navigationBarColor(backgroundColor: ColorsKt.PURPLE_500.toUIColor(), tintColor: .white)
-            .toolbarColor(backgroundColor: ColorsKt.PURPLE_500.toUIColor(), tintColor: .white)
+            .navigationBarColor(backgroundColor: "6200EE".toUIColor(), tintColor: .white)
+            .toolbarColor(backgroundColor: "6200EE".toUIColor(), tintColor: .white)
         }
     }
     

@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
-import eu.baroncelli.dkmpsample.android.styling.DKmpSampleTheme
+import eu.baroncelli.dkmpsample.android.styling.DkmpSampleTheme
 
 
 class MainActivity : ComponentActivity() {
@@ -15,7 +14,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DKmpSampleTheme(appViewModel.coreModel) {
+            DkmpSampleTheme() {
                 Navigation(appViewModel.coreModel)
             }
         }

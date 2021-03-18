@@ -14,9 +14,19 @@ struct MasterBottomBar: View {
     
     var body: some View {
         Spacer()
-        ButtonBarButton(menuItem: MenuItem.all, iconName: "list.bullet", selected: selectedItem==MenuItem.all, onItemClick: onItemClick)
+        ButtonBarButton(
+            menuItem: MenuItem.all,
+            iconName: "list.bullet",
+            selected: selectedItem==MenuItem.all,
+            onItemClick: onItemClick
+        )
         Spacer()
-        ButtonBarButton(menuItem: MenuItem.favorites, iconName: "star.fill", selected: selectedItem==MenuItem.favorites, onItemClick: onItemClick)
+        ButtonBarButton(
+            menuItem: MenuItem.favorites,
+            iconName: "star.fill",
+            selected: selectedItem==MenuItem.favorites,
+            onItemClick: onItemClick
+        )
         Spacer()
     }
 }
