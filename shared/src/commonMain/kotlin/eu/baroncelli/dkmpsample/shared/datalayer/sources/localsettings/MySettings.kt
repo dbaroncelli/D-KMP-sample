@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.datalayer.sources.localsettings
 
 import com.russhwolf.settings.Settings
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master.MenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.MenuItem
 
 class MySettings (s : Settings) : SettingsClient(s) {
 

@@ -9,7 +9,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master.MenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.MenuItem
 
 
 @Composable

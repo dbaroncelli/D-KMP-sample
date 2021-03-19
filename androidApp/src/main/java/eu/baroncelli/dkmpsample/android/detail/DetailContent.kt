@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.detail.CountryInfo
+import eu.baroncelli.dkmpsample.shared.viewmodel.detail.CountryInfo
 
 @Composable
 fun DetailContent(data: CountryInfo, paddingValues : PaddingValues ) {

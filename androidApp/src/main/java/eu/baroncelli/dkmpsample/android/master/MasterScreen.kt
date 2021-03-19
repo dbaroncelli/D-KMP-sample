@@ -12,13 +12,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.android.LoadingScreen
-import eu.baroncelli.dkmpsample.shared.viewmodel.KMPViewModel
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master.MasterState
-import eu.baroncelli.dkmpsample.shared.viewmodel.events.selectFavorite
-import eu.baroncelli.dkmpsample.shared.viewmodel.events.selectMenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.Events
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.MasterState
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.selectFavorite
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.selectMenuItem
 
 @Composable
-fun MasterScreen(model : KMPViewModel, masterState: MasterState, onListItemClick: (String) -> Unit) {
+fun MasterScreen(masterState: MasterState, events : Events, onListItemClick: (String) -> Unit) {
 
     Scaffold(
         topBar = {
@@ -42,14 +42,14 @@ fun MasterScreen(model : KMPViewModel, masterState: MasterState, onListItemClick
                                 item = countryRow,
                                 favorite = masterState.favoriteCountries.containsKey(countryRow.name),
                                 onItemClick = { onListItemClick(countryRow.name) },
-                                onFavoriteIconClick = { model.selectFavorite(countryRow.name) })
+                                onFavoriteIconClick = { events.selectFavorite(countryRow.name) })
                         })
                     }
                 }
             }
         },
         bottomBar = {
-            MasterBottomBar(selectedItem = masterState.selectedMenuItem, onItemClick = { model.selectMenuItem(it) })
+            MasterBottomBar(selectedItem = masterState.selectedMenuItem, onItemClick = { events.selectMenuItem(it) })
         }
     )
 }

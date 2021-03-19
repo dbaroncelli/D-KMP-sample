@@ -1,10 +1,18 @@
-package eu.baroncelli.dkmpsample.shared.viewmodel.statereducers
+package eu.baroncelli.dkmpsample.shared.viewmodel.master
 
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master.MenuItem
-import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
+/************ LAMBDA FUNCTION ***************/
+
+fun StateManager.updateMasterState(block: (MasterState) -> MasterState) {
+    //debugLogger.d {"changed master state"}
+    state = state.copy(masterState = block(state.masterState))
+}
+
+
+
+/************ STATE REDUCERS ***************/
 
 fun StateManager.restoreSelectedMenuItem() : MenuItem {
     val savedSelectedMenuItem = dataRepository.localSettings.selectedMenuItem

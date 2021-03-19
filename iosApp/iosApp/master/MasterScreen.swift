@@ -11,12 +11,13 @@ struct MasterScreen: View {
     @EnvironmentObject var vm: AppViewModel
     
     var body: some View {
-        if vm.appState.masterState.isLoading {
+        let masterState = vm.stateProvider.getMaster()
+        if masterState.isLoading {
             LoadingScreen()
         } else {
             NavigationView {
                 List {
-                    if vm.appState.masterState.countriesList.count == 0 {
+                    if masterState.countriesList.count == 0 {
                         HStack(spacing: 0) {
                             Spacer()
                             Text("empty list")
@@ -24,12 +25,12 @@ struct MasterScreen: View {
                         }
                     } else {
                         Section(header: MasterListHeader()) {
-                            ForEach (vm.appState.masterState.countriesList, id: \.name) { item in
+                            ForEach (masterState.countriesList, id: \.name) { item in
                                 NavigationLink(destination: DetailScreen(detailName: item.name)) {
                                     MasterListItem(
                                         item: item,
-                                        favorite: vm.appState.masterState.favoriteCountries[item.name] != nil,
-                                        onFavoriteIconClick: { vm.coreModel.selectFavorite(country: item.name) }
+                                        favorite: masterState.favoriteCountries[item.name] != nil,
+                                        onFavoriteIconClick: { vm.events.selectFavorite(country: item.name) }
                                     )
                                 }
                             }
@@ -43,8 +44,8 @@ struct MasterScreen: View {
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
                         MasterBottomBar(
-                            selectedItem : vm.appState.masterState.selectedMenuItem,
-                            onItemClick: { menuItem in vm.coreModel.selectMenuItem(menuItem: menuItem) }
+                            selectedItem : masterState.selectedMenuItem,
+                            onItemClick: { menuItem in vm.events.selectMenuItem(menuItem: menuItem) }
                         )
                     }
                 }

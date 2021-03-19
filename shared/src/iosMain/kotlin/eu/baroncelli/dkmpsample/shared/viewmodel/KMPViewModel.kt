@@ -1,6 +1,5 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.AppState
 import io.ktor.utils.io.core.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

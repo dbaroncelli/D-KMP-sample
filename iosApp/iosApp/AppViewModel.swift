@@ -8,7 +8,13 @@ import Foundation
 import shared
 
 class AppViewModel: ObservableObject {
-    let coreModel : KMPViewModel = KMPViewModel()
+    private let coreModel : KMPViewModel = KMPViewModel()
+    var events : Events {
+        return self.coreModel.events
+    }
+    var stateProvider : StateProvider {
+        return self.appState.getStateProvider(model: self.coreModel)
+    }
     @Published var appState : AppState
     
     init() {
@@ -18,4 +24,5 @@ class AppViewModel: ObservableObject {
             self.appState = newState
         }
     }
+
 }

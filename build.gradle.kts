@@ -21,7 +21,6 @@ allprojects {
         gradlePluginPortal()
         google()
         maven(url = "https://kotlin.bintray.com/kotlinx/")
-        maven(url = "https://kotlin.bintray.com/kotlin-js-wrappers/")
         mavenCentral()
     }
 }

@@ -1,7 +1,23 @@
-package eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master
+package eu.baroncelli.dkmpsample.shared.viewmodel.master
 
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
+
+
+/************ STATE CLASS DEFINITION ***************/
+
+data class MasterState (
+    val selectedMenuItem : MenuItem = MenuItem.UNDEFINED,
+    val countriesList : List<CountriesListItem> = emptyList(),
+    val isLoading : Boolean = true,
+    val favoriteCountries : Map<String,Boolean> = mutableMapOf(),
+)
+
+
+/************ PROPERTY CLASSES DEFINITION ***************/
+
+
+enum class MenuItem { UNDEFINED, ALL, FAVORITES }
 
 class CountriesListItem (
     _data : CountryListData,

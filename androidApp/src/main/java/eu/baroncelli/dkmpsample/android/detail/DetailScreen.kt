@@ -7,17 +7,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.android.LoadingScreen
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.detail.DetailState
+import eu.baroncelli.dkmpsample.shared.viewmodel.detail.DetailState
 
 @Composable
-fun DetailScreen(detailName : String, detailState: DetailState) {
+fun DetailScreen(detailState: DetailState) {
 
     Scaffold(
         topBar = {
             TopAppBar(title = {
                 Row (verticalAlignment = Alignment.Bottom) {
                     Text(text = "country: ", fontSize = 20.sp)
-                    Text(text = detailName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
+                    Text(text = detailState.detailName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
                 }
             })
         },

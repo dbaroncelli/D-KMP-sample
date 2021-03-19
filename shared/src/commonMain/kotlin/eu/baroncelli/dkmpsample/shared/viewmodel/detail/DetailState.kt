@@ -1,10 +1,19 @@
-package eu.baroncelli.dkmpsample.shared.viewmodel.appstate.detail
+package eu.baroncelli.dkmpsample.shared.viewmodel.detail
 
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
+/************ STATE CLASS DEFINITION ***************/
+
+data class DetailState (
+    val detailName : String = "",
+    val countryInfo : CountryInfo = CountryInfo(),
+    val isLoading : Boolean = false,
+)
+
+/************ PROPERTY CLASSES DEFINITION ***************/
 
 class CountryInfo (
     _listData : CountryListData = CountryListData(),
