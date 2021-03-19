@@ -15,13 +15,15 @@ fun StateManager.updateDetailState(block: (DetailState) -> DetailState) {
 /********** STATE REDUCERS **********/
 
 fun StateManager.setDetailLoading(country : String) {
+    // set the countryName property and set the isLoading flag to true
     updateDetailState {
         it.copy(countryName = country, isLoading = true)
     }
 }
 
-suspend fun StateManager.getDetails(nome: String) {
-    val listItemData = dataRepository.getCountryInfo(nome)
+suspend fun StateManager.getDetails(country: String) {
+    // get country data from the Repository
+    val listItemData = dataRepository.getCountryInfo(country)
     updateDetailState {
         it.copy(countryInfo = listItemData, isLoading = false)
     }

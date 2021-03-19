@@ -4,7 +4,8 @@ import com.russhwolf.settings.MockSettings
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import eu.baroncelli.dkmpsample.shared.utils.runBlockingTest
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
-import eu.baroncelli.dkmpsample.shared.viewmodel.appstate.master.MenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.detail.updateDetailState
+import eu.baroncelli.dkmpsample.shared.viewmodel.master.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

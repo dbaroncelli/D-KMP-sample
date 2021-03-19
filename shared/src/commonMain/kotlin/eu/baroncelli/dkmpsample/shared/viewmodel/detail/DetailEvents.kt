@@ -6,6 +6,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
 internal fun Events.loadDetailData(country: String) {
     stateManager.setDetailLoading(country)
+    // launch a coroutine, as "getDetails" is a suspend function
     launchCoroutine {
         stateManager.getDetails(country)
     }
