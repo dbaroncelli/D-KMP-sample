@@ -1,5 +1,5 @@
 # D-KMP-sample
-D-KMP official sample
+D-KMP architecture - official sample
 
 ![app_structure](https://user-images.githubusercontent.com/5320104/111846880-04e82b00-8908-11eb-983b-133387d0fb6a.png)
 
