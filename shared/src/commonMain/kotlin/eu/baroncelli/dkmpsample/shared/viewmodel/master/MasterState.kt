@@ -4,7 +4,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.Countr
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
 
-/************ STATE CLASS DEFINITION ***************/
+/********** STATE CLASS DEFINITION **********/
 
 data class MasterState (
     val selectedMenuItem : MenuItem = MenuItem.UNDEFINED,
@@ -14,7 +14,7 @@ data class MasterState (
 )
 
 
-/************ PROPERTY CLASSES DEFINITION ***************/
+/********** PROPERTY CLASSES DEFINITION **********/
 
 
 enum class MenuItem { UNDEFINED, ALL, FAVORITES }

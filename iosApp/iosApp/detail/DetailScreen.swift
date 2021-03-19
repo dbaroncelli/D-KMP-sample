@@ -9,15 +9,15 @@ import shared
 
 struct DetailScreen: View {
     var detailName : String
-    @EnvironmentObject var vm: AppViewModel
+    @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let detailState = vm.stateProvider.getDetail(country: detailName)
+        let state = viewModel.stateProvider.getDetail(country: detailName)
         VStack {
-            if detailState.isLoading {
+            if state.isLoading {
                 LoadingScreen()
             } else {
-                DetailContent(data: detailState.countryInfo)
+                DetailContent(data: state.countryInfo)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

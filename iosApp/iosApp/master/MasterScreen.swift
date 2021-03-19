@@ -8,16 +8,17 @@ import SwiftUI
 import shared
 
 struct MasterScreen: View {
-    @EnvironmentObject var vm: AppViewModel
+    @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let masterState = vm.stateProvider.getMaster()
-        if masterState.isLoading {
+        let state = viewModel.stateProvider.getMaster()
+        let events = viewModel.events
+        if state.isLoading {
             LoadingScreen()
         } else {
             NavigationView {
                 List {
-                    if masterState.countriesList.count == 0 {
+                    if state.countriesList.count == 0 {
                         HStack(spacing: 0) {
                             Spacer()
                             Text("empty list")
@@ -25,12 +26,12 @@ struct MasterScreen: View {
                         }
                     } else {
                         Section(header: MasterListHeader()) {
-                            ForEach (masterState.countriesList, id: \.name) { item in
+                            ForEach (state.countriesList, id: \.name) { item in
                                 NavigationLink(destination: DetailScreen(detailName: item.name)) {
                                     MasterListItem(
                                         item: item,
-                                        favorite: masterState.favoriteCountries[item.name] != nil,
-                                        onFavoriteIconClick: { vm.events.selectFavorite(country: item.name) }
+                                        favorite: state.favoriteCountries[item.name] != nil,
+                                        onFavoriteIconClick: { events.selectFavorite(country: item.name) }
                                     )
                                 }
                             }
@@ -44,8 +45,8 @@ struct MasterScreen: View {
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
                         MasterBottomBar(
-                            selectedItem : masterState.selectedMenuItem,
-                            onItemClick: { menuItem in vm.events.selectMenuItem(menuItem: menuItem) }
+                            selectedItem : state.selectedMenuItem,
+                            onItemClick: { menuItem in events.selectMenuItem(menuItem: menuItem) }
                         )
                     }
                 }

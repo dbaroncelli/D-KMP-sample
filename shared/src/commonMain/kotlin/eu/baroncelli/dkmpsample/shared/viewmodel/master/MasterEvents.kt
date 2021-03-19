@@ -2,7 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.master
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
-/************ INTERNAL EVENT FUNCTION USED BY THE STATE PROVIDER ***************/
+/********** INTERNAL EVENT FUNCTION USED BY THE STATE PROVIDER **********/
 
 internal fun Events.updateMasterData() {
     val restoredSelectedMenuItem = stateManager.restoreSelectedMenuItem()
@@ -13,7 +13,7 @@ internal fun Events.updateMasterData() {
 }
 
 
-/************ PUBLIC EVENT FUNCTIONS ***************/
+/********** PUBLIC EVENT FUNCTIONS **********/
 
 fun Events.selectMenuItem(menuItem: MenuItem) {
     launchCoroutine {

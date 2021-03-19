@@ -3,7 +3,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.master
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 
-/************ LAMBDA FUNCTION ***************/
+/********** LAMBDA FUNCTION **********/
 
 fun StateManager.updateMasterState(block: (MasterState) -> MasterState) {
     //debugLogger.d {"changed master state"}
@@ -12,7 +12,7 @@ fun StateManager.updateMasterState(block: (MasterState) -> MasterState) {
 
 
 
-/************ STATE REDUCERS ***************/
+/********** STATE REDUCERS **********/
 
 fun StateManager.restoreSelectedMenuItem() : MenuItem {
     val savedSelectedMenuItem = dataRepository.localSettings.selectedMenuItem

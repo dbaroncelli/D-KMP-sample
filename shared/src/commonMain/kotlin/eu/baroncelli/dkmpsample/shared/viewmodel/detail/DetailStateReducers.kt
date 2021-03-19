@@ -3,7 +3,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.detail
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountryInfo
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 
-/************ LAMBDA FUNCTION ***************/
+/********** LAMBDA FUNCTION **********/
 
 fun StateManager.updateDetailState(block: (DetailState) -> DetailState) {
     //debugLogger.d {"changed detail state"}
@@ -12,7 +12,7 @@ fun StateManager.updateDetailState(block: (DetailState) -> DetailState) {
 
 
 
-/************ STATE REDUCERS ***************/
+/********** STATE REDUCERS **********/
 
 fun StateManager.setDetailLoading(country : String) {
     updateDetailState {

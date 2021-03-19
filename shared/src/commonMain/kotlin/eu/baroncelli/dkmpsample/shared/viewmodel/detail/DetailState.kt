@@ -5,7 +5,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.Countr
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
-/************ STATE CLASS DEFINITION ***************/
+/********** STATE CLASS DEFINITION **********/
 
 data class DetailState (
     val detailName : String = "",
@@ -13,7 +13,7 @@ data class DetailState (
     val isLoading : Boolean = false,
 )
 
-/************ PROPERTY CLASSES DEFINITION ***************/
+/********** PROPERTY CLASSES DEFINITION **********/
 
 class CountryInfo (
     _listData : CountryListData = CountryListData(),
