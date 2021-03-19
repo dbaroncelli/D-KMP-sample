@@ -2,9 +2,9 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.master
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
-/********** INTERNAL EVENT FUNCTION USED BY THE STATE PROVIDER **********/
+/********** INTERNAL EVENT FUNCTION, USED BY THE STATE PROVIDER **********/
 
-internal fun Events.updateMasterData() {
+internal fun Events.loadMasterData() {
     val restoredSelectedMenuItem = stateManager.restoreSelectedMenuItem()
     launchCoroutine {
         // debugLogger.d{"restoredSelectedMenuItem: "+restoredSelectedMenuItem}

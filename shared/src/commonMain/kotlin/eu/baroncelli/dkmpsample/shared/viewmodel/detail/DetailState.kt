@@ -8,7 +8,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 /********** STATE CLASS DEFINITION **********/
 
 data class DetailState (
-    val detailName : String = "",
+    val countryName : String = "",
     val countryInfo : CountryInfo = CountryInfo(),
     val isLoading : Boolean = false,
 )

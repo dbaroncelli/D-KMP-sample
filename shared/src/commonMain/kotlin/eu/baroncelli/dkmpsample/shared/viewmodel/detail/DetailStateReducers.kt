@@ -16,7 +16,7 @@ fun StateManager.updateDetailState(block: (DetailState) -> DetailState) {
 
 fun StateManager.setDetailLoading(country : String) {
     updateDetailState {
-        it.copy(detailName = country, isLoading = true)
+        it.copy(countryName = country, isLoading = true)
     }
 }
 

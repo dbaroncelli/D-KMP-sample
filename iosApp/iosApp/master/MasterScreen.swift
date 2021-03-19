@@ -27,7 +27,7 @@ struct MasterScreen: View {
                     } else {
                         Section(header: MasterListHeader()) {
                             ForEach (state.countriesList, id: \.name) { item in
-                                NavigationLink(destination: DetailScreen(detailName: item.name)) {
+                                NavigationLink(destination: DetailScreen(countryName: item.name)) {
                                     MasterListItem(
                                         item: item,
                                         favorite: state.favoriteCountries[item.name] != nil,

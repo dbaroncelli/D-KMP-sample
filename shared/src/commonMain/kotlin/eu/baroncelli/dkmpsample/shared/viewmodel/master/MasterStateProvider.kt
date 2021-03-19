@@ -7,11 +7,14 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 fun StateProvider.getMaster() : MasterState {
 
-    /********** RUN UPDATE, BASED ON CONDITION **********/
+    /********** LOAD DATA, BASED ON CONDITION **********/
+    // condition should be set to that the StateProvider should load the data only once
+    // make sure your condition is correct, otherwise the risk is to load data at each single
+    // declarative UI recomposition, which you definitely want to avoid!
     val condition = getState().masterState.selectedMenuItem == MenuItem.UNDEFINED
-    debugLogger.d{"getMaster() menuItem: "+getState().masterState.selectedMenuItem+" / RUN UPDATE "+ condition}
+    //debugLogger.d{"MasterStateProvide: "+getState().masterState.selectedMenuItem+" / LOAD DATA "+ condition}
     if (condition) {
-        events.updateMasterData()
+        events.loadMasterData()
     }
 
     /********** RETURN STATE OBJECT **********/

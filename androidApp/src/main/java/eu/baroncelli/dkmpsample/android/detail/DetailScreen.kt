@@ -17,7 +17,7 @@ fun DetailScreen(detailState: DetailState) {
             TopAppBar(title = {
                 Row (verticalAlignment = Alignment.Bottom) {
                     Text(text = "country: ", fontSize = 20.sp)
-                    Text(text = detailState.detailName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
+                    Text(text = detailState.countryName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
                 }
             })
         },
