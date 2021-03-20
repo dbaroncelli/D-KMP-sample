@@ -11,9 +11,11 @@ import kotlinx.coroutines.launch
 class StateManager(repo: Repository = Repository()) {
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
+
     internal var state : AppState
         get() = mutableStateFlow.value
         set (value) { mutableStateFlow.value = value }
+
     internal val dataRepository = repo
 
 }

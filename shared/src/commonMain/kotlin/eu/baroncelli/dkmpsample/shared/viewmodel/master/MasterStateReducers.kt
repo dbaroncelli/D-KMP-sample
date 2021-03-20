@@ -3,7 +3,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.master
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 
-/********** LAMBDA FUNCTION **********/
+/********** LAMBDA FUNCTION, USED BY THE STATE REDUCERS **********/
 
 fun StateManager.updateMasterState(block: (MasterState) -> MasterState) {
     //debugLogger.d {"changed master state"}
