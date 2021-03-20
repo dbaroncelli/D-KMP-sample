@@ -17,7 +17,7 @@ This is the official sample of the **D-KMP architecture**, which is described in
 #### other popular libraries for connecting to different data sources:
 - **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **realtime db** (using [Firestore](https://github.com/GitLiveApp/firebase-kotlin-sdk))
-- **graphQL** (using [SqlDelight](https://github.com/apollographql/apollo-android))
+- **graphQL** (using [Apollo GraphQL Client](https://github.com/apollographql/apollo-android))
 - etc...
 
 ![app_structure](https://user-images.githubusercontent.com/5320104/111846880-04e82b00-8908-11eb-983b-133387d0fb6a.png)
