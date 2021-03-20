@@ -10,7 +10,7 @@ data class MasterState (
     val selectedMenuItem : MenuItem = MenuItem.UNDEFINED,
     val countriesList : List<CountriesListItem> = emptyList(),
     val isLoading : Boolean = true,
-    val favoriteCountries : Map<String,Boolean> = mutableMapOf(),
+    val favoriteCountries : Map<String,Boolean> = emptyMap(),
 )
 
 

@@ -22,14 +22,14 @@ class MasterReducersTests {
     @Test
     fun testFavoritesTab() = runBlockingTest {
         val sm = StateManager(Repository(MockSettings()))
-        sm.getDataByMenuItem(MenuItem.FAVORITES)
+        sm.setMasterDataByMenuItem(MenuItem.FAVORITES)
         assertEquals(sm.state.masterState.selectedMenuItem, MenuItem.FAVORITES)
     }
 
     @Test
     fun testFavoriteCountry() {
         val sm = StateManager(Repository(MockSettings()))
-        sm.selectFavorite("Italy")
+        sm.toggleFavorite("Italy")
         assertTrue(sm.state.masterState.favoriteCountries.containsKey("Italy"))
     }
 

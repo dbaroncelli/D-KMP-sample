@@ -2,6 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.master
 
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
+import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 /********** LAMBDA FUNCTION, USED BY THE STATE REDUCERS **********/
 
@@ -24,8 +25,8 @@ fun StateManager.restoreSelectedMenuItem() : MenuItem {
 }
 
 
-suspend fun StateManager.getDataByMenuItem(menuItem: MenuItem) {
-    // get countries data from the Repository
+suspend fun StateManager.setMasterDataByMenuItem(menuItem: MenuItem) {
+    // set master data into the state object, after retrieving the countries list from the repository
     var listData = dataRepository.getCountriesListData()
     if (menuItem == MenuItem.FAVORITES) {
         // in case the Favorites tab has been selected, only get the favorite countries
@@ -44,10 +45,9 @@ suspend fun StateManager.getDataByMenuItem(menuItem: MenuItem) {
 }
 
 
-fun StateManager.selectFavorite(country: String) {
-    // get favorite countries map from the Settings
+fun StateManager.toggleFavorite(country: String) {
+    // update the favorites maps and save it into the state object
     val favoriteCountries = dataRepository.localSettings.favoriteCountries
-    // remove the key if it's in the map, otherwise add it
     if (favoriteCountries.containsKey(country)) {
         favoriteCountries.remove(country)
     } else {
