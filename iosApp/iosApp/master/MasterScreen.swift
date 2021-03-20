@@ -11,14 +11,14 @@ struct MasterScreen: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let state = viewModel.stateProvider.getMaster()
+        let masterState = viewModel.stateProvider.getMaster()
         let events = viewModel.events
-        if state.isLoading {
+        if masterState.isLoading {
             LoadingScreen()
         } else {
             NavigationView {
                 List {
-                    if state.countriesList.count == 0 {
+                    if masterState.countriesList.count == 0 {
                         HStack(spacing: 0) {
                             Spacer()
                             Text("empty list")
@@ -26,11 +26,11 @@ struct MasterScreen: View {
                         }
                     } else {
                         Section(header: MasterListHeader()) {
-                            ForEach (state.countriesList, id: \.name) { item in
+                            ForEach (masterState.countriesList, id: \.name) { item in
                                 NavigationLink(destination: DetailScreen(countryName: item.name)) {
                                     MasterListItem(
                                         item: item,
-                                        favorite: state.favoriteCountries[item.name] != nil,
+                                        favorite: masterState.favoriteCountries[item.name] != nil,
                                         onFavoriteIconClick: { events.selectFavorite(country: item.name) }
                                     )
                                 }
@@ -45,7 +45,7 @@ struct MasterScreen: View {
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
                         MasterBottomBar(
-                            selectedItem : state.selectedMenuItem,
+                            selectedItem : masterState.selectedMenuItem,
                             onItemClick: { menuItem in events.selectMenuItem(menuItem: menuItem) }
                         )
                     }

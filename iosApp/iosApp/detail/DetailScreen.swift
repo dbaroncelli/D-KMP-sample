@@ -12,12 +12,12 @@ struct DetailScreen: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let state = viewModel.stateProvider.getDetail(country: countryName)
+        let detailState = viewModel.stateProvider.getDetail(country: countryName)
         VStack {
-            if state.isLoading {
+            if detailState.isLoading {
                 LoadingScreen()
             } else {
-                DetailContent(data: state.countryInfo)
+                DetailContent(data: detailState.countryInfo)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
