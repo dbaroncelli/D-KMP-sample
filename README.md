@@ -4,7 +4,7 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
-## Characteristics of the D-KMP architecture:
+## Key features of the D-KMP architecture:
 
 - it uses the latest **declarative UI** toolkits: **JetpackCompose** for *Android* and **SwiftUI** for *iOS*
 - it provides just 2 types of functions to the UI layer: **Event** functions and **StateProvider** functions
