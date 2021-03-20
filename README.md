@@ -14,7 +14,7 @@ This is the official sample of the **D-KMP architecture**, which is described in
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
 - **local settings** (using [MultiplaformSettings](https://github.com/russhwolf/multiplatform-settings))
 
-other sources:
+#### other popular libraries for connecting to different data sources:
 - **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **realtime db** (using [Firestore](https://github.com/GitLiveApp/firebase-kotlin-sdk))
 - **graphQL** (using [SqlDelight](https://github.com/apollographql/apollo-android))
