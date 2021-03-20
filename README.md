@@ -10,7 +10,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - it provides just 2 types of functions to the UI layer: **Event** functions and **StateProvider** functions
 - it **fully shares the ViewModel** (and the *DataLayer*) via **Kotlin MultiPlatform**
 - it implements the **MVI pattern** and the *unidirectional data flow*
-- it uses Kotlin's **StateFlow** for the observable mechanism
+- it uses Kotlin's **StateFlow** for the multi-platform observable mechanism
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
