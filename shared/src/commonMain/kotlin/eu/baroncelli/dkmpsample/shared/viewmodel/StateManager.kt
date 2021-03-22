@@ -29,10 +29,12 @@ class StateManager(repo: Repository = Repository()) {
     inline fun <reified T:Any> updateScreen(theClass: KClass<T>, block: (T) -> T) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
-        val screenState = state.screenStatesMap[screenType] as T
-        val screenStatesMap = state.screenStatesMap.toMutableMap()
-        screenStatesMap[screenType!!] = block(screenState)
-        state = AppState(screenStatesMap = screenStatesMap.toMap())
+        val screenState = state.screenStatesMap[screenType] as? T
+        if (screenState != null) {
+            val screenStatesMap = state.screenStatesMap.toMutableMap()
+            screenStatesMap[screenType!!] = block(screenState)
+            state = AppState(screenStatesMap = screenStatesMap.toMap())
+        }
     }
 
 }
