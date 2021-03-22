@@ -1,21 +1,38 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
-import eu.baroncelli.dkmpsample.shared.viewmodel.detail.DetailState
-import eu.baroncelli.dkmpsample.shared.viewmodel.master.MasterState
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
+import kotlin.reflect.KClass
 
 class StateManager(repo: Repository = Repository()) {
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
 
-    internal var state : AppState
+    var state : AppState
         get() = mutableStateFlow.value
         set (value) { mutableStateFlow.value = value }
 
     internal val dataRepository = repo
+
+    inline fun <reified T:Any> getScreen(theClass : KClass<T>) : Any? {
+        //debugLogger.log("getScreen: "+T::class.simpleName)
+        val screenType = stateToTypeMap[theClass]
+        return state.screenStatesMap[screenType] as? T
+    }
+    inline fun <reified T:Any> setScreen(newScreenState : T) {
+        //debugLogger.log("setScreen: "+T::class.simpleName)
+        val screenType = stateToTypeMap[T::class]
+        val screenStatesMap = state.screenStatesMap.toMutableMap()
+        screenStatesMap[screenType!!] = newScreenState
+        state = AppState(screenStatesMap = screenStatesMap.toMap())
+    }
+    inline fun <reified T:Any> updateScreen(theClass: KClass<T>, block: (T) -> T) {
+        //debugLogger.log("updateScreen: "+T::class.simpleName)
+        val screenType = stateToTypeMap[theClass]
+        val screenState = state.screenStatesMap[screenType] as T
+        val screenStatesMap = state.screenStatesMap.toMutableMap()
+        screenStatesMap[screenType!!] = block(screenState)
+        state = AppState(screenStatesMap = screenStatesMap.toMap())
+    }
 
 }

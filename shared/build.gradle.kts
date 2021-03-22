@@ -48,7 +48,6 @@ kotlin {
                 implementation("io.ktor:ktor-client-logging:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-serialization:${Versions.ktor}")
                 implementation("com.russhwolf:multiplatform-settings-no-arg:0.7.4")
-                api("co.touchlab:kermit:0.1.8")
             }
         }
         val commonTest by getting {

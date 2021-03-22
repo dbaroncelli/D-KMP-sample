@@ -1,13 +1,24 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import eu.baroncelli.dkmpsample.shared.viewmodel.detail.DetailState
-import eu.baroncelli.dkmpsample.shared.viewmodel.master.MasterState
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
+import kotlin.reflect.KClass
 
 data class AppState (
-    internal val masterState : MasterState = MasterState(),
-    internal val detailState : DetailState = DetailState(),
+    val screenStatesMap : Map<ScreenType,Any> = mapOf()
 ) {
     fun getStateProvider(model : KMPViewModel) : StateProvider {
-        return StateProvider(model)
+        return model.stateProvider
     }
+
 }
+
+// here we define all the screenTypes
+// the AppState keeps in memory just one screenState per screenType
+enum class ScreenType{ MASTER, DETAIL, DIALOG }
+
+// here we list all screenState classes, defining their screenType
+val stateToTypeMap = mapOf<KClass<*>,ScreenType>(
+    CountriesListState::class to ScreenType.MASTER,
+    CountryDetailState::class to ScreenType.DETAIL,
+)

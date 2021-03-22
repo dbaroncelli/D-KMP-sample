@@ -1,10 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import co.touchlab.kermit.CommonLogger
-import co.touchlab.kermit.Kermit
+import eu.baroncelli.dkmpsample.shared.DebugLogger
 import kotlinx.coroutines.flow.StateFlow
 
-val debugLogger by lazy { Kermit(CommonLogger()).withTag("D-KMP-SAMPLE") }
+val debugLogger by lazy { DebugLogger("D-KMP-SAMPLE") }
 
 class KMPViewModel {
 
@@ -14,5 +13,7 @@ class KMPViewModel {
     internal val stateManager = StateManager()
 
     val events = Events(stateManager)
+
+    val stateProvider = StateProvider(stateManager, events)
 
 }

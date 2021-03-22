@@ -2,7 +2,7 @@ package eu.baroncelli.dkmpsample.shared.datalayer.sources.localsettings
 
 import kotlin.reflect.KProperty
 import com.russhwolf.settings.Settings
-import eu.baroncelli.dkmpsample.shared.viewmodel.master.MenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.MenuItem
 
 open class SettingsClient(settingsImpl : Settings) {
 

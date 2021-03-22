@@ -2,7 +2,7 @@ package eu.baroncelli.dkmpsample.shared.datalayer.functions
 
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.fetchCountryExtraData
-import eu.baroncelli.dkmpsample.shared.viewmodel.detail.CountryInfo
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryInfo
 
 suspend fun Repository.getCountryInfo(country: String): CountryInfo {
 

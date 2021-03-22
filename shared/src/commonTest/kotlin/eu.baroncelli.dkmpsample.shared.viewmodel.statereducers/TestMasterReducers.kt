@@ -1,11 +1,11 @@
-package eu.baroncelli.dkmpsample.shared.viewmodel.statereducers
+package eu.baroncelli.dkmpsample.shared.eu.baroncelli.dkmpsample.shared.viewmodel.statereducers
 
 import com.russhwolf.settings.MockSettings
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
-import eu.baroncelli.dkmpsample.shared.utils.runBlockingTest
+import eu.baroncelli.dkmpsample.shared.runBlockingTest
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
-import eu.baroncelli.dkmpsample.shared.viewmodel.detail.updateDetailState
-import eu.baroncelli.dkmpsample.shared.viewmodel.master.*
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -15,41 +15,52 @@ class MasterReducersTests {
     @Test
     fun testDefaultTab() {
         val sm = StateManager(Repository(MockSettings()))
+        sm.setScreen(CountriesListState())
         sm.restoreSelectedMenuItem()
-        assertEquals(sm.state.masterState.selectedMenuItem, MenuItem.ALL)
+        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
+        assertEquals(masterState.selectedMenuItem, MenuItem.ALL)
     }
 
     @Test
     fun testFavoritesTab() = runBlockingTest {
         val sm = StateManager(Repository(MockSettings()))
-        sm.setMasterDataByMenuItem(MenuItem.FAVORITES)
-        assertEquals(sm.state.masterState.selectedMenuItem, MenuItem.FAVORITES)
+        sm.setScreen(CountriesListState())
+        sm.updateCountriesList(MenuItem.FAVORITES)
+        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
+        assertEquals(masterState.selectedMenuItem, MenuItem.FAVORITES)
     }
 
     @Test
     fun testFavoriteCountry() {
         val sm = StateManager(Repository(MockSettings()))
+        sm.setScreen(CountriesListState())
         sm.toggleFavorite("Italy")
-        assertTrue(sm.state.masterState.favoriteCountries.containsKey("Italy"))
+        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
+        assertTrue(masterState.favoriteCountries.containsKey("Italy"))
     }
 
     @Test
-    fun testMasterSubstate() {
+    fun testMasterStateUpdate() {
         val sm = StateManager(Repository(MockSettings()))
-        sm.updateMasterState {
+        sm.setScreen(CountriesListState())
+        sm.updateScreen(CountriesListState::class) {
             it.copy(isLoading = false)
         }
-        assertEquals(sm.state.masterState.isLoading, false)
+        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
+        assertEquals(masterState.isLoading, false)
     }
 
     @Test
-    fun testDetailsSubstate() {
+    fun testDetailStateUpdate() {
         val sm = StateManager(Repository(MockSettings()))
-        sm.updateDetailState {
+        sm.setScreen(CountryDetailState())
+        sm.updateScreen(CountryDetailState::class) {
             it.copy(isLoading = true)
         }
-        assertEquals(sm.state.detailState.isLoading, true)
+        val detailState = sm.getScreen(CountryDetailState::class) as CountryDetailState
+        assertEquals(detailState.isLoading, true)
     }
 
 
 }
+
