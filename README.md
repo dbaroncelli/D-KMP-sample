@@ -22,5 +22,4 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - **graphQL** (using [Apollo GraphQL](https://github.com/apollographql/apollo-android))
 - etc...
 
-![app_structure](https://user-images.githubusercontent.com/5320104/111874485-c600b680-8995-11eb-851c-79a49bf32c22.png)
-
+![app_structure](https://user-images.githubusercontent.com/5320104/112177764-7fab9180-8bf9-11eb-8107-21aad7e89971.png)
