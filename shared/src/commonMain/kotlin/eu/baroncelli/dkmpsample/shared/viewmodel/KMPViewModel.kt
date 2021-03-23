@@ -10,10 +10,10 @@ class KMPViewModel {
     val stateFlow: StateFlow<AppState>
         get() = stateManager.mutableStateFlow
 
-    internal val stateManager = StateManager()
+    internal val stateManager by lazy { StateManager() }
 
-    val events = Events(stateManager)
+    val events by lazy { Events(stateManager) }
 
-    val stateProvider = StateProvider(stateManager, events)
+    internal val stateProvider by lazy { StateProvider(stateManager, events) }
 
 }

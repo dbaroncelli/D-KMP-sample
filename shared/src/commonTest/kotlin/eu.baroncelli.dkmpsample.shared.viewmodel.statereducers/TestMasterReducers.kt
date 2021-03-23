@@ -17,8 +17,8 @@ class MasterReducersTests {
         val sm = StateManager(Repository(MockSettings()))
         sm.setScreen(CountriesListState())
         sm.restoreSelectedMenuItem()
-        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
-        assertEquals(masterState.selectedMenuItem, MenuItem.ALL)
+        val masterState = sm.getScreen(CountriesListState::class)
+        assertEquals(masterState?.selectedMenuItem, MenuItem.ALL)
     }
 
     @Test
@@ -26,8 +26,8 @@ class MasterReducersTests {
         val sm = StateManager(Repository(MockSettings()))
         sm.setScreen(CountriesListState())
         sm.updateCountriesList(MenuItem.FAVORITES)
-        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
-        assertEquals(masterState.selectedMenuItem, MenuItem.FAVORITES)
+        val masterState = sm.getScreen(CountriesListState::class)
+        assertEquals(masterState?.selectedMenuItem, MenuItem.FAVORITES)
     }
 
     @Test
@@ -35,8 +35,8 @@ class MasterReducersTests {
         val sm = StateManager(Repository(MockSettings()))
         sm.setScreen(CountriesListState())
         sm.toggleFavorite("Italy")
-        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
-        assertTrue(masterState.favoriteCountries.containsKey("Italy"))
+        val masterState = sm.getScreen(CountriesListState::class)
+        assertTrue(masterState?.favoriteCountries!!.containsKey("Italy"))
     }
 
     @Test
@@ -46,8 +46,8 @@ class MasterReducersTests {
         sm.updateScreen(CountriesListState::class) {
             it.copy(isLoading = false)
         }
-        val masterState = sm.getScreen(CountriesListState::class) as CountriesListState
-        assertEquals(masterState.isLoading, false)
+        val masterState = sm.getScreen(CountriesListState::class)
+        assertEquals(masterState?.isLoading, false)
     }
 
     @Test
@@ -57,8 +57,8 @@ class MasterReducersTests {
         sm.updateScreen(CountryDetailState::class) {
             it.copy(isLoading = true)
         }
-        val detailState = sm.getScreen(CountryDetailState::class) as CountryDetailState
-        assertEquals(detailState.isLoading, true)
+        val detailState = sm.getScreen(CountryDetailState::class)
+        assertEquals(detailState?.isLoading, true)
     }
 
 

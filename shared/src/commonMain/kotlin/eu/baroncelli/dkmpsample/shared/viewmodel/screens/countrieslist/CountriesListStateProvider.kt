@@ -1,12 +1,12 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
-
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 
 fun StateProvider.getCountriesListState() : CountriesListState {
 
-    var state = stateManager.getScreen(CountriesListState::class) as? CountriesListState
+    var state = stateManager.getScreen(CountriesListState::class)
+
 
     /********** LOAD DATA, BASED ON CONDITION **********/
     // condition should be choosen so that the StateProvider doesn't attempt to reload the data when it's already there

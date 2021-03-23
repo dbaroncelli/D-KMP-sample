@@ -12,9 +12,9 @@ class StateManager(repo: Repository = Repository()) {
         get() = mutableStateFlow.value
         set (value) { mutableStateFlow.value = value }
 
-    internal val dataRepository = repo
+    internal val dataRepository by lazy { repo }
 
-    inline fun <reified T:Any> getScreen(theClass : KClass<T>) : Any? {
+    inline fun <reified T:Any> getScreen(theClass : KClass<T>) : T? {
         //debugLogger.log("getScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
         return state.screenStatesMap[screenType] as? T

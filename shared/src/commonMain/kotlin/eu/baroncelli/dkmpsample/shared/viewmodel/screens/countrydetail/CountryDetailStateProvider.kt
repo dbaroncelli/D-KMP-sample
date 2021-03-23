@@ -2,10 +2,10 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
+
 fun StateProvider.getCountryDetailState(country : String) : CountryDetailState {
 
-
-    var state = stateManager.getScreen(CountryDetailState::class) as? CountryDetailState
+    var state = stateManager.getScreen(CountryDetailState::class)
 
 
     /********** LOAD DATA, BASED ON CONDITION **********/

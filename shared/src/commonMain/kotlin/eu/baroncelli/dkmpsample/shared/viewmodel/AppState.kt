@@ -22,4 +22,8 @@ enum class ScreenType{ MASTER, DETAIL, DIALOG }
 val stateToTypeMap = mapOf<KClass<*>,ScreenType>(
     CountriesListState::class to ScreenType.MASTER,
     CountryDetailState::class to ScreenType.DETAIL,
+    // other examples:
+    // ProfileState::class to ScreenType.MASTER,
+    // SettingsState::class to ScreenType.DETAIL,
+    // DialogState::class to ScreenType.DIALOG,
 )
