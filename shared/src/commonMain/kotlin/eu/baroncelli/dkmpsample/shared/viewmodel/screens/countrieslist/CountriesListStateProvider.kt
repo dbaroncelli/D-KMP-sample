@@ -5,21 +5,19 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 fun StateProvider.getCountriesListState() : CountriesListState {
 
-    var state = stateManager.getScreen(CountriesListState::class)
+    var screenState = stateManager.getScreen(CountriesListState::class)
 
-
-    /********** LOAD DATA, BASED ON CONDITION **********/
-    // condition should be choosen so that the StateProvider doesn't attempt to reload the data when it's already there
-    // make sure your condition is correct, otherwise the risk is to go into a recomposition loop
-    val condition = state == null
-    // in this case we load data, only if the Master screen hasn't yet been instantiated
+    /********** RESET THE SCREEN STATE, BASED ON CONDITION **********/
+    // make sure the condition is correct, otherwise the risk is to go into a recomposition loop
+    val condition = screenState == null
+    // in this case we reset the screen state, only if it hasn't been instantiated yet
     //debugLogger.log("MasterStateProvide: "+state?.selectedMenuItem+" / LOAD DATA "+ condition)
     if (condition) {
-        state = CountriesListState(isLoading = true)
-        stateManager.setScreen(state)
+        screenState = CountriesListState(isLoading = true)
+        stateManager.setScreen(screenState)
         events.loadCountriesListData()
     }
 
     /********** RETURN STATE OBJECT **********/
-    return state!!
+    return screenState!!
 }
