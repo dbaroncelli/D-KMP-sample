@@ -5,11 +5,11 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 /********** INTERNAL EVENT FUNCTION, USED BY THE STATE PROVIDER **********/
 
 internal fun Events.loadCountriesListData() {
-    val restoredSelectedMenuItem = stateManager.restoreSelectedMenuItem()
+    val restoredSelectedMenuItem = stateReducers.restoreSelectedMenuItem()
     //debugLogger.log("restoredSelectedMenuItem: "+restoredSelectedMenuItem)
     // launch a coroutine, as "updateCountriesList" is a suspend function
     launchCoroutine {
-        stateManager.updateCountriesList(restoredSelectedMenuItem)
+        stateReducers.updateCountriesList(restoredSelectedMenuItem)
     }
 }
 
@@ -19,10 +19,10 @@ internal fun Events.loadCountriesListData() {
 fun Events.selectMenuItem(menuItem: MenuItem) {
     // launch a coroutine, as "updateCountriesList" is a suspend function
     launchCoroutine {
-        stateManager.updateCountriesList(menuItem)
+        stateReducers.updateCountriesList(menuItem)
     }
 }
 
 fun Events.selectFavorite(country: String) {
-    stateManager.toggleFavorite(country)
+    stateReducers.toggleFavorite(country)
 }

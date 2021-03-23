@@ -7,11 +7,11 @@ fun StateProvider.getCountriesListState() : CountriesListState {
 
     var screenState = stateManager.getScreen(CountriesListState::class)
 
+
     /********** RESET THE SCREEN STATE, BASED ON CONDITION **********/
     // make sure the condition is correct, otherwise the risk is to go into a recomposition loop
     val condition = screenState == null
     // in this case we reset the screen state, only if it hasn't been instantiated yet
-    //debugLogger.log("MasterStateProvide: "+state?.selectedMenuItem+" / LOAD DATA "+ condition)
     if (condition) {
         screenState = CountriesListState(isLoading = true)
         stateManager.setScreen(screenState)

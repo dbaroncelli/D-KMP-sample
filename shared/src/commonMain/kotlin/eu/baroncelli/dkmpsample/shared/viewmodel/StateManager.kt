@@ -1,40 +1,46 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
 
-class StateManager(repo: Repository = Repository()) {
+class StateManager {
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
 
-    var state : AppState
-        get() = mutableStateFlow.value
-        set (value) { mutableStateFlow.value = value }
-
-    internal val dataRepository by lazy { repo }
+    val screenStatesMap : MutableMap<ScreenType,Any> = mutableMapOf()
 
     inline fun <reified T:Any> getScreen(theClass : KClass<T>) : T? {
-        //debugLogger.log("getScreen: "+T::class.simpleName)
+        debugLogger.log("getScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
-        return state.screenStatesMap[screenType] as? T
+        return screenStatesMap[screenType] as? T
     }
-    inline fun <reified T:Any> setScreen(newScreenState : T) {
+    inline fun <reified T:Any> setScreen(newScreenState : T) : T {
         //debugLogger.log("setScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[T::class]
-        val screenStatesMap = state.screenStatesMap.toMutableMap()
         screenStatesMap[screenType!!] = newScreenState
-        state = AppState(screenStatesMap = screenStatesMap.toMap())
+        return newScreenState
     }
     inline fun <reified T:Any> updateScreen(theClass: KClass<T>, block: (T) -> T) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
-        val screenState = state.screenStatesMap[screenType] as? T
+        val screenState = screenStatesMap[screenType] as? T
         if (screenState != null) {
-            val screenStatesMap = state.screenStatesMap.toMutableMap()
             screenStatesMap[screenType!!] = block(screenState)
-            state = AppState(screenStatesMap = screenStatesMap.toMap())
+            triggerRecomposition()
         }
     }
 
+    fun triggerRecomposition() {
+        mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
+    }
+
+
+}
+
+data class AppState (
+    val recompositionIndex : Int = 0
+) {
+    fun getStateProvider(model : KMPViewModel) : StateProvider {
+        return model.stateProvider
+    }
 }

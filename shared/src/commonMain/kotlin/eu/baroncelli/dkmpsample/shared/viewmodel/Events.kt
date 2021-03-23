@@ -4,9 +4,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class Events (stateManager : StateManager) {
+class Events (stateReducers: StateReducers) {
 
-    internal val stateManager by lazy { stateManager }
+    internal val stateReducers by lazy { stateReducers }
 
     // this block function is to run suspend functions in our events:
     // we always launch the coroutine on the main thread, because the DataLayer suspend functions

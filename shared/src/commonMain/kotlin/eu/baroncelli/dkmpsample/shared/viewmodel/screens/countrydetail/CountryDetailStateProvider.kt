@@ -12,7 +12,6 @@ fun StateProvider.getCountryDetailState(country : String) : CountryDetailState {
     val condition = screenState == null || country != screenState.countryName
     // in this case we reset the screen state, only if it hasn't been instantiated yet OR
     // the country passed as a parameter is different than the country currently set
-    //debugLogger.log("DetailStateProvide: "+state?.countryName+" / LOAD DATA "+ condition)
     if (condition) {
         screenState = CountryDetailState(countryName = country, isLoading = true)
         stateManager.setScreen(screenState)

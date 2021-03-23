@@ -1,5 +1,6 @@
 package eu.baroncelli.dkmpsample.android
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.navigation.compose.NavHost
@@ -18,6 +19,7 @@ fun Navigation(model: KMPViewModel) {
 
     val events = model.events
     val appState by model.stateFlow.collectAsState()
+    Log.d("D-KMP","recomposition Index: "+appState.recompositionIndex.toString())
     val stateProvider = appState.getStateProvider(model)
 
 
