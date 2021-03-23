@@ -19,7 +19,7 @@ fun Navigation(model: KMPViewModel) {
 
     val events = model.events
     val appState by model.stateFlow.collectAsState()
-    Log.d("D-KMP","recomposition Index: "+appState.recompositionIndex.toString())
+    Log.d("D-KMP-SAMPLE","recomposition Index: "+appState.recompositionIndex.toString())
     val stateProvider = appState.getStateProvider(model)
 
 

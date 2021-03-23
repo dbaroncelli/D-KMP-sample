@@ -22,6 +22,7 @@ class AppViewModel: ObservableObject {
         self.appState = coreModel.getDefaultAppState()
         coreModel.onChange { newState in
             self.appState = newState
+            NSLog("D-KMP-SAMPLE: recomposition Index: "+String(newState.recompositionIndex))
         }
     }
 

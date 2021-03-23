@@ -23,7 +23,7 @@ class StateManager {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
         val screenState = screenStatesMap[screenType] as? T
-        if (screenState != null) {
+        if (screenState != null) { // only perform update if the screenState is in the screenStatesMap
             screenStatesMap[screenType!!] = block(screenState)
             triggerRecomposition()
         }
