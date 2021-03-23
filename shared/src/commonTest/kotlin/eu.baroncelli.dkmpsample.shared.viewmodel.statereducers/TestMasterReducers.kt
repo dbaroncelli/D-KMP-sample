@@ -17,7 +17,7 @@ class MasterReducersTests {
     fun testDefaultTab() {
         val stateManager = StateManager()
         val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.setScreen(CountriesListState())
+        stateManager.initScreen(CountriesListState())
         stateReducers.restoreSelectedMenuItem()
         val masterState = stateManager.getScreen(CountriesListState::class)
         assertEquals(masterState?.selectedMenuItem, MenuItem.ALL)
@@ -27,7 +27,7 @@ class MasterReducersTests {
     fun testFavoritesTab() = runBlockingTest {
         val stateManager = StateManager()
         val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.setScreen(CountriesListState())
+        stateManager.initScreen(CountriesListState())
         stateReducers.updateCountriesList(MenuItem.FAVORITES)
         val masterState = stateManager.getScreen(CountriesListState::class)
         assertEquals(masterState?.selectedMenuItem, MenuItem.FAVORITES)
@@ -37,7 +37,7 @@ class MasterReducersTests {
     fun testFavoriteCountry() {
         val stateManager = StateManager()
         val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.setScreen(CountriesListState())
+        stateManager.initScreen(CountriesListState())
         stateReducers.toggleFavorite("Italy")
         val masterState = stateManager.getScreen(CountriesListState::class)
         assertTrue(masterState?.favoriteCountries!!.containsKey("Italy"))
@@ -46,7 +46,7 @@ class MasterReducersTests {
     @Test
     fun testCountriesListStateUpdate() {
         val stateManager = StateManager()
-        stateManager.setScreen(CountriesListState())
+        stateManager.initScreen(CountriesListState())
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(isLoading = false)
         }
@@ -57,7 +57,7 @@ class MasterReducersTests {
     @Test
     fun testCountryDetailStateUpdate() {
         val stateManager = StateManager()
-        stateManager.setScreen(CountryDetailState())
+        stateManager.initScreen(CountryDetailState())
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(isLoading = true)
         }

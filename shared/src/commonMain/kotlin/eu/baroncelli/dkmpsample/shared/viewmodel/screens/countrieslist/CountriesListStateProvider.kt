@@ -14,7 +14,7 @@ fun StateProvider.getCountriesListState() : CountriesListState {
     // in this case we reset the screen state, only if it hasn't been instantiated yet
     if (condition) {
         screenState = CountriesListState(isLoading = true)
-        stateManager.setScreen(screenState)
+        stateManager.initScreen(screenState)
         events.loadCountriesListData()
     }
 

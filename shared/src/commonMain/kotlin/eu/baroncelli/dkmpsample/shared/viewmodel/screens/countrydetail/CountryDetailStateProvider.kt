@@ -14,7 +14,7 @@ fun StateProvider.getCountryDetailState(country : String) : CountryDetailState {
     // the country passed as a parameter is different than the country currently set
     if (condition) {
         screenState = CountryDetailState(countryName = country, isLoading = true)
-        stateManager.setScreen(screenState)
+        stateManager.initScreen(screenState)
         events.loadCountryDetailData(country)
     }
 

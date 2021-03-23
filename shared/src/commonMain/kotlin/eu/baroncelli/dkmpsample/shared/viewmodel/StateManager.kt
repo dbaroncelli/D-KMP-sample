@@ -10,15 +10,14 @@ class StateManager {
     val screenStatesMap : MutableMap<ScreenType,Any> = mutableMapOf()
 
     inline fun <reified T:Any> getScreen(theClass : KClass<T>) : T? {
-        debugLogger.log("getScreen: "+T::class.simpleName)
+        //debugLogger.log("getScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[theClass]
         return screenStatesMap[screenType] as? T
     }
-    inline fun <reified T:Any> setScreen(newScreenState : T) : T {
+    inline fun <reified T:Any> initScreen(newScreenState : T) {
         //debugLogger.log("setScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[T::class]
         screenStatesMap[screenType!!] = newScreenState
-        return newScreenState
     }
     inline fun <reified T:Any> updateScreen(theClass: KClass<T>, block: (T) -> T) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
