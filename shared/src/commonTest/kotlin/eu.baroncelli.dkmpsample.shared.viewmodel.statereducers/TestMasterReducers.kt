@@ -18,7 +18,7 @@ class MasterReducersTests {
 
     @Test
     fun testDefaultTab() {
-        initTestState { CountriesListState(isLoading = true) }
+        initTestState { CountriesListState() }
         stateReducers.restoreSelectedMenuItem()
         val testState = getTestState(CountriesListState::class)
         assertEquals(testState?.selectedMenuItem, MenuItem.ALL)
@@ -26,7 +26,7 @@ class MasterReducersTests {
 
     @Test
     fun testFavoritesTab() = runBlockingTest {
-        initTestState { CountriesListState(isLoading = true) }
+        initTestState { CountriesListState() }
         stateReducers.updateCountriesList(MenuItem.FAVORITES)
         val testState = getTestState(CountriesListState::class)
         assertEquals(testState?.selectedMenuItem, MenuItem.FAVORITES)
@@ -34,7 +34,7 @@ class MasterReducersTests {
 
     @Test
     fun testFavoriteCountry() {
-        initTestState { CountriesListState(isLoading = true) }
+        initTestState { CountriesListState() }
         stateReducers.toggleFavorite("Italy")
         val testState = getTestState(CountriesListState::class)
         assertTrue(testState?.favoriteCountries!!.containsKey("Italy"))
@@ -42,7 +42,7 @@ class MasterReducersTests {
 
     @Test
     fun testCountriesListStateUpdate() {
-        initTestState { CountriesListState(isLoading = true) }
+        initTestState { CountriesListState() }
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(isLoading = false)
         }
@@ -52,7 +52,7 @@ class MasterReducersTests {
 
     @Test
     fun testCountryDetailStateUpdate() {
-        initTestState { CountryDetailState(isLoading = true) }
+        initTestState { CountryDetailState() }
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(isLoading = true)
         }
