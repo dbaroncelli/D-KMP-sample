@@ -9,27 +9,29 @@ class StateManager {
 
     val screenStatesMap : MutableMap<ScreenType,Any> = mutableMapOf()
 
-    // only called by the State Providers
-    inline fun <reified T:Any> getScreen(theClass : KClass<T>) : T? {
-        //debugLogger.log("getScreen: "+T::class.simpleName)
-        val screenType = stateToTypeMap[theClass]
-        return screenStatesMap[screenType] as? T
-    }
 
     // only called by the State Providers
-    inline fun <reified T:Any> initScreen(newScreenState : T) {
-        //debugLogger.log("setScreen: "+T::class.simpleName)
+    inline fun <reified T:Any> getScreen(initState: () -> T, callOnInit: () -> Unit, reinitWhen: (T) -> Boolean = {false}) : T {
+        //debugLogger.log("getScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[T::class]
-        screenStatesMap[screenType!!] = newScreenState // if screenType is null is because the class hasn't been added to stateToTypeMap
+        val currentState = screenStatesMap[screenType] as? T
+        if (currentState == null || reinitWhen(currentState)) {
+            val screenState = initState()
+            screenStatesMap[screenType!!] = screenState // if screenType is null it's because the class hasn't been added to stateToTypeMap
+            callOnInit()
+            return screenState
+        }
+        return currentState
     }
+
 
     // only called by the State Reducers
-    inline fun <reified T:Any> updateScreen(theClass: KClass<T>, block: (T) -> T) {
+    inline fun <reified T:Any> updateScreen(stateClass: KClass<T>, block: (T) -> T) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
-        val screenType = stateToTypeMap[theClass]
+        val screenType = stateToTypeMap[stateClass]
         val screenState = screenStatesMap[screenType] as? T
         if (screenState != null) { // only perform update if the screenState is in the screenStatesMap
-            screenStatesMap[screenType!!] = block(screenState) // if screenType is null is because the class hasn't been added to stateToTypeMap
+            screenStatesMap[screenType!!] = block(screenState) // if screenType is null it's because the class hasn't been added to stateToTypeMap
             triggerRecomposition()
         }
     }
