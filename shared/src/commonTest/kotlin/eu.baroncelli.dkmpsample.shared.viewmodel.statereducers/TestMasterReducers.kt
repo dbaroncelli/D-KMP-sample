@@ -3,66 +3,73 @@ package eu.baroncelli.dkmpsample.shared.eu.baroncelli.dkmpsample.shared.viewmode
 import com.russhwolf.settings.MockSettings
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import eu.baroncelli.dkmpsample.shared.runBlockingTest
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateReducers
+import eu.baroncelli.dkmpsample.shared.viewmodel.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.*
+import kotlin.reflect.KClass
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class MasterReducersTests {
 
+    val stateManager = StateManager()
+    val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
+
     @Test
     fun testDefaultTab() {
-        val stateManager = StateManager()
-        val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.initScreen(CountriesListState())
+        initTestState { CountriesListState(isLoading = true) }
         stateReducers.restoreSelectedMenuItem()
-        val masterState = stateManager.getScreen(CountriesListState::class)
-        assertEquals(masterState?.selectedMenuItem, MenuItem.ALL)
+        val testState = getTestState(CountriesListState::class)
+        assertEquals(testState?.selectedMenuItem, MenuItem.ALL)
     }
 
     @Test
     fun testFavoritesTab() = runBlockingTest {
-        val stateManager = StateManager()
-        val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.initScreen(CountriesListState())
+        initTestState { CountriesListState(isLoading = true) }
         stateReducers.updateCountriesList(MenuItem.FAVORITES)
-        val masterState = stateManager.getScreen(CountriesListState::class)
-        assertEquals(masterState?.selectedMenuItem, MenuItem.FAVORITES)
+        val testState = getTestState(CountriesListState::class)
+        assertEquals(testState?.selectedMenuItem, MenuItem.FAVORITES)
     }
 
     @Test
     fun testFavoriteCountry() {
-        val stateManager = StateManager()
-        val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
-        stateManager.initScreen(CountriesListState())
+        initTestState { CountriesListState(isLoading = true) }
         stateReducers.toggleFavorite("Italy")
-        val masterState = stateManager.getScreen(CountriesListState::class)
-        assertTrue(masterState?.favoriteCountries!!.containsKey("Italy"))
+        val testState = getTestState(CountriesListState::class)
+        assertTrue(testState?.favoriteCountries!!.containsKey("Italy"))
     }
 
     @Test
     fun testCountriesListStateUpdate() {
-        val stateManager = StateManager()
-        stateManager.initScreen(CountriesListState())
+        initTestState { CountriesListState(isLoading = true) }
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(isLoading = false)
         }
-        val masterState = stateManager.getScreen(CountriesListState::class)
-        assertEquals(masterState?.isLoading, false)
+        val testState = getTestState(CountriesListState::class)
+        assertEquals(testState?.isLoading, false)
     }
 
     @Test
     fun testCountryDetailStateUpdate() {
-        val stateManager = StateManager()
-        stateManager.initScreen(CountryDetailState())
+        initTestState { CountryDetailState(isLoading = true) }
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(isLoading = true)
         }
-        val detailState = stateManager.getScreen(CountryDetailState::class)
-        assertEquals(detailState?.isLoading, true)
+        val testState = getTestState(CountryDetailState::class)
+        assertEquals(testState?.isLoading, true)
+    }
+
+
+
+    inline fun <reified T:ScreenState> initTestState(initState : () -> T) {
+        val screenType = getScreenType(T::class)
+        stateManager.screenStatesMap[screenType] = initState()
+    }
+
+    inline fun <reified T:ScreenState> getTestState(stateClass : KClass<T>) : T? {
+        val screenType = getScreenType(stateClass)
+        return stateManager.screenStatesMap[screenType] as? T
     }
 
 
