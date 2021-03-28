@@ -2,6 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryListData
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
@@ -11,7 +12,7 @@ data class CountryDetailState (
     val isLoading: Boolean = false,
     val countryName : String = "",
     val countryInfo : CountryInfo = CountryInfo(),
-)
+): ScreenState
 
 /********** PROPERTY CLASSES DEFINITION **********/
 

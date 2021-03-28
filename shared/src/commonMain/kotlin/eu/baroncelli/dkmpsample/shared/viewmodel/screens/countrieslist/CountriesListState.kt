@@ -1,6 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryListData
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
 
@@ -11,7 +12,7 @@ data class CountriesListState (
     val selectedMenuItem : MenuItem = MenuItem.ALL,
     val countriesListItems : List<CountriesListItem> = emptyList(),
     val favoriteCountries : Map<String,Boolean> = emptyMap(),
-)
+): ScreenState
 
 
 /********** PROPERTY CLASSES DEFINITION **********/
