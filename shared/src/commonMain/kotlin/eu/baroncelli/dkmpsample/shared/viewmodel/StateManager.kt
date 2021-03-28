@@ -16,22 +16,22 @@ class StateManager {
         val screenType = stateToTypeMap[T::class]
         val currentState = screenStatesMap[screenType] as? T
         if (currentState == null || reinitWhen(currentState)) {
-            val screenState = initState()
-            screenStatesMap[screenType!!] = screenState // if screenType is null it's because the class hasn't been added to stateToTypeMap
+            val initializedState = initState()
+            screenStatesMap[screenType!!] = initializedState // if screenType is null it's because the class hasn't been added to stateToTypeMap
             callOnInit()
-            return screenState
+            return initializedState
         }
         return currentState
     }
 
 
     // only called by the State Reducers
-    inline fun <reified T:Any> updateScreen(stateClass: KClass<T>, block: (T) -> T) {
+    inline fun <reified T:Any> updateScreen(stateClass: KClass<T>, update: (T) -> T) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
         val screenType = stateToTypeMap[stateClass]
-        val screenState = screenStatesMap[screenType] as? T
-        if (screenState != null) { // only perform update if the screenState is in the screenStatesMap
-            screenStatesMap[screenType!!] = block(screenState) // if screenType is null it's because the class hasn't been added to stateToTypeMap
+        val currentState = screenStatesMap[screenType] as? T
+        if (currentState != null) { // only perform update if the currentState is in the screenStatesMap
+            screenStatesMap[screenType!!] = update(currentState) // if screenType is null it's because the class hasn't been added to stateToTypeMap
             triggerRecomposition()
         }
     }
