@@ -5,8 +5,9 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 fun StateProvider.getCountriesListState() : CountriesListState {
 
-    // the state gets initialized only the first time this function gets called
-    // the code in "callOnInit" is called on initialization
+    // the state gets initialized with "initState":
+    //      ONLY WHEN this function is called for the first time
+    // after initialization, the "callOnInit" code gets called
     return stateManager.getScreen(
         initState = { CountriesListState(isLoading = true) },
         callOnInit = { events.loadCountriesListData() }
