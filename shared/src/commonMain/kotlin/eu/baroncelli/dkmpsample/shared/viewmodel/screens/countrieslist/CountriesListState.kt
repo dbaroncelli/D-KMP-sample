@@ -4,8 +4,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.Countr
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
-
-/********** STATE CLASS DEFINITION **********/
+/********** ScreenState class definition **********/
 
 data class CountriesListState (
     val isLoading: Boolean = false,
@@ -15,7 +14,7 @@ data class CountriesListState (
 ): ScreenState
 
 
-/********** PROPERTY CLASSES DEFINITION **********/
+/********** property classes definition **********/
 
 
 enum class MenuItem { ALL, FAVORITES }

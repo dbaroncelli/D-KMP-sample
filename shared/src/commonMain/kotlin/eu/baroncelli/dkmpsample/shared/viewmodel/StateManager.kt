@@ -9,8 +9,13 @@ class StateManager {
 
     val screenStatesMap : MutableMap<ScreenType,ScreenState> = mutableMapOf()
 
+
     // only called by the State Providers
-    inline fun <reified T:ScreenState> getScreen(initState: () -> T, callOnInit: () -> Unit, reinitWhen: (T) -> Boolean = {false}) : T {
+    inline fun <reified T:ScreenState> getScreen(
+            initState: () -> T,
+            callOnInit: () -> Unit,
+            reinitWhen: (T) -> Boolean = {false},
+    ) : T {
         //debugLogger.log("getScreen: "+T::class.simpleName)
         val screenType = getScreenType(T::class)
         val currentState = screenStatesMap[screenType] as? T
@@ -25,7 +30,10 @@ class StateManager {
 
 
     // only called by the State Reducers
-    inline fun <reified T:ScreenState> updateScreen(stateClass: KClass<T>, update: (T) -> T) {
+    inline fun <reified T:ScreenState> updateScreen(
+            stateClass: KClass<T>,
+            update: (T) -> T,
+    ) {
         //debugLogger.log("updateScreen: "+T::class.simpleName)
         val screenType = getScreenType(stateClass)
         val currentState = screenStatesMap[screenType] as? T
@@ -38,7 +46,6 @@ class StateManager {
     fun triggerRecomposition() {
         mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
     }
-
 
 }
 

@@ -2,7 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
-/********** INTERNAL EVENT FUNCTION, USED BY THE STATE PROVIDER **********/
+/********** INTERNAL event function, used by the StateProvider **********/
 
 internal fun Events.loadCountriesListData() {
     val restoredSelectedMenuItem = stateReducers.restoreSelectedMenuItem()
@@ -14,7 +14,7 @@ internal fun Events.loadCountriesListData() {
 }
 
 
-/********** PUBLIC EVENT FUNCTIONS **********/
+/********** PUBLIC event functions **********/
 
 fun Events.selectMenuItem(menuItem: MenuItem) {
     // launch a coroutine, as "updateCountriesList" is a suspend function
