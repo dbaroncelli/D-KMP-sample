@@ -8,8 +8,8 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.3.0-alpha04")
-    implementation("androidx.appcompat:appcompat:1.3.0-beta01")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha05")
+    implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-graphics:${Versions.compose}")
     implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
