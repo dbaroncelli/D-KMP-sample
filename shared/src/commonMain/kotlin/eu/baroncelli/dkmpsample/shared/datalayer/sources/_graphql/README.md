@@ -1,3 +1,3 @@
-#### you can get read/write to a GraphQL client
-using the Apollo GraphQL:
+#### you can read/write data via GraphQL
+using the Apollo GraphQL client:
 [Apollo GraphQL](https://github.com/apollographql/apollo-android)
