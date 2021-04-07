@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 import mylocal.db.LocalDb
 import kotlin.native.concurrent.ThreadLocal
 
-class Repository (val dispatcher : CoroutineDispatcher, val sqlDriver : SqlDriver, val settings : Settings = Settings()) {
+class Repository (val dispatcher : CoroutineDispatcher?, val sqlDriver : SqlDriver, val settings : Settings = Settings()) {
 
     internal val localDb by lazy { LocalDb(sqlDriver) }
     internal val webservices by lazy { ApiClient() }
@@ -23,8 +23,11 @@ class Repository (val dispatcher : CoroutineDispatcher, val sqlDriver : SqlDrive
     // we run repository functions in the coroutine dispatcher specified in the Repository costructor
     // on Android we pass Dispatchers.Default
     // on iOS we pass Dispatchers.Main (for the moment, until the new Kotlin/Native memory model is ready)
-    suspend fun <T> withRepoContext (block: suspend CoroutineScope.() -> T) : T {
-        return withContext(dispatcher) {
+    // on testing, we instantiate a Repository with a null dispatcher
+    suspend fun <T> withRepoContext (block: suspend () -> T) : T {
+        return if (dispatcher==null) {
+            block()
+        } else withContext(dispatcher) {
             block()
         }
     }
