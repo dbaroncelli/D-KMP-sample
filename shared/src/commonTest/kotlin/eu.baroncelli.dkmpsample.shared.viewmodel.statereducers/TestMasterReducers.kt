@@ -1,7 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.eu.baroncelli.dkmpsample.shared.viewmodel.statereducers
 
-import com.russhwolf.settings.MockSettings
-import eu.baroncelli.dkmpsample.shared.datalayer.Repository
+import eu.baroncelli.dkmpsample.shared.getTestRepository
 import eu.baroncelli.dkmpsample.shared.runBlockingTest
 import eu.baroncelli.dkmpsample.shared.viewmodel.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
@@ -14,7 +13,7 @@ import kotlin.test.assertTrue
 class MasterReducersTests {
 
     val stateManager = StateManager()
-    val stateReducers = StateReducers(stateManager, Repository(MockSettings()))
+    val stateReducers = StateReducers(stateManager, getTestRepository())
 
     @Test
     fun testDefaultTab() {

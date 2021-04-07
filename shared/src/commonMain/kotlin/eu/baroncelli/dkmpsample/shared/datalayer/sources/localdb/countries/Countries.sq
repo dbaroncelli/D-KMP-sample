@@ -1,0 +1,20 @@
+CREATE TABLE Countries (
+    name TEXT NOT NULL PRIMARY KEY,
+    population INTEGER AS Int NOT NULL,
+    first_doses INTEGER AS Int NOT NULL,
+    fully_vaccinated INTEGER AS Int NOT NULL,
+    favorite INTEGER AS Boolean NOT NULL DEFAULT 0
+);
+
+getCountriesList:
+SELECT name,population,first_doses,fully_vaccinated FROM Countries;
+
+updateCountry:
+INSERT OR REPLACE INTO Countries(name,population,first_doses,fully_vaccinated)
+VALUES(?,?,?,?);
+
+updateFavorite:
+UPDATE Countries SET favorite = CASE favorite WHEN 1 THEN 0 ELSE 1 END WHERE name = ?;
+
+getFavorites:
+SELECT name FROM Countries WHERE favorite = 1;

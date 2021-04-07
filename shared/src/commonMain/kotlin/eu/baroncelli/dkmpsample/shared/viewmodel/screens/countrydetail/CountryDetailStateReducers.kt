@@ -6,8 +6,8 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.StateReducers
 
 
 suspend fun StateReducers.updateCountryDetail(country: String) {
-    // update CountryDetailState, after retrieving it from the Repository
     val listItemData = dataRepository.getCountryInfo(country)
+    // update CountryDetailState, after retrieving data from the Repository
     stateManager.updateScreen(CountryDetailState::class) {
         it.copy(countryInfo = listItemData, isLoading = false)
     }

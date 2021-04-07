@@ -4,9 +4,6 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
 /********** INTERNAL event function, used by the StateProvider **********/
 
-internal fun Events.loadCountryDetailData(country: String) {
-    // launch a coroutine, as "updateCountryDetail" is a suspend function
-    launchCoroutine {
-        stateReducers.updateCountryDetail(country)
-    }
+internal fun Events.loadCountryDetailData(country: String) = onMainCoroutine {
+    stateReducers.updateCountryDetail(country)
 }

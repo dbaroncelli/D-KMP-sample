@@ -8,6 +8,7 @@ object Versions {
 
     const val compose = "1.0.0-beta03"
     const val kotlin = "1.4.31"
-    const val ktor = "1.5.2"
+    const val ktor = "1.5.3"
+    const val sql_delight = "1.4.4"
 }
 

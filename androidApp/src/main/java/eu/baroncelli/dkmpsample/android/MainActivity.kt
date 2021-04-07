@@ -13,9 +13,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val coreModel = appViewModel.getCoreViewModel(applicationContext)
         setContent {
-            DkmpSampleTheme() {
-                Navigation(appViewModel.coreModel)
+            DkmpSampleTheme {
+                Navigation(coreModel)
             }
         }
     }

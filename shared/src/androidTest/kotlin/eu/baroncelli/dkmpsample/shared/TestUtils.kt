@@ -1,5 +1,8 @@
 package eu.baroncelli.dkmpsample.shared
 
+import com.russhwolf.settings.MockSettings
+import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.runBlocking
@@ -10,3 +13,8 @@ actual val testCoroutineContext: CoroutineContext =
     Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 actual fun runBlockingTest(block: suspend CoroutineScope.() -> Unit) =
     runBlocking(testCoroutineContext) { this.block() }
+
+actual fun getTestRepository() : Repository {
+    val sqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+    return Repository(sqlDriver, MockSettings())
+}

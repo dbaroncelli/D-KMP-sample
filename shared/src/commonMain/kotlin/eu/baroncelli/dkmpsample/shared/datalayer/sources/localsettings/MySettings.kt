@@ -10,7 +10,7 @@ class MySettings (s : Settings) : SettingsClient(s) {
     // we wrote our types definition in the SettingClient class
 
     var selectedMenuItem by MenuItemType(MenuItem.ALL)
-    var favoriteCountries by TrueMapType()
+    var listCacheTimestamp by LongType(0)
     //var selectedString by StringType("mytext")
 
 }

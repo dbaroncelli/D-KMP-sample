@@ -8,7 +8,18 @@ open class SettingsClient(settingsImpl : Settings) {
 
     val settings = settingsImpl
 
-    // this is for a standard string
+    // this is for a long
+    inner class LongType(defaultValue : Long) {
+        private val default = defaultValue
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): Long {
+            return settings.getLong(property.name, default)
+        }
+        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
+            settings.putLong(property.name, value)
+        }
+    }
+
+    // this is for a string
     inner class StringType(defaultValue : String) {
         private val default = defaultValue
         operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
@@ -29,34 +40,6 @@ open class SettingsClient(settingsImpl : Settings) {
             settings.putString(property.name, value.name)
         }
     }
-
-    // this is for a map of keys with true values (we use it conveniently to store our country favorites)
-    // we are storing the map in a Multiplatform string, by simply separating the keys with a "|" symbol
-    inner class TrueMapType {
-        operator fun getValue(thisRef: Any?, property: KProperty<*>): MutableMap<String,Boolean> {
-            val storedValue = settings.getString(property.name, "")
-            if (storedValue == "") {
-                return mutableMapOf()
-            }
-            val items = storedValue.split("|")
-            var trueMap = mutableMapOf<String,Boolean>()
-            for (item in items) {
-                trueMap.put(item,true)
-            }
-            return trueMap
-        }
-        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: MutableMap<String,Boolean>) {
-            var string = ""
-            for ((country, _) in value) {
-                if (string != "") {
-                    string += "|"
-                }
-                string += country
-            }
-            settings.putString(property.name, string)
-        }
-    }
-
 
 }
 

@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
-import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryExtraData
-import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.CountryListData
+import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryExtraData
+import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
