@@ -14,10 +14,10 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
+- **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **local settings** (using [MultiplaformSettings](https://github.com/russhwolf/multiplatform-settings))
 
 #### other popular KMP libraries for connecting to different data sources:
-- **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **realtime db** (using [Firestore](https://github.com/GitLiveApp/firebase-kotlin-sdk))
 - **graphQL** (using [Apollo GraphQL](https://github.com/apollographql/apollo-android))
 - **device bluetooth** (using [Kable]( https://github.com/JuulLabs/kable))
