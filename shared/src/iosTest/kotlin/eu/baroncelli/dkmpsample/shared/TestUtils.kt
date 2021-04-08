@@ -17,5 +17,5 @@ actual fun runBlockingTest(block: suspend CoroutineScope.() -> Unit) =
 
 actual fun getTestRepository() : Repository {
     val sqlDriver = NativeSqliteDriver(LocalDb.Schema, "test.db")
-    return Repository(null, sqlDriver, MockSettings())
+    return Repository(false, sqlDriver, MockSettings())
 }

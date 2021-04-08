@@ -8,7 +8,7 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.3.0-alpha05")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha06")
     implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-graphics:${Versions.compose}")
@@ -16,7 +16,7 @@ dependencies {
     implementation("androidx.compose.foundation:foundation-layout:${Versions.compose}")
     implementation("androidx.compose.material:material:${Versions.compose}")
     implementation("androidx.compose.material:material-icons-extended:${Versions.compose}")
-    implementation("androidx.navigation:navigation-compose:1.0.0-alpha09")
+    implementation("androidx.navigation:navigation-compose:1.0.0-alpha10")
 }
 
 android {

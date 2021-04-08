@@ -9,9 +9,11 @@ CREATE TABLE Countries (
 getCountriesList:
 SELECT name,population,first_doses,fully_vaccinated FROM Countries;
 
-updateCountry:
-INSERT OR REPLACE INTO Countries(name,population,first_doses,fully_vaccinated)
-VALUES(?,?,?,?);
+upsertCountry {
+    INSERT OR REPLACE INTO Countries(name,population,first_doses,fully_vaccinated,favorite)
+    VALUES(:name, :population, :first_doses, :fully_vaccinated, (SELECT favorite FROM Countries WHERE name = :name));
+}
+
 
 updateFavorite:
 UPDATE Countries SET favorite = CASE favorite WHEN 1 THEN 0 ELSE 1 END WHERE name = ?;

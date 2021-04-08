@@ -18,5 +18,5 @@ actual fun runBlockingTest(block: suspend CoroutineScope.() -> Unit) =
 actual fun getTestRepository() : Repository {
     val sqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
     LocalDb.Schema.create(sqlDriver)
-    return Repository(null, sqlDriver, MockSettings())
+    return Repository(false, sqlDriver, MockSettings())
 }

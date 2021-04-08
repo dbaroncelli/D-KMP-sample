@@ -5,10 +5,13 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.localdb.countries.getFa
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.localdb.countries.toggleFavoriteCountry
 
 suspend fun Repository.getFavoriteCountriesMap(toggleCountry : String? = null): Map<String,Boolean> = withRepoContext {
+
+    // LOCAL DB operation, to toggle a country as favorite
     if (toggleCountry != null) {
         localDb.toggleFavoriteCountry(toggleCountry)
     }
-    localDb.getFavoriteCountriesMap()
-    // returns a "trueMap" (i.e. the values are always TRUE boolean)
+
+    // RETURN a "trueMap" (i.e. the values are always TRUE boolean):
     // where the keys are the names of the favorite countries
+    localDb.getFavoriteCountriesMap()
 }

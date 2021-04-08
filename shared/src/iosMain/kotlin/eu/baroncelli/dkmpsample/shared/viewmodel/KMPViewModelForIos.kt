@@ -13,7 +13,7 @@ import mylocal.db.LocalDb
 
 fun KMPViewModel.Factory.getIosInstance() : KMPViewModel {
     val sqlDriver = NativeSqliteDriver(LocalDb.Schema, "Local.db")
-    val repository = Repository(Dispatchers.Main, sqlDriver)
+    val repository = Repository(false, sqlDriver)
     return KMPViewModel(repository)
 }
 

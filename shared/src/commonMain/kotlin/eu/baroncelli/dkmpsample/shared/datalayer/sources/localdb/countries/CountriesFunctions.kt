@@ -10,7 +10,7 @@ fun LocalDb.getCountriesList() : List<CountryListData> {
 fun LocalDb.setCountriesList(list : List<CountryListData>) {
     countriesQueries.transaction {
         list.forEach {
-            countriesQueries.updateCountry(
+            countriesQueries.upsertCountry(
                 name = it.name,
                 population = it.population,
                 first_doses = it.firstDoses,
