@@ -12,7 +12,7 @@ struct CountryDetailScreen: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let countryDetailState = viewModel.stateProvider.getCountryDetailState(country: countryName)
+        let countryDetailState = viewModel.stateProviders.getCountryDetailState(country: countryName)
         VStack {
             if countryDetailState.isLoading {
                 LoadingElement()

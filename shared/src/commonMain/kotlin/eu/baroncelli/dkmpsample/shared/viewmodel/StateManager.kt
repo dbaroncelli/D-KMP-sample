@@ -12,7 +12,6 @@ class StateManager {
     internal val mutableStateFlow = MutableStateFlow(AppState())
 
     val screenStatesMap : MutableMap<ScreenType,ScreenState> = mutableMapOf()
-
     val screenScopesMap : MutableMap<ScreenType,CoroutineScope> = mutableMapOf()
 
     // only called by the State Providers
@@ -67,7 +66,7 @@ class StateManager {
 data class AppState (
     val recompositionIndex : Int = 0
 ) {
-    fun getStateProvider(model : KMPViewModel) : StateProvider {
-        return model.stateProvider
+    fun getStateProviders(model : KMPViewModel) : StateProviders {
+        return model.stateProviders
     }
 }

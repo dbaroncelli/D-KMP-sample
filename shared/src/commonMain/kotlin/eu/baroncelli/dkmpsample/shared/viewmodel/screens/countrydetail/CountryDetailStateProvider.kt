@@ -1,9 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
+import eu.baroncelli.dkmpsample.shared.viewmodel.StateProviders
 
 
-fun StateProvider.getCountryDetailState(country : String) : CountryDetailState {
+fun StateProviders.getCountryDetailState(country : String) : CountryDetailState {
 
     // the state gets initialized with "initState":
     //      WHEN this function is called for the first time

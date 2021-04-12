@@ -12,8 +12,8 @@ class AppViewModel: ObservableObject {
     var events : Events {
         return self.coreModel.events
     }
-    var stateProvider : StateProvider {
-        return self.appState.getStateProvider(model: self.coreModel)
+    var stateProviders : StateProviders {
+        return self.appState.getStateProviders(model: self.coreModel)
     }
     @Published var appState : AppState
     

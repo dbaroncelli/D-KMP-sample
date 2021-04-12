@@ -21,6 +21,6 @@ class KMPViewModel (repo: Repository) {
 
     val events by lazy { Events(stateReducers) }
 
-    internal val stateProvider by lazy { StateProvider(stateManager, events) }
+    internal val stateProviders by lazy { StateProviders(stateManager, events) }
 
 }

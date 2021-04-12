@@ -1,9 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
+import eu.baroncelli.dkmpsample.shared.viewmodel.StateProviders
 
 
-fun StateProvider.getCountriesListState() : CountriesListState {
+fun StateProviders.getCountriesListState() : CountriesListState {
 
     // the state gets initialized with "initState":
     //      ONLY WHEN this function is called for the first time

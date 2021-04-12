@@ -11,7 +11,7 @@ struct CountriesListScreen: View {
     @EnvironmentObject var viewModel: AppViewModel
     
     var body: some View {
-        let countriesListState = viewModel.stateProvider.getCountriesListState()
+        let countriesListState = viewModel.stateProviders.getCountriesListState()
         let events = viewModel.events
         if countriesListState.isLoading {
             LoadingElement()

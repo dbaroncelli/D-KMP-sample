@@ -4,7 +4,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.Countries
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import kotlin.reflect.KClass
 
-class StateProvider (stateManager : StateManager, events : Events) {
+class StateProviders (stateManager : StateManager, events : Events) {
 
     internal val stateManager by lazy { stateManager }
 

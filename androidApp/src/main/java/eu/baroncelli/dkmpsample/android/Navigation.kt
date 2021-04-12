@@ -20,7 +20,7 @@ fun Navigation(model: KMPViewModel) {
     val events = model.events
     val appState by model.stateFlow.collectAsState()
     Log.d("D-KMP-SAMPLE","recomposition Index: "+appState.recompositionIndex.toString())
-    val stateProvider = appState.getStateProvider(model)
+    val stateProviders = appState.getStateProviders(model)
 
 
     val navController = rememberNavController()
@@ -28,7 +28,7 @@ fun Navigation(model: KMPViewModel) {
     NavHost(navController, startDestination = "countrieslist") {
         composable("countrieslist") {
             CountriesListScreen(
-                countriesListState = stateProvider.getCountriesListState(),
+                countriesListState = stateProviders.getCountriesListState(),
                 events = events,
                 onListItemClick = { navController.navigate("country/$it") },
             )
@@ -36,7 +36,7 @@ fun Navigation(model: KMPViewModel) {
         composable("country/{item}") { backStackEntry ->
             val item = backStackEntry.arguments?.getString("item")!!
             CountryDetailScreen(
-                countryDetailState = stateProvider.getCountryDetailState(item)
+                countryDetailState = stateProviders.getCountryDetailState(item)
             )
         }
     }
