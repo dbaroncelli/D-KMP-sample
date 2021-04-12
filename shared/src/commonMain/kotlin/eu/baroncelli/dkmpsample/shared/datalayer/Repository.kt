@@ -10,8 +10,8 @@ import mylocal.db.LocalDb
 
 class Repository (val useDefaultDispatcher : Boolean, val sqlDriver : SqlDriver, val settings : Settings = Settings()) {
 
-    internal val localDb by lazy { LocalDb(sqlDriver) }
     internal val webservices by lazy { ApiClient() }
+    internal val localDb by lazy { LocalDb(sqlDriver) }
     val localSettings by lazy { MySettings(settings) }
     internal val runtimeCache by lazy { CacheObjects() }
 

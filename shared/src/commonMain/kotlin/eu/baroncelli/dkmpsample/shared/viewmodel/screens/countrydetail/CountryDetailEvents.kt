@@ -4,6 +4,6 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
 /********** INTERNAL event function, used by the StateProvider **********/
 
-internal fun Events.loadCountryDetailData(country: String) = onMainCoroutine {
+internal fun Events.loadCountryDetailData(country: String) = screenCoroutine(CountryDetailState::class) {
     stateReducers.updateCountryDetail(country)
 }

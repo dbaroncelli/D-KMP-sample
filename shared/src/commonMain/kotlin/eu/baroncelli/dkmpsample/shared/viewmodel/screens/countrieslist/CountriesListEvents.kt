@@ -4,17 +4,17 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
 /********** INTERNAL event function, used by the StateProvider **********/
 
-internal fun Events.loadCountriesListData() = onMainCoroutine {
+internal fun Events.loadCountriesListData() = screenCoroutine(CountriesListState::class) {
     stateReducers.updateCountriesList(null)
 }
 
 
 /********** PUBLIC event functions **********/
 
-fun Events.selectMenuItem(menuItem: MenuItem) = onMainCoroutine {
+fun Events.selectMenuItem(menuItem: MenuItem) = screenCoroutine(CountriesListState::class) {
     stateReducers.updateCountriesList(menuItem)
 }
 
-fun Events.selectFavorite(country: String) = onMainCoroutine {
+fun Events.selectFavorite(country: String) = screenCoroutine(CountriesListState::class) {
     stateReducers.toggleFavorite(country)
 }
