@@ -1,5 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
@@ -47,7 +48,11 @@ class StateManager {
         val currentState = screenStatesMap[screenType] as? T
         if (currentState != null) { // only perform update if the state class object is currently inside the screenStatesMap
             screenStatesMap[screenType] = update(currentState)
-            triggerRecomposition()
+            // only trigger recomposition if screen state has changed
+            if (!currentState.equals(screenStatesMap[screenType] as T)) {
+                triggerRecomposition()
+                debugLogger.log(T::class.simpleName+" changed: triggered recomposition")
+            }
         }
     }
 

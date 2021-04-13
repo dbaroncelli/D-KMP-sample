@@ -16,9 +16,9 @@ data class CountryDetailState (
 
 /********** property classes definition **********/
 
-class CountryInfo (
-    _listData : CountryListData = CountryListData(),
-    _extraData : CountryExtraData? = CountryExtraData(),
+data class CountryInfo (
+    val _listData : CountryListData = CountryListData(),
+    val _extraData : CountryExtraData? = CountryExtraData(),
 ) {
     // in the ViewModel classes, our computed properties only do UI-formatting operations
     // (the arithmetical operations, such as calculating a percentage, should happen in the DataLayer classes)
