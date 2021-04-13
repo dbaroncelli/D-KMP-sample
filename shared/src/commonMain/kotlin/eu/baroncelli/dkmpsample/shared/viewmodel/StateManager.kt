@@ -49,9 +49,9 @@ class StateManager {
         if (currentState != null) { // only perform update if the state class object is currently inside the screenStatesMap
             screenStatesMap[screenType] = update(currentState)
             // only trigger recomposition if screen state has changed
-            if (!currentState.equals(screenStatesMap[screenType] as T)) {
+            if (!currentState.equals(screenStatesMap[screenType])) {
                 triggerRecomposition()
-                debugLogger.log(T::class.simpleName+" changed: triggered recomposition")
+                debugLogger.log(T::class.simpleName+" changed: recomposition is triggered")
             }
         }
     }

@@ -22,7 +22,7 @@ class KMPViewModel (repo: Repository) {
 
     fun onReEnterForeground() {
         // not called at startup, but only when reentering the app after it was in background
-        debugLogger.log("onReEnterForeground")
+        debugLogger.log("onReEnterForeground: recomposition is triggered")
         stateManager.triggerRecomposition()
     }
 
