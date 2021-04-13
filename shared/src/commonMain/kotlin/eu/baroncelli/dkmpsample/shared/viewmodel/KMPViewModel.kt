@@ -28,7 +28,7 @@ class KMPViewModel (repo: Repository) {
 
     fun onEnterBackground() {
         debugLogger.log("onEnterBackground")
-        stateManager.clearScreenScopes()
+        stateManager.cancelScreenScopes()
     }
 
 }

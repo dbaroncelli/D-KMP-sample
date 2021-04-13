@@ -26,7 +26,7 @@ class AppLifecycleObserver (val model: KMPViewModel) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onEnterForeground() {
-        if (model.stateFlow.value.recompositionIndex > 0) {
+        if (model.stateFlow.value.recompositionIndex > 0) { // not calling at app startup
             model.onReEnterForeground()
         }
     }

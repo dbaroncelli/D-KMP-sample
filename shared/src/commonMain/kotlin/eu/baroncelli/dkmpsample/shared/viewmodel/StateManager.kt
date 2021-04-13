@@ -71,8 +71,8 @@ class StateManager {
         return screenScopesMap[screenType]?.isActive == true
     }
 
-    fun clearScreenScopes() {
-        //debugLogger.log("clearScreenScopes()")
+    fun cancelScreenScopes() {
+        //debugLogger.log("cancelScreenScopes()")
         screenScopesMap.forEach {
             it.value.cancel() // cancel screen's coroutine scope
         }
