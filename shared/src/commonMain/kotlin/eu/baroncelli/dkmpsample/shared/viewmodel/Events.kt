@@ -9,7 +9,7 @@ class Events (stateReducers: StateReducers) {
 
     // we run each event function on a Dispatchers.Main coroutine, scoped on the specific screen
     fun screenCoroutine (stateClass : KClass<out ScreenState>, block: suspend () -> Unit) {
-        val screenScope = stateReducers.stateManager.getScreenCoroutineScope(stateClass)
+        val screenScope = stateReducers.stateManager.getScreenScope(stateClass)
         screenScope?.launch {
             block()
         }

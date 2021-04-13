@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		64884FA7260163D900AD1112 /* CountriesListBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64884FA6260163D900AD1112 /* CountriesListBottomBar.swift */; };
-		64F9CB4C25FCE90300527AD8 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4A25FCE90300527AD8 /* AppViewModel.swift */; };
+		64F9CB4C25FCE90300527AD8 /* AppObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */; };
 		64F9CB4D25FCE90300527AD8 /* AppMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4B25FCE90300527AD8 /* AppMain.swift */; };
 		64F9CB5225FCE91300527AD8 /* LoadingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB5025FCE91300527AD8 /* LoadingElement.swift */; };
 		64F9CB5325FCE91300527AD8 /* StylingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB5125FCE91300527AD8 /* StylingUtils.swift */; };
@@ -60,7 +60,7 @@
 
 /* Begin PBXFileReference section */
 		64884FA6260163D900AD1112 /* CountriesListBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesListBottomBar.swift; sourceTree = "<group>"; };
-		64F9CB4A25FCE90300527AD8 /* AppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppObservableObject.swift; sourceTree = "<group>"; };
 		64F9CB4B25FCE90300527AD8 /* AppMain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppMain.swift; sourceTree = "<group>"; };
 		64F9CB5025FCE91300527AD8 /* LoadingElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingElement.swift; sourceTree = "<group>"; };
 		64F9CB5125FCE91300527AD8 /* StylingUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StylingUtils.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 			children = (
 				646F59C9260918AF003A7E52 /* screens */,
 				64F9CB4B25FCE90300527AD8 /* AppMain.swift */,
-				64F9CB4A25FCE90300527AD8 /* AppViewModel.swift */,
+				64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */,
 				7555FF82242A565900829871 /* ContentView.swift */,
 				64F9CB5125FCE91300527AD8 /* StylingUtils.swift */,
 				7555FF84242A565B00829871 /* Assets.xcassets */,
@@ -366,7 +366,7 @@
 			files = (
 				64F9CB5225FCE91300527AD8 /* LoadingElement.swift in Sources */,
 				64F9CBA925FCF8DE00527AD8 /* CountryDetailScreen.swift in Sources */,
-				64F9CB4C25FCE90300527AD8 /* AppViewModel.swift in Sources */,
+				64F9CB4C25FCE90300527AD8 /* AppObservableObject.swift in Sources */,
 				64884FA7260163D900AD1112 /* CountriesListBottomBar.swift in Sources */,
 				64F9CBA325FCF8D400527AD8 /* CountriesListScreen.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,

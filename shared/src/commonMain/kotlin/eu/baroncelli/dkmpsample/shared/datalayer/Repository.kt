@@ -15,7 +15,6 @@ class Repository (val useDefaultDispatcher : Boolean, val sqlDriver : SqlDriver,
     val localSettings by lazy { MySettings(settings) }
     internal val runtimeCache by lazy { CacheObjects() }
 
-
     // if useDefaultDispatcher is TRUE, we run repository functions in Dispatchers.Default
     // otherwise, we run them in the originating coroutine dispatcher, which is Dispatchers.Main
     // NOTE: currently we are passing useDefaultDispatcher=TRUE only for Android

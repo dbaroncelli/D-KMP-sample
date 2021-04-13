@@ -1,5 +1,5 @@
 //
-//  MasterBottomBar.swift
+//  CountriesListBottomBar.swift
 //
 //  Created by Daniele Baroncelli on 16/03/21.
 //

@@ -1,5 +1,5 @@
 //
-//  MasterScreen.swift
+//  CountriesListScreen.swift
 //
 //  Created by Daniele Baroncelli on 13/03/2021.
 //
@@ -8,11 +8,11 @@ import SwiftUI
 import shared
 
 struct CountriesListScreen: View {
-    @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var appObj: AppObservableObject
     
     var body: some View {
-        let countriesListState = viewModel.stateProviders.getCountriesListState()
-        let events = viewModel.events
+        let countriesListState = appObj.stateProviders.getCountriesListState()
+        let events = appObj.events
         if countriesListState.isLoading {
             LoadingElement()
         } else {

@@ -10,10 +10,20 @@ import shared
 
 @main
 struct iosApp: App {
-    @StateObject var vm = AppViewModel()
+    @StateObject var appObj = AppObservableObject()
+    @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(vm)
+            ContentView()
+                .environmentObject(appObj)
+                .onChange(of: scenePhase) { newPhase in
+                    if newPhase == .active {
+                        appObj.model.onReEnterForeground()
+                    }
+                    else if newPhase == .background {
+                        appObj.model.onEnterBackground()
+                    }
+                }
         }
     }
 }

@@ -1,9 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
 
@@ -11,8 +8,8 @@ class StateManager {
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
 
-    val screenStatesMap : MutableMap<ScreenType,ScreenState> = mutableMapOf()
-    val screenScopesMap : MutableMap<ScreenType,CoroutineScope> = mutableMapOf()
+    val screenStatesMap : MutableMap<ScreenType,ScreenState> = mutableMapOf() // map of screen states currently in memory
+    val screenScopesMap : MutableMap<ScreenType,CoroutineScope> = mutableMapOf() // map of coroutine scopes associated to current screen states
 
     // only called by the State Providers
     inline fun <reified T:ScreenState> getScreen(
@@ -24,14 +21,17 @@ class StateManager {
         val screenType = getScreenType(T::class)
         val currentState = screenStatesMap[screenType] as? T
         if (currentState == null || reinitWhen(currentState)) {
-            // we initialize the COROUTINE SCOPE
-            screenScopesMap[screenType]?.cancel()
-            screenScopesMap[screenType] = CoroutineScope(Job() + Dispatchers.Main)
-            // we initialize the SCREEN STATE
+            debugLogger.log("initialize state: "+T::class.simpleName)
+            initScreenScope(screenType)
             val initializedState = initState()
             screenStatesMap[screenType] = initializedState
             callOnInit()
             return initializedState
+        }
+        if (!isScreenScopeActive(screenType)) { // in case it's coming back from background
+            debugLogger.log("reinitialize scope: "+T::class.simpleName)
+            initScreenScope(screenType)
+            callOnInit()
         }
         return currentState
     }
@@ -56,9 +56,26 @@ class StateManager {
     }
 
 
-    fun getScreenCoroutineScope(stateClass : KClass<out ScreenState>) : CoroutineScope? {
+    fun initScreenScope(screenType : ScreenType) {
+        //debugLogger.log("initScreenScope($screenType)")
+        screenScopesMap[screenType]?.cancel()
+        screenScopesMap[screenType] = CoroutineScope(Job() + Dispatchers.Main)
+    }
+
+    fun getScreenScope(stateClass : KClass<out ScreenState>) : CoroutineScope? {
         val screenType = getScreenType(stateClass)
         return screenScopesMap[screenType]
+    }
+
+    fun isScreenScopeActive(screenType : ScreenType) : Boolean {
+        return screenScopesMap[screenType]?.isActive == true
+    }
+
+    fun clearScreenScopes() {
+        //debugLogger.log("clearScreenScopes()")
+        screenScopesMap.forEach {
+            it.value.cancel() // cancel screen's coroutine scope
+        }
     }
 
 }

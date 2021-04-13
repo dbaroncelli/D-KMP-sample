@@ -9,6 +9,7 @@ plugins {
 dependencies {
     implementation(project(":shared"))
     implementation("androidx.activity:activity-compose:1.3.0-alpha06")
+    implementation("androidx.lifecycle:lifecycle-process:2.3.1")
     implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
     implementation("androidx.compose.ui:ui-graphics:${Versions.compose}")

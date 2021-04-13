@@ -1,5 +1,5 @@
 //
-//  DetailScreen.swift
+//  CountryDetailScreen.swift
 //
 //  Created by Daniele Baroncelli on 13/03/2021.
 //
@@ -9,10 +9,10 @@ import shared
 
 struct CountryDetailScreen: View {
     var countryName : String
-    @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var appObj: AppObservableObject
     
     var body: some View {
-        let countryDetailState = viewModel.stateProviders.getCountryDetailState(country: countryName)
+        let countryDetailState = appObj.stateProviders.getCountryDetailState(country: countryName)
         VStack {
             if countryDetailState.isLoading {
                 LoadingElement()
