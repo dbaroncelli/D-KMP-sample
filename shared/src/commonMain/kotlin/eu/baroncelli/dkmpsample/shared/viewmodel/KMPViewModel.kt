@@ -21,13 +21,13 @@ class KMPViewModel (repo: Repository) {
     internal val stateProviders by lazy { StateProviders(stateManager, events) }
 
     fun onReEnterForeground() {
-        // not called at startup, but only when reentering the app after it was in background
+        // not called at app startup, but only when reentering the app after it was in background
         debugLogger.log("onReEnterForeground: recomposition is triggered")
         stateManager.triggerRecomposition()
     }
 
     fun onEnterBackground() {
-        debugLogger.log("onEnterBackground")
+        debugLogger.log("onEnterBackground: screen scopes are cancelled")
         stateManager.cancelScreenScopes()
     }
 

@@ -19,10 +19,11 @@ class StateManager {
             reinitWhen: (T) -> Boolean = {false},
     ) : T {
         //debugLogger.log("getScreen: "+T::class.simpleName)
+        val loggerText = T::class.simpleName+" StateProvider is called"
         val screenType = getScreenType(T::class)
         val currentState = screenStatesMap[screenType] as? T
         if (currentState == null || reinitWhen(currentState)) {
-            debugLogger.log(T::class.simpleName+" initialized")
+            debugLogger.log(loggerText+" (INITIALIZED state)")
             initScreenScope(screenType)
             val initializedState = initState()
             screenStatesMap[screenType] = initializedState
@@ -30,9 +31,11 @@ class StateManager {
             return initializedState
         }
         if (!isScreenScopeActive(screenType)) { // in case it's coming back from background
-            debugLogger.log(T::class.simpleName+" scope reinitialized")
+            debugLogger.log(loggerText+" (reinitialized scope)")
             initScreenScope(screenType)
             callOnInit()
+        } else {
+            debugLogger.log(loggerText)
         }
         return currentState
     }
