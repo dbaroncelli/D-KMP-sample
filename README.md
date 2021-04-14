@@ -23,7 +23,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - **device bluetooth** (using [Kable]( https://github.com/JuulLabs/kable))
 - etc...
 
-## Instructions:
+## Instructions to write your own D-KMP app:
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
 - the **5 files** in the ViewModel root folder don't need to be modified. They can be used as they are:
   - _Events.kt_
