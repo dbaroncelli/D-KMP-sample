@@ -10,8 +10,8 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - it **fully shares the ViewModel** (and the *DataLayer*) via **Kotlin MultiPlatform**
 - **coroutine scopes** are **cancelled/reinitialized automatically**, based on the current active screens and the app lifecycle (using LifecycleOwner on **Android** and the SwiftUI lifecycle on **iOS**)
 - it implements the **MVI pattern** and the *unidirectional data flow*
-- it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 - it implements the **CQRS pattern**, by providing 2 types of functions to the UI layer: **Events** and **StateProviders**
+- it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
