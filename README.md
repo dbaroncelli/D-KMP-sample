@@ -32,7 +32,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - _StateManager.kt_
   - _StateProviders.kt_
   - _StateReducers.kt_
-- the _Repository.kt_ file in the DataLayer root folder should be modified only in case you want to implement an extra data source
+- the _Repository.kt_ file in the DataLayer root folder should be modified only in case you want to add an extra data source
 - these are the app-specific files in the shared code:
   - in the **viewmodel**, create a folder for each screen in _viewmodel/screens_, containing these **4 files** (as shown in the sample app):
     - _screen_**Events**, where the event functions are defined
