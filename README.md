@@ -9,7 +9,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - it uses the latest **declarative UI** toolkits: **JetpackCompose** for *Android* and **SwiftUI** for *iOS*
 - it **fully shares the ViewModel** (and the *DataLayer*) via **Kotlin MultiPlatform**
 - it implements the **MVI pattern** and the *unidirectional data flow*
-- it uses Kotlin's **StateFlow** for the multi-platform observable mechanism
+- it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 - it implements the **CQRS pattern**, by providing 2 types of functions to the UI layer: **Events** and **StateProviders**
 
 ## Data sources used by this sample:
