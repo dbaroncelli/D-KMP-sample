@@ -25,20 +25,20 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 ## Instructions:
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
-- the 5 files in the ViewModel root folder don't need to be modified. They can be used as they are:
-  - Events.kt
-  - KMPViewModel.kt
-  - StateManager.kt
-  - StateProviders.kt
-  - StateReducers.kt
-- the Repository.kt file in the DataLayer root folder should be modified only in case you want to implement an extra data source
+- the **5 files** in the ViewModel root folder don't need to be modified. They can be used as they are:
+  - _Events.kt_
+  - _KMPViewModel.kt_
+  - _StateManager.kt_
+  - _StateProviders.kt_
+  - _StateReducers.kt_
+- the _Repository.kt_ file in the DataLayer root folder should be modified only in case you want to implement an extra data source
 - these are the app-specific files in the shared code:
-  - in the viewmodel, create a folder for each screen in viewmodel/screens, containing these 4 files (as shown in the sample app):
+  - in the **viewmodel**, create a folder for each screen in _viewmodel/screens_, containing these **4 files** (as shown in the sample app):
     - _Screen_**Events**, where the event functions are defined
     - _Screen_**State**, where the screen state data class is defined
     - _Screen_**StateProvider**, where the screen state provider function is defined
     - _Screen_**StateReducers**, where the screen state reducers functions (called by the events) are defined
-  - in the datalayer:
+  - in the **datalayer**:
     - in the **functions** folder: a file for each repository function to be called by the StateReducers
     - in the **objects** folder: a file for each data class used by the repository functions
     - in the **sources** folder: a subfolder for each datasource used by the repository functions, where the datasource-specific functions are defined
