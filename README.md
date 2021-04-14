@@ -42,6 +42,6 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - in the **datalayer**:
     - in the **functions** folder: a file for each repository function to be called by the StateReducers
     - in the **objects** folder: a file for each data class used by the repository functions
-    - in the **sources** folder: create a folder for each datasource, where the datasource-specific functions called by the repository functions are defined
+    - in the **sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
 
 ![app_structure](https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png)
