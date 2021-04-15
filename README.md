@@ -28,17 +28,17 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
 ### shared code:
 #### View Model
-  - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
   - in the **viewmodel/screens** folder: create a folder for each screen, containing these **4 files** (as shown in the sample app):
     - _screen_**Events**, where the event functions are defined
     - _screen_**State**, where the screen state data class is defined
     - _screen_**StateProvider**, where the screen state provider function is defined
     - _screen_**StateReducers**, where the screen state reducers functions (called by the events) are defined
+  - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
 #### Data Layer
-  - the **datalayer/Repository.kt** file should be modified only in case you want to add an extra data source
   - in the **datalayer/functions** folder: create a file for each repository function to be called by the StateReducers
   - in the **datalayer/objects** folder: create a file for each data class used by the repository functions
   - in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
+  - the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
 
 ### platform-specific code:
 #### androidApp
