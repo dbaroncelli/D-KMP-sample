@@ -31,7 +31,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 ### shared code:
 #### View Model
   <img width="355" src="https://user-images.githubusercontent.com/5320104/114903067-b51d5680-9e16-11eb-81fa-c8dbd18c5db3.png"></img>
-  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app filesystem above):
+  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
     - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
@@ -48,17 +48,16 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 ### platform-specific code:
 #### androidApp
   <img width="228" src="https://user-images.githubusercontent.com/5320104/114901926-95396300-9e15-11eb-823d-7b6ed2413418.png"></img>
+  - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
   - the **MainActivity.kt** file should be modified only to change the name of the JetpackCompose theme
   - the **MyApp.kt** file doesn't need to be modified
   - the **Navigation.kt** file should be modified to define the screens navigation in the app
-  - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
 #### iosApp
 <img width="266" src="https://user-images.githubusercontent.com/5320104/114904200-e5192980-9e17-11eb-84af-526085b35197.png"></img>
-
+  - in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
   - the **AppMain.swift** file doesn't need to be modified
   - the **AppObservableObject.swift** file doesn't need to be modified
   - the **ContentView.swift** file should be modified to define which is the startup screen of the app
-  - in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
 #### webApp (coming soon!)
   mainly waiting for 2 big things to happen:
   - **SqlDelight** releasing version 1.5.0, which will have support for JS/Web
