@@ -43,7 +43,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 
 ### platform-specific code:
 #### androidApp
-  - the **MainActivity.kt** file should be modified only to change the name of the Android theme
+  - the **MainActivity.kt** file should be modified only to change the name of the JetpackCompose theme
   - the **MyApp.kt** file doesn't need to be modified
   - the **Navigation.kt** file should be modified to define the screens navigation in the app
   - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
