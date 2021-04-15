@@ -31,7 +31,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 ### shared code:
 #### View Model
   <img width="355" src="https://user-images.githubusercontent.com/5320104/114903067-b51d5680-9e16-11eb-81fa-c8dbd18c5db3.png"></img>
-  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app):
+  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app filesystem above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
     - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
@@ -62,4 +62,4 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 #### webApp (coming soon!)
   mainly waiting for 2 big things to happen:
   - **SqlDelight** releasing version 1.5.0, which will have support for JS/Web
-  - **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114)!)
+  - **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114))
