@@ -29,10 +29,10 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 ### shared code:
 #### View Model
   - in the **viewmodel/screens** folder: create a folder for each screen, containing these **4 files** (as shown in the sample app):
-    - _screen_**Events.kt**, where the event functions are defined
-    - _screen_**State.kt**, where the screen state data class is defined
-    - _screen_**StateProvider.kt**, where the screen state provider function is defined
-    - _screen_**StateReducers.kt**, where the screen state reducers functions (called by the events) are defined
+    - _screen_**Events.kt**, where the event functions for that screen are defined
+    - _screen_**State.kt**, where the data class of the state for that screen is defined
+    - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
+    - _screen_**StateReducers.kt**, where the state reducers functions (called by the events) for that screen are defined
   - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
 #### Data Layer
   - in the **datalayer/functions** folder: create a file for each repository function to be called by the StateReducers
