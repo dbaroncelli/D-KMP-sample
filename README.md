@@ -28,7 +28,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
 ### shared code:
 #### View Model
-  - in the **viewmodel/screens** folder: create a folder for each screen, containing these **4 files** (as shown in the sample app):
+  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
     - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
@@ -46,11 +46,11 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - the **MainActivity.kt** file should be modified only to change the name of the Android theme
   - the **MyApp.kt** file doesn't need to be modified
   - the **Navigation.kt** file should be modified to define the screens navigation in the app
-  - in the **screens** folder: create a folder for each screen, containing all JetpackCompose composables for that screen
+  - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
 #### iosApp
   - the **AppMain.swift** file doesn't need to be modified
   - the **AppObservableObject.swift** file doesn't need to be modified
   - the **ContentView.swift** file should be modified to define which is the startup screen of the app
-  - in the **screens** folder: create a folder for each screen, containing all SwiftUI views for that screen
+  - in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
 
 ![app_structure](https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png)
