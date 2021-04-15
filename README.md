@@ -4,6 +4,8 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
+<img width="400" src="https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png"></img>
+
 ## Key features of the D-KMP architecture:
 
 - it uses the latest **declarative UI** toolkits: **JetpackCompose** for *Android* and **SwiftUI** for *iOS*
@@ -61,5 +63,3 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   mainly waiting for 2 big things to happen:
   - **SqlDelight** releasing version 1.5.0, which will have support for JS/Web
   - **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114)!)
-
-![app_structure](https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png)
