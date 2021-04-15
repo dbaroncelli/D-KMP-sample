@@ -53,7 +53,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - the **Navigation.kt** file should be modified to define the screens navigation in the app
   - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
 #### iosApp
-<img width="243" src="https://user-images.githubusercontent.com/5320104/114902619-4809c100-9e16-11eb-86dc-552c386ca8c1.png"></img>
+<img width="266" src="https://user-images.githubusercontent.com/5320104/114904200-e5192980-9e17-11eb-84af-526085b35197.png"></img>
 
   - the **AppMain.swift** file doesn't need to be modified
   - the **AppObservableObject.swift** file doesn't need to be modified
