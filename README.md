@@ -27,7 +27,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - etc...
 
 ## Instructions to write your own D-KMP app:
-If you want to create your own app using the D-KMP Architecture, here are some instructions:
+If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
 ### shared code:
 #### View Model
   <img width="355" src="https://user-images.githubusercontent.com/5320104/114903067-b51d5680-9e16-11eb-81fa-c8dbd18c5db3.png"></img>
