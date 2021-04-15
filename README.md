@@ -33,7 +33,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
     - _screen_**State.kt**, where the screen state data class is defined
     - _screen_**StateProvider.kt**, where the screen state provider function is defined
     - _screen_**StateReducers.kt**, where the screen state reducers functions (called by the events) are defined
-  - the **5 files** in the **viewmodel.kt** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
+  - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
 #### Data Layer
   - in the **datalayer/functions** folder: create a file for each repository function to be called by the StateReducers
   - in the **datalayer/objects** folder: create a file for each data class used by the repository functions
