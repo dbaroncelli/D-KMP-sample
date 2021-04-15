@@ -28,6 +28,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
 ### shared code:
 #### View Model
+  <img width="355" src="https://user-images.githubusercontent.com/5320104/114903067-b51d5680-9e16-11eb-81fa-c8dbd18c5db3.png"></img>
   - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
@@ -36,6 +37,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
   - also **KMPViewModelForAndroid.kt** in _androidMain_ and **KMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 #### Data Layer
+<img width="322" src="https://user-images.githubusercontent.com/5320104/114903196-d7af6f80-9e16-11eb-823c-8ef9e2039ab6.png"></img>
   - in the **datalayer/functions** folder: create a file for each repository function to be called by the ViewModel's StateReducers
   - in the **datalayer/objects** folder: create a file for each data class used by the repository functions
   - in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
@@ -43,11 +45,14 @@ If you want to create your own app using the D-KMP Architecture, here are some i
 
 ### platform-specific code:
 #### androidApp
+  <img width="228" src="https://user-images.githubusercontent.com/5320104/114901926-95396300-9e15-11eb-823d-7b6ed2413418.png"></img>
   - the **MainActivity.kt** file should be modified only to change the name of the JetpackCompose theme
   - the **MyApp.kt** file doesn't need to be modified
   - the **Navigation.kt** file should be modified to define the screens navigation in the app
   - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
 #### iosApp
+<img width="243" src="https://user-images.githubusercontent.com/5320104/114902619-4809c100-9e16-11eb-86dc-552c386ca8c1.png"></img>
+
   - the **AppMain.swift** file doesn't need to be modified
   - the **AppObservableObject.swift** file doesn't need to be modified
   - the **ContentView.swift** file should be modified to define which is the startup screen of the app
