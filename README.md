@@ -28,13 +28,8 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 If you want to create your own app using the D-KMP Architecture, here are some instructions:
 ### shared code:
 #### View Model
-  - the **5 files** in the _viewmodel_ folder don't need to be modified. They can be used as they are:
-    - _Events.kt_
-    - _KMPViewModel.kt_
-    - _StateManager.kt_
-    - _StateProviders.kt_
-    - _StateReducers.kt_
-  - in the _viewmodel/screens_ folder: create a folder for each screen, containing these **4 files** (as shown in the sample app):
+  - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
+  - in the **viewmodel/screens** folder: create a folder for each screen, containing these **4 files** (as shown in the sample app):
     - _screen_**Events**, where the event functions are defined
     - _screen_**State**, where the screen state data class is defined
     - _screen_**StateProvider**, where the screen state provider function is defined
