@@ -52,5 +52,10 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - the **AppObservableObject.swift** file doesn't need to be modified
   - the **ContentView.swift** file should be modified to define which is the startup screen of the app
   - in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
+#### webApp
+  coming soon!
+  mainly waiting for 2 big things to happen:
+  - **SqlDelight** releasing version 1.5.0, which will have support for JS/Web
+  - **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114)!)
 
 ![app_structure](https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png)
