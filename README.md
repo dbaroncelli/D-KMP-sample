@@ -36,7 +36,7 @@ If you want to create your own app using the D-KMP Architecture, here are some i
   - the **5 files** in the **viewmodel** folder (_Events.kt_, _KMPViewModel.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
   - also **KMPViewModelForAndroid.kt** in _androidMain_ and **KMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 #### Data Layer
-  - in the **datalayer/functions** folder: create a file for each repository function to be called by the KMPViewModel's StateReducers
+  - in the **datalayer/functions** folder: create a file for each repository function to be called by the ViewModel's StateReducers
   - in the **datalayer/objects** folder: create a file for each data class used by the repository functions
   - in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
   - the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
