@@ -16,10 +16,12 @@ class ApiClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json { ignoreUnknownKeys = true })
         }
+        /* Ktor specific logging: reenable if needed to debug requests
         install(Logging) {
             logger = Logger.DEFAULT
             level = LogLevel.INFO
         }
+        */
     }
 
 

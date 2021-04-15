@@ -1,6 +1,5 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
