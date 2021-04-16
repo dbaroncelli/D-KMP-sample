@@ -8,30 +8,11 @@ open class SettingsClient(settingsImpl : Settings) {
 
     val settings = settingsImpl
 
-    // this is for a long
-    inner class LongType(defaultValue : Long) {
-        private val default = defaultValue
-        operator fun getValue(thisRef: Any?, property: KProperty<*>): Long {
-            return settings.getLong(property.name, default)
-        }
-        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: Long) {
-            settings.putLong(property.name, value)
-        }
-    }
 
-    // this is for a string
-    inner class StringType(defaultValue : String) {
-        private val default = defaultValue
-        operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
-            return settings.getString(property.name, default)
-        }
-        operator fun setValue(thisRef: Any?, property: KProperty<*>, value: String) {
-            settings.putString(property.name, value)
-        }
-    }
+    // we can define here any custom type, using delegated properties: https://kotlinlang.org/docs/delegated-properties.html
 
-    // this is for our custom MenuItem enum
-    inner class MenuItemType(defaultValue : MenuItem) {
+    // MenuItem enum
+    inner class MenuItemCustomType(defaultValue : MenuItem) {
         private val default = defaultValue
         operator fun getValue(thisRef: Any?, property: KProperty<*>): MenuItem {
             return enumValueOf(settings.getString(property.name, default.name))
