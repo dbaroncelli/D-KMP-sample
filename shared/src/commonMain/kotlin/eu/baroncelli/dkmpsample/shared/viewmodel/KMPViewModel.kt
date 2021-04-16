@@ -3,7 +3,9 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 import eu.baroncelli.dkmpsample.shared.DebugLogger
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.native.concurrent.ThreadLocal
 
+@ThreadLocal
 val debugLogger by lazy { DebugLogger("D-KMP SAMPLE") }
 
 class KMPViewModel (repo: Repository) {
