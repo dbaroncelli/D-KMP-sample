@@ -8,6 +8,6 @@ object CacheObjects {
     // here is the repository data we decide to just cache temporarily (for the runtime session),
     // rather than caching it permanently in the local db or local settings
 
-    internal var countryExtraData: MutableMap<String, CountryExtraData> = mutableMapOf()
+    internal val countryExtraData: MutableMap<String, CountryExtraData> by lazy { mutableMapOf() }
 
 }

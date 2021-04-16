@@ -9,6 +9,6 @@ import mylocal.db.LocalDb
 
 fun KMPViewModel.Factory.getAndroidInstance(context : Context) : KMPViewModel {
     val sqlDriver = AndroidSqliteDriver(LocalDb.Schema, context, "Local.db")
-    val repository = Repository(true, sqlDriver)
+    val repository = Repository(sqlDriver)
     return KMPViewModel(repository)
 }
