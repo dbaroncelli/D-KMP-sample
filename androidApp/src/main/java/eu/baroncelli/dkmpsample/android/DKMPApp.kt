@@ -5,24 +5,24 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
-import eu.baroncelli.dkmpsample.shared.viewmodel.KMPViewModel
+import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 import eu.baroncelli.dkmpsample.shared.viewmodel.getAndroidInstance
 
-class MyApp : Application() {
+class DKMPApp : Application() {
 
-    lateinit var kmpViewModel: KMPViewModel
+    lateinit var model: DKMPViewModel
 
     override fun onCreate() {
         super.onCreate()
-        kmpViewModel = KMPViewModel.Factory.getAndroidInstance(this)
+        model = DKMPViewModel.Factory.getAndroidInstance(this)
 
-        val appLifecycleObserver = AppLifecycleObserver(kmpViewModel)
+        val appLifecycleObserver = AppLifecycleObserver(model)
         ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver)
     }
 
 }
 
-class AppLifecycleObserver (val model: KMPViewModel) : LifecycleObserver {
+class AppLifecycleObserver (val model: DKMPViewModel) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onEnterForeground() {

@@ -8,7 +8,8 @@ import kotlin.native.concurrent.ThreadLocal
 @ThreadLocal
 val debugLogger by lazy { DebugLogger("D-KMP SAMPLE") }
 
-class KMPViewModel (repo: Repository) {
+
+class DKMPViewModel (repo: Repository) {
 
     companion object Factory {
         // factory methods are defined in the platform-specific shared code (androidMain and iosMain)

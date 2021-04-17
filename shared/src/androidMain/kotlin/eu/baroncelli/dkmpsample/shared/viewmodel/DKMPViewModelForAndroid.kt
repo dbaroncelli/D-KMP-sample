@@ -3,12 +3,11 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 import android.content.Context
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
-import kotlinx.coroutines.Dispatchers
 import mylocal.db.LocalDb
 
 
-fun KMPViewModel.Factory.getAndroidInstance(context : Context) : KMPViewModel {
+fun DKMPViewModel.Factory.getAndroidInstance(context : Context) : DKMPViewModel {
     val sqlDriver = AndroidSqliteDriver(LocalDb.Schema, context, "Local.db")
     val repository = Repository(sqlDriver)
-    return KMPViewModel(repository)
+    return DKMPViewModel(repository)
 }

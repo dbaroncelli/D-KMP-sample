@@ -11,23 +11,23 @@ import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
 import mylocal.db.LocalDb
 
 
-fun KMPViewModel.Factory.getIosInstance() : KMPViewModel {
+fun DKMPViewModel.Factory.getIosInstance() : DKMPViewModel {
     val sqlDriver = NativeSqliteDriver(LocalDb.Schema, "Local.db")
     val repository = Repository(sqlDriver)
-    return KMPViewModel(repository)
+    return DKMPViewModel(repository)
 }
 
 
 // this is required, because default arguments of Kotlin functions are currently not exposed to Objective-C or Swift
 // https://youtrack.jetbrains.com/issue/KT-41908
-fun KMPViewModel.getDefaultAppState() : AppState {
+fun DKMPViewModel.getDefaultAppState() : AppState {
     return AppState()
 }
 
 // this function notifies of any state changes to the iOS AppViewModel class
 // hopefully this code will eventually be provided by an official Kotlin function
 // https://youtrack.jetbrains.com/issue/KT-41953
-fun KMPViewModel.onChange(provideNewState: ((AppState) -> Unit)) : Closeable {
+fun DKMPViewModel.onChange(provideNewState: ((AppState) -> Unit)) : Closeable {
 
     val job = Job()
 

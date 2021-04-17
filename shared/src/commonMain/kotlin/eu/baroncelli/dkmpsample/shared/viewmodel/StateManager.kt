@@ -90,7 +90,7 @@ class StateManager {
 data class AppState (
     val recompositionIndex : Int = 0
 ) {
-    fun getStateProviders(model : KMPViewModel) : StateProviders {
+    fun getStateProviders(model : DKMPViewModel) : StateProviders {
         return model.stateProviders
     }
 }

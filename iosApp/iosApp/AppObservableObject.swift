@@ -8,7 +8,7 @@ import Foundation
 import shared
 
 class AppObservableObject: ObservableObject {
-    let model : KMPViewModel = KMPViewModel.Factory().getIosInstance()
+    let model : DKMPViewModel = DKMPViewModel.Factory().getIosInstance()
     var events : Events {
         return self.model.events
     }

@@ -9,13 +9,13 @@ import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import eu.baroncelli.dkmpsample.android.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.android.screens.countrieslist.CountriesListScreen
-import eu.baroncelli.dkmpsample.shared.viewmodel.KMPViewModel
+import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 import androidx.compose.runtime.getValue
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.getCountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.getCountriesListState
 
 @Composable
-fun Navigation(model: KMPViewModel) {
+fun Navigation(model: DKMPViewModel) {
 
     val events = model.events
     val appState by model.stateFlow.collectAsState()
