@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 extension String {
     func toColor() -> Color {
         let hex = self.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
