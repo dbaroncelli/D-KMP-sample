@@ -9,6 +9,7 @@ import shared
 
 struct CountriesListScreen: View {
     @EnvironmentObject var appObj: AppObservableObject
+    let bgColor = UIColor(red: 98/255, green: 0, blue: 238/255, alpha: 1) // purple
     
     var body: some View {
         let countriesListState = appObj.stateProviders.getCountriesListState()
@@ -49,8 +50,8 @@ struct CountriesListScreen: View {
                     }
                 }
             }
-            .navigationBarColor(backgroundColor: "6200EE".toUIColor(), tintColor: .white)
-            .toolbarColor(backgroundColor: "6200EE".toUIColor(), tintColor: .white)
+            .navigationBarColor(backgroundColor: bgColor, tintColor: .white)
+            .toolbarColor(backgroundColor: bgColor, tintColor: .white)
         }
     }
     

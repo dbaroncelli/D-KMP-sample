@@ -19,7 +19,7 @@ class AppObservableObject: ObservableObject {
     @Published var appState : AppState
     
     init() {
-        // "getDefaultAppState" and "onChange" are iOS-only KMPViewModel's extension functions, defined in shared/iosMain
+        // "getDefaultAppState" and "onChange" are iOS-only DKMPViewModel's extension functions, defined in shared/iosMain
         self.appState = model.getDefaultAppState()
         model.onChange { newState in
             self.appState = newState

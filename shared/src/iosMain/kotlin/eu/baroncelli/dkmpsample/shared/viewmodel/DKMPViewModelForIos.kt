@@ -24,7 +24,7 @@ fun DKMPViewModel.getDefaultAppState() : AppState {
     return AppState()
 }
 
-// this function notifies of any state changes to the iOS AppViewModel class
+// this function notifies of any state changes to the iOS AppObservableObject class
 // hopefully this code will eventually be provided by an official Kotlin function
 // https://youtrack.jetbrains.com/issue/KT-41953
 fun DKMPViewModel.onChange(provideNewState: ((AppState) -> Unit)) : Closeable {

@@ -39,7 +39,8 @@ struct ButtonBarButton: View {
     var iconName : String
     var selected : Bool
     var onItemClick : (MenuItem) -> Void
-
+    let unselectedColor = Color(.sRGB, red: 0xAA, green: 0xAA, blue: 0xAA, opacity: 0xFF) // grey
+    
     var body: some View {
         Button(action: { onItemClick(menuItem) }) {
             HStack(spacing: 10) {
@@ -47,7 +48,7 @@ struct ButtonBarButton: View {
                 Text(menuItem.name)
             }
             .frame(height: 50)
-            .foregroundColor(selected ? .white : "AAAAAA".toColor())
+            .foregroundColor(selected ? .white : unselectedColor)
         }
     }
 }
