@@ -5,7 +5,7 @@
     <!-- Base application theme. In this Jetpack Compose sample app, these colors
      don't affect the Composable functions, just the color of the Status Bar.
      For the colors used by the Composable functions, see styling/Theme.kt -->
-    <style name="Theme.DkmpSample" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/purple_500</item>
