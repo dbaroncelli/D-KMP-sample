@@ -39,7 +39,7 @@ struct ButtonBarButton: View {
     var iconName : String
     var selected : Bool
     var onItemClick : (MenuItem) -> Void
-    let unselectedColor = Color(.sRGB, red: 0xAA, green: 0xAA, blue: 0xAA, opacity: 0xFF) // grey
+    let unselectedColor = Color(.sRGB, red: 170/255, green: 170/255, blue: 170/255, opacity: 1) // grey
     
     var body: some View {
         Button(action: { onItemClick(menuItem) }) {

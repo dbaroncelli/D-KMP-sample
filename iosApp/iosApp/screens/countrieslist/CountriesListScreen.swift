@@ -9,7 +9,7 @@ import shared
 
 struct CountriesListScreen: View {
     @EnvironmentObject var appObj: AppObservableObject
-    let bgColor = UIColor(red: 98/255, green: 0, blue: 238/255, alpha: 1) // purple
+    let bgUIColor = UIColor(Color(.sRGB, red: 98/255, green: 0, blue: 238/255, opacity: 1)) // purple
     
     var body: some View {
         let countriesListState = appObj.stateProviders.getCountriesListState()
@@ -50,8 +50,8 @@ struct CountriesListScreen: View {
                     }
                 }
             }
-            .navigationBarColor(backgroundColor: bgColor, tintColor: .white)
-            .toolbarColor(backgroundColor: bgColor, tintColor: .white)
+            .navigationBarColor(backgroundUIColor: bgUIColor, tintUIColor: .white)
+            .toolbarColor(backgroundUIColor: bgUIColor, tintUIColor: .white)
         }
     }
     
