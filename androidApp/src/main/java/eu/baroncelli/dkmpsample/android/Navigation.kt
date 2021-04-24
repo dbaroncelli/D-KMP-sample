@@ -17,10 +17,10 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.getCountr
 @Composable
 fun Navigation(model: DKMPViewModel) {
 
-    val events = model.events
     val appState by model.stateFlow.collectAsState()
     Log.d("D-KMP-SAMPLE","recomposition Index: "+appState.recompositionIndex.toString())
     val stateProviders = appState.getStateProviders(model)
+    val events = model.events
 
 
     val navController = rememberNavController()

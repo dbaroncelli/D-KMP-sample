@@ -15,7 +15,7 @@ class DKMPApp : Application() {
     override fun onCreate() {
         super.onCreate()
         model = DKMPViewModel.Factory.getAndroidInstance(this)
-
+        
         val appLifecycleObserver = AppLifecycleObserver(model)
         ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver)
     }
