@@ -59,4 +59,4 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - the **ContentView.swift** file should be modified to define which is the startup screen of the app
   - the **DKMPApp.swift** file doesn't need to be modified
 #### webApp (coming soon!)
-  waiting for **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114))
+  - waiting for **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114))
