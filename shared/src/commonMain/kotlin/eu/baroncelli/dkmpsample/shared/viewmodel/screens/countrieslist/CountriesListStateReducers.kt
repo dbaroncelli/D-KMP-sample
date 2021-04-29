@@ -4,6 +4,8 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateReducers
 
+// here we define all state reducers for this screen,
+// which are always called by the events
 
 suspend fun StateReducers.updateCountriesList(selectedMenuItem: MenuItem?) {
     val menuItem = selectedMenuItem ?: dataRepository.localSettings.selectedMenuItem

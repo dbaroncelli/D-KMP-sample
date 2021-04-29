@@ -1,11 +1,10 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
-
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
-/********** ScreenState class definition **********/
+// here is the data class defining the state for this screen
 
 data class CountriesListState (
     val isLoading: Boolean = false,
@@ -15,8 +14,8 @@ data class CountriesListState (
 ): ScreenState
 
 
-/********** property classes definition **********/
 
+/********** property classes **********/
 
 enum class MenuItem { ALL, FAVORITES }
 

@@ -6,7 +6,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
 
-/********** ScreenState class definition **********/
+// here is the data class defining the state for this screen
 
 data class CountryDetailState (
     val isLoading: Boolean = false,
@@ -14,7 +14,9 @@ data class CountryDetailState (
     val countryInfo : CountryInfo = CountryInfo(),
 ): ScreenState
 
-/********** property classes definition **********/
+
+
+/********** property classes **********/
 
 data class CountryInfo (
     val _listData : CountryListData = CountryListData(),

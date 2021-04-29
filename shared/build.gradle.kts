@@ -55,14 +55,14 @@ kotlin {
                 implementation("io.ktor:ktor-client-json:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-logging:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-serialization:${Versions.ktor}")
-                implementation("com.russhwolf:multiplatform-settings-no-arg:0.7.4")
+                implementation("com.russhwolf:multiplatform-settings-no-arg:0.7.5")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("com.russhwolf:multiplatform-settings-test:0.7.4")
+                implementation("com.russhwolf:multiplatform-settings-test:0.7.5")
             }
         }
         val androidMain by getting {
