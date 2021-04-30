@@ -13,9 +13,10 @@ class StateManager {
 
     // only called by the State Providers
     inline fun <reified T:ScreenState> getScreen(
-            initState: () -> T,
-            callOnInit: () -> Unit,
-            reinitWhen: (T) -> Boolean = {false},
+            initState: () -> T,     // default state on initialization
+            callOnInit: () -> Unit,     // event to run on initialization
+            reinitWhen: (T) -> Boolean = {false},   // condition to reinitialize the state
+            callOnInitAlsoAfterBackground : Boolean = false,    // if true, it runs "callOnInit" also after coming back from background
     ) : T {
         //debugLogger.log("getScreen: "+T::class.simpleName)
         val loggerText = T::class.simpleName+" StateProvider is called"
@@ -32,7 +33,9 @@ class StateManager {
         if (!isScreenScopeActive(screenType)) { // in case it's coming back from background
             debugLogger.log(loggerText+" (reinitialized scope)")
             initScreenScope(screenType)
-            callOnInit()
+            if (callOnInitAlsoAfterBackground) {
+                callOnInit()
+            }
         } else {
             debugLogger.log(loggerText)
         }
