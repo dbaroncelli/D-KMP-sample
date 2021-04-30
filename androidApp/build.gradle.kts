@@ -8,7 +8,7 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.3.0-alpha06")
+    implementation("androidx.activity:activity-compose:1.3.0-alpha07")
     implementation("androidx.lifecycle:lifecycle-process:2.3.1")
     implementation("androidx.appcompat:appcompat:1.3.0-rc01")
     implementation("androidx.compose.ui:ui:${Versions.compose}")
@@ -21,13 +21,13 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(Versions.compile_sdk)
-    buildToolsVersion(Versions.build_tools)
+    compileSdk = Versions.compile_sdk
+    buildToolsVersion = Versions.build_tools
 
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
-        minSdkVersion(Versions.min_sdk)
-        targetSdkVersion(Versions.target_sdk)
+        minSdk = Versions.min_sdk
+        targetSdk = Versions.target_sdk
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -42,10 +42,10 @@ android {
             isMinifyEnabled = true
             // Enables resource shrinking, which is performed by the
             // Android Gradle plugin.
-            isShrinkResources = true
+            /* isShrinkResources = true
             // Includes the default ProGuard rules files that are packaged with
             // the Android Gradle plugin. To learn more, go to the section about
-            // R8 configuration files.
+            // R8 configuration files. */
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

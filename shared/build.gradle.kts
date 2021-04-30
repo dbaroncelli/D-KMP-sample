@@ -89,14 +89,12 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(Versions.compile_sdk)
-    buildToolsVersion(Versions.build_tools)
+    compileSdk = Versions.compile_sdk
+    buildToolsVersion = Versions.build_tools
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(Versions.min_sdk)
-        targetSdkVersion(Versions.target_sdk)
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = Versions.min_sdk
+        targetSdk = Versions.target_sdk
     }
     buildTypes {
         getByName("release") {

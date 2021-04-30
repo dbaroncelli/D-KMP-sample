@@ -14,7 +14,7 @@ class StateProviders (stateManager : StateManager, events : Events) {
 
 // here we define all the screenTypes
 // the AppState keeps in memory just one screenState per screenType
-// in order to support dual-pane, it makes sense to have at least a MASTER and a DETAIL
+// in order to support a "two pane" visualization on larger devices, it makes sense to have at least a MASTER and a DETAIL
 enum class ScreenType{ MASTER, DETAIL, DIALOG }
 
 interface ScreenState // we apply this empty interface to all screen state data classes
