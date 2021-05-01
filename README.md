@@ -31,32 +31,32 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 ### shared code:
 #### View Model
   <img width="352" src="https://user-images.githubusercontent.com/5320104/115110762-51fa0400-9f7d-11eb-9397-069c3dbbbba1.png"></img>
-  - in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
+  - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
     - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
     - _screen_**StateReducers.kt**, where the state reducers functions (called by the events) for that screen are defined
-  - the **5 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
-  - also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
+  - :white_check_mark: the **5 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
+  - :white_check_mark: also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 #### Data Layer
 <img width="322" src="https://user-images.githubusercontent.com/5320104/114903196-d7af6f80-9e16-11eb-823c-8ef9e2039ab6.png"></img>
-  - in the **datalayer/functions** folder: create a file for each repository function to be called by the ViewModel's StateReducers
-  - in the **datalayer/objects** folder: create a file for each data class used by the repository functions
-  - in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
-  - the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
+  - :hammer_and_wrench: in the **datalayer/functions** folder: create a file for each repository function to be called by the ViewModel's StateReducers
+  - :hammer_and_wrench: in the **datalayer/objects** folder: create a file for each data class used by the repository functions
+  - :hammer_and_wrench: in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
+  - :white_check_mark: the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
 
 ### platform-specific code:
 #### androidApp
   <img width="219" src="https://user-images.githubusercontent.com/5320104/115110782-705fff80-9f7d-11eb-9075-6ecd1a479247.png"></img>
-  - in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
-  - the **DKMPApp.kt** file doesn't need to be modified
-  - the **MainActivity.kt** file doesn't need to be modified
-  - the **Navigation.kt** file should be modified to define the screens navigation in the app
+  - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
+  - :white_check_mark: the **DKMPApp.kt** file doesn't need to be modified
+  - :white_check_mark: the **MainActivity.kt** file doesn't need to be modified
+  - :hammer_and_wrench: the **Navigation.kt** file should be modified to define the screens navigation in the app
 #### iosApp
 <img width="267" src="https://user-images.githubusercontent.com/5320104/115110809-853c9300-9f7d-11eb-892d-edd7cd1aa570.png"></img>
-  - in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
-  - the **AppObservableObject.swift** file doesn't need to be modified
-  - the **ContentView.swift** file should be modified to define which is the startup screen of the app
-  - the **DKMPApp.swift** file doesn't need to be modified
+  - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
+  - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
+  - :hammer_and_wrench: the **ContentView.swift** file should be modified to define which is the startup screen of the app
+  - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
 #### webApp (coming soon!)
   - waiting for **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114))
