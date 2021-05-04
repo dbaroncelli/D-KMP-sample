@@ -36,7 +36,7 @@ If you want to create your own app using the D-KMP Architecture, here are the in
     - _screen_**State.kt**, where the data class of the state for that screen is defined
     - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
     - _screen_**StateReducers.kt**, where the state reducers functions (called by the events) for that screen are defined
-  - :hammer_and_wrench: in the **StateProviders.kt** file in the **viewmodel** folder, you should define the state data classes for the screen
+  - :hammer_and_wrench: in the **StateProviders.kt** file in the **viewmodel** folder, you should list the data classes for the screens states
   - :white_check_mark: the other **4 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _StateManager.kt_, _StateReducers.kt_) don't need to be modified
   - :white_check_mark: also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 #### Data Layer
