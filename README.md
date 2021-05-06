@@ -62,6 +62,6 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPNavigation.swift** file doesn't need to be modified
-  - :hammer_and_wrench: the **ViewsDefinition.swift** file should be modified to define the screen views the app
+  - :hammer_and_wrench: the **ViewsDefinition.swift** file should be modified to define the screen views in the app
 #### webApp (coming soon!)
-  - we'll be implementing the same app using [Compose for Web](https://blog.jetbrains.com/kotlin/2021/05/technology-preview-jetpack-compose-for-web/)
+  - we'll be implementing the same app using [Jetpack Compose for Web](https://blog.jetbrains.com/kotlin/2021/05/technology-preview-jetpack-compose-for-web/)
