@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MainView: View {
     @EnvironmentObject var appObj: AppObservableObject
     var body: some View {
         appObj.getStartView()

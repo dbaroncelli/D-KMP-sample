@@ -19,20 +19,7 @@ class MainActivity : ComponentActivity() {
         val model = (application as DKMPApp).model
         setContent {
             MyComposeTheme {
-
-                val appState by model.stateFlow.collectAsState()
-                Log.d("D-KMP-SAMPLE","recomposition Index: "+appState.recompositionIndex.toString())
-                val stateProviders = appState.getStateProviders(model)
-                val events = model.events
-
-                val navController = rememberNavController()
-                val dkmpNav = remember(model, navController) { DKMPNavigation(model, navController) }
-
-                NavHost(navController, startDestination = dkmpNav.getStartDestination()) {
-                    dkmpNav.navGraphBuilder = this
-                    dkmpNav.getComposables(stateProviders, events)
-                }
-
+                MainComposable(model)
             }
         }
     }
