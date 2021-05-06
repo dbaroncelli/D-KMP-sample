@@ -8,11 +8,11 @@
 import SwiftUI
 import shared
 
-extension AppObservableObject {
-    @ViewBuilder func getViewInstance(screen: Screen, instanceId: String? = nil) -> some View {
+extension DKMPNavigation {
+    @ViewBuilder func getViewInstance(_ screen: Screen, _ instanceId: String?) -> some View {
         switch screen {
         case Screen.countrieslist:
-            CountriesListScreen()
+            CountriesListScreen(destinationScreen: Screen.countrydetail)
         case Screen.countrydetail:
             CountryDetailScreen(countryName: instanceId!)
         default:

@@ -40,9 +40,9 @@ class StateManager {
             callOnInit()
             return initializedState
         }
-        if (!isScreenScopeActive(currentRouteId)) { // in case it's coming back from background
+        if (!isScreenScopeActive(routeId)) { // in case it's coming back from background
             debugLogger.log(loggerText+" (reinitialized scope)")
-            initScreenScope(currentRouteId)
+            initScreenScope(routeId)
             if (callOnInitAlsoAfterBackground) {
                 callOnInit()
             }
@@ -100,6 +100,7 @@ class StateManager {
 
     fun removeScreen(oldRouteId: String, newRouteId: String) {
         screenScopesMap[oldRouteId]?.cancel() // cancel screen's coroutine scope
+        screenScopesMap.remove(oldRouteId)
         screenStatesMap.remove(oldRouteId)
         currentRouteId = newRouteId
     }

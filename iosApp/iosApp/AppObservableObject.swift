@@ -30,12 +30,16 @@ class AppObservableObject: ObservableObject {
             NSLog("D-KMP-SAMPLE: recomposition Index: "+String(newState.recompositionIndex))
         }
     }
-    
-    @ViewBuilder func getView(screen: Screen, instanceId: String? = nil) -> some View {
-        self.getViewInstance(screen: screen, instanceId: instanceId)
-            .onAppear { self.dkmpNav.enterScreen(screen: screen, instanceId: instanceId) }
-            .onDisappear { self.dkmpNav.popScreen() }
-    }
 
+    @ViewBuilder func getView(_ screen: Screen, _ instanceId: String? = nil) -> some View {
+        self.dkmpNav.getViewInstance(screen, instanceId)
+            .onAppear { self.dkmpNav.enterRoute(screen, instanceId) }
+            .onDisappear { self.dkmpNav.popRoute() }
+    }
+    
+    @ViewBuilder func getStartView() -> some View {
+        getView(model.getStartScreen(), nil)
+    }
+    
 
 }

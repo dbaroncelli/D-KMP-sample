@@ -8,6 +8,7 @@ import SwiftUI
 import shared
 
 struct CountriesListScreen: View {
+    var destinationScreen : Screen
     @EnvironmentObject var appObj: AppObservableObject
     let bgUIColor = UIColor(Color(.sRGB, red: 98/255, green: 0, blue: 238/255, opacity: 1)) // purple
     
@@ -26,7 +27,7 @@ struct CountriesListScreen: View {
                     } else {
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavigationLink(destination: appObj.getView(screen: Screen.countrydetail, instanceId: item.name)) {
+                                NavigationLink(destination: appObj.getView(destinationScreen, item.name)) {
                                     CountriesListRow(
                                         item: item,
                                         favorite: countriesListState.favoriteCountries[item.name] != nil,
