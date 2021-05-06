@@ -28,7 +28,7 @@ class StateManager {
         if (instanceId != null) {
             routeId += "/"+instanceId
         }
-        debugLogger.log("getScreen: "+routeId)
+
         val loggerText = "/"+routeId+": "+T::class.simpleName+" StateProvider is called"
         val currentState = screenStatesMap[routeId] as? T
         if (currentState == null) {
@@ -40,7 +40,7 @@ class StateManager {
             callOnInit()
             return initializedState
         }
-        if (!isScreenScopeActive(routeId)) { // in case it's coming back from background
+        if (routeId == currentRouteId && !isScreenScopeActive(routeId)) { // in case it's coming back from background
             debugLogger.log(loggerText+" (reinitialized scope)")
             initScreenScope(routeId)
             if (callOnInitAlsoAfterBackground) {
@@ -60,12 +60,12 @@ class StateManager {
     ) {
         //debugLogger.log("updateScreen: "+currentRouteId)
         val currentState = screenStatesMap[currentRouteId] as? T
-        if (currentState != null) { // only perform update if the state class object is currently inside the screenStatesMap
+        if (currentState != null) { // only perform screen state update if screen is currently visible
             screenStatesMap[currentRouteId] = update(currentState)
             // only trigger recomposition if screen state has changed
             if (!currentState.equals(screenStatesMap[currentRouteId])) {
                 triggerRecomposition()
-                debugLogger.log(T::class.simpleName+" changed: recomposition is triggered")
+                debugLogger.log("/"+currentRouteId+" state changed: recomposition is triggered")
             }
         }
     }
