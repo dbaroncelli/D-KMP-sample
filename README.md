@@ -30,7 +30,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
 ### shared code:
 #### View Model
-<img width="361" src="https://user-images.githubusercontent.com/5320104/117335160-204ccc80-ae9b-11eb-9df0-e90168e1a0eb.png">
+<img width="361" src="https://user-images.githubusercontent.com/5320104/117335160-204ccc80-ae9b-11eb-9df0-e90168e1a0eb.png"></img>
   - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
@@ -64,4 +64,4 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :white_check_mark: the **DKMPNavigation.swift** file doesn't need to be modified
   - :hammer_and_wrench: the **ViewsDefinition.swift** file should be modified to define the screen views the app
 #### webApp (coming soon!)
-  - waiting for **Compose for Web** to become available (it recently hit a [great milestone](https://twitter.com/shikasd_/status/1379757917893722114))
+  - we'll be implementing the same app using **Compose for Web**
