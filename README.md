@@ -28,7 +28,9 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 ## Instructions to write your own D-KMP app:
 If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
+
 ### shared code:
+
 #### View Model
 <img width="361" src="https://user-images.githubusercontent.com/5320104/117335160-204ccc80-ae9b-11eb-9df0-e90168e1a0eb.png"></img>
   - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
@@ -39,6 +41,8 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :hammer_and_wrench: in the **ScreenEnum.kt** file in the **viewmodel** folder, you should define the enum with all screens in your app
   - :white_check_mark: the other **5 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
   - :white_check_mark: also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
+
+
 #### Data Layer
 <img width="322" src="https://user-images.githubusercontent.com/5320104/114903196-d7af6f80-9e16-11eb-823c-8ef9e2039ab6.png"></img>
   - :hammer_and_wrench: in the **datalayer/functions** folder: create a file for each repository function to be called by the ViewModel's StateReducers
@@ -46,22 +50,26 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :hammer_and_wrench: in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
   - :white_check_mark: the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
 
-### platform-specific code:
-#### androidApp
 
-<img width="262" src="https://user-images.githubusercontent.com/5320104/117334809-b92f1800-ae9a-11eb-8f51-9a86a05e1ec5.png"></img>
+### platform-specific code:
+
+#### androidApp
+<img width="247" src="https://user-images.githubusercontent.com/5320104/117370264-7125ea80-aec6-11eb-9a0e-40f1d388869a.png"></img>
   - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
-  - :hammer_and_wrench: the **ComposablesDefinition.kt** file should be modified to define the screen composables in the app
   - :white_check_mark: the **DKMPApp.kt** file doesn't need to be modified
   - :white_check_mark: the **DKMPNavigation.kt** file doesn't need to be modified
   - :white_check_mark: the **MainActivity.kt** file doesn't need to be modified
-#### iosApp
+  - :white_check_mark: the **MainComposable.kt** file doesn't need to be modified
+  - :hammer_and_wrench: the **ScreenComposables.kt** file should be modified to define the screen composables in the app
 
-<img width="285" src="https://user-images.githubusercontent.com/5320104/117334463-50e03680-ae9a-11eb-9707-09408661f068.png"></img>
+#### iosApp
+  <img width="271" src="https://user-images.githubusercontent.com/5320104/117370187-56537600-aec6-11eb-9d4c-aec0bb720bb0.png"></img>
   - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPNavigation.swift** file doesn't need to be modified
-  - :hammer_and_wrench: the **ViewsDefinition.swift** file should be modified to define the screen views in the app
+  - :white_check_mark: the **MainView.swift** file doesn't need to be modified
+  - :hammer_and_wrench: the **ScreenViews.swift** file should be modified to define the screen views in the app
+
 #### webApp (coming soon!)
   - we'll be adding also the web version, using [Jetpack Compose for Web](https://blog.jetbrains.com/kotlin/2021/05/technology-preview-jetpack-compose-for-web/)
