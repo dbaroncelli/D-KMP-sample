@@ -11,7 +11,7 @@ suspend fun Repository.getFavoriteCountriesMap(toggleCountry : String? = null): 
         localDb.toggleFavoriteCountry(toggleCountry)
     }
 
-    // RETURN a "trueMap" (i.e. the values are always TRUE boolean):
+    // RETURN a "trueMap" (i.e. a map whose values are always TRUE boolean):
     // where the keys are the names of the favorite countries
     localDb.getFavoriteCountriesMap()
 }

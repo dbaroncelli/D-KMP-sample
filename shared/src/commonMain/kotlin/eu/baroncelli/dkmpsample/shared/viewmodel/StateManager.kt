@@ -4,35 +4,45 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
 
+interface ScreenState // we apply this empty interface to all screen state data classes
+
 class StateManager {
+
+    var currentRouteId = ""
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
 
-    val screenStatesMap : MutableMap<ScreenType,ScreenState> = mutableMapOf() // map of screen states currently in memory
-    val screenScopesMap : MutableMap<ScreenType,CoroutineScope> = mutableMapOf() // map of coroutine scopes associated to current screen states
+    val screenStatesMap : MutableMap<String,ScreenState> = mutableMapOf() // map of screen states currently in memory
+    val screenScopesMap : MutableMap<String,CoroutineScope> = mutableMapOf() // map of coroutine scopes associated to current screen states
+
 
     // only called by the State Providers
     inline fun <reified T:ScreenState> getScreen(
-            initState: () -> T,     // default state on initialization
-            callOnInit: () -> Unit,     // event to run on initialization
-            reinitWhen: (T) -> Boolean = {false},   // condition to reinitialize the state
-            callOnInitAlsoAfterBackground : Boolean = false,    // if true, it runs "callOnInit" also after coming back from background
+        screen: Screen,            // screen enum
+        instanceId: String? = null, // instanceId, to be specified for screens that support multiple instances
+        initState: () -> T,         // default state on initialization
+        callOnInit: () -> Unit,     // event to run on initialization
+        callOnInitAlsoAfterBackground : Boolean = false,    // if true, it runs "callOnInit" also after coming back from background
     ) : T {
-        //debugLogger.log("getScreen: "+T::class.simpleName)
-        val loggerText = T::class.simpleName+" StateProvider is called"
-        val screenType = getScreenType(T::class)
-        val currentState = screenStatesMap[screenType] as? T
-        if (currentState == null || reinitWhen(currentState)) {
+        var routeId = screen.route
+        if (instanceId != null) {
+            routeId += "/"+instanceId
+        }
+        debugLogger.log("getScreen: "+routeId)
+        val loggerText = "/"+routeId+": "+T::class.simpleName+" StateProvider is called"
+        val currentState = screenStatesMap[routeId] as? T
+        if (currentState == null) {
             debugLogger.log(loggerText+" (INITIALIZED state)")
-            initScreenScope(screenType)
+            currentRouteId = routeId
+            initScreenScope(currentRouteId)
             val initializedState = initState()
-            screenStatesMap[screenType] = initializedState
+            screenStatesMap[currentRouteId] = initializedState
             callOnInit()
             return initializedState
         }
-        if (!isScreenScopeActive(screenType)) { // in case it's coming back from background
+        if (!isScreenScopeActive(currentRouteId)) { // in case it's coming back from background
             debugLogger.log(loggerText+" (reinitialized scope)")
-            initScreenScope(screenType)
+            initScreenScope(currentRouteId)
             if (callOnInitAlsoAfterBackground) {
                 callOnInit()
             }
@@ -48,13 +58,12 @@ class StateManager {
             stateClass: KClass<T>,
             update: (T) -> T,
     ) {
-        //debugLogger.log("updateScreen: "+T::class.simpleName)
-        val screenType = getScreenType(stateClass)
-        val currentState = screenStatesMap[screenType] as? T
+        //debugLogger.log("updateScreen: "+currentRouteId)
+        val currentState = screenStatesMap[currentRouteId] as? T
         if (currentState != null) { // only perform update if the state class object is currently inside the screenStatesMap
-            screenStatesMap[screenType] = update(currentState)
+            screenStatesMap[currentRouteId] = update(currentState)
             // only trigger recomposition if screen state has changed
-            if (!currentState.equals(screenStatesMap[screenType])) {
+            if (!currentState.equals(screenStatesMap[currentRouteId])) {
                 triggerRecomposition()
                 debugLogger.log(T::class.simpleName+" changed: recomposition is triggered")
             }
@@ -66,19 +75,20 @@ class StateManager {
     }
 
 
-    fun initScreenScope(screenType : ScreenType) {
-        //debugLogger.log("initScreenScope($screenType)")
-        screenScopesMap[screenType]?.cancel()
-        screenScopesMap[screenType] = CoroutineScope(Job() + Dispatchers.Main)
+    fun initScreenScope(routeId: String) {
+        //debugLogger.log("initScreenScope()")
+        screenScopesMap[routeId]?.cancel()
+        screenScopesMap[routeId] = CoroutineScope(Job() + Dispatchers.Main)
     }
 
-    fun getScreenScope(stateClass : KClass<out ScreenState>) : CoroutineScope? {
-        val screenType = getScreenType(stateClass)
-        return screenScopesMap[screenType]
+    fun getCurrentScreenScope() : CoroutineScope? {
+        // debugLogger.log("getCurrentScreenScope(): "+currentRouteId)
+        return screenScopesMap[currentRouteId]
     }
 
-    fun isScreenScopeActive(screenType : ScreenType) : Boolean {
-        return screenScopesMap[screenType]?.isActive == true
+
+    fun isScreenScopeActive(routeId: String) : Boolean {
+        return screenScopesMap[routeId]?.isActive == true
     }
 
     fun cancelScreenScopes() {
@@ -88,12 +98,18 @@ class StateManager {
         }
     }
 
+    fun removeScreen(oldRouteId: String, newRouteId: String) {
+        screenScopesMap[oldRouteId]?.cancel() // cancel screen's coroutine scope
+        screenStatesMap.remove(oldRouteId)
+        currentRouteId = newRouteId
+    }
+
 }
 
 data class AppState (
     val recompositionIndex : Int = 0
 ) {
-    fun getStateProviders(model : DKMPViewModel) : StateProviders {
+    fun getStateProviders(model: DKMPViewModel) : StateProviders {
         return model.stateProviders
     }
 }

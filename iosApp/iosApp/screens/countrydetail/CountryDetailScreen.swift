@@ -20,6 +20,7 @@ struct CountryDetailScreen: View {
                 CountryDetailContent(data: countryDetailState.countryInfo)
             }
         }
+        .onAppear()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {

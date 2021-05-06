@@ -26,7 +26,7 @@ struct CountriesListScreen: View {
                     } else {
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavigationLink(destination: CountryDetailScreen(countryName: item.name)) {
+                                NavigationLink(destination: appObj.getView(screen: Screen.countrydetail, instanceId: item.name)) {
                                     CountriesListRow(
                                         item: item,
                                         favorite: countriesListState.favoriteCountries[item.name] != nil,
