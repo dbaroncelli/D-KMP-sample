@@ -1,7 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import kotlinx.coroutines.launch
-import kotlin.reflect.KClass
 
 class Events (stateReducers: StateReducers) {
 

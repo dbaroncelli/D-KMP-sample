@@ -40,7 +40,7 @@ class DKMPViewModel (repo: Repository) {
 
 
     fun exitScreen(oldRouteId: String, newRouteId: String) {
-        debugLogger.log("exitScreen /$oldRouteId: state is removed, new routeId "+newRouteId)
+        debugLogger.log("exitScreen /$oldRouteId: state is removed, new routeId $newRouteId")
         stateManager.removeScreen(oldRouteId, newRouteId)
     }
 

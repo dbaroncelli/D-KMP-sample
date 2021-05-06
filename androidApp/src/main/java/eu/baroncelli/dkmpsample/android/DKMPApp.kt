@@ -17,12 +17,12 @@ class DKMPApp : Application() {
         model = DKMPViewModel.Factory.getAndroidInstance(this)
         
         val appLifecycleObserver = AppLifecycleObserver(model)
-        ProcessLifecycleOwner.get().getLifecycle().addObserver(appLifecycleObserver)
+        ProcessLifecycleOwner.get().lifecycle.addObserver(appLifecycleObserver)
     }
 
 }
 
-class AppLifecycleObserver (val model: DKMPViewModel) : LifecycleObserver {
+class AppLifecycleObserver (private val model: DKMPViewModel) : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onEnterForeground() {

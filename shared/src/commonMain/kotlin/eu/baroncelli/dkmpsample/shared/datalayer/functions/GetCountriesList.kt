@@ -6,10 +6,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.localdb.countries.setCo
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.apis.fetchCountriesList
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListItem
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
-import kotlin.time.measureTime
 
 suspend fun Repository.getCountriesListData(): List<CountriesListItem> = withRepoContext {
 

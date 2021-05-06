@@ -11,7 +11,7 @@ import androidx.navigation.compose.navigate
 import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 import eu.baroncelli.dkmpsample.shared.viewmodel.Screen
 
-class DKMPNavigation(val model: DKMPViewModel, val navController : NavHostController) {
+class DKMPNavigation(private val model: DKMPViewModel, private val navController : NavHostController) {
 
     lateinit var navGraphBuilder: NavGraphBuilder
 
@@ -42,7 +42,7 @@ class DKMPNavigation(val model: DKMPViewModel, val navController : NavHostContro
     }
 
 
-    fun getCurrentRouteId() : String {
+    private fun getCurrentRouteId() : String {
         var currentRouteId = navController.currentBackStackEntry?.arguments?.getString(KEY_ROUTE)
         if (currentRouteId == null) {
             return ""
@@ -55,19 +55,18 @@ class DKMPNavigation(val model: DKMPViewModel, val navController : NavHostContro
     }
 
     fun getScreenInstanceId() : String? {
-        val screenID = navController.currentBackStackEntry?.arguments?.getString("instanceId")
-        return screenID
+        return navController.currentBackStackEntry?.arguments?.getString("instanceId")
     }
 
     fun navigate(screen : Screen, instanceId : String?) {
         var routeId = screen.route
         if (instanceId != null) {
-            routeId += "/"+instanceId
+            routeId += "/$instanceId"
         }
         navController.navigate(routeId)
     }
 
-    fun back() {
+    private fun back() {
         val oldRouteId = getCurrentRouteId()
         navController.popBackStack()
         model.exitScreen(oldRouteId, getCurrentRouteId())
