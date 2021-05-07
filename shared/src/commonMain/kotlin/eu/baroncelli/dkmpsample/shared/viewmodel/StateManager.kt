@@ -15,7 +15,6 @@ class StateManager {
     val screenStatesMap : MutableMap<String,ScreenState> = mutableMapOf() // map of screen states currently in memory
     val screenScopesMap : MutableMap<String,CoroutineScope> = mutableMapOf() // map of coroutine scopes associated to current screen states
 
-
     // only called by the State Providers
     inline fun <reified T:ScreenState> getScreen(
         screen: Screen,            // screen enum

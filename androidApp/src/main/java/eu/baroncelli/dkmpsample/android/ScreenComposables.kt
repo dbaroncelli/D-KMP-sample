@@ -19,8 +19,8 @@ fun DKMPNavigation.getComposables(stateProviders: StateProviders, events: Events
         )
     }
 
-    dkmpComposable(Screen.CountryDetail, true) {
-        val countryName = getScreenInstanceId()!!
+    dkmpComposable(Screen.CountryDetail) {
+        val countryName = getScreenInstanceId()!! // in ScreenEnum we defined this screen is supporting multiple instances
         CountryDetailScreen(
             countryDetailState = stateProviders.getCountryDetailState(countryName)
         )

@@ -17,15 +17,14 @@ class DKMPNavigation(private val model: DKMPViewModel, private val navController
 
     fun dkmpComposable(
         screen: Screen,
-        multipleInstances : Boolean = false,
         content: @Composable (NavBackStackEntry) -> Unit
     ) {
-        var route = screen.route
-        if (multipleInstances) {
-            route += "/{instanceId}"
+        var routeId = screen.route
+        if (screen.multipleInstances) {
+            routeId += "/{instanceId}"
         }
 
-        navGraphBuilder.composable(route, emptyList(), emptyList()) { navBackStackEntry ->
+        navGraphBuilder.composable(routeId, emptyList(), emptyList()) { navBackStackEntry ->
             if (navController.currentDestination?.id != navController.graph.startDestination) { // only if it's not the start screen
                 // Note: if it's the start screen, the back button is managed directly by the Activity, which closes the app
                 BackHandler { // catching the back button to update the DKMPModel
@@ -34,7 +33,9 @@ class DKMPNavigation(private val model: DKMPViewModel, private val navController
             }
             content(navBackStackEntry)
         }
+
     }
+
 
 
     fun getStartDestination() : String {
@@ -57,6 +58,7 @@ class DKMPNavigation(private val model: DKMPViewModel, private val navController
     fun getScreenInstanceId() : String? {
         return navController.currentBackStackEntry?.arguments?.getString("instanceId")
     }
+
 
     fun navigate(screen : Screen, instanceId : String?) {
         var routeId = screen.route

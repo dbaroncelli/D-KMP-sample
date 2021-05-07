@@ -12,7 +12,7 @@ extension DKMPNavigation {
     @ViewBuilder func getViewInstance(_ screen: Screen, _ instanceId: String?) -> some View {
         switch screen {
         case Screen.countrieslist:
-            CountriesListScreen(destinationScreen: Screen.countrydetail)
+            CountriesListScreen()
         case Screen.countrydetail:
             CountryDetailScreen(countryName: instanceId!)
         default:
