@@ -24,7 +24,10 @@ class StateManager {
         callOnInitAlsoAfterBackground : Boolean = false,    // if true, it runs "callOnInit" also after coming back from background
     ) : T {
         var routeId = screen.route
-        if (instanceId != null) {
+        if (screen.requiresInstanceId) {
+            if (instanceId == null) {
+                throw IllegalArgumentException("/${screen.route} getScreen() requires an InstanceId")
+            }
             routeId += "/$instanceId"
         }
 

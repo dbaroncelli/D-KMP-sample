@@ -20,7 +20,7 @@ class DKMPNavigation(private val model: DKMPViewModel, private val navController
         content: @Composable (NavBackStackEntry) -> Unit
     ) {
         var routeId = screen.route
-        if (screen.multipleInstances) {
+        if (screen.requiresInstanceId) {
             routeId += "/{instanceId}"
         }
 
