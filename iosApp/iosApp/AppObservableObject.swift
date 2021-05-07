@@ -33,7 +33,7 @@ class AppObservableObject: ObservableObject {
 
     @ViewBuilder func getView(_ screen: Screen, _ instanceId: String? = nil) -> some View {
         self.dkmpNav.getViewInstance(screen, instanceId)
-            .onAppear { self.dkmpNav.enterRoute(screen, instanceId) }
+            .onAppear { self.dkmpNav.addRoute(screen, instanceId) }
             .onDisappear { self.dkmpNav.popRoute() }
     }
     

@@ -20,7 +20,7 @@ class DKMPNavigation {
     }
     
     
-    func enterRoute(_ screen: Screen, _ instanceId: String?) {
+    func addRoute(_ screen: Screen, _ instanceId: String?) {
         var routeId = screen.route
         if (instanceId != nil) {
             routeId += "/"+instanceId!
@@ -32,8 +32,8 @@ class DKMPNavigation {
     
     func popRoute() {
         let oldRouteId = self.backstack.popLast()
-        if let lastEntry = self.backstack.last {
-            self.model.exitScreen(oldRouteId: oldRouteId!, newRouteId: lastEntry)
+        if let newRouteId = self.backstack.last {
+            self.model.exitScreen(oldRouteId: oldRouteId!, newRouteId: newRouteId)
         }
     }
 
