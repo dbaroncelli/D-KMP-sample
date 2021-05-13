@@ -29,6 +29,8 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 ## Instructions to write your own D-KMP app:
 If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
 
+**May 13, 2021: UPDATE! There is an ongoing rewriting of the architecture, which should be completed by the end of May. So, the advise is not to go any deep into the current sample, because soon there will be major improvements.**
+
 ### shared code:
 
 #### View Model
