@@ -11,14 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.baroncelli.dkmpsample.android.LoadingElement
-import eu.baroncelli.dkmpsample.shared.viewmodel.Events
+import eu.baroncelli.dkmpsample.android.LoadingScreen
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectMenuItem
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
 
 @Composable
-fun CountriesListScreen(countriesListState: CountriesListState, events : Events, onListItemClick: (String) -> Unit) {
+fun CountriesListScreen(
+    countriesListState: CountriesListState,
+    onMenuItemClick: (CountriesListType) -> Unit,
+    onListItemClick: (String) -> Unit,
+    onFavoriteIconClick : (String) -> Unit,
+) {
 
     Scaffold(
         topBar = {
@@ -28,7 +33,7 @@ fun CountriesListScreen(countriesListState: CountriesListState, events : Events,
         },
         content = { paddingValues ->
             if (countriesListState.isLoading) {
-                LoadingElement()
+                LoadingScreen()
             } else {
                 if (countriesListState.countriesListItems.isEmpty()) {
                     Text(text = "empty list", style = MaterialTheme.typography.body1, modifier = Modifier.padding(top=30.dp).fillMaxWidth(), textAlign = TextAlign.Center, fontSize = 18.sp)
@@ -42,14 +47,14 @@ fun CountriesListScreen(countriesListState: CountriesListState, events : Events,
                                 item = item,
                                 favorite = countriesListState.favoriteCountries.containsKey(item.name),
                                 onItemClick = { onListItemClick(item.name) },
-                                onFavoriteIconClick = { events.selectFavorite(item.name) })
+                                onFavoriteIconClick = { onFavoriteIconClick(item.name) })
                         })
                     }
                 }
             }
         },
         bottomBar = {
-            CountriesListBottomBar(selectedItem = countriesListState.selectedMenuItem, onItemClick = { events.selectMenuItem(it) })
+            CountriesListBottomBar(selectedTab = ScreenIdentifier(Screen.CountriesList, countriesListState.params), onItemClick = { onMenuItemClick(it) })
         }
     )
 }

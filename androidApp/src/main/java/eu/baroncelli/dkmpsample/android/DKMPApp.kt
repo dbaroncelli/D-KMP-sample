@@ -27,13 +27,13 @@ class AppLifecycleObserver (private val model: DKMPViewModel) : LifecycleObserve
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     fun onEnterForeground() {
         if (model.stateFlow.value.recompositionIndex > 0) { // not calling at app startup
-            model.onReEnterForeground()
+            model.navigation.onReEnterForeground()
         }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun onEnterBackground() {
-        model.onEnterBackground()
+        model.navigation.onEnterBackground()
     }
 
 }

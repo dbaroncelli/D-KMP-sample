@@ -18,7 +18,12 @@ import androidx.compose.ui.unit.dp
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListItem
 
 @Composable
-fun CountriesListRow(item: CountriesListItem, favorite : Boolean, onItemClick: () -> Unit, onFavoriteIconClick: () -> Unit) {
+fun CountriesListRow(
+    item: CountriesListItem,
+    favorite : Boolean,
+    onItemClick: () -> Unit,
+    onFavoriteIconClick: () -> Unit,
+) {
     Row(modifier = Modifier.fillMaxWidth().clickable(onClick = onItemClick).height(50.dp).padding(start=10.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.weight(1f).padding(end = 10.dp)) {
             Text(text = item.name, style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)

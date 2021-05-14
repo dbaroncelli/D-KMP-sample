@@ -8,12 +8,12 @@
 import SwiftUI
 import shared
 
-extension DKMPNavigation {
-    @ViewBuilder func getViewInstance(_ screen: Screen, _ instanceId: String?) -> some View {
+extension Navigation {
+    @ViewBuilder func screenPicker(_ screen: Screen, _ instanceId: String?) -> some View {
         switch screen {
-        case Screen.countrieslist:
+        case .countrieslist:
             CountriesListScreen()
-        case Screen.countrydetail:
+        case .countrydetail:
             CountryDetailScreen(countryName: instanceId!)
         default:
             EmptyView()

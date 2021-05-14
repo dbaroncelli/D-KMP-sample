@@ -15,7 +15,7 @@ struct CountriesListScreen: View {
         let countriesListState = appObj.stateProviders.getCountriesListState()
         let events = appObj.events
         if countriesListState.isLoading {
-            LoadingElement()
+            LoadingScreen()
         } else {
             NavigationView {
                 List {

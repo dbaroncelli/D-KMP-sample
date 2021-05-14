@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct LoadingElement: View {
+struct LoadingScreen: View {
     var body: some View {
         VStack {
             Spacer()

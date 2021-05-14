@@ -1,67 +1,42 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
+import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.getTestRepository
-import eu.baroncelli.dkmpsample.shared.runBlockingTest
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.*
-import kotlin.reflect.KClass
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryInfo
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class ViewModelTests {
 
-    val stateManager = StateManager()
-    val stateReducers = StateReducers(stateManager, getTestRepository())
+    val vm = DKMPViewModel(getTestRepository())
+    val stateProvider = vm.stateProviders
+    val stateManager = vm.stateProviders.stateManager
 
-
-    @Test
-    fun testFavoritesTab() = runBlockingTest {
-        stateManager.initTestState { CountriesListState() }
-        stateReducers.updateCountriesList(MenuItem.FAVORITES)
-        val testState = stateManager.getTestState(CountriesListState::class)
-        assertEquals(testState?.selectedMenuItem, MenuItem.FAVORITES)
-    }
-
-    @Test
-    fun testFavoriteCountry()  = runBlockingTest {
-        stateManager.initTestState { CountriesListState() }
-        stateReducers.updateCountriesList(null)
-        stateReducers.toggleFavorite("Italy")
-        val testState = stateManager.getTestState(CountriesListState::class)
-        println(testState?.favoriteCountries.toString())
-        assertTrue(testState?.favoriteCountries!!.containsKey("Italy"))
-    }
 
     @Test
     fun testCountriesListStateUpdate() {
-        stateManager.initTestState { CountriesListState() }
+        val screenIdentifier = ScreenIdentifier(Screen.CountriesList,CountriesListParams(CountriesListType.ALL))
+        stateManager.addScreen(screenIdentifier, CountriesListState(screenIdentifier.params()))
         stateManager.updateScreen(CountriesListState::class) {
-            it.copy(isLoading = false)
+            it.copy(favoriteCountries = mapOf("Italy" to true))
         }
-        val testState = stateManager.getTestState(CountriesListState::class)
-        assertEquals(testState?.isLoading, false)
+        val screenState = stateProvider.get(screenIdentifier) as CountriesListState
+        assertTrue(screenState.favoriteCountries.containsKey("Italy"))
     }
 
     @Test
     fun testCountryDetailStateUpdate() {
-        stateManager.initTestState { CountryDetailState() }
+        val screenIdentifier = ScreenIdentifier(Screen.CountryDetail, CountryDetailParams("Germany"))
+        stateManager.addScreen(screenIdentifier, CountryDetailState(screenIdentifier.params()))
         stateManager.updateScreen(CountryDetailState::class) {
-            it.copy(isLoading = true)
+            it.copy(countryInfo = CountryInfo(_extraData = CountryExtraData(vaccines = "Pfizer, Moderna, AstraZeneca")))
         }
-        val testState = stateManager.getTestState(CountryDetailState::class)
-        assertEquals(testState?.isLoading, true)
+        val screenState = stateProvider.get(screenIdentifier) as CountryDetailState
+        assertTrue(screenState.countryInfo.vaccinesList!!.contains("Pfizer"))
     }
 
-}
-
-
-inline fun <reified T: ScreenState> StateManager.initTestState(initState : () -> T) {
-    val screenType = getScreenType(T::class)
-    screenStatesMap[screenType] = initState()
-}
-
-inline fun <reified T: ScreenState> StateManager.getTestState(stateClass : KClass<T>) : T? {
-    val screenType = getScreenType(stateClass)
-    return screenStatesMap[screenType] as? T
 }

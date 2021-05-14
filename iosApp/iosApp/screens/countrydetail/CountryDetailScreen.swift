@@ -15,7 +15,7 @@ struct CountryDetailScreen: View {
         let countryDetailState = appObj.stateProviders.getCountryDetailState(country: countryName)
         VStack {
             if countryDetailState.isLoading {
-                LoadingElement()
+                LoadingScreen()
             } else {
                 CountryDetailContent(data: countryDetailState.countryInfo)
             }

@@ -1,9 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-class StateProviders (stateManager : StateManager, events : Events) {
+class StateProviders (val stateManager : StateManager) {
 
-    internal val stateManager by lazy { stateManager }
-
-    internal val events by lazy { events }
+    inline fun <reified T: ScreenState> get(screenIdentifier: ScreenIdentifier) : T {
+        return stateManager.screenStatesMap[screenIdentifier] as T
+    }
 
 }

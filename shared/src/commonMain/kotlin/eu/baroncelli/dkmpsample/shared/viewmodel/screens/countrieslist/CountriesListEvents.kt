@@ -1,20 +1,16 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
+import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
-/********** INTERNAL event function, called by the StateProvider's callOnInit **********/
-
-internal fun Events.loadCountriesListData() = screenCoroutine {
-    stateReducers.updateCountriesList(null)
-}
 
 
-/********** PUBLIC event functions, called directly by the UI layer **********/
-
-fun Events.selectMenuItem(menuItem: MenuItem) = screenCoroutine {
-    stateReducers.updateCountriesList(menuItem)
-}
+/********** EVENT functions, called directly by the UI layer **********/
 
 fun Events.selectFavorite(country: String) = screenCoroutine {
-    stateReducers.toggleFavorite(country)
+    val favorites = dataRepository.getFavoriteCountriesMap(alsoToggleCountry = country)
+    // update state with new favorites map, after toggling the value for the specified country
+    stateManager.updateScreen(CountriesListState::class) {
+        it.copy(favoriteCountries = favorites)
+    }
 }

@@ -6,24 +6,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
-import eu.baroncelli.dkmpsample.android.LoadingElement
+import eu.baroncelli.dkmpsample.android.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 
 @Composable
-fun CountryDetailScreen(countryDetailState: CountryDetailState) {
+fun CountryDetailScreen(
+    countryDetailState: CountryDetailState,
+) {
 
     Scaffold(
         topBar = {
             TopAppBar(title = {
                 Row (verticalAlignment = Alignment.Bottom) {
                     Text(text = "country: ", fontSize = 20.sp)
-                    Text(text = countryDetailState.countryName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
+                    Text(text = countryDetailState.params.countryName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
                 }
             })
         },
         content = { paddingValues ->
             if (countryDetailState.isLoading) {
-                LoadingElement()
+                LoadingScreen()
             } else {
                 CountryDetailContent(data = countryDetailState.countryInfo, paddingValues = paddingValues)
             }

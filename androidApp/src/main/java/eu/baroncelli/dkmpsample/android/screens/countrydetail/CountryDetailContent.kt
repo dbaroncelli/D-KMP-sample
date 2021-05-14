@@ -10,7 +10,10 @@ import androidx.compose.ui.unit.dp
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryInfo
 
 @Composable
-fun CountryDetailContent(data: CountryInfo, paddingValues : PaddingValues ) {
+fun CountryDetailContent(
+    data: CountryInfo,
+    paddingValues : PaddingValues,
+) {
 
     Column(modifier = Modifier.padding(paddingValues).padding(10.dp)) {
 

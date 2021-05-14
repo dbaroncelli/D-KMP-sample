@@ -1,11 +1,14 @@
 //
-//  StylingUtils.swift
+//  NavigationBarColor.swift
+//  iosApp
 //
-//  Created by Daniele Baroncelli on 13/03/2021.
-//
+//  Created by Daniele Baroncelli on 14/05/21.
+//  Copyright © 2021 orgName. All rights reserved.
 //
 
 import SwiftUI
+
+
 
 
 // navigation bar color
@@ -33,30 +36,3 @@ extension View {
     self.modifier(NavigationBarColor(backgroundColor: backgroundUIColor, tintColor: tintUIColor))
   }
 }
-
-
-
-// toolbar color
-
-struct ToolbarColor: ViewModifier {
-
-  init(backgroundColor: UIColor, tintColor: UIColor) {
-    let coloredAppearance = UIToolbarAppearance()
-    coloredAppearance.configureWithOpaqueBackground()
-    coloredAppearance.backgroundColor = backgroundColor
-    UIToolbar.appearance().standardAppearance = coloredAppearance
-    UIToolbar.appearance().compactAppearance = coloredAppearance
-    UIToolbar.appearance().tintColor = tintColor
-  }
-
-  func body(content: Content) -> some View {
-    content
-  }
-}
-
-extension View {
-  func toolbarColor(backgroundUIColor: UIColor, tintUIColor: UIColor) -> some View {
-    self.modifier(ToolbarColor(backgroundColor: backgroundUIColor, tintColor: tintUIColor))
-  }
-}
-
