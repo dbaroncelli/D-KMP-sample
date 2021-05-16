@@ -1,4 +1,4 @@
-package eu.baroncelli.dkmpsample.android.screens.countrieslist
+package eu.baroncelli.dkmpsample.android.composables.screens.countrieslist
 
 import androidx.compose.material.Icon
 import androidx.compose.material.Text

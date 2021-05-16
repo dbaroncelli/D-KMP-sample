@@ -1,4 +1,4 @@
-package eu.baroncelli.dkmpsample.android.screens.countrydetail
+package eu.baroncelli.dkmpsample.android.composables.screens.countrydetail
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.*
@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.sp
-import eu.baroncelli.dkmpsample.android.LoadingScreen
+import eu.baroncelli.dkmpsample.android.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 
 @Composable

@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.getScreenInitInfo
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 
 class Navigation(val stateManager : StateManager) {
@@ -16,11 +16,6 @@ class Navigation(val stateManager : StateManager) {
 
     val screenUIsToForget = mutableListOf<ScreenIdentifier>()
 
-    // we run each event function on a Dispatchers.Main coroutine
-    fun screenCoroutine (block: suspend () -> Unit) {
-        stateManager.runInCurrentScreenScope(block)
-    }
-
     val currentScreenIdentifier : ScreenIdentifier
         get() = stateManager.currentScreenIdentifier
 
@@ -28,29 +23,35 @@ class Navigation(val stateManager : StateManager) {
         val screenIdentifier = ScreenIdentifier(screen,params)
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         var shouldTriggerRecomposition = true
-        val screenInitInfo = getScreenInitInfo(screenIdentifier)
+        val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
         if (stateManager.backstack.isNotEmpty()) {
-            if (currentScreenIdentifier.screen == screenIdentifier.screen && screenInitInfo.skipDefaultStateRecompositionIfSameAsPreviousScreen) {
+            if (currentScreenIdentifier.screen == screenIdentifier.screen && screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
                 shouldTriggerRecomposition = false
             }
-            for (backstackEntry in stateManager.backstack.reversed()) {
-                if (
-                    backstackEntry.screen.navigationLevel < screenIdentifier.screen.navigationLevel ||
-                    (backstackEntry.screen.navigationLevel == screenIdentifier.screen.navigationLevel && backstackEntry.screen.stackableInstances)
-                ) {
-                    break
-                }
-                stateManager.removeScreen(backstackEntry)
-                screenUIsToForget.add(backstackEntry)
-            }
+            removeScreensIfNeeded(screenIdentifier)
         }
-        stateManager.addScreen(screenIdentifier, screenInitInfo.defaultState)
+        stateManager.addScreen(screenIdentifier, screenInitSettings.initState(screenIdentifier))
         if (shouldTriggerRecomposition) {
             stateManager.triggerRecomposition()
         }
-        screenInitInfo.callOnInit(screenIdentifier)
+        stateManager.runInCurrentScreenScope {
+            screenInitSettings.callOnInit(stateManager)
+        }
         if (navigationSettings.saveLastLevel1Screen && screenIdentifier.screen.navigationLevel == 1) {
-            dataRepository.localSettings.savedLevel1Screen = screenIdentifier.URI
+            dataRepository.localSettings.savedLevel1Screen =
+        }
+    }
+
+    private fun removeScreensIfNeeded(screenIdentifier: ScreenIdentifier) {
+        for (backstackEntry in stateManager.backstack.reversed()) {
+            if (
+                backstackEntry.screen.navigationLevel < screenIdentifier.screen.navigationLevel ||
+                (backstackEntry.screen.navigationLevel == screenIdentifier.screen.navigationLevel && backstackEntry.screen.stackableInstances)
+            ) {
+                break
+            }
+            stateManager.removeScreen(backstackEntry)
+            screenUIsToForget.add(backstackEntry)
         }
     }
 
@@ -67,9 +68,9 @@ class Navigation(val stateManager : StateManager) {
         val reinitializedScreens = stateManager.reinitScreenScopes()
         stateManager.triggerRecomposition()
         reinitializedScreens.forEach {
-            getScreenInitInfo(it).apply {
+            it.getScreenInitSettings(this).apply {
                 if (callOnInitAlsoAfterBackground) {
-                    callOnInit(it)
+                    stateManager.runInCurrentScreenScope { callOnInit(stateManager) }
                 }
             }
         }
@@ -84,7 +85,7 @@ class Navigation(val stateManager : StateManager) {
 }
 
 
-data class ScreenIdentifier (
+class ScreenIdentifier (
     val screen : Screen,
     val params: ScreenParams? = null
 ) {
@@ -95,11 +96,9 @@ data class ScreenIdentifier (
     inline fun <reified T: ScreenParams> params() : T {
         return params as T
     }
-}
 
-data class ScreenInitInfo (
-    val defaultState : ScreenState,
-    val callOnInit: (ScreenIdentifier) -> Unit = {},
-    val skipDefaultStateRecompositionIfSameAsPreviousScreen: Boolean = false, // this is useful to avoid showing the "loading..." message, when filtering/displaying local content (which was already downloaded by the first instance of this screen)
-    val callOnInitAlsoAfterBackground : Boolean = false,
-)
+    fun getScreenInitSettings(navigation: Navigation) : ScreenInitSettings {
+        return screen.initSettings(navigation,this)
+    }
+
+}

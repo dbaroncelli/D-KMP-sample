@@ -10,8 +10,10 @@
 		6402EBF3264E7CCC009AC8FF /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */; };
 		6402EBF5264E7CE3009AC8FF /* ScreenPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */; };
 		6402EBF8264EA1AE009AC8FF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF7264EA1AE009AC8FF /* NavigationBar.swift */; };
+		6402EBFC264F0F34009AC8FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBFB264F0F34009AC8FF /* Colors.swift */; };
+		6402EBFE264FB2EF009AC8FF /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBFD264FB2EF009AC8FF /* MainView.swift */; };
 		64884FA7260163D900AD1112 /* CountriesListBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64884FA6260163D900AD1112 /* CountriesListBottomBar.swift */; };
-		64A9E0D22641D8E00065309C /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A9E0D12641D8DE0065309C /* NavigationRouter.swift */; };
+		64A9E0D22641D8E00065309C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A9E0D12641D8DE0065309C /* Router.swift */; };
 		64F9CB4C25FCE90300527AD8 /* AppObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */; };
 		64F9CB4D25FCE90300527AD8 /* DKMPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4B25FCE90300527AD8 /* DKMPApp.swift */; };
 		64F9CB5325FCE91300527AD8 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB5125FCE91300527AD8 /* Toolbar.swift */; };
@@ -64,8 +66,10 @@
 		6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenPicker.swift; sourceTree = "<group>"; };
 		6402EBF7264EA1AE009AC8FF /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		6402EBFB264F0F34009AC8FF /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6402EBFD264FB2EF009AC8FF /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		64884FA6260163D900AD1112 /* CountriesListBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesListBottomBar.swift; sourceTree = "<group>"; };
-		64A9E0D12641D8DE0065309C /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		64A9E0D12641D8DE0065309C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppObservableObject.swift; sourceTree = "<group>"; };
 		64F9CB4B25FCE90300527AD8 /* DKMPApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DKMPApp.swift; sourceTree = "<group>"; };
 		64F9CB5125FCE91300527AD8 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
@@ -117,11 +121,30 @@
 		6402EBF6264EA172009AC8FF /* styling */ = {
 			isa = PBXGroup;
 			children = (
-				6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */,
 				64F9CB5125FCE91300527AD8 /* Toolbar.swift */,
 				6402EBF7264EA1AE009AC8FF /* NavigationBar.swift */,
+				6402EBFB264F0F34009AC8FF /* Colors.swift */,
 			);
 			path = styling;
+			sourceTree = "<group>";
+		};
+		6402EBF9264F0462009AC8FF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				6402EBFA264F046F009AC8FF /* navigation */,
+				646F59C9260918AF003A7E52 /* screens */,
+				6402EBFD264FB2EF009AC8FF /* MainView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		6402EBFA264F046F009AC8FF /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				64A9E0D12641D8DE0065309C /* Router.swift */,
+				6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */,
+			);
+			path = navigation;
 			sourceTree = "<group>";
 		};
 		646F59C9260918AF003A7E52 /* screens */ = {
@@ -129,7 +152,7 @@
 			children = (
 				64F9CB9C25FCF89F00527AD8 /* countrieslist */,
 				64F9CB9D25FCF8A700527AD8 /* countrydetail */,
-				6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */,
+				6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */,
 			);
 			path = screens;
 			sourceTree = "<group>";
@@ -178,11 +201,10 @@
 		7555FF7D242A565900829871 /* iosApp */ = {
 			isa = PBXGroup;
 			children = (
-				646F59C9260918AF003A7E52 /* screens */,
+				6402EBF9264F0462009AC8FF /* views */,
 				6402EBF6264EA172009AC8FF /* styling */,
 				64F9CB4B25FCE90300527AD8 /* DKMPApp.swift */,
 				64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */,
-				64A9E0D12641D8DE0065309C /* NavigationRouter.swift */,
 				7555FF84242A565B00829871 /* Assets.xcassets */,
 				7555FF89242A565B00829871 /* LaunchScreen.storyboard */,
 				7555FF8C242A565B00829871 /* Info.plist */,
@@ -381,15 +403,17 @@
 				6402EBF8264EA1AE009AC8FF /* NavigationBar.swift in Sources */,
 				64F9CBA925FCF8DE00527AD8 /* CountryDetailScreen.swift in Sources */,
 				64F9CB4C25FCE90300527AD8 /* AppObservableObject.swift in Sources */,
+				6402EBFC264F0F34009AC8FF /* Colors.swift in Sources */,
 				64884FA7260163D900AD1112 /* CountriesListBottomBar.swift in Sources */,
 				64F9CBA325FCF8D400527AD8 /* CountriesListScreen.swift in Sources */,
 				64F9CB5325FCE91300527AD8 /* Toolbar.swift in Sources */,
-				64A9E0D22641D8E00065309C /* NavigationRouter.swift in Sources */,
+				64A9E0D22641D8E00065309C /* Router.swift in Sources */,
 				6402EBF5264E7CE3009AC8FF /* ScreenPicker.swift in Sources */,
 				64F9CBA125FCF8D400527AD8 /* CountriesListHeader.swift in Sources */,
 				6402EBF3264E7CCC009AC8FF /* LoadingScreen.swift in Sources */,
 				64F9CB4D25FCE90300527AD8 /* DKMPApp.swift in Sources */,
 				64F9CBA225FCF8D400527AD8 /* CountriesListRow.swift in Sources */,
+				6402EBFE264FB2EF009AC8FF /* MainView.swift in Sources */,
 				64F9CBAB25FCF8DE00527AD8 /* CountryDetailContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

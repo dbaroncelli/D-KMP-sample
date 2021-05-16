@@ -1,4 +1,4 @@
-package eu.baroncelli.dkmpsample.android.screens.countrieslist
+package eu.baroncelli.dkmpsample.android.composables.screens.countrieslist
 
 
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.baroncelli.dkmpsample.android.LoadingScreen
+import eu.baroncelli.dkmpsample.android.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState

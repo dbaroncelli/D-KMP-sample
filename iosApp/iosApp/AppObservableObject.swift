@@ -14,8 +14,8 @@ class AppObservableObject: ObservableObject {
     var dkmpNav : Navigation {
         return self.appState.getNavigation(model: self.model)
     }
-    var stateProviders : StateProviders {
-        return self.model.stateProviders
+    var stateProvider : StateProvider {
+        return self.model.stateProvider
     }
     var events : Events {
         return self.model.events

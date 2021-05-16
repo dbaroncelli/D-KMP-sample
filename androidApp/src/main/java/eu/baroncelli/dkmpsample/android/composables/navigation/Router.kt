@@ -1,29 +1,30 @@
-package eu.baroncelli.dkmpsample.android
+package eu.baroncelli.dkmpsample.android.composables.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
-import eu.baroncelli.dkmpsample.shared.viewmodel.Events
-import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProviders
+import eu.baroncelli.dkmpsample.shared.viewmodel.*
 
 @Composable
 fun Navigation.Router(
-    stateProviders: StateProviders,
+    stateProvider: StateProvider,
     events: Events,
 ) {
+
+    val screenUIsStateHolder = rememberSaveableStateHolder()
+
     BackHandler { // catching the back button to update the DKMPViewModel
         exitScreen()
     }
-    val screenUIsStateHolder = rememberSaveableStateHolder()
+
     screenUIsStateHolder.SaveableStateProvider(currentScreenIdentifier.URI) {
-        ScreenPicker(currentScreenIdentifier, stateProviders, events)
+        ScreenPicker(currentScreenIdentifier, stateProvider, events)
     }
+
     screenUIsToForget.forEach {
         screenUIsStateHolder.removeState(it.URI)
     }
+
+
 }
-
-
-
-

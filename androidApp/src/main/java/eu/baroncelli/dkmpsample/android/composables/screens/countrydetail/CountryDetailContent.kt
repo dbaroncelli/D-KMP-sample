@@ -1,4 +1,4 @@
-package eu.baroncelli.dkmpsample.android.screens.countrydetail
+package eu.baroncelli.dkmpsample.android.composables.screens.countrydetail
 
 import androidx.compose.material.Text
 import androidx.compose.foundation.layout.*

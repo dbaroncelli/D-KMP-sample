@@ -13,8 +13,8 @@ import kotlin.test.assertTrue
 class ViewModelTests {
 
     val vm = DKMPViewModel(getTestRepository())
-    val stateProvider = vm.stateProviders
-    val stateManager = vm.stateProviders.stateManager
+    val stateProvider = vm.stateProvider
+    val stateManager = vm.stateProvider.stateManager
 
 
     @Test

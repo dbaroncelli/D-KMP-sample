@@ -1,12 +1,12 @@
-package eu.baroncelli.dkmpsample.android
+package eu.baroncelli.dkmpsample.android.composables.navigation
 
 import androidx.compose.runtime.Composable
-import eu.baroncelli.dkmpsample.android.screens.countrydetail.CountryDetailScreen
-import eu.baroncelli.dkmpsample.android.screens.countrieslist.CountriesListScreen
+import eu.baroncelli.dkmpsample.android.composables.screens.countrydetail.CountryDetailScreen
+import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.CountriesListScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProviders
+import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
@@ -16,23 +16,22 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDe
 @Composable
 fun Navigation.ScreenPicker(
     screenIdentifier: ScreenIdentifier,
-    stateProviders: StateProviders,
+    stateProvider: StateProvider,
     events: Events,
 ) {
-
     when (screenIdentifier.screen) {
 
         Screen.CountriesList ->
             CountriesListScreen(
-                countriesListState = stateProviders.get(screenIdentifier),
+                countriesListState = stateProvider.get(screenIdentifier),
                 onMenuItemClick = { navigate(Screen.CountriesList, CountriesListParams(listType = it)) },
                 onListItemClick = { navigate(Screen.CountryDetail, CountryDetailParams(countryName = it)) },
-                onFavoriteIconClick = { events.selectFavorite(country = it) },
+                onFavoriteIconClick = { events.selectFavorite(countryName = it) },
             )
 
         Screen.CountryDetail ->
             CountryDetailScreen(
-                countryDetailState = stateProviders.get(screenIdentifier)
+                countryDetailState = stateProvider.get(screenIdentifier)
             )
     }
 

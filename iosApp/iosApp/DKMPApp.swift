@@ -14,7 +14,7 @@ struct iosApp: App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            Navigation.RouterView()
+            MainView()
                 .environmentObject(appObj)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .onChange(of: scenePhase) { newPhase in

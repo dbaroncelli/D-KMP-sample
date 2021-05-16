@@ -2,6 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryListData
+import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
