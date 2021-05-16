@@ -1,5 +1,9 @@
 # D-KMP architecture - official sample
 
+**May 13, 2021: UPDATE! There is an ongoing rewriting of the architecture, which should be completed by the end of May. So, the advise is not to go any deep into the current sample, as soon there will be major improvements, such as shared-code navigation.**
+
+==
+
 This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**.
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
