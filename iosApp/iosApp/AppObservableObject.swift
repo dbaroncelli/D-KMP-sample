@@ -32,15 +32,4 @@ class AppObservableObject: ObservableObject {
         }
     }
 
-    @ViewBuilder func getView(_ screen: Screen, _ instanceId: String? = nil) -> some View {
-        self.dkmpNav.screenPicker(screen, instanceId)
-            .onAppear { self.dkmpNav.addRoute(screen, instanceId) }
-            .onDisappear { self.dkmpNav.popRoute() }
-    }
-    
-    @ViewBuilder func getStartView() -> some View {
-        getView(model.getStartScreen(), nil)
-    }
-    
-
 }

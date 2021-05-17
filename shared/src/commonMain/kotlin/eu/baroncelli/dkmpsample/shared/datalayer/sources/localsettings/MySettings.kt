@@ -5,14 +5,14 @@ import com.russhwolf.settings.long
 import com.russhwolf.settings.string
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 
-class MySettings (s : Settings) : SettingsClient(s) {
+class MySettings (s : Settings) {
 
-    // here we define all our local settings properties:
-    // for standard types, we use the MultiplatformSettings delegated properties
-    // for custom types, we can define our own delegated properties in the SettingsClient class
+
+    // here we define all our local settings properties,
+    // by using the MultiplatformSettings library delegated properties
 
     var listCacheTimestamp by s.long(defaultValue = 0)
-    var savedLevel1Screen by Level1NavigationType(defaultValue = Level1Navigation.AllCountries)
+    var savedLevel1URI by s.string(defaultValue = Level1Navigation.AllCountries.screenIdentifier.URI)
 
 
 }

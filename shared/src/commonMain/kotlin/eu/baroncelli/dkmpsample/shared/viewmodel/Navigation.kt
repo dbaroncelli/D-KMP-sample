@@ -1,57 +1,57 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 
 class Navigation(val stateManager : StateManager) {
 
     init {
-        val homescreenIdentifier = navigationSettings.homeScreen.screenIdentifier
-        navigate(homescreenIdentifier.screen, homescreenIdentifier.params)
+        var startScreenIdentifier = navigationSettings.homeScreen.screenIdentifier
+        if (navigationSettings.saveLastLevel1Screen) {
+            startScreenIdentifier = ScreenIdentifier.getByURI(dataRepository.localSettings.savedLevel1URI) ?: startScreenIdentifier
+        }
+        navigateByScreenIdentifier(startScreenIdentifier)
     }
 
     val dataRepository
         get() = stateManager.dataRepository
 
-    val screenUIsToForget = mutableListOf<ScreenIdentifier>()
-
     val currentScreenIdentifier : ScreenIdentifier
         get() = stateManager.currentScreenIdentifier
 
+    fun getScreenUIsToForget() : List<ScreenIdentifier> {
+        val screenUIsToForget = stateManager.lastRemovedScreens.toList()
+        stateManager.lastRemovedScreens.clear()
+        return screenUIsToForget
+    }
+
     fun navigate(screen: Screen, params: ScreenParams? = null) {
-        val screenIdentifier = ScreenIdentifier(screen,params)
+        navigateByScreenIdentifier(ScreenIdentifier(screen,params))
+    }
+
+    fun navigateByLevel1Menu(level1NavigationItem: Level1Navigation) {
+        navigateByScreenIdentifier(level1NavigationItem.screenIdentifier)
+    }
+
+    fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         var shouldTriggerRecomposition = true
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
-        if (stateManager.backstack.isNotEmpty()) {
+        if (stateManager.level1Backstack.isNotEmpty()) {
             if (currentScreenIdentifier.screen == screenIdentifier.screen && screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
                 shouldTriggerRecomposition = false
             }
-            removeScreensIfNeeded(screenIdentifier)
         }
         stateManager.addScreen(screenIdentifier, screenInitSettings.initState(screenIdentifier))
         if (shouldTriggerRecomposition) {
-            stateManager.triggerRecomposition()
+            stateManager.triggerRecomposition() // FIRST UI RECOMPOSITION
         }
         stateManager.runInCurrentScreenScope {
-            screenInitSettings.callOnInit(stateManager)
+            screenInitSettings.callOnInit(stateManager) // SECOND UI RECOMPOSITION
         }
         if (navigationSettings.saveLastLevel1Screen && screenIdentifier.screen.navigationLevel == 1) {
-            dataRepository.localSettings.savedLevel1Screen =
-        }
-    }
-
-    private fun removeScreensIfNeeded(screenIdentifier: ScreenIdentifier) {
-        for (backstackEntry in stateManager.backstack.reversed()) {
-            if (
-                backstackEntry.screen.navigationLevel < screenIdentifier.screen.navigationLevel ||
-                (backstackEntry.screen.navigationLevel == screenIdentifier.screen.navigationLevel && backstackEntry.screen.stackableInstances)
-            ) {
-                break
-            }
-            stateManager.removeScreen(backstackEntry)
-            screenUIsToForget.add(backstackEntry)
+            dataRepository.localSettings.savedLevel1URI = screenIdentifier.URI
         }
     }
 
@@ -81,24 +81,5 @@ class Navigation(val stateManager : StateManager) {
         stateManager.cancelScreenScopes()
     }
 
-
-}
-
-
-class ScreenIdentifier (
-    val screen : Screen,
-    val params: ScreenParams? = null
-) {
-    val URI : String
-        get() = screen.asString+":"+params.toString()
-
-    // unlike the "params" property, this reified function returns the specific type and not the generic "ScreenParams" interface type
-    inline fun <reified T: ScreenParams> params() : T {
-        return params as T
-    }
-
-    fun getScreenInitSettings(navigation: Navigation) : ScreenInitSettings {
-        return screen.initSettings(navigation,this)
-    }
 
 }

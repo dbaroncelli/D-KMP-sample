@@ -24,7 +24,7 @@ fun Navigation.ScreenPicker(
         Screen.CountriesList ->
             CountriesListScreen(
                 countriesListState = stateProvider.get(screenIdentifier),
-                onMenuItemClick = { navigate(Screen.CountriesList, CountriesListParams(listType = it)) },
+                onMenuItemClick = { navigateByLevel1Menu(level1NavigationItem = it) },
                 onListItemClick = { navigate(Screen.CountryDetail, CountryDetailParams(countryName = it)) },
                 onFavoriteIconClick = { events.selectFavorite(countryName = it) },
             )

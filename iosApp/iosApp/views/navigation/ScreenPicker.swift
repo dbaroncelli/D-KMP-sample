@@ -9,14 +9,24 @@ import SwiftUI
 import shared
 
 extension Navigation {
-    @ViewBuilder func screenPicker(_ screen: Screen, _ instanceId: String?) -> some View {
-        switch screen {
+    
+    @ViewBuilder func screenPicker(_ sId: ScreenIdentifier,_ stateProvider: StateProvider,_ events: Events) -> some View {
+        
+        switch sId.screen {
         case .countrieslist:
-            CountriesListScreen()
+            CountriesListScreen(
+                countriesListState: stateProvider.getToCast(screenIdentifier: sId) as! CountriesListState,
+                onMenuItemClick: { item in self.navigateByLevel1Menu(level1NavigationItem: item) },
+                onListItemClick: { name in self.navigate(.countrydetail, CountryDetailParams(countryName: name)) },
+                onFavoriteIconClick: { name in events.selectFavorite(countryName: name) }
+            )
         case .countrydetail:
-            CountryDetailScreen(countryName: instanceId!)
+            CountryDetailScreen(
+                countryDetailState: stateProvider.getToCast(screenIdentifier: sId) as! CountryDetailState
+            )
         default:
             EmptyView()
         }
     }
 }
+

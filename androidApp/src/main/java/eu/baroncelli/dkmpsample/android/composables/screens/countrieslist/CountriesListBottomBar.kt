@@ -17,20 +17,20 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.Countries
 @Composable
 fun CountriesListBottomBar(
     selectedTab: ScreenIdentifier,
-    onItemClick: (CountriesListType) -> Unit,
+    onItemClick: (Level1Navigation) -> Unit,
 ) {
     BottomAppBar(content = {
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Menu, "ALL") },
             label = { Text("All", fontSize = 13.sp) },
             selected = selectedTab == Level1Navigation.AllCountries.screenIdentifier,
-            onClick = { onItemClick(CountriesListType.ALL) }
+            onClick = { onItemClick(Level1Navigation.AllCountries) }
         )
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Star, "FAVORITES") },
             label = { Text("Favourites", fontSize = 13.sp) },
             selected = selectedTab == Level1Navigation.FavoriteCountries.screenIdentifier,
-            onClick = { onItemClick(CountriesListType.FAVORITES) }
+            onClick = { onItemClick(Level1Navigation.FavoriteCountries) }
         )
     })
 }

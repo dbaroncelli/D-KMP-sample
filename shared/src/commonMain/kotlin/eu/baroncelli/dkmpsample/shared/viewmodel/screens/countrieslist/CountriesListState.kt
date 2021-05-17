@@ -3,6 +3,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryListData
 import eu.baroncelli.dkmpsample.shared.viewmodel.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
+import kotlinx.serialization.Serializable
 
 // here is the data class defining the state for this screen
 
@@ -15,6 +16,7 @@ data class CountriesListState (
 
 /********** property classes **********/
 
+@Serializable // Note: ScreenParams should always be set as Serializable
 data class CountriesListParams(val listType: CountriesListType) : ScreenParams
 
 enum class CountriesListType { ALL, FAVORITES }

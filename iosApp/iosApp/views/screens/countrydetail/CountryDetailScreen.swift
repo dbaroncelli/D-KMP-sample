@@ -8,11 +8,9 @@ import SwiftUI
 import shared
 
 struct CountryDetailScreen: View {
-    var countryName : String
-    @EnvironmentObject var appObj: AppObservableObject
+    var countryDetailState: CountryDetailState
     
     var body: some View {
-        let countryDetailState = appObj.stateProviders.getCountryDetailState(country: countryName)
         VStack {
             if countryDetailState.isLoading {
                 LoadingScreen()
@@ -24,7 +22,7 @@ struct CountryDetailScreen: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(countryName).font(.headline).foregroundColor(.white)
+                Text(countryDetailState.params.countryName).font(.headline).foregroundColor(.white)
             }
         }
     }

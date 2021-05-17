@@ -9,13 +9,26 @@
 import SwiftUI
 import shared
 
-
-struct Router: View {
-    @EnvironmentObject var appObj: AppObservableObject
-    var body: some View {
-        appObj.getStartView()
+extension Navigation {
+    
+    @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
+        self.screenPicker(self.currentScreenIdentifier, stateProvider, events)
     }
 }
+
+extension Navigation {
+    
+    func navigate(_ screen: Screen, _ params: ScreenParams?) {
+        let sId = getScreenIdentifier(screen, params)
+        navigateByScreenIdentifier(screenIdentifier: sId)
+    }
+    
+}
+
+func getScreenIdentifier(_ screen : Screen, _ params: ScreenParams? = nil) -> ScreenIdentifier {
+    return ScreenIdentifier(screen: screen, params: params, paramsAsString: nil)
+}
+
 
 
 /*

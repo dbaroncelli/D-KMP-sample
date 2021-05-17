@@ -13,14 +13,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.android.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
 
 @Composable
 fun CountriesListScreen(
     countriesListState: CountriesListState,
-    onMenuItemClick: (CountriesListType) -> Unit,
+    onMenuItemClick: (Level1Navigation) -> Unit,
     onListItemClick: (String) -> Unit,
     onFavoriteIconClick : (String) -> Unit,
 ) {

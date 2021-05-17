@@ -14,15 +14,14 @@ struct iosApp: App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environmentObject(appObj)
+            MainView(appObj: appObj)
                 .navigationViewStyle(StackNavigationViewStyle())
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
-                        appObj.model.onReEnterForeground()
+                        appObj.dkmpNav.onReEnterForeground()
                     }
                     else if newPhase == .background {
-                        appObj.model.onEnterBackground()
+                        appObj.dkmpNav.onEnterBackground()
                     }
                 }
         }

@@ -1,5 +1,6 @@
 package eu.baroncelli.dkmpsample.android.composables.navigation
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.SaveableStateHolder
@@ -22,8 +23,9 @@ fun Navigation.Router(
         ScreenPicker(currentScreenIdentifier, stateProvider, events)
     }
 
-    screenUIsToForget.forEach {
+    getScreenUIsToForget().forEach {
         screenUIsStateHolder.removeState(it.URI)
+        Log.d("D-KMP", "removed UI screen "+it.URI)
     }
 
 

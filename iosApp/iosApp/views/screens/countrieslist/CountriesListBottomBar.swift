@@ -9,23 +9,23 @@ import shared
 
 
 struct CountriesListBottomBar: View {
-    var selectedItem : MenuItem
-    var onItemClick : (MenuItem) -> Void
+    var selectedTab : ScreenIdentifier
+    var onItemClick : (Level1Navigation) -> Void
     
     var body: some View {
         Spacer()
         ButtonBarButton(
-            menuItem: MenuItem.all,
+            itemLabel: "All",
             iconName: "list.bullet",
-            selected: selectedItem==MenuItem.all,
-            onItemClick: onItemClick
+            selected: selectedTab==Level1Navigation.allcountries.screenIdentifier,
+            onItemClick: { onItemClick(Level1Navigation.allcountries) }
         )
         Spacer()
         ButtonBarButton(
-            menuItem: MenuItem.favorites,
+            itemLabel: "Favorites",
             iconName: "star.fill",
-            selected: selectedItem==MenuItem.favorites,
-            onItemClick: onItemClick
+            selected: selectedTab==Level1Navigation.favoritecountries.screenIdentifier,
+            onItemClick: { onItemClick(Level1Navigation.favoritecountries) }
         )
         Spacer()
     }
@@ -35,16 +35,16 @@ struct CountriesListBottomBar: View {
 
 
 struct ButtonBarButton: View {
-    var menuItem : MenuItem
+    var itemLabel : String
     var iconName : String
     var selected : Bool
-    var onItemClick : (MenuItem) -> Void
+    var onItemClick : () -> Void
     
     var body: some View {
-        Button(action: { onItemClick(menuItem) }) {
+        Button(action: { onItemClick() }) {
             HStack(spacing: 10) {
                 Image(systemName: iconName)
-                Text(menuItem.name)
+                Text(itemLabel)
             }
             .frame(height: 50)
             .foregroundColor(selected ? .white : greyColor)

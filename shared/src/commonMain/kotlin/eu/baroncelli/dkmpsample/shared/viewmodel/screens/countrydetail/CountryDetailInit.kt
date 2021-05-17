@@ -5,9 +5,9 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 
 
+
 // INIZIALIZATION settings for this screen
 // to understand the initialization behaviour, read the comments in the ScreenInitSettings.kt file
-
 
 fun Navigation.initCountryDetail(params: CountryDetailParams) = ScreenInitSettings (
     initState = { CountryDetailState(params = params, isLoading = true) },

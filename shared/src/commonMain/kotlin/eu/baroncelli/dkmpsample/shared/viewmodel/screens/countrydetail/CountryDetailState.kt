@@ -7,6 +7,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenState
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toCommaThousandString
 import eu.baroncelli.dkmpsample.shared.viewmodel.utils.toPercentageString
+import kotlinx.serialization.Serializable
 
 // here is the data class defining the state for this screen
 
@@ -19,6 +20,7 @@ data class CountryDetailState (
 
 /********** property classes **********/
 
+@Serializable // Note: ScreenParams should always be set as Serializable
 data class CountryDetailParams(val countryName: String) : ScreenParams
 
 data class CountryInfo (

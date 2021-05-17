@@ -8,11 +8,12 @@ import SwiftUI
 import shared
 
 struct CountriesListScreen: View {
-    @EnvironmentObject var appObj: AppObservableObject
+    var countriesListState: CountriesListState
+    var onMenuItemClick: (Level1Navigation) -> Void
+    var onListItemClick: (String) -> Void
+    var onFavoriteIconClick : (String) -> Void
     
     var body: some View {
-        let countriesListState = appObj.stateProviders.getCountriesListState()
-        let events = appObj.events
         if countriesListState.isLoading {
             LoadingScreen()
         } else {
@@ -25,13 +26,11 @@ struct CountriesListScreen: View {
                     } else {
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavigationLink(destination: appObj.getView(Screen.countrydetail, item.name)) {
-                                    CountriesListRow(
-                                        item: item,
-                                        favorite: countriesListState.favoriteCountries[item.name] != nil,
-                                        onFavoriteIconClick: { events.selectFavorite(country: item.name) }
-                                    )
-                                }
+                                CountriesListRow(
+                                    item: item,
+                                    favorite: countriesListState.favoriteCountries[item.name] != nil,
+                                    onFavoriteIconClick: { onFavoriteIconClick(item.name) }
+                                )
                             }
                         }
                     }
@@ -43,8 +42,8 @@ struct CountriesListScreen: View {
                     }
                     ToolbarItemGroup(placement: .bottomBar) {
                         CountriesListBottomBar(
-                            selectedItem : countriesListState.selectedMenuItem,
-                            onItemClick: { menuItem in events.selectMenuItem(menuItem: menuItem) }
+                            selectedTab : getScreenIdentifier(.countrieslist, countriesListState.params),
+                            onItemClick: { menuItem in onMenuItemClick(menuItem) }
                         )
                     }
                 }
