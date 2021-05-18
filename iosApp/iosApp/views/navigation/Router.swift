@@ -27,7 +27,6 @@ extension Navigation {
                     )
             }
         }
-        
     }
     
     
@@ -37,7 +36,7 @@ extension Navigation {
                 HStack {
                     Image(systemName: "chevron.left")
                     Text("Back")
-                }
+                }.foregroundColor(linkColor)
             }
         }
     }

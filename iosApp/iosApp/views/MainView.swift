@@ -18,7 +18,6 @@ struct MainView: View {
             dkmpNav.router(appObj.model.stateProvider, appObj.model.events)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarColor(backgroundUIColor: purpleUIColor, tintUIColor: .white)
-        .toolbarColor(backgroundUIColor: purpleUIColor, tintUIColor: .white)
+        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
     }
 }

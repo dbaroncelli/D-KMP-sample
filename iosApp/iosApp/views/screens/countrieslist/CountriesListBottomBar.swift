@@ -46,8 +46,7 @@ struct ButtonBarButton: View {
                 Image(systemName: iconName)
                 Text(itemLabel)
             }
-            .frame(height: 50)
-            .foregroundColor(selected ? .white : greyColor)
+            .foregroundColor(selected ? .white : linkColor)
         }
     }
 }

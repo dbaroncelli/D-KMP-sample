@@ -20,7 +20,7 @@ struct CountriesListRow: View {
                 .frame(width: 60)
             Text(item.fullyVaccinatedPerc).font(Font.subheadline).multilineTextAlignment(.trailing)
                 .frame(width: 60)
-            Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? .purple : .gray)
+            Image(systemName: favorite ? "star.fill" : "star").foregroundColor(favorite ? magentaColor : .gray)
                 .highPriorityGesture(TapGesture().onEnded(onFavoriteIconClick))
                 .frame(width: 70)
         }
