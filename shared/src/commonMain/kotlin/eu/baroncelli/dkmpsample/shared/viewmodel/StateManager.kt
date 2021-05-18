@@ -24,19 +24,19 @@ class StateManager(repo: Repository) {
     val verticalBackstacks: MutableMap<ScreenIdentifier,MutableList<ScreenIdentifier>> = mutableMapOf() // the map keys are NavigationLevel1 ScreenIdentifiers
     val level1Backstack: MutableList<ScreenIdentifier> = mutableListOf() // list elements are only NavigationLevel1 ScreenIdentifiers
     val navigationLevelsMap : MutableMap<Int, ScreenIdentifier> = mutableMapOf() // the map keys are the NavigationLevel numbers
-    val currentBackstack: MutableList<ScreenIdentifier>
+    val currentVerticalBackstack: MutableList<ScreenIdentifier>
         get() = verticalBackstacks[navigationLevelsMap[1]] ?: mutableListOf()
     val currentScreenIdentifier : ScreenIdentifier
-        get() = currentBackstack.lastOrNull() ?: level1Backstack.last()
+        get() = currentVerticalBackstack.lastOrNull() ?: level1Backstack.last()
     val only1ScreenInBackstack : Boolean
         get() = level1Backstack.size == 1 && verticalBackstacks[navigationLevelsMap[1]]?.size == 0
 
-    fun getFullBackstack(): List<BackStackEntry> {
+    fun getUIBackstack(): List<BackStackEntry> {
         val screenIndentifiersStack: MutableList<ScreenIdentifier> = mutableListOf()
+        currentVerticalBackstack.reversed().forEach {
+            screenIndentifiersStack.add(it)
+        }
         level1Backstack.reversed().forEach {
-            verticalBackstacks[it]?.reversed()?.forEach {
-                screenIndentifiersStack.add(it)
-            }
             screenIndentifiersStack.add(it)
         }
         return screenIndentifiersStack.reversed()
@@ -112,9 +112,9 @@ class StateManager(repo: Repository) {
         } else {
             if (currentScreenIdentifier.screen == screenIdentifier.screen && !screenIdentifier.screen.stackableInstances) {
                 removeScreenStateAndScope(currentScreenIdentifier)
-                currentBackstack.remove(currentScreenIdentifier)
+                currentVerticalBackstack.remove(currentScreenIdentifier)
             }
-            currentBackstack.add(screenIdentifier)
+            currentVerticalBackstack.add(screenIdentifier)
             navigationLevelsMap[screenIdentifier.screen.navigationLevel] = screenIdentifier
         }
         /*

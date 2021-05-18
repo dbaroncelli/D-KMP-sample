@@ -23,8 +23,8 @@ class Navigation(val stateManager : StateManager) {
     val only1ScreenInBackstack : Boolean
         get() = stateManager.only1ScreenInBackstack
 
-    val fullBackstack : List<BackStackEntry>
-        get() = stateManager.getFullBackstack()
+    val UIBackstack : List<BackStackEntry>
+        get() = stateManager.getUIBackstack()
 
     fun getScreenUIsToForget() : List<ScreenIdentifier> {
         val screenUIsToForget = stateManager.lastRemovedScreens.toList()

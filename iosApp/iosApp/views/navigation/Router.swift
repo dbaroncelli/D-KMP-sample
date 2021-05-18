@@ -14,7 +14,7 @@ extension Navigation {
     @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
         
         ZStack {
-            ForEach(fullBackstack, id: \.self.index) { entry in
+            ForEach(UIBackstack, id: \.self.index) { entry in
                 self.screenPicker(entry.screenIdentifier, stateProvider, events)
                     .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
                     .navigationBarItems(leading: self.topLeftButton() )
