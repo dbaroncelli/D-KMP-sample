@@ -12,6 +12,8 @@ interface ScreenState {
 }
 interface ScreenParams
 
+class BackStackEntry (val index : Int, val screenIdentifier : ScreenIdentifier)
+
 class StateManager(repo: Repository) {
 
     internal val mutableStateFlow = MutableStateFlow(AppState())
@@ -29,15 +31,16 @@ class StateManager(repo: Repository) {
     val only1ScreenInBackstack : Boolean
         get() = level1Backstack.size == 1 && verticalBackstacks[navigationLevelsMap[1]]?.size == 0
 
-    fun getFullNavigationStack() : List<ScreenIdentifier> {
-        val fullNavigationStack : MutableList<ScreenIdentifier> = mutableListOf()
+    fun getFullBackstack(): List<BackStackEntry> {
+        val screenIndentifiersStack: MutableList<ScreenIdentifier> = mutableListOf()
         level1Backstack.reversed().forEach {
             verticalBackstacks[it]?.reversed()?.forEach {
-                fullNavigationStack.add(it)
+                screenIndentifiersStack.add(it)
             }
-            fullNavigationStack.add(it)
+            screenIndentifiersStack.add(it)
         }
-        return fullNavigationStack.reversed()
+        return screenIndentifiersStack.reversed()
+            .mapIndexed { index, screenIdentifier -> BackStackEntry(index, screenIdentifier) }
     }
 
     val lastRemovedScreens = mutableListOf<ScreenIdentifier>()

@@ -14,9 +14,9 @@ extension Navigation {
     @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
         
         ZStack {
-            ForEach(fullNavigationStack, id: \.self.URI) { screenIdentifier in
-                self.screenPicker(screenIdentifier, stateProvider, events)
-                    .opacity(screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
+            ForEach(fullBackstack, id: \.self.index) { entry in
+                self.screenPicker(entry.screenIdentifier, stateProvider, events)
+                    .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
                     .navigationBarItems(leading: self.topLeftButton() )
                     .gesture(
                         DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
