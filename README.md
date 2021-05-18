@@ -41,7 +41,7 @@ If you want to create your own app using the D-KMP Architecture, here are the in
     - _screen_**State.kt**, where the data class of the state for that screen is defined
   - :hammer_and_wrench: in the **NavigationSettings.kt** file in the **screens** folder, you should define your level 1 navigation and other settings
   - :hammer_and_wrench: in the **ScreenEnum.kt** file in the **screens** folder, you should define the enum with all screens in your app
-  - :hammer_and_wrench: the **ScreenInitSettings.kt** file in the **screens** folder doesn't need to be modified
+  - :white_check_mark: the **ScreenInitSettings.kt** file in the **screens** folder doesn't need to be modified
   - :white_check_mark: the **6 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _Navigation.kt_, _ScreenIdentifier.kt_, _StateManager.kt_, _StateProviders.kt_) don't need to be modified
   - :white_check_mark: also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 
