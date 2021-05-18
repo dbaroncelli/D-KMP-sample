@@ -1,18 +1,19 @@
 # D-KMP architecture - official sample
 
-This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**.
+This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**. Planning to publish the **Web** and **Desktop** version soon too.
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
-<img width="400" src="https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png"></img>
+
+<img width="400" src="https://user-images.githubusercontent.com/5320104/118643793-4c424900-b7dd-11eb-85c7-1f55b06da6aa.png"></img>
 
 ## Key features of the D-KMP architecture:
 
-- it uses the latest **declarative UI** toolkits: **JetpackCompose** for *Android* and **SwiftUI** for *iOS*
-- it **fully shares the ViewModel** (and the *DataLayer*) via **Kotlin MultiPlatform**
+- it uses the latest **declarative UI** toolkits: **Compose** for *Android* and **SwiftUI** for *iOS*
+- it **fully shares the ViewModel** (including **navigation logic** and **data layer**) via **Kotlin MultiPlatform**
 - **coroutine scopes** are **cancelled/reinitialized automatically**, based on the current active screens and the app lifecycle (using LifecycleObserver on **Android** and the SwiftUI lifecycle on **iOS**)
 - it implements the **MVI pattern** and the *unidirectional data flow*
-- it implements the **CQRS pattern**, by providing 2 types of functions to the UI layer: **Events** and **StateProviders**
+- it implements the **CQRS pattern**, by providing **Command** functions (via _Events_ and _Navigation_) and **Query** functions (via _StateProviders_)
 - it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 
 ## Data sources used by this sample:
@@ -34,7 +35,7 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 #### View Model
 
 <img width="272" src="https://user-images.githubusercontent.com/5320104/118641163-194a8600-b7da-11eb-9bdd-b59e34392d36.png"></img>
-  - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
+  - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **3 files** (as shown in the sample app structure above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
     - _screen_**Init.kt**, where the initialization settings for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
