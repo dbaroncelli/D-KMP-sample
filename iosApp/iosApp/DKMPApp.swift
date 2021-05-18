@@ -15,7 +15,6 @@ struct iosApp: App {
     var body: some Scene {
         WindowGroup {
             MainView(appObj: appObj)
-                .navigationViewStyle(StackNavigationViewStyle())
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         appObj.dkmpNav.onReEnterForeground()

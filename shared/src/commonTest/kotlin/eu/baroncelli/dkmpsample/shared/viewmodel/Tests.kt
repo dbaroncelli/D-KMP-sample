@@ -18,6 +18,13 @@ class ViewModelTests {
 
 
     @Test
+    fun myTest() {
+        val a = mapOf(2 to "W", 3 to "V", 1 to "T")
+        val arranged = a.toList().sortedBy { it.first }.map { it.second }
+        println(arranged)
+    }
+
+    @Test
     fun testCountriesListStateUpdate() {
         val screenIdentifier = ScreenIdentifier(Screen.CountriesList,CountriesListParams(CountriesListType.ALL))
         stateManager.addScreen(screenIdentifier, CountriesListState(screenIdentifier.params()))

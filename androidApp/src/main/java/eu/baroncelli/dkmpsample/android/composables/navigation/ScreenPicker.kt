@@ -8,7 +8,6 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
 

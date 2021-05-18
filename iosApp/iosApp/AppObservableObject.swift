@@ -5,7 +5,6 @@
 //
 //
 
-import Foundation
 import SwiftUI
 import shared
 
@@ -13,12 +12,6 @@ class AppObservableObject: ObservableObject {
     let model : DKMPViewModel = DKMPViewModel.Factory().getIosInstance()
     var dkmpNav : Navigation {
         return self.appState.getNavigation(model: self.model)
-    }
-    var stateProvider : StateProvider {
-        return self.model.stateProvider
-    }
-    var events : Events {
-        return self.model.events
     }
     @Published var appState : AppState
 

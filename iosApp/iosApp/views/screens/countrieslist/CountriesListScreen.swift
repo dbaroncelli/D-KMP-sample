@@ -17,15 +17,15 @@ struct CountriesListScreen: View {
         if countriesListState.isLoading {
             LoadingScreen()
         } else {
-            NavigationView {
-                List {
-                    if countriesListState.countriesListItems.count == 0 {
-                        HStack(spacing: 0) {
-                            Text("empty list")
-                        }
-                    } else {
-                        Section(header: CountriesListHeader()) {
-                            ForEach (countriesListState.countriesListItems, id: \.name) { item in
+            List {
+                if countriesListState.countriesListItems.count == 0 {
+                    HStack(spacing: 0) {
+                        Text("empty list")
+                    }
+                } else {
+                    Section(header: CountriesListHeader()) {
+                        ForEach (countriesListState.countriesListItems, id: \.name) { item in
+                            NavigationLink( linkFunction: { onListItemClick(item.name) } ) {
                                 CountriesListRow(
                                     item: item,
                                     favorite: countriesListState.favoriteCountries[item.name] != nil,
@@ -35,21 +35,19 @@ struct CountriesListScreen: View {
                         }
                     }
                 }
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text("D-KMP sample").font(.headline).foregroundColor(.white)
-                    }
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        CountriesListBottomBar(
-                            selectedTab : getScreenIdentifier(.countrieslist, countriesListState.params),
-                            onItemClick: { menuItem in onMenuItemClick(menuItem) }
-                        )
-                    }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("D-KMP sample").font(.headline).foregroundColor(.white)
+                }
+                ToolbarItemGroup(placement: .bottomBar) {
+                    CountriesListBottomBar(
+                        selectedTab : getScreenIdentifier(.countrieslist, countriesListState.params),
+                        onItemClick: { menuItem in onMenuItemClick(menuItem) }
+                    )
                 }
             }
-            .navigationBarColor(backgroundUIColor: purpleUIColor, tintUIColor: .white)
-            .toolbarColor(backgroundUIColor: purpleUIColor, tintUIColor: .white)
         }
     }
     

@@ -15,8 +15,10 @@ fun Navigation.Router(
 
     val screenUIsStateHolder = rememberSaveableStateHolder()
 
-    BackHandler { // catching the back button to update the DKMPViewModel
-        exitScreen()
+    if (!only1ScreenInBackstack) {
+        BackHandler { // catching the back button to update the DKMPViewModel
+            exitScreen()
+        }
     }
 
     screenUIsStateHolder.SaveableStateProvider(currentScreenIdentifier.URI) {

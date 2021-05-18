@@ -20,6 +20,12 @@ class Navigation(val stateManager : StateManager) {
     val currentScreenIdentifier : ScreenIdentifier
         get() = stateManager.currentScreenIdentifier
 
+    val only1ScreenInBackstack : Boolean
+        get() = stateManager.only1ScreenInBackstack
+
+    val navigationLevelsStack : List<ScreenIdentifier>
+        get() = stateManager.navigationLevelsMap.toList().sortedBy { it.first }.map { it.second }
+
     fun getScreenUIsToForget() : List<ScreenIdentifier> {
         val screenUIsToForget = stateManager.lastRemovedScreens.toList()
         stateManager.lastRemovedScreens.clear()

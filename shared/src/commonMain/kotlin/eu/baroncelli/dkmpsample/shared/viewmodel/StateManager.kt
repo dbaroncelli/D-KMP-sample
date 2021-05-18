@@ -3,6 +3,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.serialization.Polymorphic
@@ -29,6 +30,8 @@ class StateManager(repo: Repository) {
         get() = verticalBackstacks[navigationLevelsMap[1]] ?: mutableListOf()
     val currentScreenIdentifier : ScreenIdentifier
         get() = currentBackstack.lastOrNull() ?: level1Backstack.last()
+    val only1ScreenInBackstack : Boolean
+        get() = level1Backstack.size == 1 && verticalBackstacks[navigationLevelsMap[1]]?.size == 0
 
     val lastRemovedScreens = mutableListOf<ScreenIdentifier>()
 
@@ -117,7 +120,11 @@ class StateManager(repo: Repository) {
         removeScreenStateAndScope(currentScreenIdentifier)
         if (currentScreenIdentifier.screen.navigationLevel == 1) {
             level1Backstack.remove(currentScreenIdentifier)
-            navigationLevelsMap[1] = currentScreenIdentifier
+            if (level1Backstack.size == 0) {
+                navigationLevelsMap.remove(1)
+            } else {
+                navigationLevelsMap[1] = currentScreenIdentifier
+            }
         } else {
             navigationLevelsMap.remove(currentScreenIdentifier.screen.navigationLevel)
             verticalBackstacks[navigationLevelsMap[1]]!!.remove(currentScreenIdentifier)
@@ -149,7 +156,11 @@ class StateManager(repo: Repository) {
 
 
     fun setupNewLevel1Screen(screenIdentifier: ScreenIdentifier) {
-        level1Backstack.removeAll { it.URI == screenIdentifier.URI }
+        if (navigationSettings.alwaysQuitOnHomeScreen && screenIdentifier == navigationSettings.homeScreen.screenIdentifier) {
+            level1Backstack.clear() // remove all elements
+        } else {
+            level1Backstack.removeAll { it == screenIdentifier } // remove only its element, before adding it to the end
+        }
         level1Backstack.add(screenIdentifier)
         navigationLevelsMap[1] = screenIdentifier
         if (verticalBackstacks[screenIdentifier] != null) {

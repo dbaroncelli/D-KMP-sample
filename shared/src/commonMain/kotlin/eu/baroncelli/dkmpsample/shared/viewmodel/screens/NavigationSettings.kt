@@ -10,7 +10,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.Countries
 object navigationSettings {
     val homeScreen = Level1Navigation.AllCountries // the start screen should be specified here
     val saveLastLevel1Screen = true
-    val alwaysQuitOnHomeScreen = false
+    val alwaysQuitOnHomeScreen = true
 }
 
 
