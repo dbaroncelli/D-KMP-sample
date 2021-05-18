@@ -1,22 +1,19 @@
 # D-KMP architecture - official sample
 
-**May 13, 2021: UPDATE! There is an ongoing rewriting of the architecture, which should be completed by the end of May. So, the advise is not to go any deep into the current sample, as soon there will be major improvements, such as shared-code navigation.**
-
-==
-
-This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**.
+This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**. Planning to publish the **Web** and **Desktop** version soon too.
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
-<img width="400" src="https://user-images.githubusercontent.com/5320104/112217256-b518a500-8c22-11eb-93d5-52298f7b765f.png"></img>
+
+<img width="400" src="https://user-images.githubusercontent.com/5320104/118643793-4c424900-b7dd-11eb-85c7-1f55b06da6aa.png"></img>
 
 ## Key features of the D-KMP architecture:
 
-- it uses the latest **declarative UI** toolkits: **JetpackCompose** for *Android* and **SwiftUI** for *iOS*
-- it **fully shares the ViewModel** (and the *DataLayer*) via **Kotlin MultiPlatform**
+- it uses the latest **declarative UI** toolkits: **Compose** for *Android* and **SwiftUI** for *iOS*
+- it **fully shares the ViewModel** (including **navigation logic** and **data layer**) via **Kotlin MultiPlatform**
 - **coroutine scopes** are **cancelled/reinitialized automatically**, based on the current active screens and the app lifecycle (using LifecycleObserver on **Android** and the SwiftUI lifecycle on **iOS**)
 - it implements the **MVI pattern** and the *unidirectional data flow*
-- it implements the **CQRS pattern**, by providing 2 types of functions to the UI layer: **Events** and **StateProviders**
+- it implements the **CQRS pattern**, by providing **Command** functions (via _Events_ and _Navigation_) and **Query** functions (via _StateProviders_)
 - it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 
 ## Data sources used by this sample:
@@ -33,19 +30,19 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 ## Instructions to write your own D-KMP app:
 If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
 
-**May 13, 2021: UPDATE! There is an ongoing rewriting of the architecture, which should be completed by the end of May. So, the advise is not to go any deep into the current sample, as soon there will be major improvements, such as shared-code navigation.**
-
 ### shared code:
 
 #### View Model
-<img width="361" src="https://user-images.githubusercontent.com/5320104/117335160-204ccc80-ae9b-11eb-9df0-e90168e1a0eb.png"></img>
-  - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **4 files** (as shown in the sample app structure above):
+
+<img width="272" src="https://user-images.githubusercontent.com/5320104/118641163-194a8600-b7da-11eb-9bdd-b59e34392d36.png"></img>
+  - :hammer_and_wrench: in the **viewmodel/screens** folder: create a folder for each screen of the app, containing these **3 files** (as shown in the sample app structure above):
     - _screen_**Events.kt**, where the event functions for that screen are defined
+    - _screen_**Init.kt**, where the initialization settings for that screen are defined
     - _screen_**State.kt**, where the data class of the state for that screen is defined
-    - _screen_**StateProvider.kt**, where the state provider function for that screen is defined
-    - _screen_**StateReducers.kt**, where the state reducers functions (called by the events) for that screen are defined
-  - :hammer_and_wrench: in the **ScreenEnum.kt** file in the **viewmodel** folder, you should define the enum with all screens in your app
-  - :white_check_mark: the other **5 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _StateManager.kt_, _StateProviders.kt_, _StateReducers.kt_) don't need to be modified
+  - :hammer_and_wrench: in the **NavigationSettings.kt** file in the **screens** folder, you should define your level 1 navigation and other settings
+  - :hammer_and_wrench: in the **ScreenEnum.kt** file in the **screens** folder, you should define the enum with all screens in your app
+  - :hammer_and_wrench: the **ScreenInitSettings.kt** file in the **screens** folder doesn't need to be modified
+  - :white_check_mark: the **6 files** in the **viewmodel** folder (_DKMPViewModel.kt_, _Events.kt_, _Navigation.kt_, _ScreenIdentifier.kt_, _StateManager.kt_, _StateProviders.kt_) don't need to be modified
   - :white_check_mark: also **DKMPViewModelForAndroid.kt** in _androidMain_ and **DKMPViewModelForIos.kt** in _iosMain_ don't need to be modified
 
 
@@ -60,22 +57,24 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 ### platform-specific code:
 
 #### androidApp
-<img width="247" src="https://user-images.githubusercontent.com/5320104/117370264-7125ea80-aec6-11eb-9a0e-40f1d388869a.png"></img>
-  - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all JetpackCompose composables for that screen
+
+<img width="227" src="https://user-images.githubusercontent.com/5320104/118641954-100de900-b7db-11eb-9ac3-218b54613549.png"></img>
+  - :white_check_mark: the **Router.kt** file in the **composables/navigation** folder doesn't need to be modified
+  - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **composables/navigation** folder, you should define the screen composables in your app
+  - :hammer_and_wrench: in the **composables/screens** folder: create a folder for each screen of the app, containing all composables for that screen
+  - :white_check_mark: the **MainComposable.kt** file in the **composables** folder doesn't need to be modified
   - :white_check_mark: the **DKMPApp.kt** file doesn't need to be modified
-  - :white_check_mark: the **DKMPNavigation.kt** file doesn't need to be modified
   - :white_check_mark: the **MainActivity.kt** file doesn't need to be modified
-  - :white_check_mark: the **MainComposable.kt** file doesn't need to be modified
-  - :hammer_and_wrench: the **ScreenComposables.kt** file should be modified to define the screen composables in the app
 
 #### iosApp
-  <img width="271" src="https://user-images.githubusercontent.com/5320104/117370187-56537600-aec6-11eb-9d4c-aec0bb720bb0.png"></img>
-  - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
+
+<img width="260" src="https://user-images.githubusercontent.com/5320104/118642505-bce86600-b7db-11eb-9af0-75d310ba24b4.png"></img>
+  - :white_check_mark: the **Router.swift** file in the **views/navigation** folder doesn't need to be modified
+  - :hammer_and_wrench: in the **ScreenPicker.swift** file in the **views/navigation** folder, you should define the screen composables in your app
+  - :hammer_and_wrench: in the **views/screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
+  - :white_check_mark: the **MainView.swift** file doesn't need to be modified
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
-  - :white_check_mark: the **DKMPNavigation.swift** file doesn't need to be modified
-  - :white_check_mark: the **MainView.swift** file doesn't need to be modified
-  - :hammer_and_wrench: the **ScreenViews.swift** file should be modified to define the screen views in the app
 
 #### webApp (coming soon!)
   - we'll be adding also the web version, using [Jetpack Compose for Web](https://blog.jetbrains.com/kotlin/2021/05/technology-preview-jetpack-compose-for-web/)
