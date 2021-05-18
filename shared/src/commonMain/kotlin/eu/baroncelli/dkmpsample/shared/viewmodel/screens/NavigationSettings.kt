@@ -1,8 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListParams
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType.*
 
 
 // CONFIGURATION SETTINGS
@@ -17,6 +18,6 @@ object navigationSettings {
 // LEVEL 1 NAVIGATION OF THE APP
 
 enum class Level1Navigation(val screenIdentifier: ScreenIdentifier, val rememberVerticalStack: Boolean = false) {
-    AllCountries( ScreenIdentifier(Screen.CountriesList, CountriesListParams(CountriesListType.ALL))),
-    FavoriteCountries( ScreenIdentifier(Screen.CountriesList, CountriesListParams(CountriesListType.FAVORITES))),
+    AllCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = ALL))),
+    FavoriteCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = FAVORITES))),
 }

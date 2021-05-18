@@ -17,14 +17,14 @@ struct CountriesListBottomBar: View {
         ButtonBarButton(
             itemLabel: "All",
             iconName: "list.bullet",
-            selected: selectedTab==Level1Navigation.allcountries.screenIdentifier,
+            selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
             onItemClick: { onItemClick(Level1Navigation.allcountries) }
         )
         Spacer()
         ButtonBarButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
-            selected: selectedTab==Level1Navigation.favoritecountries.screenIdentifier,
+            selected: selectedTab.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
             onItemClick: { onItemClick(Level1Navigation.favoritecountries) }
         )
         Spacer()

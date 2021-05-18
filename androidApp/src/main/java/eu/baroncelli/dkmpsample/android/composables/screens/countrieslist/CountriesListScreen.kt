@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.android.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
 
 @Composable
@@ -54,7 +54,7 @@ fun CountriesListScreen(
             }
         },
         bottomBar = {
-            CountriesListBottomBar(selectedTab = ScreenIdentifier(Screen.CountriesList, countriesListState.params), onItemClick = { onMenuItemClick(it) })
+            CountriesListBottomBar(selectedTab = ScreenIdentifier.get(CountriesList, countriesListState.params), onItemClick = { onMenuItemClick(it) })
         }
     )
 }

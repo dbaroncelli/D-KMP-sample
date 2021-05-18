@@ -7,21 +7,46 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 
-data class ScreenIdentifier (
+class ScreenIdentifier private constructor(
     val screen : Screen,
     var params: ScreenParams? = null,
     var paramsAsString: String? = null,
 ) {
 
     val URI : String
-        get() = screen.asString+":"+paramsString()
+        get() = getURI()
+
+    companion object Factory {
+        fun get(screen: Screen, params: ScreenParams?): ScreenIdentifier {
+            return ScreenIdentifier(screen, params, null)
+        }
+        fun getByURI(URI: String): ScreenIdentifier? {
+            val parts = URI.split(":")
+            Screen.values().forEach {
+                if (it.asString == parts[0]) {
+                    return ScreenIdentifier(it, null, parts[1])
+                }
+            }
+            return null
+        }
+
+    }
+
+    private fun getURI() : String {
+        if (paramsAsString != null) {
+            return screen.asString + ":" + paramsAsString
+        }
+        val toString = params.toString() // returns `ClassParams(A=1&B=2)`
+        val startIndex = toString.indexOf("(")
+        val paramsString = toString.substring(startIndex + 1, toString.length - 1)
+        return screen.asString  + ":" + paramsString
+    }
 
     // unlike the "params" property, this reified function returns the specific type and not the generic "ScreenParams" interface type
     inline fun <reified T: ScreenParams> params() : T {
         if (params == null && paramsAsString != null) {
             val jsonValues = paramsStrToJson(paramsAsString!!)
             params = Json.decodeFromString<T>("""{$jsonValues}""")
-            paramsAsString = null
         }
         return params as T
     }
@@ -40,17 +65,6 @@ data class ScreenIdentifier (
         return jsonValues
     }
 
-    private fun paramsString() : String {
-        // returns paramsAsString: `A=1&B=2`
-        if (paramsAsString != null) {
-            return paramsAsString!!
-        } else if (params == null) {
-            return ""
-        }
-        val toString = params.toString() // returns `ClassParams(A=1&B=2)`
-        val startIndex = toString.indexOf("(")
-        return toString.substring(startIndex+1,toString.length-1)
-    }
 
     fun getScreenInitSettings(navigation: Navigation) : ScreenInitSettings {
         return screen.initSettings(navigation,this)
@@ -63,19 +77,6 @@ data class ScreenIdentifier (
             }
         }
         return false
-    }
-
-    companion object {
-        fun getByURI(URI: String): ScreenIdentifier? {
-            val parts = URI.split(":")
-            Screen.values().forEach {
-                if (it.asString == parts[0]) {
-                    return ScreenIdentifier(it, null, parts[1])
-                }
-            }
-            return null
-        }
-
     }
 
 }

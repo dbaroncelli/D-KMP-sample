@@ -14,12 +14,12 @@ extension Navigation {
     @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
         
         ZStack {
-            ForEach(navigationLevelsStack, id: \.self) { screenIdentifier in
+            ForEach(fullNavigationStack, id: \.self.URI) { screenIdentifier in
                 self.screenPicker(screenIdentifier, stateProvider, events)
-                    .opacity(screenIdentifier == self.currentScreenIdentifier ? 1 : 0)
+                    .opacity(screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
                     .navigationBarItems(leading: self.topLeftButton() )
                     .gesture(
-                        DragGesture(minimumDistance: 5, coordinateSpace: .local).onEnded({ value in
+                        DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
                             if value.translation.width > 0 { // RIGHT SWIPE
                                 if (!self.only1ScreenInBackstack) { self.exitScreen() }
                             }
@@ -52,7 +52,7 @@ extension Navigation {
 }
 
 func getScreenIdentifier(_ screen : Screen, _ params: ScreenParams? = nil) -> ScreenIdentifier {
-    return ScreenIdentifier(screen: screen, params: params, paramsAsString: nil)
+    return ScreenIdentifier.Factory().get(screen: screen, params: params)
 }
 
 

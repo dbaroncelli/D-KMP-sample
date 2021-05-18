@@ -1,13 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.serialization.Polymorphic
-import kotlinx.serialization.Serializable
 import kotlin.reflect.KClass
 
 
@@ -32,6 +28,17 @@ class StateManager(repo: Repository) {
         get() = currentBackstack.lastOrNull() ?: level1Backstack.last()
     val only1ScreenInBackstack : Boolean
         get() = level1Backstack.size == 1 && verticalBackstacks[navigationLevelsMap[1]]?.size == 0
+
+    fun getFullNavigationStack() : List<ScreenIdentifier> {
+        val fullNavigationStack : MutableList<ScreenIdentifier> = mutableListOf()
+        level1Backstack.reversed().forEach {
+            verticalBackstacks[it]?.reversed()?.forEach {
+                fullNavigationStack.add(it)
+            }
+            fullNavigationStack.add(it)
+        }
+        return fullNavigationStack.reversed()
+    }
 
     val lastRemovedScreens = mutableListOf<ScreenIdentifier>()
 
@@ -159,7 +166,7 @@ class StateManager(repo: Repository) {
         if (navigationSettings.alwaysQuitOnHomeScreen && screenIdentifier == navigationSettings.homeScreen.screenIdentifier) {
             level1Backstack.clear() // remove all elements
         } else {
-            level1Backstack.removeAll { it == screenIdentifier } // remove only its element, before adding it to the end
+            level1Backstack.removeAll { it.URI == screenIdentifier.URI } // remove only its element, before adding it to the end
         }
         level1Backstack.add(screenIdentifier)
         navigationLevelsMap[1] = screenIdentifier
