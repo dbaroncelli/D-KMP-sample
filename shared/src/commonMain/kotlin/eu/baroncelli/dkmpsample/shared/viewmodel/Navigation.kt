@@ -42,8 +42,8 @@ class Navigation(val stateManager : StateManager) {
 
     fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
-        var shouldTriggerRecomposition = true
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
+        var shouldTriggerRecomposition = true
         if (stateManager.level1Backstack.isNotEmpty()) {
             if (currentScreenIdentifier.screen == screenIdentifier.screen && screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
                 shouldTriggerRecomposition = false

@@ -6,6 +6,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
+typealias URI = String
 
 class ScreenIdentifier private constructor(
     val screen : Screen,
@@ -13,7 +14,7 @@ class ScreenIdentifier private constructor(
     var paramsAsString: String? = null,
 ) {
 
-    val URI : String
+    val URI : URI
         get() = returnURI()
 
     companion object Factory {
