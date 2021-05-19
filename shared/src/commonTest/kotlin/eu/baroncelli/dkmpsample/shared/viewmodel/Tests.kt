@@ -2,7 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.getTestRepository
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
@@ -18,15 +18,8 @@ class ViewModelTests {
 
 
     @Test
-    fun myTest() {
-        val a = mapOf(2 to "W", 3 to "V", 1 to "T")
-        val arranged = a.toList().sortedBy { it.first }.map { it.second }
-        println(arranged)
-    }
-
-    @Test
     fun testCountriesListStateUpdate() {
-        val screenIdentifier = ScreenIdentifier(Screen.CountriesList,CountriesListParams(CountriesListType.ALL))
+        val screenIdentifier = ScreenIdentifier.get(CountriesList,CountriesListParams(CountriesListType.ALL))
         stateManager.addScreen(screenIdentifier, CountriesListState(screenIdentifier.params()))
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(favoriteCountries = mapOf("Italy" to true))
@@ -37,7 +30,7 @@ class ViewModelTests {
 
     @Test
     fun testCountryDetailStateUpdate() {
-        val screenIdentifier = ScreenIdentifier(Screen.CountryDetail, CountryDetailParams("Germany"))
+        val screenIdentifier = ScreenIdentifier.get(CountryDetail, CountryDetailParams("Germany"))
         stateManager.addScreen(screenIdentifier, CountryDetailState(screenIdentifier.params()))
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(countryInfo = CountryInfo(_extraData = CountryExtraData(vaccines = "Pfizer, Moderna, AstraZeneca")))

@@ -7,7 +7,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
 
@@ -20,15 +20,15 @@ fun Navigation.ScreenPicker(
 ) {
     when (screenIdentifier.screen) {
 
-        Screen.CountriesList ->
+        CountriesList ->
             CountriesListScreen(
                 countriesListState = stateProvider.get(screenIdentifier),
                 onMenuItemClick = { navigateByLevel1Menu(level1NavigationItem = it) },
-                onListItemClick = { navigate(Screen.CountryDetail, CountryDetailParams(countryName = it)) },
+                onListItemClick = { navigate(CountryDetail, CountryDetailParams(countryName = it)) },
                 onFavoriteIconClick = { events.selectFavorite(countryName = it) },
             )
 
-        Screen.CountryDetail ->
+        CountryDetail ->
             CountryDetailScreen(
                 countryDetailState = stateProvider.get(screenIdentifier)
             )

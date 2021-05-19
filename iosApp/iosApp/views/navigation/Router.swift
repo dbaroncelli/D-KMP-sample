@@ -17,7 +17,7 @@ extension Navigation {
             ForEach(UIBackstack, id: \.self.index) { entry in
                 self.screenPicker(entry.screenIdentifier, stateProvider, events)
                     .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
-                    .navigationBarItems(leading: self.topLeftButton() )
+                    .navigationBarItems(leading: self.backButton() )
                     .gesture(
                         DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
                             if value.translation.width > 0 { // RIGHT SWIPE
@@ -30,7 +30,7 @@ extension Navigation {
     }
     
     
-    @ViewBuilder func topLeftButton()  -> some View {
+    @ViewBuilder func backButton()  -> some View {
         if (!only1ScreenInBackstack) {
             Button(action: { withAnimation { self.exitScreen() } } ) {
                 HStack {

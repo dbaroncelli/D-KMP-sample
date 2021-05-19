@@ -71,35 +71,8 @@ class StateManager(repo: Repository) {
     }
 
 
-    fun initScreenScope(screenIdentifier: ScreenIdentifier) {
-        //debugLogger.log("initScreenScope()")
-        screenScopesMap[screenIdentifier]?.cancel()
-        screenScopesMap[screenIdentifier] = CoroutineScope(Job() + Dispatchers.Main)
-    }
 
-    // we run each event function on a Dispatchers.Main coroutine
-    fun runInCurrentScreenScope (block: suspend () -> Unit) {
-        val screenScope = screenScopesMap[currentScreenIdentifier]
-        screenScope?.launch {
-            block()
-        }
-    }
-
-
-    fun reinitScreenScopes() : List<ScreenIdentifier> {
-        //debugLogger.log("reinitScreenScopes()")
-        navigationLevelsMap.forEach {
-            screenScopesMap[it.value] = CoroutineScope(Job() + Dispatchers.Main)
-        }
-        return navigationLevelsMap.values.toMutableList() // return list of screens whose scope has been reinitialized
-    }
-
-    fun cancelScreenScopes() {
-        //debugLogger.log("cancelScreenScopes()")
-        screenScopesMap.forEach {
-            it.value.cancel() // cancel screen's coroutine scope
-        }
-    }
+    // ADD SCREEN FUNCTION
 
     fun addScreen(screenIdentifier: ScreenIdentifier, screenState: ScreenState) {
         initScreenScope(screenIdentifier)
@@ -128,6 +101,10 @@ class StateManager(repo: Repository) {
         */
     }
 
+
+
+    // REMOVE SCREEN FUNCTIONS
+
     fun removeLastScreen() {
         removeScreenStateAndScope(currentScreenIdentifier)
         if (currentScreenIdentifier.screen.navigationLevel == 1) {
@@ -152,6 +129,10 @@ class StateManager(repo: Repository) {
         lastRemovedScreens.add(screenIdentifier)
     }
 
+
+
+    // LEVEL 1 NAVIGATION FUNCTIONS
+
     fun clearOldLevel1Screen(screenIdentifier: ScreenIdentifier, sameAsNewScreen: Boolean) {
         // debugLogger.log("clear vertical backstack /"+screenIdentifier.URI)
         verticalBackstacks[screenIdentifier]?.forEach {
@@ -165,7 +146,6 @@ class StateManager(repo: Repository) {
             level1Backstack.remove(screenIdentifier)
         }
     }
-
 
     fun setupNewLevel1Screen(screenIdentifier: ScreenIdentifier) {
         if (navigationSettings.alwaysQuitOnHomeScreen) {
@@ -189,8 +169,44 @@ class StateManager(repo: Repository) {
         }
     }
 
+
+
+    // COROUTINE SCOPES FUNCTIONS
+
+    fun initScreenScope(screenIdentifier: ScreenIdentifier) {
+        //debugLogger.log("initScreenScope()")
+        screenScopesMap[screenIdentifier]?.cancel()
+        screenScopesMap[screenIdentifier] = CoroutineScope(Job() + Dispatchers.Main)
+    }
+
+    fun reinitScreenScopes() : List<ScreenIdentifier> {
+        //debugLogger.log("reinitScreenScopes()")
+        navigationLevelsMap.forEach {
+            screenScopesMap[it.value] = CoroutineScope(Job() + Dispatchers.Main)
+        }
+        return navigationLevelsMap.values.toMutableList() // return list of screens whose scope has been reinitialized
+    }
+
+    // we run each event function on a Dispatchers.Main coroutine
+    fun runInCurrentScreenScope (block: suspend () -> Unit) {
+        val screenScope = screenScopesMap[currentScreenIdentifier]
+        screenScope?.launch {
+            block()
+        }
+    }
+
+    fun cancelScreenScopes() {
+        //debugLogger.log("cancelScreenScopes()")
+        screenScopesMap.forEach {
+            it.value.cancel() // cancel screen's coroutine scope
+        }
+    }
+
 }
 
+
+
+// APPSTATE DATA CLASS DEFINITION
 
 data class AppState (
     val recompositionIndex : Int = 0,

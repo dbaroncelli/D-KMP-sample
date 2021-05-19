@@ -14,7 +14,7 @@ class ScreenIdentifier private constructor(
 ) {
 
     val URI : String
-        get() = getURI()
+        get() = returnURI()
 
     companion object Factory {
         fun get(screen: Screen, params: ScreenParams?): ScreenIdentifier {
@@ -32,7 +32,7 @@ class ScreenIdentifier private constructor(
 
     }
 
-    private fun getURI() : String {
+    private fun returnURI() : String {
         if (paramsAsString != null) {
             return screen.asString + ":" + paramsAsString
         }

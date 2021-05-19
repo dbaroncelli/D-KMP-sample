@@ -67,14 +67,12 @@ class Navigation(val stateManager : StateManager) {
         if (stateManager.isInTheStatesMap(currentScreenIdentifier)) {
             stateManager.triggerRecomposition()
         } else {
-            // if state of new screen is not in the screenStatesMap (because it was in a vertical backstack),
-            // remove the screen and navigate to it
+            // if state of new screen is not in the screenStatesMap, remove the screen and navigate to it
             val screenIdentifier = currentScreenIdentifier
             stateManager.removeLastScreen()
             navigateByScreenIdentifier(screenIdentifier)
         }
     }
-
 
     fun onReEnterForeground() {
         // not called at app startup, but only when reentering the app after it was in background
