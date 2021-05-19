@@ -43,14 +43,9 @@ class Navigation(val stateManager : StateManager) {
     fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
-        var shouldTriggerRecomposition = true
-        if (stateManager.level1Backstack.isNotEmpty()) {
-            if (currentScreenIdentifier.screen == screenIdentifier.screen && screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
-                shouldTriggerRecomposition = false
-            }
-        }
+        val previousScreen = if (stateManager.level1Backstack.isNotEmpty()) currentScreenIdentifier.screen else null
         stateManager.addScreen(screenIdentifier, screenInitSettings.initState(screenIdentifier))
-        if (shouldTriggerRecomposition) {
+        if (previousScreen != screenIdentifier.screen  || !screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
             stateManager.triggerRecomposition() // FIRST UI RECOMPOSITION
         }
         stateManager.runInCurrentScreenScope {
@@ -65,12 +60,12 @@ class Navigation(val stateManager : StateManager) {
         debugLogger.log("exitScreen")
         stateManager.removeLastScreen()
         if (stateManager.isInTheStatesMap(currentScreenIdentifier)) {
+            // if state is already stored, just trigger a recomposition
             stateManager.triggerRecomposition()
         } else {
-            // if state of new screen is not in the screenStatesMap, remove the screen and navigate to it
-            val screenIdentifier = currentScreenIdentifier
-            stateManager.removeLastScreen()
-            navigateByScreenIdentifier(screenIdentifier)
+            // if state is not stored, navigate to it, so that it reinitializes the state
+            // (it always checks what's the latest URI in the backstack, so that it won't add an extra backstack element)
+            navigateByScreenIdentifier(currentScreenIdentifier)
         }
     }
 

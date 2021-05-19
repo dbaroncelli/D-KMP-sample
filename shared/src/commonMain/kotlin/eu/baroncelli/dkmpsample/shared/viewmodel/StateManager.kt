@@ -92,7 +92,9 @@ class StateManager(repo: Repository) {
                 removeScreenStateAndScope(currentScreenIdentifier)
                 currentVerticalBackstack.remove(currentScreenIdentifier)
             }
-            currentVerticalBackstack.add(screenIdentifier)
+            if (currentVerticalBackstack.lastOrNull()?.URI != screenIdentifier.URI) {
+                currentVerticalBackstack.add(screenIdentifier)
+            }
             navigationLevelsMap[screenIdentifier.screen.navigationLevel] = screenIdentifier
         }
         /*
@@ -138,11 +140,11 @@ class StateManager(repo: Repository) {
 
     fun clearOldLevel1Screen(screenIdentifier: ScreenIdentifier, sameAsNewScreen: Boolean) {
         // debugLogger.log("clear vertical backstack /"+screenIdentifier.URI)
-        verticalBackstacks[screenIdentifier]?.forEach {
+        verticalBackstacks[screenIdentifier.URI]?.forEach {
             removeScreenStateAndScope(it)
         }
         if (!screenIdentifier.level1VerticalBackstackEnabled()) {
-            verticalBackstacks[screenIdentifier]?.clear()
+            verticalBackstacks[screenIdentifier.URI]?.clear()
         }
         if (sameAsNewScreen && !screenIdentifier.screen.stackableInstances) {
             removeScreenStateAndScope(screenIdentifier)
@@ -151,6 +153,7 @@ class StateManager(repo: Repository) {
     }
 
     fun setupNewLevel1Screen(screenIdentifier: ScreenIdentifier) {
+        level1Backstack.removeAll { it.URI == screenIdentifier.URI }
         if (navigationSettings.alwaysQuitOnHomeScreen) {
             if (screenIdentifier.URI == navigationSettings.homeScreen.screenIdentifier.URI) {
                 level1Backstack.clear() // remove all elements
@@ -158,8 +161,6 @@ class StateManager(repo: Repository) {
                 level1Backstack.add(navigationSettings.homeScreen.screenIdentifier)
                 verticalBackstacks[navigationSettings.homeScreen.screenIdentifier.URI] = mutableListOf()
             }
-        } else {
-            level1Backstack.removeAll { it.URI == screenIdentifier.URI } // remove only its element, before adding it to the end
         }
         level1Backstack.add(screenIdentifier)
         navigationLevelsMap[1] = screenIdentifier
