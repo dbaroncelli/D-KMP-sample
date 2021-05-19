@@ -3,7 +3,6 @@ package eu.baroncelli.dkmpsample.android.composables.navigation
 import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import eu.baroncelli.dkmpsample.shared.viewmodel.*
 
