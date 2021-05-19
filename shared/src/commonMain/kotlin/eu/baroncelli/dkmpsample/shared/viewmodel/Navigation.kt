@@ -23,7 +23,7 @@ class Navigation(val stateManager : StateManager) {
     val only1ScreenInBackstack : Boolean
         get() = stateManager.only1ScreenInBackstack
 
-    val UIBackstack : List<BackStackEntry>
+    val UIBackstack : List<UIBackstackEntry>
         get() = stateManager.getUIBackstack()
 
     fun getScreenUIsToForget() : List<ScreenIdentifier> {
@@ -64,7 +64,15 @@ class Navigation(val stateManager : StateManager) {
     fun exitScreen() {
         debugLogger.log("exitScreen")
         stateManager.removeLastScreen()
-        stateManager.triggerRecomposition()
+        if (stateManager.isInTheStatesMap(currentScreenIdentifier)) {
+            stateManager.triggerRecomposition()
+        } else {
+            // if state of new screen is not in the screenStatesMap (because it was in a vertical backstack),
+            // remove the screen and navigate to it
+            val screenIdentifier = currentScreenIdentifier
+            stateManager.removeLastScreen()
+            navigateByScreenIdentifier(screenIdentifier)
+        }
     }
 
 

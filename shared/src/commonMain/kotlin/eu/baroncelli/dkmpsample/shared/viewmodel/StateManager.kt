@@ -12,7 +12,7 @@ interface ScreenState {
 }
 interface ScreenParams
 
-class BackStackEntry (val index : Int, val screenIdentifier : ScreenIdentifier)
+class UIBackstackEntry (val index : Int, val screenIdentifier : ScreenIdentifier)
 
 class StateManager(repo: Repository) {
 
@@ -31,22 +31,24 @@ class StateManager(repo: Repository) {
     val only1ScreenInBackstack : Boolean
         get() = level1Backstack.size == 1 && verticalBackstacks[navigationLevelsMap[1]]?.size == 0
 
-    fun getUIBackstack(): List<BackStackEntry> {
+    fun getUIBackstack(): List<UIBackstackEntry> {
         val screenIndentifiersStack: MutableList<ScreenIdentifier> = mutableListOf()
-        currentVerticalBackstack.reversed().forEach {
-            screenIndentifiersStack.add(it)
-        }
-        level1Backstack.reversed().forEach {
-            screenIndentifiersStack.add(it)
+        (currentVerticalBackstack.reversed() + level1Backstack.reversed()).forEach {
+            if (screenStatesMap.containsKey(it)) { // omit if it hasn't its state stored
+                screenIndentifiersStack.add(it)
+            }
         }
         return screenIndentifiersStack.reversed()
-            .mapIndexed { index, screenIdentifier -> BackStackEntry(index, screenIdentifier) }
+            .mapIndexed { index, screenIdentifier -> UIBackstackEntry(index, screenIdentifier) }
     }
 
     val lastRemovedScreens = mutableListOf<ScreenIdentifier>()
 
     internal val dataRepository by lazy { repo }
 
+    fun isInTheStatesMap(screenIdentifier: ScreenIdentifier) : Boolean {
+        return screenStatesMap.containsKey(screenIdentifier)
+    }
 
     inline fun <reified T: ScreenState> updateScreen(
             stateClass: KClass<T>,
@@ -166,8 +168,12 @@ class StateManager(repo: Repository) {
 
 
     fun setupNewLevel1Screen(screenIdentifier: ScreenIdentifier) {
-        if (navigationSettings.alwaysQuitOnHomeScreen && screenIdentifier == navigationSettings.homeScreen.screenIdentifier) {
-            level1Backstack.clear() // remove all elements
+        if (navigationSettings.alwaysQuitOnHomeScreen) {
+            if (screenIdentifier.URI == navigationSettings.homeScreen.screenIdentifier.URI) {
+                level1Backstack.clear() // remove all elements
+            } else if (level1Backstack.size == 0) {
+                level1Backstack.add(navigationSettings.homeScreen.screenIdentifier)
+            }
         } else {
             level1Backstack.removeAll { it.URI == screenIdentifier.URI } // remove only its element, before adding it to the end
         }

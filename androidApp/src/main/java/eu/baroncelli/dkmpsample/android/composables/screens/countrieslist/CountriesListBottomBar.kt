@@ -23,13 +23,13 @@ fun CountriesListBottomBar(
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Menu, "ALL") },
             label = { Text("All", fontSize = 13.sp) },
-            selected = selectedTab == Level1Navigation.AllCountries.screenIdentifier,
+            selected = selectedTab.URI == Level1Navigation.AllCountries.screenIdentifier.URI,
             onClick = { onItemClick(Level1Navigation.AllCountries) }
         )
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Star, "FAVORITES") },
             label = { Text("Favourites", fontSize = 13.sp) },
-            selected = selectedTab == Level1Navigation.FavoriteCountries.screenIdentifier,
+            selected = selectedTab.URI == Level1Navigation.FavoriteCountries.screenIdentifier.URI,
             onClick = { onItemClick(Level1Navigation.FavoriteCountries) }
         )
     })
