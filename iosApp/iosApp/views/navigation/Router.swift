@@ -17,7 +17,6 @@ extension Navigation {
             ForEach(UIBackstack, id: \.self.index) { entry in
                 NavigationView {
                     self.screenPicker(entry.screenIdentifier, stateProvider, events)
-                        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
                         .navigationBarItems(leading: self.backButton() )
                 }
                 .navigationViewStyle(StackNavigationViewStyle())
@@ -32,6 +31,8 @@ extension Navigation {
 
             }
         }
+        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
+        .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
     }
     
     

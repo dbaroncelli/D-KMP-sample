@@ -17,34 +17,35 @@ struct CountriesListScreen: View {
         if countriesListState.isLoading {
             LoadingScreen()
         } else {
-            VStack {
-                List {
-                    if countriesListState.countriesListItems.count == 0 {
-                        HStack(spacing: 0) {
-                            Text("empty list")
-                        }
-                    } else {
-                        Section(header: CountriesListHeader()) {
-                            ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavigationLink( linkFunction: { onListItemClick(item.name) } ) {
-                                    CountriesListRow(
-                                        item: item,
-                                        favorite: countriesListState.favoriteCountries[item.name] != nil,
-                                        onFavoriteIconClick: { onFavoriteIconClick(item.name) }
-                                    )
-                                }
+            List {
+                if countriesListState.countriesListItems.count == 0 {
+                    HStack(spacing: 0) {
+                        Text("empty list")
+                    }
+                } else {
+                    Section(header: CountriesListHeader()) {
+                        ForEach (countriesListState.countriesListItems, id: \.name) { item in
+                            NavigationLink( linkFunction: { onListItemClick(item.name) } ) {
+                                CountriesListRow(
+                                    item: item,
+                                    favorite: countriesListState.favoriteCountries[item.name] != nil,
+                                    onFavoriteIconClick: { onFavoriteIconClick(item.name) }
+                                )
                             }
                         }
                     }
                 }
-                HStack {
+            }
+            .navigationBarTitle("D-KMP sample", displayMode: .inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .bottomBar) {
                     CountriesListBottomBar(
                         selectedTab : getScreenIdentifier(.countrieslist, countriesListState.params),
                         onItemClick: { menuItem in onMenuItemClick(menuItem) }
                     )
-                }.frame(height:50).background(customBgColor.ignoresSafeArea(.all))
+                }
             }
-            .navigationBarTitle("D-KMP sample", displayMode: .inline)
+
         }
     }
     
