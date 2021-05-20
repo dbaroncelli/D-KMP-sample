@@ -18,11 +18,6 @@ struct CountryDetailScreen: View {
                 CountryDetailContent(data: countryDetailState.countryInfo)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(countryDetailState.params.countryName).font(.headline).foregroundColor(.white)
-            }
-        }
+        .navigationBarTitle(countryDetailState.params.countryName, displayMode: .inline)
     }
 }

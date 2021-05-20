@@ -15,16 +15,21 @@ extension Navigation {
         
         ZStack {
             ForEach(UIBackstack, id: \.self.index) { entry in
-                self.screenPicker(entry.screenIdentifier, stateProvider, events)
-                    .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
-                    .navigationBarItems(leading: self.backButton() )
-                    .gesture(
-                        DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
-                            if value.translation.width > 0 { // RIGHT SWIPE
-                                if (!self.only1ScreenInBackstack) { self.exitScreen() }
-                            }
-                        })
-                    )
+                NavigationView {
+                    self.screenPicker(entry.screenIdentifier, stateProvider, events)
+                        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
+                        .navigationBarItems(leading: self.backButton() )
+                }
+                .navigationViewStyle(StackNavigationViewStyle())
+                .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
+                .gesture(
+                    DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
+                        if value.translation.width > 0 { // RIGHT SWIPE
+                            if (!self.only1ScreenInBackstack) { self.exitScreen() }
+                        }
+                    })
+                )
+
             }
         }
     }

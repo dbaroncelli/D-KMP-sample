@@ -44,12 +44,7 @@ struct CountriesListScreen: View {
                     )
                 }.frame(height:50).background(customBgColor.ignoresSafeArea(.all))
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("D-KMP sample").font(.headline).foregroundColor(.white)
-                }
-            }
+            .navigationBarTitle("D-KMP sample", displayMode: .inline)
         }
     }
     

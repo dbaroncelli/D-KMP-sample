@@ -14,10 +14,6 @@ struct MainView: View {
     @ObservedObject var appObj: AppObservableObject
     var body: some View {
         let dkmpNav = appObj.dkmpNav
-        NavigationView {
-            dkmpNav.router(appObj.model.stateProvider, appObj.model.events)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
+        dkmpNav.router(appObj.model.stateProvider, appObj.model.events)
     }
 }

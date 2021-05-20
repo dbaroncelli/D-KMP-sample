@@ -23,11 +23,13 @@ class Navigation(val stateManager : StateManager) {
     val only1ScreenInBackstack : Boolean
         get() = stateManager.only1ScreenInBackstack
 
-    // used by Router composable in Compose apps
+    // used by the Router composable in Compose apps
+    // it returns a list of screens whose UI state should be forgotten by Compose's SaveableStateHolder
     val screenUIsToForget : List<ScreenIdentifier>
         get() = stateManager.getScreenUIsToForget()
 
-    // used by Router view in SwiftUI apps
+    // used by the Router view in SwiftUI apps
+    // it returns a list of UI screens to be rendered inside a SwiftUI's ZStack (it only includes screens whose state is stored, not the full backstack)
     val UIBackstack : List<UIBackstackEntry>
         get() = stateManager.getUIBackstack()
 
