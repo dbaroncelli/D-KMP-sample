@@ -22,7 +22,7 @@ fun CountriesListBottomBar(
     BottomAppBar(content = {
         BottomNavigationItem(
             icon = { Icon(Icons.Default.Menu, "ALL") },
-            label = { Text("All", fontSize = 13.sp) },
+            label = { Text("All Countries", fontSize = 13.sp) },
             selected = selectedTab.URI == Level1Navigation.AllCountries.screenIdentifier.URI,
             onClick = { onItemClick(Level1Navigation.AllCountries) }
         )
