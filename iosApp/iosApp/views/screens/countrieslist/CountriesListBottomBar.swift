@@ -15,7 +15,7 @@ struct CountriesListBottomBar: View {
     var body: some View {
         Spacer()
         ButtonBarButton(
-            itemLabel: "All",
+            itemLabel: "All Countries",
             iconName: "list.bullet",
             selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
             onItemClick: { onItemClick(Level1Navigation.allcountries) }
