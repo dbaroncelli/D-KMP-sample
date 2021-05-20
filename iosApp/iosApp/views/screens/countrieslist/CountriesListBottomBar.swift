@@ -42,9 +42,9 @@ struct ButtonBarButton: View {
     
     var body: some View {
         Button(action: { onItemClick() }) {
-            HStack(spacing: 10) {
-                Image(systemName: iconName)
-                Text(itemLabel)
+            VStack(spacing: 5) {
+                Image(systemName: iconName).resizable().scaledToFit().frame(height:15)
+                Text(itemLabel).font(Font.footnote)
             }
             .foregroundColor(selected ? .white : linkColor)
         }
