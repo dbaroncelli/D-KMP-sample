@@ -9,6 +9,7 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+UserInterfaceState.xcuserstate
 /build
 /buildSrc/build
 /shared/build
