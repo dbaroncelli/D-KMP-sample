@@ -23,14 +23,14 @@ class Navigation(val stateManager : StateManager) {
     val only1ScreenInBackstack : Boolean
         get() = stateManager.only1ScreenInBackstack
 
+    // used by Router composable in Compose apps
+    val screenUIsToForget : List<ScreenIdentifier>
+        get() = stateManager.getScreenUIsToForget()
+
+    // used by Router view in SwiftUI apps
     val UIBackstack : List<UIBackstackEntry>
         get() = stateManager.getUIBackstack()
 
-    fun getScreenUIsToForget() : List<ScreenIdentifier> {
-        val screenUIsToForget = stateManager.lastRemovedScreens.toList()
-        stateManager.lastRemovedScreens.clear()
-        return screenUIsToForget
-    }
 
     fun navigate(screen: Screen, params: ScreenParams? = null) {
         navigateByScreenIdentifier(ScreenIdentifier.get(screen,params))

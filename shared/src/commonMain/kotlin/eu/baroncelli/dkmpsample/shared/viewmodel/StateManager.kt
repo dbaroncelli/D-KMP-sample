@@ -39,6 +39,14 @@ class StateManager(repo: Repository) {
         get() = fullNavigationBackstack.size == 1
 
 
+    // used by Compose apps
+    fun getScreenUIsToForget() : List<ScreenIdentifier> {
+        val screenUIsToForget = lastRemovedScreens.toList()
+        lastRemovedScreens.clear() // clear after retrieval
+        return screenUIsToForget
+    }
+
+    // used by SwiftUI apps
     fun getUIBackstack(): List<UIBackstackEntry> {
         val screenIndentifiersStack: MutableList<ScreenIdentifier> = mutableListOf()
         fullNavigationBackstack.forEach {
