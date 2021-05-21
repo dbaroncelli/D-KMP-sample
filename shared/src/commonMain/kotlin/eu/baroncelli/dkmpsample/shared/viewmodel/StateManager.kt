@@ -1,6 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,36 +30,37 @@ class StateManager(repo: Repository) {
 
     internal val dataRepository by lazy { repo }
 
-    val fullNavigationBackstack : List<ScreenIdentifier>
-        get() = (currentVerticalBackstack.reversed() + level1Backstack.reversed()).reversed()
     val currentVerticalBackstack: MutableList<ScreenIdentifier>
         get() = verticalBackstacks[navigationLevelsMap[1]?.URI]!!
     val currentScreenIdentifier : ScreenIdentifier
-        get() = fullNavigationBackstack.last()
+        get() = currentVerticalBackstack.lastOrNull() ?: level1Backstack.last()
     val only1ScreenInBackstack : Boolean
-        get() = fullNavigationBackstack.size == 1
+        get() = level1Backstack.size + currentVerticalBackstack.size == 1
 
 
     // used by Compose apps
-    fun getScreenUIsToForget() : List<ScreenIdentifier> {
-        val screenUIsToForget = lastRemovedScreens.toList()
-        lastRemovedScreens.clear() // clear after retrieval
-        return screenUIsToForget
+    fun getScreenStatesToRemove() : List<ScreenIdentifier> {
+        val screenStatesToRemove = lastRemovedScreens.toList()
+        lastRemovedScreens.clear() // clear list
+        return screenStatesToRemove
     }
 
     // used by SwiftUI apps
-    fun getUIBackstack(): List<UIBackstackEntry> {
-        val screenIndentifiersStack: MutableList<ScreenIdentifier> = mutableListOf()
-        fullNavigationBackstack.forEach {
-            if (screenStatesMap.containsKey(it.URI)) { // omit if it hasn't its state stored
-                screenIndentifiersStack.add(it)
-            }
-        }
-        return screenIndentifiersStack.mapIndexed { index, screenIdentifier -> UIBackstackEntry(index, screenIdentifier) }
+    fun getStatefulBackstack(): List<UIBackstackEntry> {
+        val statefulBackstack = (level1Backstack + currentVerticalBackstack).toMutableList()
+        statefulBackstack.removeAll { !screenStatesMap.containsKey(it.URI) }  // remove all that don't have the state stored
+        return statefulBackstack.mapIndexed { index, screenIdentifier -> UIBackstackEntry(index, screenIdentifier) }
     }
 
     fun isInTheStatesMap(screenIdentifier: ScreenIdentifier) : Boolean {
         return screenStatesMap.containsKey(screenIdentifier.URI)
+    }
+
+    fun getCurrentScreen() : Screen? {
+        if (level1Backstack.isEmpty()) {
+            return null
+        }
+        return currentScreenIdentifier.screen
     }
 
     inline fun <reified T: ScreenState> updateScreen(

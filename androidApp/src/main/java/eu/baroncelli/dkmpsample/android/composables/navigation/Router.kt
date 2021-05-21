@@ -24,7 +24,7 @@ fun Navigation.Router(
         ScreenPicker(currentScreenIdentifier, stateProvider, events)
     }
 
-    screenUIsToForget.forEach {
+    screenStatesToRemove.forEach {
         screenUIsStateHolder.removeState(it.URI)
         Log.d("D-KMP", "removed UI screen "+it.URI)
     }

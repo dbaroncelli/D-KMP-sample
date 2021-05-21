@@ -14,7 +14,7 @@ extension Navigation {
     @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
         
         ZStack {
-            ForEach(UIBackstack, id: \.self.index) { entry in
+            ForEach(statefulBackstack, id: \.self.index) { entry in
                 NavigationView {
                     self.screenPicker(entry.screenIdentifier, stateProvider, events)
                         .navigationBarItems(leading: self.backButton() )

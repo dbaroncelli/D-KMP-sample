@@ -24,14 +24,14 @@ class Navigation(val stateManager : StateManager) {
         get() = stateManager.only1ScreenInBackstack
 
     // used by the Router composable in Compose apps
-    // it returns a list of screens whose UI state should be forgotten by Compose's SaveableStateHolder
-    val screenUIsToForget : List<ScreenIdentifier>
-        get() = stateManager.getScreenUIsToForget()
+    // it returns a list of screens whose state has been removed, so they should also be removed from Compose's SaveableStateHolder
+    val screenStatesToRemove : List<ScreenIdentifier>
+        get() = stateManager.getScreenStatesToRemove()
 
     // used by the Router view in SwiftUI apps
     // it returns a list of UI screens to be rendered inside a SwiftUI's ZStack (it only includes screens whose state is stored, not the full backstack)
-    val UIBackstack : List<UIBackstackEntry>
-        get() = stateManager.getUIBackstack()
+    val statefulBackstack : List<UIBackstackEntry>
+        get() = stateManager.getStatefulBackstack()
 
 
     fun navigate(screen: Screen, params: ScreenParams? = null) {
@@ -45,7 +45,7 @@ class Navigation(val stateManager : StateManager) {
     fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
-        val previousScreen = if (stateManager.level1Backstack.isNotEmpty()) currentScreenIdentifier.screen else null
+        val previousScreen = stateManager.getCurrentScreen()
         stateManager.addScreen(screenIdentifier, screenInitSettings.initState(screenIdentifier))
         if (previousScreen != screenIdentifier.screen  || !screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
             stateManager.triggerRecomposition() // FIRST UI RECOMPOSITION
