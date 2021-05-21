@@ -179,9 +179,10 @@ class StateManager(repo: Repository) {
         navigationLevelsMap[1] = screenIdentifier
         if (verticalBackstacks[screenIdentifier.URI] == null) {
             verticalBackstacks[screenIdentifier.URI] = mutableListOf()
-        }
-        verticalBackstacks[screenIdentifier.URI]?.forEach {
-            navigationLevelsMap[it.screen.navigationLevel] = it
+        } else {
+            verticalBackstacks[screenIdentifier.URI]!!.forEach {
+                navigationLevelsMap[it.screen.navigationLevel] = it
+            }
         }
     }
 
