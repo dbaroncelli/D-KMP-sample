@@ -94,7 +94,7 @@ class StateManager(repo: Repository) {
         if (screenIdentifier.screen.navigationLevel == 1) {
             if (currentLevel1ScreenIdentifier != null) {
                 val sameAsNewScreen = screenIdentifier.screen == currentLevel1ScreenIdentifier.screen
-                clearOldLevel1Screen(currentLevel1ScreenIdentifier, sameAsNewScreen)
+                clearLevel1Screen(currentLevel1ScreenIdentifier, sameAsNewScreen)
             }
             setupNewLevel1Screen(screenIdentifier)
         } else {
@@ -131,8 +131,8 @@ class StateManager(repo: Repository) {
             }
         } else {
             navigationLevelsMap.remove(currentScreenIdentifier.screen.navigationLevel)
-            verticalBackstacks[navigationLevelsMap[1]?.URI]!!.remove(currentScreenIdentifier)
-            navigationLevelsMap[currentScreenIdentifier.screen.navigationLevel] = currentScreenIdentifier
+            currentVerticalBackstack.remove(currentScreenIdentifier)
+            navigationLevelsMap[currentScreenIdentifier.screen.navigationLevel] = currentScreenIdentifier // set new currentScreenIdentifier, after the removal
         }
     }
 
@@ -148,7 +148,7 @@ class StateManager(repo: Repository) {
 
     // LEVEL 1 NAVIGATION FUNCTIONS
 
-    fun clearOldLevel1Screen(screenIdentifier: ScreenIdentifier, sameAsNewScreen: Boolean) {
+    fun clearLevel1Screen(screenIdentifier: ScreenIdentifier, sameAsNewScreen: Boolean) {
         // debugLogger.log("clear vertical backstack /"+screenIdentifier.URI)
         verticalBackstacks[screenIdentifier.URI]?.forEach {
             removeScreenStateAndScope(it)
@@ -168,18 +168,20 @@ class StateManager(repo: Repository) {
             if (screenIdentifier.URI == navigationSettings.homeScreen.screenIdentifier.URI) {
                 level1Backstack.clear() // remove all elements
             } else if (level1Backstack.size == 0) {
-                level1Backstack.add(navigationSettings.homeScreen.screenIdentifier)
-                verticalBackstacks[navigationSettings.homeScreen.screenIdentifier.URI] = mutableListOf()
+                addLevel1ScreenToBackstack(navigationSettings.homeScreen.screenIdentifier)
             }
         }
+        addLevel1ScreenToBackstack(screenIdentifier)
+    }
+
+    private fun addLevel1ScreenToBackstack(screenIdentifier: ScreenIdentifier) {
         level1Backstack.add(screenIdentifier)
         navigationLevelsMap[1] = screenIdentifier
-        if (verticalBackstacks[screenIdentifier.URI] != null) {
-            verticalBackstacks[screenIdentifier.URI]!!.forEach {
-                navigationLevelsMap[it.screen.navigationLevel] = it
-            }
-        } else {
+        if (verticalBackstacks[screenIdentifier.URI] == null) {
             verticalBackstacks[screenIdentifier.URI] = mutableListOf()
+        }
+        verticalBackstacks[screenIdentifier.URI]?.forEach {
+            navigationLevelsMap[it.screen.navigationLevel] = it
         }
     }
 
