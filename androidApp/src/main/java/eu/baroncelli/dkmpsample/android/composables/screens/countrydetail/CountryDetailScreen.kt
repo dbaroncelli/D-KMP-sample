@@ -1,11 +1,12 @@
 package eu.baroncelli.dkmpsample.android.composables.screens.countrydetail
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import eu.baroncelli.dkmpsample.android.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 
@@ -14,21 +15,40 @@ fun CountryDetailScreen(
     countryDetailState: CountryDetailState,
 ) {
 
-    Scaffold(
-        topBar = {
-            TopAppBar(title = {
-                Row (verticalAlignment = Alignment.Bottom) {
-                    Text(text = "country: ", fontSize = 20.sp)
-                    Text(text = countryDetailState.params.countryName, fontSize = 18.sp, fontStyle = FontStyle.Italic)
+    if (countryDetailState.isLoading) {
+
+        LoadingScreen()
+
+    } else {
+        val data = countryDetailState.countryInfo
+        Column(modifier = Modifier.padding(10.dp)) {
+
+            DataElement("total population", data.population)
+            DataElement("   with first dose", data.firstDoses, data.firstDosesPerc)
+            DataElement("   fully vaccinated", data.fullyVaccinated, data.fullyVaccinatedPerc)
+
+            Spacer(modifier = Modifier.size(24.dp))
+
+            if (data.vaccinesList!=null) {
+                Text(text = "Vaccines:", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                for (vaccine in data.vaccinesList!!) {
+                    Text(text = "   ‣ $vaccine", style = MaterialTheme.typography.body1)
                 }
-            })
-        },
-        content = { paddingValues ->
-            if (countryDetailState.isLoading) {
-                LoadingScreen()
-            } else {
-                CountryDetailContent(data = countryDetailState.countryInfo, paddingValues = paddingValues)
             }
-        },
-    )
+        }
+
+    }
+}
+
+
+
+@Composable
+fun DataElement(label : String, value : String = "", percentage : String = "") {
+    Row {
+        Text(text = "$label: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+        Text(text = value, style = MaterialTheme.typography.body1)
+        if (percentage!="") {
+            Text(text = " ($percentage)", style = MaterialTheme.typography.body1)
+        }
+    }
 }

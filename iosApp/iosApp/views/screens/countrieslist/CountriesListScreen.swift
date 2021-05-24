@@ -9,7 +9,6 @@ import shared
 
 struct CountriesListScreen: View {
     var countriesListState: CountriesListState
-    var onMenuItemClick: (Level1Navigation) -> Void
     var onListItemClick: (String) -> Void
     var onFavoriteIconClick : (String) -> Void
     
@@ -37,15 +36,6 @@ struct CountriesListScreen: View {
                         }
                     }
                 }
-            }
-        }
-        .navigationBarTitle("D-KMP sample", displayMode: .inline)
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                CountriesListBottomBar(
-                    selectedTab : getScreenIdentifier(.countrieslist, countriesListState.params),
-                    onItemClick: { menuItem in onMenuItemClick(menuItem) }
-                )
             }
         }
     }

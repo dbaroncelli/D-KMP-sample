@@ -23,6 +23,9 @@ struct iosApp: App {
                         appObj.dkmpNav.onEnterBackground()
                     }
                 }
+                .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                    appObj.dkmpNav.onChangeOrientation()
+                }
         }
     }
 }

@@ -29,18 +29,16 @@ fun CountriesListRow(
             Text(text = item.name, style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
         }
         Column(modifier = Modifier.width(70.dp), horizontalAlignment = Alignment.End) {
-            Row { Text(text = item.firstDosesPerc, style = MaterialTheme.typography.body1) }
+            Text(text = item.firstDosesPerc, style = MaterialTheme.typography.body1)
         }
         Column(modifier = Modifier.width(70.dp), horizontalAlignment = Alignment.End) {
-            Row { Text(text = item.fullyVaccinatedPerc, style = MaterialTheme.typography.body1) }
+            Text(text = item.fullyVaccinatedPerc, style = MaterialTheme.typography.body1)
         }
         Column(modifier = Modifier.fillMaxHeight().width(100.dp).clickable(onClick = onFavoriteIconClick), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-            Row {
-                if (favorite) {
-                    Icon(Icons.Default.Star, contentDescription = "favorite", tint = Color.Magenta)
-                } else {
-                    Icon(Icons.Default.StarBorder, contentDescription = "not a favorite", tint = Color.LightGray)
-                }
+            if (favorite) {
+                Icon(Icons.Default.Star, contentDescription = "favorite", tint = Color.Magenta)
+            } else {
+                Icon(Icons.Default.StarBorder, contentDescription = "not a favorite", tint = Color.LightGray)
             }
         }
     }

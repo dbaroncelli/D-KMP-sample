@@ -15,16 +15,16 @@ import androidx.compose.ui.unit.sp
 fun CountriesListHeader() {
     Row(modifier = Modifier.fillMaxWidth().height(50.dp).background(Color.LightGray).padding(start=10.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(modifier = Modifier.weight(1f)) {
-            Row { Text(text = "country", fontSize = 16.sp) }
+            Text(text = "country", fontSize = 16.sp)
         }
         Column(modifier = Modifier.width(70.dp), horizontalAlignment = Alignment.End) {
-            Row { Text(text = "first\ndose", fontSize = 15.sp, textAlign = TextAlign.Right) }
+            Text(text = "first\ndose", fontSize = 15.sp, textAlign = TextAlign.Right)
         }
         Column(modifier = Modifier.width(70.dp), horizontalAlignment = Alignment.End) {
-            Row { Text(text = "fully\nvax'd", fontSize = 15.sp, textAlign = TextAlign.Right) }
+            Text(text = "fully\nvax'd", fontSize = 15.sp, textAlign = TextAlign.Right)
         }
         Column(modifier = Modifier.width(100.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            Row { Text(text = "favorite?", fontSize = 15.sp, textAlign = TextAlign.Center) }
+            Text(text = "favorite?", fontSize = 15.sp, textAlign = TextAlign.Center)
         }
     }
 }

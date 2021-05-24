@@ -1,5 +1,5 @@
 //
-//  CountriesListBottomBar.swift
+//  Level1BottomBar.swift
 //
 //  Created by Daniele Baroncelli on 16/03/21.
 //
@@ -8,40 +8,41 @@ import SwiftUI
 import shared
 
 
-struct CountriesListBottomBar: View {
-    var selectedTab : ScreenIdentifier
-    var onItemClick : (Level1Navigation) -> Void
-    
-    var body: some View {
+extension Navigation {
+
+    @ViewBuilder func level1ButtonBar(selectedTab: ScreenIdentifier) -> some View {
+
         Spacer()
-        ButtonBarButton(
+        BottomBarButton(
             itemLabel: "All Countries",
             iconName: "list.bullet",
             selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onItemClick: { onItemClick(Level1Navigation.allcountries) }
+            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.allcountries) }
         )
         Spacer()
-        ButtonBarButton(
+        BottomBarButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
             selected: selectedTab.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onItemClick: { onItemClick(Level1Navigation.favoritecountries) }
+            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.favoritecountries) }
         )
         Spacer()
+
     }
+        
 }
 
 
 
 
-struct ButtonBarButton: View {
+struct BottomBarButton: View {
     var itemLabel : String
     var iconName : String
     var selected : Bool
-    var onItemClick : () -> Void
+    var onClick : () -> Void
     
     var body: some View {
-        Button(action: { onItemClick() }) {
+        Button(action: { onClick() }) {
             VStack(spacing: 5) {
                 Image(systemName: iconName).resizable().scaledToFit().frame(height:15)
                 Text(itemLabel).font(Font.footnote)

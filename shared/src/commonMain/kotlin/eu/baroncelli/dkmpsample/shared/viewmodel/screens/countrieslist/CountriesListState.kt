@@ -8,16 +8,12 @@ import kotlinx.serialization.Serializable
 // here is the data class defining the state for this screen
 
 data class CountriesListState (
-    override val params: CountriesListParams,
     val isLoading : Boolean = false,
     val countriesListItems : List<CountriesListItem> = emptyList(),
     val favoriteCountries : Map<String,Boolean> = emptyMap(),
 ): ScreenState
 
 /********** property classes **********/
-
-@Serializable // Note: ScreenParams should always be set as Serializable
-data class CountriesListParams(val listType: CountriesListType) : ScreenParams
 
 enum class CountriesListType { ALL, FAVORITES }
 

@@ -12,16 +12,12 @@ import kotlinx.serialization.Serializable
 // here is the data class defining the state for this screen
 
 data class CountryDetailState (
-    override val params: CountryDetailParams,
     val isLoading: Boolean = false,
     val countryInfo : CountryInfo = CountryInfo(),
 ): ScreenState
 
 
 /********** property classes **********/
-
-@Serializable // Note: ScreenParams should always be set as Serializable
-data class CountryDetailParams(val countryName: String) : ScreenParams
 
 data class CountryInfo (
     val _listData : CountryListData = CountryListData(),

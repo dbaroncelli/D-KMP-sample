@@ -1,8 +1,10 @@
 package eu.baroncelli.dkmpsample.android.composables.navigation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import eu.baroncelli.dkmpsample.android.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.CountriesListScreen
+import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.CountriesListTwoPaneDefaultDetail
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
@@ -23,7 +25,6 @@ fun Navigation.ScreenPicker(
         CountriesList ->
             CountriesListScreen(
                 countriesListState = stateProvider.get(screenIdentifier),
-                onMenuItemClick = { navigateByLevel1Menu(level1NavigationItem = it) },
                 onListItemClick = { navigate(CountryDetail, CountryDetailParams(countryName = it)) },
                 onFavoriteIconClick = { events.selectFavorite(countryName = it) },
             )
@@ -32,6 +33,21 @@ fun Navigation.ScreenPicker(
             CountryDetailScreen(
                 countryDetailState = stateProvider.get(screenIdentifier)
             )
-    }
 
+    }
+}
+
+
+
+@Composable
+fun Navigation.TwoPaneDefaultDetail(
+    screenIdentifier: ScreenIdentifier
+) {
+    when (screenIdentifier.screen) {
+
+        CountriesList ->
+            CountriesListTwoPaneDefaultDetail()
+
+        else -> Box{}
+    }
 }

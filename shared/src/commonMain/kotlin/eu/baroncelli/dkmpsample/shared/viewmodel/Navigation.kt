@@ -14,6 +14,8 @@ class Navigation(val stateManager : StateManager) {
         navigateByScreenIdentifier(startScreenIdentifier)
     }
 
+    lateinit var title : String
+
     val dataRepository
         get() = stateManager.dataRepository
 
@@ -22,6 +24,9 @@ class Navigation(val stateManager : StateManager) {
 
     val only1ScreenInBackstack : Boolean
         get() = stateManager.only1ScreenInBackstack
+
+    val navigationLevelsMap : Map<Int,ScreenIdentifier>
+        get() = stateManager.navigationLevelsMap
 
     // used by the Router composable in Compose apps
     // it returns a list of screens whose state has been removed, so they should also be removed from Compose's SaveableStateHolder
@@ -46,6 +51,7 @@ class Navigation(val stateManager : StateManager) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
         val previousScreen = stateManager.getCurrentScreen()
+        title = screenInitSettings.title
         stateManager.addScreen(screenIdentifier, screenInitSettings.initState(screenIdentifier))
         if (previousScreen != screenIdentifier.screen  || !screenInitSettings.skipFirstRecompositionIfSameAsPreviousScreen) {
             stateManager.triggerRecomposition() // FIRST UI RECOMPOSITION
@@ -61,6 +67,8 @@ class Navigation(val stateManager : StateManager) {
     fun exitScreen() {
         debugLogger.log("exitScreen")
         stateManager.removeLastScreen()
+        val screenInitSettings = currentScreenIdentifier.getScreenInitSettings(this)
+        title = screenInitSettings.title
         if (stateManager.isInTheStatesMap(currentScreenIdentifier)) {
             // if state is already stored, just trigger a recomposition
             stateManager.triggerRecomposition()
@@ -70,6 +78,7 @@ class Navigation(val stateManager : StateManager) {
             navigateByScreenIdentifier(currentScreenIdentifier)
         }
     }
+
 
     fun onReEnterForeground() {
         // not called at app startup, but only when reentering the app after it was in background
@@ -88,6 +97,11 @@ class Navigation(val stateManager : StateManager) {
     fun onEnterBackground() {
         debugLogger.log("onEnterBackground: screen scopes are cancelled")
         stateManager.cancelScreenScopes()
+    }
+
+    fun onChangeOrientation() {
+        debugLogger.log("onChangeOrientation: recomposition is triggered")
+        stateManager.triggerRecomposition()
     }
 
 

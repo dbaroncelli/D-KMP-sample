@@ -14,6 +14,7 @@ when a screen is first navigated to, using "dkmpNav.navigate(screen,params)", th
 
 
 class ScreenInitSettings (
+    val title : String,
     val initState : (ScreenIdentifier) -> ScreenState,
     val callOnInit : suspend (StateManager) -> Unit,
     val skipFirstRecompositionIfSameAsPreviousScreen: Boolean = false,

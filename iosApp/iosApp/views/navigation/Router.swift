@@ -12,27 +12,32 @@ import shared
 extension Navigation {
 
     @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
+
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
+
+        let twopaneWidthThreshold : CGFloat = 1000
         
         ZStack {
-            ForEach(statefulBackstack, id: \.self.index) { entry in
-                NavigationView {
-                    self.screenPicker(entry.screenIdentifier, stateProvider, events)
-                        .navigationBarItems(leading: self.backButton() )
+            if width < height || width < twopaneWidthThreshold {
+                ForEach(self.statefulBackstack, id: \.self.index) { entry in
+                    self.onePane(entry.screenIdentifier, stateProvider, events)
                 }
-                .navigationViewStyle(StackNavigationViewStyle())
-                .opacity(entry.screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
-                .gesture(
-                    DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
-                        if value.translation.width > 0 { // RIGHT SWIPE
-                            if (!self.only1ScreenInBackstack) { self.exitScreen() }
-                        }
-                    })
-                )
-
+            } else {
+                self.twoPane(stateProvider, events, width)
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .gesture(
+            DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
+                if value.translation.width > 0 { // RIGHT SWIPE
+                    if (!self.only1ScreenInBackstack) { self.exitScreen() }
+                }
+            })
+        )
         .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
         .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
+
     }
     
     

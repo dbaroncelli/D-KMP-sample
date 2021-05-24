@@ -8,9 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
 
 
-interface ScreenState {
-    val params : ScreenParams?
-}
+interface ScreenState
 interface ScreenParams
 
 class UIBackstackEntry (val index : Int, val screenIdentifier : ScreenIdentifier)
@@ -68,16 +66,26 @@ class StateManager(repo: Repository) {
             update: (T) -> T,
     ) {
         //debugLogger.log("updateScreen: "+currentScreenIdentifier.URI)
-        val currentState = screenStatesMap[currentScreenIdentifier.URI] as? T
-        if (currentState != null) { // only perform screen state update if screen is currently visible
-            screenStatesMap[currentScreenIdentifier.URI] = update(currentState)
+
+        lateinit var screenIdentifier : ScreenIdentifier
+        var screenState : T? = null
+        for(i in navigationLevelsMap.keys.sortedDescending()) {
+            screenState = screenStatesMap[navigationLevelsMap[i]?.URI] as? T
+            if (screenState != null) {
+                screenIdentifier = navigationLevelsMap[i]!!
+                break
+            }
+        }
+        if (screenState != null) { // only perform screen state update if screen is currently visible
+            screenStatesMap[screenIdentifier.URI] = update(screenState)
             // only trigger recomposition if screen state has changed
-            if (!currentState.equals(screenStatesMap[currentScreenIdentifier.URI])) {
+            if (!screenState.equals(screenStatesMap[screenIdentifier.URI])) {
                 triggerRecomposition()
-                debugLogger.log("state changed @ /${currentScreenIdentifier.URI}: recomposition is triggered")
+                debugLogger.log("state changed @ /${screenIdentifier.URI}: recomposition is triggered")
             }
         }
     }
+
 
     fun triggerRecomposition() {
         mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
@@ -98,8 +106,12 @@ class StateManager(repo: Repository) {
             }
             setupNewLevel1Screen(screenIdentifier)
         } else {
+            if (currentScreenIdentifier.URI == screenIdentifier.URI) {
+                return
+            }
             if (currentScreenIdentifier.screen == screenIdentifier.screen && !screenIdentifier.screen.stackableInstances) {
                 removeScreenStateAndScope(currentScreenIdentifier)
+                navigationLevelsMap.remove(currentScreenIdentifier.screen.navigationLevel)
                 currentVerticalBackstack.remove(currentScreenIdentifier)
             }
             if (currentVerticalBackstack.lastOrNull()?.URI != screenIdentifier.URI) {
@@ -176,6 +188,7 @@ class StateManager(repo: Repository) {
 
     private fun addLevel1ScreenToBackstack(screenIdentifier: ScreenIdentifier) {
         level1Backstack.add(screenIdentifier)
+        navigationLevelsMap.clear()
         navigationLevelsMap[1] = screenIdentifier
         if (verticalBackstacks[screenIdentifier.URI] == null) {
             verticalBackstacks[screenIdentifier.URI] = mutableListOf()
