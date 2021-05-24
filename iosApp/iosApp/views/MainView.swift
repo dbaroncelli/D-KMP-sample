@@ -14,6 +14,6 @@ struct MainView: View {
     @ObservedObject var appObj: AppObservableObject
     var body: some View {
         let dkmpNav = appObj.dkmpNav
-        dkmpNav.router(appObj.model.stateProvider, appObj.model.events)
+        dkmpNav.router()
     }
 }

@@ -12,10 +12,10 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func onePane(_ screenIdentifier: ScreenIdentifier, _ stateProvider: StateProvider,_ events: Events) -> some View {
+    @ViewBuilder func onePane(_ screenIdentifier: ScreenIdentifier) -> some View {
         
             NavigationView {
-                self.screenPicker(screenIdentifier, stateProvider, events)
+                self.screenPicker(screenIdentifier)
                     .opacity(screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
                     .navigationBarItems(leading: self.backButton() )
                     .navigationBarTitle(title, displayMode: .inline)

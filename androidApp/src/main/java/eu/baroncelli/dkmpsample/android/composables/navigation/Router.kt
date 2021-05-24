@@ -11,19 +11,16 @@ import eu.baroncelli.dkmpsample.android.composables.navigation.templates.TwoPane
 import eu.baroncelli.dkmpsample.shared.viewmodel.*
 
 @Composable
-fun Navigation.Router(
-    stateProvider: StateProvider,
-    events: Events,
-) {
+fun Navigation.Router() {
 
     val screenUIsStateHolder = rememberSaveableStateHolder()
 
     val twopaneWidthThreshold = 1000.dp
     BoxWithConstraints() {
         if (maxWidth < maxHeight || maxWidth<twopaneWidthThreshold) {
-            OnePane(screenUIsStateHolder, stateProvider, events)
+            OnePane(screenUIsStateHolder)
         } else {
-            TwoPane(screenUIsStateHolder, stateProvider, events)
+            TwoPane(screenUIsStateHolder)
         }
     }
 

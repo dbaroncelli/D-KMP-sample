@@ -20,7 +20,5 @@ class DKMPViewModel (repo: Repository) {
 
     private val stateManager by lazy { StateManager(repo) }
     val navigation by lazy { Navigation(stateManager) }
-    val stateProvider by lazy { StateProvider(stateManager) }
-    val events by lazy { Events(stateManager) }
 
 }

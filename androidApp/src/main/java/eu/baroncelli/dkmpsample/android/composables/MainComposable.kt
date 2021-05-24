@@ -12,8 +12,6 @@ fun MainComposable(model: DKMPViewModel) {
     val appState by model.stateFlow.collectAsState()
     Log.d("D-KMP-SAMPLE","recomposition Index: "+appState.recompositionIndex.toString())
     val dkmpNav = appState.getNavigation(model)
-
-    dkmpNav.Router(model.stateProvider, model.events)
-
+    dkmpNav.Router()
 }
 

@@ -17,11 +17,8 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 @Composable
 fun Navigation.TwoPane(
-    saveableStateHolder: SaveableStateHolder,
-    stateProvider: StateProvider,
-    events: Events,
+    saveableStateHolder: SaveableStateHolder
 ) {
-
     Scaffold(
         topBar = { TopBar(title) },
         content = {
@@ -34,7 +31,7 @@ fun Navigation.TwoPane(
                 Column(Modifier
                     .weight(0.4f)) {
                         saveableStateHolder.SaveableStateProvider(navigationLevelsMap[1]!!.URI) {
-                            ScreenPicker(navigationLevelsMap[1]!!, stateProvider, events)
+                            ScreenPicker(navigationLevelsMap[1]!!)
                         }
                 }
                 Column(Modifier
@@ -44,13 +41,11 @@ fun Navigation.TwoPane(
                             TwoPaneDefaultDetail(navigationLevelsMap[1]!!)
                         } else {
                             saveableStateHolder.SaveableStateProvider(navigationLevelsMap[2]!!.URI) {
-                                ScreenPicker(navigationLevelsMap[2]!!, stateProvider, events)
+                                ScreenPicker(navigationLevelsMap[2]!!)
                             }
                         }
                 }
             }
         }
-
     )
-
 }

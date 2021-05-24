@@ -16,10 +16,9 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDe
 
 @Composable
 fun Navigation.ScreenPicker(
-    screenIdentifier: ScreenIdentifier,
-    stateProvider: StateProvider,
-    events: Events,
+    screenIdentifier: ScreenIdentifier
 ) {
+
     when (screenIdentifier.screen) {
 
         CountriesList ->
@@ -35,6 +34,7 @@ fun Navigation.ScreenPicker(
             )
 
     }
+
 }
 
 
@@ -43,6 +43,7 @@ fun Navigation.ScreenPicker(
 fun Navigation.TwoPaneDefaultDetail(
     screenIdentifier: ScreenIdentifier
 ) {
+
     when (screenIdentifier.screen) {
 
         CountriesList ->
@@ -50,4 +51,5 @@ fun Navigation.TwoPaneDefaultDetail(
 
         else -> Box{}
     }
+
 }

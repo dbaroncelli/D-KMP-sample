@@ -20,7 +20,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.Countries
 
 @Composable
 fun Navigation.Level1BottomBar(
-    selectedTab: ScreenIdentifier,
+    selectedTab: ScreenIdentifier
 ) {
     BottomAppBar(content = {
         BottomNavigationItem(

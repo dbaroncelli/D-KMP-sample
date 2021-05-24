@@ -12,7 +12,7 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func twoPane(_ stateProvider: StateProvider, _ events: Events, _ width: CGFloat) -> some View {
+    @ViewBuilder func twoPane(_ width: CGFloat) -> some View {
         
         NavigationView {
             HStack {
@@ -25,7 +25,7 @@ extension Navigation {
                 .ignoresSafeArea()
                 
                 VStack {
-                    self.screenPicker(navigationLevelsMap[1]!, stateProvider, events)
+                    self.screenPicker(navigationLevelsMap[1]!)
                 }
                 .frame(width: 330)
                 
@@ -33,7 +33,7 @@ extension Navigation {
                     if navigationLevelsMap[2] == nil {
                         CountriesListTwoPaneDefaultDetail()
                     } else {
-                        self.screenPicker(navigationLevelsMap[2]!, stateProvider, events)
+                        self.screenPicker(navigationLevelsMap[2]!)
                             .padding(20)
                     }
                 }

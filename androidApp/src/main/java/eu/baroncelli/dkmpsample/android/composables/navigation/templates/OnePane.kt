@@ -11,16 +11,13 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 @Composable
 fun Navigation.OnePane(
-    saveableStateHolder: SaveableStateHolder,
-    stateProvider: StateProvider,
-    events: Events,
+    saveableStateHolder: SaveableStateHolder
 ) {
-
     Scaffold(
         topBar = { TopBar(title) },
         content = {
             saveableStateHolder.SaveableStateProvider(currentScreenIdentifier.URI) {
-                ScreenPicker(currentScreenIdentifier, stateProvider, events)
+                ScreenPicker(currentScreenIdentifier)
             }
         },
         bottomBar = { if (currentScreenIdentifier.screen.navigationLevel == 1) Level1BottomBar(currentScreenIdentifier) }

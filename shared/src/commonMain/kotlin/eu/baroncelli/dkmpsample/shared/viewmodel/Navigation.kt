@@ -14,6 +14,9 @@ class Navigation(val stateManager : StateManager) {
         navigateByScreenIdentifier(startScreenIdentifier)
     }
 
+    val stateProvider by lazy { StateProvider(stateManager) }
+    val events by lazy { Events(stateManager) }
+
     lateinit var title : String
 
     val dataRepository

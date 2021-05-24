@@ -11,7 +11,7 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func router(_ stateProvider: StateProvider,_ events: Events) -> some View {
+    @ViewBuilder func router() -> some View {
 
         let width = UIScreen.main.bounds.width
         let height = UIScreen.main.bounds.height
@@ -21,10 +21,10 @@ extension Navigation {
         ZStack {
             if width < height || width < twopaneWidthThreshold {
                 ForEach(self.statefulBackstack, id: \.self.index) { entry in
-                    self.onePane(entry.screenIdentifier, stateProvider, events)
+                    self.onePane(entry.screenIdentifier)
                 }
             } else {
-                self.twoPane(stateProvider, events, width)
+                self.twoPane(width)
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
