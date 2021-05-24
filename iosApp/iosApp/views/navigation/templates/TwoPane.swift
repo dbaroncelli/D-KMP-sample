@@ -31,7 +31,7 @@ extension Navigation {
                 
                 VStack {
                     if navigationLevelsMap[2] == nil {
-                        CountriesListTwoPaneDefaultDetail()
+                        twoPaneDefaultDetail(navigationLevelsMap[1]!)
                     } else {
                         self.screenPicker(navigationLevelsMap[2]!)
                             .padding(20)

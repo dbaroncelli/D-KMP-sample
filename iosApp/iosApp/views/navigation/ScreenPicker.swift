@@ -36,7 +36,7 @@ extension Navigation {
     }
     
     
-    @ViewBuilder func twoPaneDefaultDetail(_ sId: ScreenIdentifier,_ stateProvider: StateProvider,_ events: Events) -> some View {
+    @ViewBuilder func twoPaneDefaultDetail(_ sId: ScreenIdentifier) -> some View {
         
         switch sId.screen {
 
