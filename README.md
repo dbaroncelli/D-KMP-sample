@@ -57,8 +57,10 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 ### platform-specific code:
 
 #### androidApp
-
-<img width="227" src="https://user-images.githubusercontent.com/5320104/118641954-100de900-b7db-11eb-9ac3-218b54613549.png"></img>
+<img width="292" src="https://user-images.githubusercontent.com/5320104/119408347-d743a780-bce5-11eb-8a6b-59acdc7c80e4.png"></img>
+  - :hammer_and_wrench: the **Level1BottomBar.kt**  and **Level1NavigationRail.kt** files in the **composables/navigation/bars** folder should be modified to custom the Navigation bars items
+  - :white_check_mark: the **TopBar.kt** file in the **composables/navigation/bars** folder doesn't need to be modified
+  - :white_check_mark: the **OnePane.kt**  and **TwoPane.kt** files in the **composables/navigation/templates** folder don't need to be modified
   - :white_check_mark: the **Router.kt** file in the **composables/navigation** folder doesn't need to be modified
   - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **composables/navigation** folder, you should define the screen composables in your app
   - :hammer_and_wrench: in the **composables/screens** folder: create a folder for each screen of the app, containing all composables for that screen
@@ -67,9 +69,11 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :white_check_mark: the **MainActivity.kt** file doesn't need to be modified
 
 #### iosApp
-
-<img width="260" src="https://user-images.githubusercontent.com/5320104/118642505-bce86600-b7db-11eb-9af0-75d310ba24b4.png"></img>
-  - :white_check_mark: the **Router.swift** file in the **views/navigation** folder doesn't need to be modified
+<img width="323" src="https://user-images.githubusercontent.com/5320104/119408362-dd398880-bce5-11eb-92bf-be2974f3f448.png"></img>
+  - :hammer_and_wrench: the **Level1BottomBar.swift**  and **Level1NavigationRail.swift** files in the **composables/navigation/bars** folder should be modified to custom the Navigation bars items
+  - :white_check_mark: the **TopBar.swift** file in the **composables/navigation/bars** folder doesn't need to be modified
+  - :white_check_mark: the **OnePane.swift**  and **TwoPane.swift** files in the **composables/navigation/templates** folder don't need to be modified
+  - :white_check_mark: the **Router.swift** file in the **composables/navigation** folder doesn't need to be modified
   - :hammer_and_wrench: in the **ScreenPicker.swift** file in the **views/navigation** folder, you should define the screen composables in your app
   - :hammer_and_wrench: in the **views/screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
   - :white_check_mark: the **MainView.swift** file doesn't need to be modified
