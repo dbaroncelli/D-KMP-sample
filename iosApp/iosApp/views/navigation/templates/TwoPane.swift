@@ -41,13 +41,6 @@ extension Navigation {
             }
             .frame(maxWidth: .infinity)
             .navigationBarTitle(title, displayMode: .inline)
-            .gesture(
-                DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
-                    if value.translation.width > 0 { // RIGHT SWIPE
-                        if (!self.only1ScreenInBackstack) { self.exitScreen() }
-                    }
-                })
-            )
         }
         
     }
