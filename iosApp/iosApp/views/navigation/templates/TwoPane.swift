@@ -27,7 +27,6 @@ extension Navigation {
                 VStack {
                     self.screenPicker(navigationLevelsMap[1]!, stateProvider, events)
                 }
-                .opacity(navigationLevelsMap[1]?.URI == navigationLevelsMap[1]?.URI ? 1 : 0)
                 .frame(width: 330)
                 
                 VStack {
@@ -36,7 +35,6 @@ extension Navigation {
                     } else {
                         self.screenPicker(navigationLevelsMap[2]!, stateProvider, events)
                             .padding(20)
-                            .opacity(navigationLevelsMap[2]?.URI == navigationLevelsMap[2]!.URI ? 1 : 0)
                     }
                 }
                 .frame(maxWidth: .infinity)
