@@ -18,6 +18,10 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 
+
+// this is the left vertical navigation bar for 2-Pane visualization
+// (used by bigger devices in landscape mode)
+
 @Composable
 fun Navigation.Level1NavigationRail(
     selectedTab: ScreenIdentifier,

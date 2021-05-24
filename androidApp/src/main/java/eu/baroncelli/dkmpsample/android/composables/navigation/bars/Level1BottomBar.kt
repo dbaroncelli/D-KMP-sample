@@ -15,6 +15,9 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
 
 
+// this is the bottom horizontal navigation bar for 1-Pane visualization
+// (used by small devices and in Portrait mode)
+
 @Composable
 fun Navigation.Level1BottomBar(
     selectedTab: ScreenIdentifier,

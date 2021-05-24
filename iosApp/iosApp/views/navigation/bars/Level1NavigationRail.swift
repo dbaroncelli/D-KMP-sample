@@ -12,6 +12,9 @@ import shared
 
 extension Navigation {
 
+    // this is the left vertical navigation bar for 2-Pane visualization
+    // (used by bigger devices in landscape mode)
+    
     @ViewBuilder func level1NavigationRail(selectedTab: ScreenIdentifier) -> some View {
 
         Spacer()

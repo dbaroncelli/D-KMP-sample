@@ -10,6 +10,9 @@ import shared
 
 extension Navigation {
 
+    // this is the bottom horizontal navigation bar for 1-Pane visualization
+    // (used by small devices and in Portrait mode)
+    
     @ViewBuilder func level1ButtonBar(selectedTab: ScreenIdentifier) -> some View {
 
         Spacer()
