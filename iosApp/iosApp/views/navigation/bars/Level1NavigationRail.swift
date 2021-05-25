@@ -24,7 +24,6 @@ extension Navigation {
             selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
             onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.allcountries) }
         )
-        Spacer()
         NavigationRailButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
@@ -52,6 +51,8 @@ struct NavigationRailButton: View {
                 Image(systemName: iconName).resizable().scaledToFit().frame(height:15)
                 Text(itemLabel).font(Font.footnote)
             }
+            .padding(.top, 25)
+            .padding(.bottom, 25)
             .foregroundColor(selected ? .white : linkColor)
         }
     }

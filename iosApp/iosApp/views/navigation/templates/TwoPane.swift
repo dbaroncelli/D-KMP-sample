@@ -12,7 +12,7 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func twoPane(_ width: CGFloat) -> some View {
+    @ViewBuilder func twoPane() -> some View {
         
         NavigationView {
             HStack {

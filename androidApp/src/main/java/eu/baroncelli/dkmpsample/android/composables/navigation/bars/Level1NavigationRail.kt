@@ -27,10 +27,11 @@ fun Navigation.Level1NavigationRail(
     selectedTab: ScreenIdentifier
 ) {
     Column(
-        Modifier
+        modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(MaterialTheme.colors.primary)
+            .background(MaterialTheme.colors.primary),
+        verticalArrangement = Arrangement.Center
     ) {
         NavigationRailItem(
             icon = { Icon(Icons.Default.Menu, "ALL") },
@@ -54,13 +55,15 @@ fun ColumnScope.NavigationRailItem(icon : @Composable () -> Unit , label :  @Com
     CompositionLocalProvider(
         LocalContentColor provides if (selected) MaterialTheme.colors.background else  MaterialTheme.colors.primaryVariant
     ) {
-        Row(modifier = Modifier.weight(1f)) {
-            Column(Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .clickable { onClick() },
+        Row(
+            modifier = Modifier
+                .clickable { onClick() }
+                .padding(top = 25.dp, bottom = 25.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
             ) {
                 icon()
                 label()

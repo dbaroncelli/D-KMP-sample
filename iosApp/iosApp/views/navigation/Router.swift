@@ -9,22 +9,31 @@
 import SwiftUI
 import shared
 
+
+let twopaneWidthThreshold : CGFloat = 1000
+
+func isTwoPane() -> Bool {
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+    if width < height || width < twopaneWidthThreshold {
+        return false
+    }
+    return true
+}
+
+
 extension Navigation {
 
     @ViewBuilder func router() -> some View {
 
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-
-        let twopaneWidthThreshold : CGFloat = 1000
         
         ZStack {
-            if width < height || width < twopaneWidthThreshold {
+            if !isTwoPane() {
                 ForEach(self.statefulBackstack, id: \.self.index) { entry in
                     self.onePane(entry.screenIdentifier)
                 }
             } else {
-                self.twoPane(width)
+                self.twoPane()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
