@@ -22,8 +22,10 @@ func isTwoPane() -> Bool {
 }
 
 
+
 extension Navigation {
 
+    
     @ViewBuilder func router() -> some View {
 
         ZStack {
@@ -61,13 +63,11 @@ extension Navigation {
     }
 
     
-}
-
-
-extension Navigation {
     func navigate(_ screen: Screen, _ params: ScreenParams?) { // just to remove named parameters
         navigate(screen: screen, params: params)
     }
+    
+    
 }
 
 
