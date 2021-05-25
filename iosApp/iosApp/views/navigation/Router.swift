@@ -26,7 +26,6 @@ extension Navigation {
 
     @ViewBuilder func router() -> some View {
 
-        
         ZStack {
             if !isTwoPane() {
                 ForEach(self.statefulBackstack, id: \.self.index) { entry in
@@ -69,10 +68,6 @@ extension Navigation {
     func navigate(_ screen: Screen, _ params: ScreenParams?) { // just to remove named parameters
         navigate(screen: screen, params: params)
     }
-}
-
-func getScreenIdentifier(_ screen : Screen, _ params: ScreenParams? = nil) -> ScreenIdentifier {
-    return ScreenIdentifier.Factory().get(screen: screen, params: params)
 }
 
 
