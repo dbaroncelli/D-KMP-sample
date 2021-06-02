@@ -73,7 +73,7 @@ class ScreenIdentifier private constructor(
 
     fun level1VerticalBackstackEnabled() : Boolean {
         Level1Navigation.values().forEach {
-            if (it.screenIdentifier == this && it.rememberVerticalStack) {
+            if (it.screenIdentifier.URI == this.URI && it.rememberVerticalStack) {
                 return true
             }
         }

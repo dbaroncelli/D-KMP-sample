@@ -31,7 +31,7 @@ fun Navigation.Router() {
 
     if (!only1ScreenInBackstack) {
         BackHandler { // catching the back button to update the DKMPViewModel
-            exitScreen()
+            exitScreen(true)
         }
     }
 

@@ -17,13 +17,11 @@ class ScreenInitSettings (
     val title : String,
     val initState : (ScreenIdentifier) -> ScreenState,
     val callOnInit : suspend (StateManager) -> Unit,
-    val skipFirstRecompositionIfSameAsPreviousScreen: Boolean = false,
-    /* use cases for skipFirstRecompositionIfSameAsPreviousScreen = true:
-        When calling "dkmpNav.navigate(screen,params)" to navigate to a screen of the same kind (i.e. same "screen" but different "params")
-        AND the Repository functions called inside the "callOnInit" function don't depend on "params",
-        it typically means that the Repository functions will not make a network call, but will retrieve the data from the local cache.
-        In this specific case, it makes sense to skip the first recomposition, as it avoids showing the "loading..." message for a fraction of a second.
-        In order to achieve this behaviour, just set the flag "skipFirstRecompositionIfSameAsPreviousScreen" to true for such screen. */
+    val reinitOnEachNavigation: Boolean = false,
+    /* use cases for reinitOnEachNavigation = true:
+        By default, if the screen is already in the backstack, it doesn't get reinitialized if it becomes active again.
+        However if you want to refresh it each time it becomes active, you might want to reinitialize it again.
+        In order to achieve this behaviour, just set the flag "reinitOnEachNavigation" to true for such screen. */
     val callOnInitAlsoAfterBackground : Boolean = false,
     /* use cases for callOnInitAlsoAfterBackground = true:
         By default, the "callOnInit" function is not called again when the app comes back from the background.

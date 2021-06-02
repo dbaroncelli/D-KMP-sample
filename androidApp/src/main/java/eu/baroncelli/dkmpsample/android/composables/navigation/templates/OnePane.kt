@@ -5,16 +5,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.SaveableStateHolder
 import eu.baroncelli.dkmpsample.android.composables.navigation.ScreenPicker
 import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.Level1BottomBar
-import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 @Composable
 fun Navigation.OnePane(
     saveableStateHolder: SaveableStateHolder
 ) {
     Scaffold(
-        topBar = { TopBar(title) },
+        topBar = { TopBar(getTitle(currentScreenIdentifier)) },
         content = {
             saveableStateHolder.SaveableStateProvider(currentScreenIdentifier.URI) {
                 ScreenPicker(currentScreenIdentifier)

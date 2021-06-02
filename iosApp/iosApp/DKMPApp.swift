@@ -14,7 +14,8 @@ struct iosApp: App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            MainView(appObj: appObj)
+            MainView()
+                .environmentObject(appObj)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         appObj.dkmpNav.onReEnterForeground()

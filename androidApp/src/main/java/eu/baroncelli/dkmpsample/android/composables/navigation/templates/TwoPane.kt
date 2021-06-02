@@ -1,26 +1,22 @@
 package eu.baroncelli.dkmpsample.android.composables.navigation.templates
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.SaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import eu.baroncelli.dkmpsample.android.composables.navigation.ScreenPicker
 import eu.baroncelli.dkmpsample.android.composables.navigation.TwoPaneDefaultDetail
-import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.Level1BottomBar
-import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 
 @Composable
 fun Navigation.TwoPane(
     saveableStateHolder: SaveableStateHolder
 ) {
+    val navigationLevelsMap = getNavigationLevelsMap(currentLevel1ScreenIdentifier)!!
     Scaffold(
-        topBar = { TopBar(title) },
+        topBar = { TopBar(getTitle(currentScreenIdentifier)) },
         content = {
             Row {
                 Column(Modifier

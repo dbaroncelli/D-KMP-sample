@@ -12,25 +12,19 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func onePane(_ screenIdentifier: ScreenIdentifier) -> some View {
-        
-            NavigationView {
-                self.screenPicker(screenIdentifier)
-                    .opacity(screenIdentifier.URI == self.currentScreenIdentifier.URI ? 1 : 0)
-                    .navigationBarItems(leading: self.backButton() )
-                    .navigationBarTitle(title, displayMode: .inline)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .bottomBar) {
-                            if (currentScreenIdentifier.screen.navigationLevel == 1) {
-                                self.level1ButtonBar(selectedTab: currentScreenIdentifier)
-                            } else {
-                                EmptyView()
-                            }
-                        }
-                    }
+    @ViewBuilder func onePane(_ level1ScreenIdentifier: ScreenIdentifier) -> some View {
+        NavigationView {
+            self.screenPicker(level1ScreenIdentifier)
+                .navigationBarTitle(getTitle(screenIdentifier: level1ScreenIdentifier), displayMode: .inline)
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                if level1ScreenIdentifier.URI == currentLevel1ScreenIdentifier.URI {
+                    self.level1ButtonBar(selectedTab: self.currentLevel1ScreenIdentifier)
+                }
             }
-        
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
-    
     
 }

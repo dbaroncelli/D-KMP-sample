@@ -18,6 +18,6 @@ object navigationSettings {
 // LEVEL 1 NAVIGATION OF THE APP
 
 enum class Level1Navigation(val screenIdentifier: ScreenIdentifier, val rememberVerticalStack: Boolean = false) {
-    AllCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = ALL))),
-    FavoriteCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = FAVORITES))),
+    AllCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = ALL)), true),
+    FavoriteCountries( ScreenIdentifier.get(CountriesList, CountriesListParams(listType = FAVORITES)), true),
 }

@@ -14,13 +14,13 @@ struct CountriesListHeader: View {
         HStack {
             Text("country").font(Font.caption).frame(alignment: .leading)
             Spacer()
-            Text("first\ndose").font(Font.caption).multilineTextAlignment(.trailing)
+            Text("first\ndose").font(Font.caption).multilineTextAlignment(.center)
                 .frame(width: 60)
-            Text("fully\nvax'd").font(Font.caption).multilineTextAlignment(.trailing)
+            Text("fully\nvax'd").font(Font.caption).multilineTextAlignment(.center)
                 .frame(width: 60)
             Text("favorite?").font(Font.caption).frame(alignment: .center)
-                .frame(width: 70)
-                .padding(.trailing, 20)
+                .frame(width: 80)
+                .padding(.trailing, 25)
         }.frame(height: 50)
     }
 }

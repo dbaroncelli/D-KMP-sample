@@ -28,43 +28,27 @@ extension Navigation {
     
     @ViewBuilder func router() -> some View {
 
+
         ZStack {
-            if !isTwoPane() {
-                ForEach(self.statefulBackstack, id: \.self.index) { entry in
-                    self.onePane(entry.screenIdentifier)
+            ForEach(self.level1Backstack, id: \.self.screenIdentifier.URI) { level1Entry in
+                if !isTwoPane() {
+                    self.onePane(level1Entry.screenIdentifier)
+                        .opacity(level1Entry.screenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
+                } else {
+                    self.twoPane(level1Entry.screenIdentifier)
+                        .opacity(level1Entry.screenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
                 }
-            } else {
-                self.twoPane()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
-        .gesture(
-            DragGesture(minimumDistance: 20, coordinateSpace: .local).onEnded({ value in
-                if value.translation.width > 0 { // RIGHT SWIPE
-                    if (!self.only1ScreenInBackstack) { self.exitScreen() }
-                }
-            })
-        )
         .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
         .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
 
     }
     
-    
-    @ViewBuilder func backButton()  -> some View {
-        if (!only1ScreenInBackstack) {
-            Button(action: { withAnimation { self.exitScreen() } } ) {
-                HStack {
-                    Image(systemName: "chevron.left")
-                    Text("Back")
-                }.foregroundColor(linkColor)
-            }
-        }
-    }
 
     
-    func navigate(_ screen: Screen, _ params: ScreenParams?) { // just to remove named parameters
-        navigate(screen: screen, params: params)
+    func navigate(_ screen: Screen, _ params: ScreenParams?) -> (Navigation, ScreenIdentifier) {
+        return (self, ScreenIdentifier.Factory().get(screen: screen, params: params))
     }
     
     
@@ -72,18 +56,71 @@ extension Navigation {
 
 
 
-struct NavigationLink<Content: View>: View {
-    var linkFunction: () -> Void
+struct NavLink<Content: View>: View {
+    var linkFunction: () -> (Navigation, ScreenIdentifier)
+    var itemKey: String
     let content: () -> Content
 
+    @EnvironmentObject var appObj: AppObservableObject
+    @State private var selectedItemKey : String?
     var body: some View {
-        Button(action: { linkFunction() }) {
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    content()
-                    Image(systemName: "chevron.right").resizable().frame(width: 6, height: 12).foregroundColor(lightGreyColor)
+        if isTwoPane() {
+            Button(action: {
+                let resultsObjs = linkFunction()
+                let navigation = resultsObjs.0
+                let screenIdentifier = resultsObjs.1
+                navigation.navigateByScreenIdentifier(screenIdentifier: screenIdentifier, triggerRecomposition: true)
+                self.selectedItemKey = itemKey
+            }) {
+                VStack(spacing: 0) {
+                    HStack(spacing: 0) {
+                        content()
+                        Image(systemName: "chevron.right").resizable().frame(width: 6, height: 12).foregroundColor(lightGreyColor)
+                    }
                 }
             }
+        } else {
+            let isActive = Binding<Bool> (
+                get: {
+                    self.selectedItemKey == itemKey
+                },
+                set: { isActive in
+                    if isActive {
+                        let resultsObjs = linkFunction()
+                        let navigation = resultsObjs.0
+                        let screenIdentifier = resultsObjs.1
+                        navigation.navigateByScreenIdentifier(screenIdentifier: screenIdentifier, triggerRecomposition: false)
+                        self.selectedItemKey = itemKey
+                    }
+                }
+            )
+            NavigationLink(
+                destination: LazyDestinationView(
+                    linkFunction().0.screenPicker(linkFunction().1)
+                        .navigationBarTitle(linkFunction().0.getTitle(screenIdentifier: linkFunction().1), displayMode: .inline)
+                        .onDisappear {
+                            self.selectedItemKey = nil
+                            isActive.wrappedValue = false
+                            let navigation = linkFunction().0
+                            navigation.exitScreen(triggerRecomposition: false)
+                        }
+                ),
+                isActive: isActive
+            ) {
+                content()
+            }
         }
+    }
+}
+
+
+
+struct LazyDestinationView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
     }
 }

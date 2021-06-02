@@ -35,5 +35,5 @@ fun Navigation.initCountriesList(params: CountriesListParams) = ScreenInitSettin
             )
         }
     },
-    skipFirstRecompositionIfSameAsPreviousScreen = true, // this avoids showing the "loading..." message when changing tab selection
+    reinitOnEachNavigation = true, // in this way favourites can refrest
 )

@@ -12,8 +12,9 @@ import shared
 
 extension Navigation {
 
-    @ViewBuilder func twoPane() -> some View {
+    @ViewBuilder func twoPane(_ level1ScreenIdentifier: ScreenIdentifier) -> some View {
         
+        let navigationLevelsMap = getNavigationLevelsMap(level1ScreenIdentifier: level1ScreenIdentifier)!
         NavigationView {
             HStack {
                 VStack {
@@ -27,7 +28,7 @@ extension Navigation {
                 VStack {
                     self.screenPicker(navigationLevelsMap[1]!)
                 }
-                .frame(width: 330)
+                .frame(width: 400)
                 
                 VStack {
                     if navigationLevelsMap[2] == nil {
@@ -40,8 +41,10 @@ extension Navigation {
                 .frame(maxWidth: .infinity)
             }
             .frame(maxWidth: .infinity)
-            .navigationBarTitle(title, displayMode: .inline)
+            .navigationBarTitle(getTitle(screenIdentifier: navigationLevelsMap[2] ?? navigationLevelsMap[1]!), displayMode: .inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         
     }
+    
 }
