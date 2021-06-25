@@ -80,5 +80,8 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
   - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
 
-#### webApp (coming soon!)
-  - we'll be adding also the web version, using [Jetpack Compose for Web](https://blog.jetbrains.com/kotlin/2021/05/technology-preview-jetpack-compose-for-web/)
+#### desktopApp
+  - The files structure is identical to the **androidApp**, so refer to that
+
+#### webApp (not yet implemented)
+  - Compose for Web is still at a very early stage. We'll give the technology a little bit of time to mature before we publish an app. The web version of SqlDelight (the most popular local database for Kotlin MultiPlatform) is also at a very early stage, as the database cannot even be saved persistently at the moment. It might take until the end of 2021 before it makes sense to work to a proper Compose for Web app.
