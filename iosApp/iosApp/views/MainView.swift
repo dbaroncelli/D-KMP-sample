@@ -12,6 +12,7 @@ import shared
 
 struct MainView: View {
     @EnvironmentObject var appObj: AppObservableObject
+    
     var body: some View {
         let dkmpNav = appObj.dkmpNav
         dkmpNav.router()

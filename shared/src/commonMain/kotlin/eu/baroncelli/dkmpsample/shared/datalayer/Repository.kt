@@ -8,7 +8,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.ApiClient
 import kotlinx.coroutines.*
 import mylocal.db.LocalDb
 
-class Repository (val sqlDriver : SqlDriver, val settings : Settings = Settings(), val useDefaultDispatcher : Boolean = true) {
+class Repository(val sqlDriver: SqlDriver, val settings: Settings = Settings(), val useDefaultDispatcher: Boolean = true) {
 
     internal val webservices by lazy { ApiClient() }
     internal val localDb by lazy { LocalDb(sqlDriver) }

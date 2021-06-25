@@ -4,7 +4,6 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesM
 import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 
 
-
 /********** EVENT functions, called directly by the UI layer **********/
 
 fun Events.selectFavorite(countryName: String) = screenCoroutine {

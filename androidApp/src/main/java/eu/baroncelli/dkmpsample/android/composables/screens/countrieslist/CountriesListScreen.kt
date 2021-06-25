@@ -20,7 +20,6 @@ fun CountriesListScreen(
     onListItemClick: (String) -> Unit,
     onFavoriteIconClick : (String) -> Unit,
 ) {
-
     if (countriesListState.isLoading) {
 
         LoadingScreen()

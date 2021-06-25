@@ -25,5 +25,5 @@ fun Navigation.initCountryDetail(params: CountryDetailParams) = ScreenInitSettin
                 countryInfo = countryInfo,
             )
         }
-    },
+    }
 )

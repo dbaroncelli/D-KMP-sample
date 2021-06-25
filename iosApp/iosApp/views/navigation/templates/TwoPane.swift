@@ -28,7 +28,7 @@ extension Navigation {
                 VStack {
                     self.screenPicker(navigationLevelsMap[1]!)
                 }
-                .frame(width: 400)
+                .frame(width: 420)
                 
                 VStack {
                     if navigationLevelsMap[2] == nil {

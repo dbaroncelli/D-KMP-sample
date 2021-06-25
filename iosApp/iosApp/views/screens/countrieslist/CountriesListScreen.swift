@@ -9,7 +9,7 @@ import shared
 
 struct CountriesListScreen: View {
     var countriesListState: CountriesListState
-    var onListItemClick: (String) -> (Navigation,ScreenIdentifier)
+    var onListItemClick: (String) -> ScreenIdentifier
     var onFavoriteIconClick : (String) -> Void
     
     var body: some View {
@@ -23,9 +23,10 @@ struct CountriesListScreen: View {
                             Text("empty list")
                         }
                     } else {
+                        // let _ = print("count: "+String(countriesListState.countriesListItems.count))
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavLink( linkFunction: { onListItemClick(item.name) }, itemKey: item.name ) {
+                                NavLink( linkFunction: { onListItemClick(item.name) } ) {
                                     CountriesListRow(
                                         item: item,
                                         favorite: countriesListState.favoriteCountries[item.name] != nil,
@@ -35,7 +36,8 @@ struct CountriesListScreen: View {
                             }
                         }
                     }
-                }.listStyle(InsetGroupedListStyle())
+                }
+                .listStyle(InsetGroupedListStyle())
             }
         }
     }

@@ -4,6 +4,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.serialization.Serializable
 
@@ -35,5 +36,5 @@ fun Navigation.initCountriesList(params: CountriesListParams) = ScreenInitSettin
             )
         }
     },
-    reinitOnEachNavigation = true, // in this way favourites can refrest
+    reinitOnEachNavigation = true, // in this way favourites can refresh
 )

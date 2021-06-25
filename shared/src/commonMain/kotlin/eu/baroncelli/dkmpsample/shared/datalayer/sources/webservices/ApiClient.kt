@@ -13,7 +13,12 @@ class ApiClient {
 
     val client = HttpClient {
         install(JsonFeature) {
-            serializer = KotlinxSerializer(Json { ignoreUnknownKeys = true })
+            serializer = KotlinxSerializer(Json {
+                useAlternativeNames = false // currently needed as a workaround for this bug:
+                                            // https://github.com/Kotlin/kotlinx.serialization/issues/1450#issuecomment-841214332
+                                            // it should get fixed in kotlinx-serialization-json:1.2.2
+                ignoreUnknownKeys = true
+            })
         }
         /* Ktor specific logging: reenable if needed to debug requests
         install(Logging) {

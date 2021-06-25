@@ -8,15 +8,15 @@ plugins {
 
 dependencies {
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.3.0-alpha08")
+    implementation("androidx.activity:activity-compose:1.3.0-beta02")
     implementation("androidx.lifecycle:lifecycle-process:2.3.1")
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha01")
-    implementation("androidx.compose.ui:ui:${Versions.compose}")
-    implementation("androidx.compose.ui:ui-graphics:${Versions.compose}")
-    implementation("androidx.compose.ui:ui-tooling:${Versions.compose}")
-    implementation("androidx.compose.foundation:foundation-layout:${Versions.compose}")
-    implementation("androidx.compose.material:material:${Versions.compose}")
-    implementation("androidx.compose.material:material-icons-extended:${Versions.compose}")
+    implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
+    implementation("androidx.compose.ui:ui:${Versions.jetpackCompose}")
+    implementation("androidx.compose.ui:ui-graphics:${Versions.jetpackCompose}")
+    implementation("androidx.compose.ui:ui-tooling:${Versions.jetpackCompose}")
+    implementation("androidx.compose.foundation:foundation-layout:${Versions.jetpackCompose}")
+    implementation("androidx.compose.material:material:${Versions.jetpackCompose}")
+    implementation("androidx.compose.material:material-icons-extended:${Versions.jetpackCompose}")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 }
 
@@ -65,7 +65,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = Versions.jetpackCompose
     }
 }
 

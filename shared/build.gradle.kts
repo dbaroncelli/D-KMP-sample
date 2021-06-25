@@ -11,18 +11,6 @@ plugins {
 }
 
 
-// next block is a workaround for https://youtrack.jetbrains.com/issue/KT-43944
-// it will not be needed anymore in Kotlin 1.5
-android {
-    configurations {
-        create("androidTestApi")
-        create("androidTestDebugApi")
-        create("androidTestReleaseApi")
-        create("testApi")
-        create("testDebugApi")
-        create("testReleaseApi")
-    }
-}
 
 kotlin {
     android ()
@@ -39,30 +27,39 @@ kotlin {
     } else {
         iosX64("ios")
     }
+    jvm("desktop") {
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
+        }
+    }
+    js("web",IR) {
+        useCommonJs()
+        browser()
+    }
     sourceSets {
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 useExperimentalAnnotation("kotlin.time.ExperimentalTime")
-            }
+                useExperimentalAnnotation("com.russhwolf.settings.ExperimentalSettingsImplementation")            }
         }
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3-native-mt")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0-native-mt")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
                 implementation("io.ktor:ktor-client-core:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-json:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-logging:${Versions.ktor}")
                 implementation("io.ktor:ktor-client-serialization:${Versions.ktor}")
-                implementation("com.russhwolf:multiplatform-settings-no-arg:0.7.5")
+                implementation("com.russhwolf:multiplatform-settings-no-arg:0.7.7")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("com.russhwolf:multiplatform-settings-test:0.7.5")
+                implementation("com.russhwolf:multiplatform-settings-test:0.7.7")
             }
         }
         val androidMain by getting {
@@ -78,6 +75,13 @@ kotlin {
                 implementation("com.squareup.sqldelight:sqlite-driver:${Versions.sql_delight}")
             }
         }
+        val desktopMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-apache:${Versions.ktor}")
+                implementation("com.squareup.sqldelight:sqlite-driver:${Versions.sql_delight}")
+            }
+        }
+        val desktopTest by getting
         val iosMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-ios:${Versions.ktor}")
@@ -85,6 +89,12 @@ kotlin {
             }
         }
         val iosTest by getting
+        val webMain by getting {
+            dependencies {
+                implementation("io.ktor:ktor-client-js:${Versions.ktor}")
+                implementation("com.squareup.sqldelight:sqljs-driver:${Versions.sql_delight}")
+            }
+        }
     }
 }
 

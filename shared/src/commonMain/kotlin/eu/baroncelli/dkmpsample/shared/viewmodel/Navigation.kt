@@ -11,7 +11,7 @@ class Navigation(val stateManager : StateManager) {
         if (navigationSettings.saveLastLevel1Screen) {
             startScreenIdentifier = ScreenIdentifier.getByURI(dataRepository.localSettings.savedLevel1URI) ?: startScreenIdentifier
         }
-        navigateByScreenIdentifier(startScreenIdentifier, false)
+        navigateByScreenIdentifier(startScreenIdentifier)
     }
 
     val stateProvider by lazy { StateProvider(stateManager) }
@@ -41,62 +41,55 @@ class Navigation(val stateManager : StateManager) {
         get() = stateManager.getScreenStatesToRemove()
 
     // used by the Router view in SwiftUI apps
-    // it returns a list of UI screens to be rendered inside a SwiftUI's ZStack (it only includes screens whose state is stored, not the full backstack)
-    val level1Backstack : List<level1BackstackEntry>
-        get() = stateManager.getLevel1BackstackEntriesList()
+    // it returns the list of Level1 screens to be rendered inside a SwiftUI's ZStack
+    val level1ScreenIdentifiers : List<ScreenIdentifier>
+        get() = stateManager.getLevel1ScreenIdentifiers()
 
     fun getNavigationLevelsMap(level1ScreenIdentifier: ScreenIdentifier) : Map<Int,ScreenIdentifier>? {
         return stateManager.verticalNavigationLevels[level1ScreenIdentifier.URI]
     }
 
+    fun isInCurrentVerticalBackstack(screenIdentifier: ScreenIdentifier) : Boolean {
+        stateManager.currentVerticalBackstack.forEach {
+            if (it.URI == screenIdentifier.URI) {
+                return true
+            }
+        }
+        return false
+    }
+
+
     fun navigate(screen: Screen, params: ScreenParams? = null) {
-        navigateByScreenIdentifier(ScreenIdentifier.get(screen,params), true)
+        navigateByScreenIdentifier(ScreenIdentifier.get(screen,params))
     }
 
     fun navigateByLevel1Menu(level1NavigationItem: Level1Navigation) {
         val navigationLevelsMap = getNavigationLevelsMap(level1NavigationItem.screenIdentifier)
         if (navigationLevelsMap==null) {
-            debugLogger.log("navigationLevelsMap: null")
-            navigateByScreenIdentifier(level1NavigationItem.screenIdentifier, true)
+            navigateByScreenIdentifier(level1NavigationItem.screenIdentifier)
         } else {
-            debugLogger.log("navigationLevelsMap: size "+navigationLevelsMap.size)
             navigationLevelsMap.keys.sorted().forEach {
-                navigateByScreenIdentifier(navigationLevelsMap[it]!!, true)
+                navigateByScreenIdentifier(navigationLevelsMap[it]!!)
             }
         }
 
     }
 
-    fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier, triggerRecomposition: Boolean) {
+    fun navigateByScreenIdentifier(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("navigate to /"+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
-        val skipInitState = stateManager.isInTheStatesMap(screenIdentifier) && !screenInitSettings.reinitOnEachNavigation
-        stateManager.addScreen(screenIdentifier, screenInitSettings, skipInitState)
-        if (triggerRecomposition) {
-            stateManager.triggerRecomposition() // FIRST UI RECOMPOSITION
-        }
-        if (!skipInitState) {
-            stateManager.runInScreenScope(screenIdentifier) {
-                screenInitSettings.callOnInit(stateManager) // SECOND UI RECOMPOSITION
-            }
-        }
+        stateManager.addScreen(screenIdentifier, screenInitSettings)
         if (navigationSettings.saveLastLevel1Screen && screenIdentifier.screen.navigationLevel == 1) {
             dataRepository.localSettings.savedLevel1URI = screenIdentifier.URI
         }
     }
 
-    fun exitScreen(triggerRecomposition: Boolean) {
-        debugLogger.log("exitScreen")
-        stateManager.removeLastScreen()
+    fun exitScreen(screenIdentifier: ScreenIdentifier? = null, triggerRecomposition: Boolean = true) {
+        val sID = screenIdentifier ?: currentScreenIdentifier
+        debugLogger.log("exitScreen: "+sID.URI)
+        stateManager.removeScreen(sID)
         if (triggerRecomposition) {
-            if (stateManager.isInTheStatesMap(currentScreenIdentifier)) {
-                // if state is already stored, just trigger a recomposition
-                stateManager.triggerRecomposition()
-            } else {
-                // if state is not stored, navigate to it, so that it reinitializes the state
-                // (it always checks what's the latest URI in the backstack, so that it won't add an extra backstack element)
-                navigateByScreenIdentifier(currentScreenIdentifier, true)
-            }
+            navigateByScreenIdentifier(currentScreenIdentifier)
         }
     }
 

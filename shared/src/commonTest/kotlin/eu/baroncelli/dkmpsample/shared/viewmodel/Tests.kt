@@ -13,14 +13,16 @@ import kotlin.test.assertTrue
 class ViewModelTests {
 
     val vm = DKMPViewModel(getTestRepository())
-    val stateProvider = vm.stateProvider
-    val stateManager = vm.stateProvider.stateManager
+    val navigation = vm.navigation
+    val stateProvider = navigation.stateProvider
+    val stateManager = navigation.stateManager
 
 
     @Test
     fun testCountriesListStateUpdate() {
         val screenIdentifier = ScreenIdentifier.get(CountriesList,CountriesListParams(CountriesListType.ALL))
-        stateManager.addScreen(screenIdentifier, CountriesListState(screenIdentifier.params()))
+        val screenInitSettings = screenIdentifier.getScreenInitSettings(navigation)
+        stateManager.addScreen(screenIdentifier, screenInitSettings)
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(favoriteCountries = mapOf("Italy" to true))
         }
@@ -31,7 +33,8 @@ class ViewModelTests {
     @Test
     fun testCountryDetailStateUpdate() {
         val screenIdentifier = ScreenIdentifier.get(CountryDetail, CountryDetailParams("Germany"))
-        stateManager.addScreen(screenIdentifier, CountryDetailState(screenIdentifier.params()))
+        val screenInitSettings = screenIdentifier.getScreenInitSettings(navigation)
+        stateManager.addScreen(screenIdentifier, screenInitSettings)
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(countryInfo = CountryInfo(_extraData = CountryExtraData(vaccines = "Pfizer, Moderna, AstraZeneca")))
         }

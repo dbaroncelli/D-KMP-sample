@@ -5,10 +5,8 @@ import androidx.compose.runtime.Composable
 import eu.baroncelli.dkmpsample.android.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.CountriesListScreen
 import eu.baroncelli.dkmpsample.android.composables.screens.countrieslist.CountriesListTwoPaneDefaultDetail
-import eu.baroncelli.dkmpsample.shared.viewmodel.Events
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
-import eu.baroncelli.dkmpsample.shared.viewmodel.StateProvider
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
