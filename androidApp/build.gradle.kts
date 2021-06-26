@@ -4,8 +4,8 @@ group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    kotlin("android")
     id("com.android.application")
+    kotlin("android")
     id("org.jetbrains.compose") version Versions.mppCompose
 }
 

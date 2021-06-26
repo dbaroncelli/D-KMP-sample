@@ -11,11 +11,6 @@ kotlin {
         binaries.executable()
     }
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
         val jsMain by getting {
             dependencies {
                 implementation(project(":shared"))

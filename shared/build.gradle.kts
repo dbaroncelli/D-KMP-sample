@@ -10,8 +10,6 @@ plugins {
     id("com.squareup.sqldelight")
 }
 
-
-
 kotlin {
     android ()
     ios {
