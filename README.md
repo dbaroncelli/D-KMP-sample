@@ -7,6 +7,8 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 <img width="500" src="https://user-images.githubusercontent.com/5320104/118643793-4c424900-b7dd-11eb-85c7-1f55b06da6aa.png"></img>
 
+**Note**: in order to run the sample you should use the latest [Android Studio Canary build](https://developer.android.com/studio/preview): 
+
 ## Key features of the D-KMP architecture:
 
 - it uses the latest **declarative UI** toolkits: **Compose** for *Android* and **SwiftUI** for *iOS*
