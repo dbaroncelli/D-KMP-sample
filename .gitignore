@@ -15,6 +15,7 @@ UserInterfaceState.xcuserstate
 /shared/build
 /androidApp/build
 /desktopApp/build
+/composables/build
 /webApp/build
 /captures
 .externalNativeBuild
