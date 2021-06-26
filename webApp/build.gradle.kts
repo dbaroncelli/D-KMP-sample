@@ -2,7 +2,7 @@ import org.jetbrains.compose.compose
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.jetbrainsCompose
+    id("org.jetbrains.compose") version Versions.mppCompose
 }
 
 repositories {

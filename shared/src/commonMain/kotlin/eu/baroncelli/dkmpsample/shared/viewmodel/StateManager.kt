@@ -100,7 +100,7 @@ class StateManager(repo: Repository) {
     // ADD SCREEN FUNCTIONS
 
     fun addScreen(screenIdentifier: ScreenIdentifier, screenInitSettings: ScreenInitSettings) {
-        debugLogger.log("addScreen: "+screenIdentifier.URI)
+        //debugLogger.log("addScreen: "+screenIdentifier.URI)
         addScreenToBackstack(screenIdentifier)
         initScreenScope(screenIdentifier)
         if (!isInTheStatesMap(screenIdentifier) || screenInitSettings.reinitOnEachNavigation) {
@@ -112,11 +112,11 @@ class StateManager(repo: Repository) {
         } else {
             triggerRecomposition() // JUST 1 UI RECOMPOSITION
         }
-        debugLogger.log("currentVerticalBackstack: "+currentVerticalBackstack.map{it.URI}.toString())
-        debugLogger.log("currentVerticalNavigationLevelsMap: "+currentVerticalNavigationLevelsMap.values.map{it.URI}.toString())
-        debugLogger.log("level1Backstack: "+level1Backstack.map{it.URI}.toString())
-        debugLogger.log("screenScopesMap: "+screenScopesMap.keys.map{it}.toString())
-        debugLogger.log("screenStatesMap: "+screenStatesMap.keys.map{it}.toString())
+        //debugLogger.log("currentVerticalBackstack: "+currentVerticalBackstack.map{it.URI}.toString())
+        //debugLogger.log("currentVerticalNavigationLevelsMap: "+currentVerticalNavigationLevelsMap.values.map{it.URI}.toString())
+        //debugLogger.log("level1Backstack: "+level1Backstack.map{it.URI}.toString())
+        //debugLogger.log("screenScopesMap: "+screenScopesMap.keys.map{it}.toString())
+        //debugLogger.log("screenStatesMap: "+screenStatesMap.keys.map{it}.toString())
     }
 
     fun addScreenToBackstack(screenIdentifier: ScreenIdentifier) {

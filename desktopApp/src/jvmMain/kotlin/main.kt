@@ -1,8 +1,8 @@
 import androidx.compose.desktop.Window
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.window.application
-import eu.baroncelli.dkmpsample.android.styling.MyMaterialTheme
-import eu.baroncelli.dkmpsample.desktop.composables.navigation.MainComposable
+import eu.baroncelli.dkmpsample.composables.MainComposable
+import eu.baroncelli.dkmpsample.composables.styling.MyMaterialTheme
 import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 import eu.baroncelli.dkmpsample.shared.viewmodel.getDesktopInstance
 

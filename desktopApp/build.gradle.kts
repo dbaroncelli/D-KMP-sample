@@ -3,7 +3,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.jetbrainsCompose
+    id("org.jetbrains.compose") version Versions.mppCompose
 }
 
 repositories {
@@ -27,6 +27,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
+                implementation(project(":composables"))
                 implementation(project(":shared"))
                 implementation(compose.desktop.currentOs)
             }
