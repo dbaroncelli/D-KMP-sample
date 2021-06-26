@@ -97,14 +97,7 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 
   - :white_check_mark: the **main.kt** file doesn't need to be modified
   - **The composables are used by both Android and Desktop apps:**
-    - :hammer_and_wrench: the **Level1BottomBar.kt**  and **Level1NavigationRail.kt** files in the **navigation/bars** folder should be modified to custom the Navigation bars items
-    - :white_check_mark: the **TopBar.kt** file in the **navigation/bars** folder doesn't need to be modified
-    - :white_check_mark: the **OnePane.kt**  and **TwoPane.kt** files in the **navigation/templates** folder don't need to be modified
-    - :white_check_mark: the **HandleBackButton.kt** file in the **navigation** folder doesn't need to be modified
-    - :white_check_mark: the **Router.kt** file in the **navigation** folder doesn't need to be modified
-    - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **navigation** folder, you should define the screen composables in your app
-    - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all composables for that screen
-    - :white_check_mark: the **MainComposable.kt** file doesn't need to be modified
+    - look at the description on the [Android section](#android) above
 <br>
 
 ### Web (not yet implemented)
