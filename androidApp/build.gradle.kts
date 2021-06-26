@@ -16,13 +16,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.3.1")
     implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
-    implementation(compose.ui)
-    implementation(compose("org.jetbrains.compose.ui:ui-tooling"))
-    implementation(compose.foundation)
-    implementation(compose.material)
-    implementation(compose.materialIconsExtended)
     implementation(compose.runtime)
-
 }
 
 android {
@@ -65,11 +59,5 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-}
-
-kotlin.sourceSets.all {
-    languageSettings.apply {
-        useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
     }
 }

@@ -8,7 +8,6 @@ import eu.baroncelli.dkmpsample.composables.styling.MyMaterialTheme
 
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val model = (application as DKMPApp).model
@@ -18,5 +17,4 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
