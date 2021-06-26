@@ -9,8 +9,6 @@ plugins {
     id("com.android.library")
 }
 
-
-
 kotlin {
     android ()
     jvm("desktop") {
@@ -22,7 +20,6 @@ kotlin {
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                useExperimentalAnnotation("androidx.compose.ui.ExperimentalComposeUiApi")
                 useExperimentalAnnotation("androidx.compose.foundation.ExperimentalFoundationApi")
             }
         }

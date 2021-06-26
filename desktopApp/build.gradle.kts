@@ -6,11 +6,6 @@ plugins {
     id("org.jetbrains.compose") version Versions.mppCompose
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-}
-
 kotlin {
     jvm {
         compilations.all {
@@ -20,9 +15,7 @@ kotlin {
     sourceSets {
         all {
             languageSettings.apply {
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
                 useExperimentalAnnotation("androidx.compose.ui.ExperimentalComposeUiApi")
-                useExperimentalAnnotation("androidx.compose.foundation.ExperimentalFoundationApi")
             }
         }
         val jvmMain by getting {
@@ -34,8 +27,6 @@ kotlin {
         }
     }
 }
-
-
 
 compose.desktop {
     application {

@@ -4,8 +4,8 @@ group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    id("com.android.application")
     kotlin("android")
+    id("com.android.application")
     id("org.jetbrains.compose") version Versions.mppCompose
 }
 
@@ -22,7 +22,6 @@ dependencies {
 android {
     compileSdk = Versions.compile_sdk
     buildToolsVersion = Versions.build_tools
-
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
         minSdk = Versions.min_sdk
@@ -31,9 +30,6 @@ android {
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    // packagingOptions {
-    //    exclude("META-INF/*.kotlin_module")
-    //}
     buildTypes {
         getByName("release") {
             // Enables code shrinking, obfuscation, and optimization for only

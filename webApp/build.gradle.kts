@@ -5,13 +5,6 @@ plugins {
     id("org.jetbrains.compose") version Versions.mppCompose
 }
 
-repositories {
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    maven("https://www.jetbrains.com/intellij-repository/releases")
-    maven("https://jetbrains.bintray.com/intellij-third-party-dependencies")
-}
-
 kotlin {
     js(IR) {
         browser()
@@ -33,6 +26,5 @@ kotlin {
                 implementation(npm("@material-ui/icons", "4.11.2"))
             }
         }
-        val jsTest by getting
     }
 }
