@@ -1,6 +1,5 @@
 package eu.baroncelli.dkmpsample.composables.screens.countrieslist
 
-
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.composables.screens.LoadingScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
 
-@ExperimentalFoundationApi
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CountriesListScreen(
     countriesListState: CountriesListState,

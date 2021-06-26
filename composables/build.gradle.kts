@@ -5,8 +5,8 @@ version = "1.0-SNAPSHOT"
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.mppCompose
     id("com.android.library")
+    id("org.jetbrains.compose") version Versions.mppCompose
 }
 
 kotlin {
@@ -14,15 +14,10 @@ kotlin {
     jvm("desktop") {
         compilations.all {
             kotlinOptions.jvmTarget = "11"
+            kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
         }
     }
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                useExperimentalAnnotation("androidx.compose.foundation.ExperimentalFoundationApi")
-            }
-        }
         val commonMain by getting {
             dependencies {
                 implementation(project(":shared"))
