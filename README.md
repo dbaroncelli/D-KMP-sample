@@ -29,8 +29,9 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 ## Instructions to write your own D-KMP app:
 If you want to create your own app using the D-KMP Architecture, here are the instructions you need:
+<br>
 
-### shared code:
+### SHARED CODE:
 
 #### View Model
 
@@ -53,23 +54,31 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :hammer_and_wrench: in the **datalayer/sources** folder: create a folder for each datasource, where the datasource-specific functions (called by the repository functions) are defined
   - :white_check_mark: the **datalayer/Repository.kt** file should be modified only in case you want to add an extra datasource
 
+<br><br>
 
-### platform-specific code:
+### PLATFORM-SPECIFIC CODE:
 
-#### androidApp
-<img width="292" src="https://user-images.githubusercontent.com/5320104/119408347-d743a780-bce5-11eb-8a6b-59acdc7c80e4.png"></img>
-  - :hammer_and_wrench: the **Level1BottomBar.kt**  and **Level1NavigationRail.kt** files in the **composables/navigation/bars** folder should be modified to custom the Navigation bars items
-  - :white_check_mark: the **TopBar.kt** file in the **composables/navigation/bars** folder doesn't need to be modified
-  - :white_check_mark: the **OnePane.kt**  and **TwoPane.kt** files in the **composables/navigation/templates** folder don't need to be modified
-  - :white_check_mark: the **Router.kt** file in the **composables/navigation** folder doesn't need to be modified
-  - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **composables/navigation** folder, you should define the screen composables in your app
-  - :hammer_and_wrench: in the **composables/screens** folder: create a folder for each screen of the app, containing all composables for that screen
-  - :white_check_mark: the **MainComposable.kt** file in the **composables** folder doesn't need to be modified
-  - :white_check_mark: the **DKMPApp.kt** file doesn't need to be modified
+### Android
+<img width="352" alt="Schermata 2021-06-26 alle 16 54 32" src="https://user-images.githubusercontent.com/5320104/123515260-f0e65f00-d696-11eb-9ba5-9d44faa58563.png"></img>
+
+<img width="390" alt="Schermata 2021-06-26 alle 17 03 13" src="https://user-images.githubusercontent.com/5320104/123515523-0d36cb80-d698-11eb-9be9-257e1603174d.png"></img>
+
+  - :white_check_mark: the **App.kt** file doesn't need to be modified
   - :white_check_mark: the **MainActivity.kt** file doesn't need to be modified
+  - **The composables are used by both Android and Desktop apps:**
+    - :hammer_and_wrench: the **Level1BottomBar.kt**  and **Level1NavigationRail.kt** files in the **navigation/bars** folder should be modified to custom the Navigation bars items
+    - :white_check_mark: the **TopBar.kt** file in the **navigation/bars** folder doesn't need to be modified
+    - :white_check_mark: the **OnePane.kt**  and **TwoPane.kt** files in the **navigation/templates** folder don't need to be modified
+    - :white_check_mark: the **HandleBackButton.kt** file in the **navigation** folder doesn't need to be modified
+    - :white_check_mark: the **Router.kt** file in the **navigation** folder doesn't need to be modified
+    - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **navigation** folder, you should define the screen composables in your app
+    - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all composables for that screen
+    - :white_check_mark: the **MainComposable.kt** file doesn't need to be modified
+<br>
 
-#### iosApp
-<img width="323" src="https://user-images.githubusercontent.com/5320104/119408362-dd398880-bce5-11eb-92bf-be2974f3f448.png"></img>
+### iOS
+
+<img width="307" alt="Schermata 2021-06-26 alle 16 53 55" src="https://user-images.githubusercontent.com/5320104/123515587-496a2c00-d698-11eb-81b9-6fe3174d3c02.png"></img>
   - :hammer_and_wrench: the **Level1BottomBar.swift**  and **Level1NavigationRail.swift** files in the **composables/navigation/bars** folder should be modified to custom the Navigation bars items
   - :white_check_mark: the **TopBar.swift** file in the **composables/navigation/bars** folder doesn't need to be modified
   - :white_check_mark: the **OnePane.swift**  and **TwoPane.swift** files in the **composables/navigation/templates** folder don't need to be modified
@@ -77,11 +86,26 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :hammer_and_wrench: in the **ScreenPicker.swift** file in the **views/navigation** folder, you should define the screen composables in your app
   - :hammer_and_wrench: in the **views/screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
   - :white_check_mark: the **MainView.swift** file doesn't need to be modified
+  - :white_check_mark: the **App.swift** file doesn't need to be modified
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
-  - :white_check_mark: the **DKMPApp.swift** file doesn't need to be modified
+<br>
 
-#### desktopApp
-  - The files structure is identical to the **androidApp**, so refer to that
+### Desktop
+<img width="298" alt="Schermata 2021-06-26 alle 16 54 15" src="https://user-images.githubusercontent.com/5320104/123515803-3efc6200-d699-11eb-9703-4ca4850c89d9.png"></img>
 
-#### webApp (not yet implemented)
+<img width="390" alt="Schermata 2021-06-26 alle 17 03 13" src="https://user-images.githubusercontent.com/5320104/123515523-0d36cb80-d698-11eb-9be9-257e1603174d.png"></img>
+
+  - :white_check_mark: the **main.kt** file doesn't need to be modified
+  - **The composables are used by both Android and Desktop apps:**
+    - :hammer_and_wrench: the **Level1BottomBar.kt**  and **Level1NavigationRail.kt** files in the **navigation/bars** folder should be modified to custom the Navigation bars items
+    - :white_check_mark: the **TopBar.kt** file in the **navigation/bars** folder doesn't need to be modified
+    - :white_check_mark: the **OnePane.kt**  and **TwoPane.kt** files in the **navigation/templates** folder don't need to be modified
+    - :white_check_mark: the **HandleBackButton.kt** file in the **navigation** folder doesn't need to be modified
+    - :white_check_mark: the **Router.kt** file in the **navigation** folder doesn't need to be modified
+    - :hammer_and_wrench: in the **ScreenPicker.kt** file in the **navigation** folder, you should define the screen composables in your app
+    - :hammer_and_wrench: in the **screens** folder: create a folder for each screen of the app, containing all composables for that screen
+    - :white_check_mark: the **MainComposable.kt** file doesn't need to be modified
+<br>
+
+### Web (not yet implemented)
   - **Compose for Web** is still at a very early stage. We'll give it a little bit more time to mature before publishing an app. The web version of **SqlDelight** (the most popular local database for *Kotlin MultiPlatform*) is also at a very early stage, as currently the database cannot even be saved persistently. It might take until the **end of 2021** before it makes sense to work to a proper Compose for Web app.
