@@ -1,6 +1,7 @@
 # D-KMP architecture - official sample
 
-This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for both **Android** and **iOS**. Planning to publish the **Web** and **Desktop** version soon too.
+This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
+(the **Web** version will be implemented at a later stage, when "Compose for Web" becomes [more mature](#web-not-yet-implemented))
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
