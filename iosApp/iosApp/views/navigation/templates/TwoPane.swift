@@ -11,11 +11,11 @@ import shared
 
 
 extension Navigation {
-
-    @ViewBuilder func twoPane(_ level1ScreenIdentifier: ScreenIdentifier) -> some View {
+    
+    @ViewBuilder func twoPane(_ navState: LocalNavigationState) -> some View {
         
-        let navigationLevelsMap = getNavigationLevelsMap(level1ScreenIdentifier: level1ScreenIdentifier)!
         NavigationView {
+            /*
             HStack {
                 VStack {
                     level1NavigationRail(selectedTab: navigationLevelsMap[1]!)
@@ -42,9 +42,28 @@ extension Navigation {
             }
             .frame(maxWidth: .infinity)
             .navigationBarTitle(getTitle(screenIdentifier: navigationLevelsMap[2] ?? navigationLevelsMap[1]!), displayMode: .inline)
+             */
         }
         .navigationViewStyle(StackNavigationViewStyle())
         
     }
     
+    
+}
+
+
+func twoPaneMasterScreen(_ navState: LocalNavigationState) -> ScreenIdentifier {
+    if (navState.path.count > 1) {
+        return navState.path[navState.path.count-2]
+    } else {
+        return navState.level1ScreenIdentifier
+    }
+}
+
+func twoPaneDetailScreen(_ navState: LocalNavigationState) -> ScreenIdentifier? {
+    if (navState.path.count > 1) {
+        return navState.path.last
+    } else {
+        return nil
+    }
 }

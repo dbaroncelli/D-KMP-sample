@@ -14,7 +14,7 @@ struct iosApp: App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            MainView()
+            Router()
                 .environmentObject(appObj)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
@@ -25,7 +25,9 @@ struct iosApp: App {
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    appObj.dkmpNav.onChangeOrientation()
+                    if appObj.localNavigationState.isOrientationChanged(UIDevice.current.orientation) {
+                            appObj.dkmpNav.onChangeOrientation()
+                    }
                 }
         }
     }

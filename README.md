@@ -104,4 +104,4 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 <br>
 
 ### Web (not yet implemented)
-  - **Compose for Web** is still at a very early stage. We'll give it a bit more time to mature before publishing an app. The web version of **SqlDelight** (the most popular local database for *Kotlin MultiPlatform*) is also at a very early stage, as currently the database cannot even be saved persistently. It might take until the **end of 2021** before it makes sense to work to a proper Compose for Web app.
+  - **Compose for Web** is still at a very early stage. Eventually we can expect that either through [Kotlin/Wasm](https://www.youtube.com/watch?v=-pqz9sKXatw) or [Kotlin/Js-skiko](https://github.com/JetBrains/skiko), we'll be able to build Compose projects seamlessly for the Web, using the same composables we are already using for the Desktop and Android.

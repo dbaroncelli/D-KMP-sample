@@ -9,7 +9,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 @Composable
 fun MainComposable(model: DKMPViewModel) {
     val appState by model.stateFlow.collectAsState()
-    println("D-KMP-SAMPLE: recomposition Index: "+appState.recompositionIndex.toString())
+    println("D-KMP-SAMPLE: APP STATE RECOMPOSITION: index #"+appState.recompositionIndex.toString())
     val dkmpNav = appState.getNavigation(model)
     dkmpNav.Router()
 }

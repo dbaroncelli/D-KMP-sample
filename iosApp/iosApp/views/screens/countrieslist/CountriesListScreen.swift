@@ -26,7 +26,7 @@ struct CountriesListScreen: View {
                         // let _ = print("count: "+String(countriesListState.countriesListItems.count))
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
-                                NavLink( linkFunction: { onListItemClick(item.name) } ) {
+                                NavigationLink(value: onListItemClick(item.name) ) {
                                     CountriesListRow(
                                         item: item,
                                         favorite: countriesListState.favoriteCountries[item.name] != nil,
@@ -37,9 +37,23 @@ struct CountriesListScreen: View {
                         }
                     }
                 }
-                .listStyle(InsetGroupedListStyle())
+                .listStyle(.insetGrouped)
             }
         }
     }
     
+}
+
+
+
+struct CountryListView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            CountriesListScreen(
+                countriesListState: CountriesListState(isLoading: false, countriesListItems: [CountriesListItem(_data: CountryListData(name: "AAAAAAAA", population: 1000, firstDoses: 700, fullyVaccinated: 530)), CountriesListItem(_data: CountryListData(name: "BBBBBBBB", population: 1000, firstDoses: 654, fullyVaccinated: 432)), CountriesListItem(_data: CountryListData(name: "CCCCCCCC", population: 1000, firstDoses: 557, fullyVaccinated: 398))], favoriteCountries: [:]),
+                onListItemClick: { name in ScreenIdentifier.Factory().self.getByURI(URI: "countrieslist:listType=ALL")! },
+                onFavoriteIconClick: { name in print() }
+            )
+        }
+    }
 }

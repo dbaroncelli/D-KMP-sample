@@ -1,6 +1,6 @@
 package eu.baroncelli.dkmpsample.shared
 
-import com.russhwolf.settings.MockSettings
+import com.russhwolf.settings.MapSettings
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.newSingleThreadContext
@@ -18,5 +18,5 @@ actual fun runBlockingTest(block: suspend CoroutineScope.() -> Unit) =
 actual fun getTestRepository() : Repository {
     val sqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
     LocalDb.Schema.create(sqlDriver)
-    return Repository(sqlDriver, MockSettings(), false)
+    return Repository(sqlDriver, MapSettings(), false)
 }

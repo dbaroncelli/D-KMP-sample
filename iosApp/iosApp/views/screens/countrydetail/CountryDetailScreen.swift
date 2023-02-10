@@ -9,6 +9,7 @@ import shared
 
 struct CountryDetailScreen: View {
     var countryDetailState: CountryDetailState
+    var ontestScreenOpened: (String) -> ScreenIdentifier
     
     var body: some View {
         VStack {
@@ -18,7 +19,9 @@ struct CountryDetailScreen: View {
                 let data = countryDetailState.countryInfo
                 ScrollView(.vertical) {
                     VStack(alignment: .leading, spacing: 5) {
-                        DataElement(label: "total population", value: data.population)
+                        NavigationLink(value: ontestScreenOpened("population") ) {
+                            DataElement(label: "total population", value: data.population)
+                        }
                         DataElement(label: "    with first dose", value: data.firstDoses, percentage: data.firstDosesPerc)
                         DataElement(label: "    fully vaccinated", value: data.fullyVaccinated, percentage: data.fullyVaccinatedPerc)
                         Spacer().frame(height: 20)

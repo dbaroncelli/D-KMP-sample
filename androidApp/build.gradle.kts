@@ -1,5 +1,3 @@
-import org.jetbrains.compose.compose
-
 group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
@@ -12,16 +10,15 @@ plugins {
 dependencies {
     implementation(project(":composables"))
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.3.0-beta02")
-    implementation("androidx.lifecycle:lifecycle-process:2.3.1")
-    implementation("androidx.appcompat:appcompat:1.4.0-alpha02")
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    implementation("androidx.activity:activity-compose:1.7.0-alpha04")
+    implementation("androidx.lifecycle:lifecycle-process:2.5.1")
+    implementation("androidx.appcompat:appcompat:1.6.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
     implementation(compose.runtime)
 }
 
 android {
     compileSdk = Versions.compile_sdk
-    buildToolsVersion = Versions.build_tools
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
         minSdk = Versions.min_sdk
@@ -44,16 +41,16 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    lint {
-        isWarningsAsErrors = true
-        isAbortOnError = true
-    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
         isCoreLibraryDesugaringEnabled = true
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
     }
+    namespace = "eu.baroncelli.dkmpsample"
 }

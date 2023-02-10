@@ -11,20 +11,44 @@ import shared
 
 
 extension Navigation {
-
-    @ViewBuilder func onePane(_ level1ScreenIdentifier: ScreenIdentifier) -> some View {
-        NavigationView {
-            self.screenPicker(level1ScreenIdentifier)
-                .navigationBarTitle(getTitle(screenIdentifier: level1ScreenIdentifier), displayMode: .inline)
+    
+    @ViewBuilder func onePane(_ navState: LocalNavigationState) -> some View {
+        
+        NavigationStack() {
+            let _ = NSLog("onePane latest path URI "+navState.level1ScreenIdentifier.URI)
+            self.screenPicker(requestedSId: navState.level1ScreenIdentifier, navState: navState)
+                .navigationDestination(for: ScreenIdentifier.self) { sId in
+                    let _ = NSLog("destination screen: "+sId.URI)
+                    self.screenPicker(requestedSId: sId, navState: navState)
+                }
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
-                if level1ScreenIdentifier.URI == currentLevel1ScreenIdentifier.URI {
-                    self.level1ButtonBar(selectedTab: self.currentLevel1ScreenIdentifier)
-                }
+                Level1ButtonBar()
             }
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        
     }
     
+}
+
+
+struct OnePane: View {
+    @EnvironmentObject var appObj: AppObservableObject
+    
+    var body: some View {
+        NavigationStack(path: $appObj.localNavigationState.path) {
+            //let _ = NSLog("onePane top URI "+(appObj.localNavigationState.topScreenIdentifier.URI))
+            //let _ = NSLog("onePane level1ScreenIdentifier "+appObj.localNavigationState.level1ScreenIdentifier.URI)
+            appObj.dkmpNav.screenPicker(requestedSId: appObj.localNavigationState.level1ScreenIdentifier, navState: appObj.localNavigationState)
+                .navigationDestination(for: ScreenIdentifier.self) { sId in
+                    appObj.dkmpNav.screenPicker(requestedSId: sId, navState: appObj.localNavigationState)
+                }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Level1ButtonBar()
+            }
+        }
+    }
 }

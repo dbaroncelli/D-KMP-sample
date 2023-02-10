@@ -1,14 +1,14 @@
 
 
 object Versions {
-    const val compile_sdk = 30
-    const val build_tools = "30.0.2"
-    const val min_sdk = 21
-    const val target_sdk = 30
+    const val compile_sdk = 33
+    const val min_sdk = 24
+    const val target_sdk = compile_sdk
 
-    const val mppCompose = "0.5.0-build226"
-    const val kotlin = "1.5.10"
-    const val ktor = "1.6.0"
-    const val sql_delight = "1.5.0"
+    const val mppCompose = "1.3.0"
+    const val kotlin = "1.8.0"
+    const val ktor = "2.2.2"
+    const val sql_delight = "1.5.5"
+    const val multiplatform_settings = "1.0.0"
 }
 

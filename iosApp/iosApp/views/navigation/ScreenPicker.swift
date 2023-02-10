@@ -10,22 +10,30 @@ import shared
 
 extension Navigation {
     
-    @ViewBuilder func screenPicker(_ sId: ScreenIdentifier) -> some View {
+    @ViewBuilder func screenPicker(requestedSId: ScreenIdentifier, navState: LocalNavigationState) -> some View {
         
+        let currentSId = navState.topScreenIdentifier
+
         VStack {
         
-            switch sId.screen {
+            switch requestedSId.screen {
             
             case .countrieslist:
                 CountriesListScreen(
-                    countriesListState: self.stateProvider.getToCast(screenIdentifier: sId) as! CountriesListState,
+                    countriesListState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! CountriesListState,
                     onListItemClick: { name in self.navigate(.countrydetail, CountryDetailParams(countryName: name)) },
                     onFavoriteIconClick: { name in self.events.selectFavorite(countryName: name) }
                 )
                 
             case .countrydetail:
                 CountryDetailScreen(
-                    countryDetailState: self.stateProvider.getToCast(screenIdentifier: sId) as! CountryDetailState
+                    countryDetailState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! CountryDetailState,
+                    ontestScreenOpened: { name in self.navigate(.level3screen, Level3ScreenParams(name: name)) }
+                )
+                
+            case .level3screen:
+                Level3Screen(
+                    level3ScreenState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! Level3ScreenState
                 )
                 
             default:
@@ -33,6 +41,16 @@ extension Navigation {
             }
             
         }
+        .navigationTitle(getTitle(screenIdentifier: requestedSId))
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear { if requestedSId.URI == currentSId.URI {
+            NSLog("  onAppear: "+requestedSId.URI)
+        } }
+        .onDisappear { if requestedSId.URI == currentSId.URI {
+            self.exitScreen(screenIdentifier: requestedSId)
+        } }
+        
+        
     }
     
     

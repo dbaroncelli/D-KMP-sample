@@ -4,6 +4,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.serialization.Serializable
@@ -17,7 +18,7 @@ import kotlinx.serialization.Serializable
 @Serializable // Note: ScreenParams should always be set as Serializable
 data class CountriesListParams(val listType: CountriesListType) : ScreenParams
 
-fun Navigation.initCountriesList(params: CountriesListParams) = ScreenInitSettings (
+fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSettings (
     title = "Countries: " + params.listType.name,
     initState = { CountriesListState(isLoading = true) },
     callOnInit = {
@@ -28,7 +29,7 @@ fun Navigation.initCountriesList(params: CountriesListParams) = ScreenInitSettin
             listData = listData.filter { favorites.containsKey(it.name) }
         }
         // update state, after retrieving data from the repository
-        stateManager.updateScreen(CountriesListState::class) {
+        updateScreen(CountriesListState::class) {
             it.copy(
                 isLoading = false,
                 countriesListItems = listData,
@@ -36,5 +37,6 @@ fun Navigation.initCountriesList(params: CountriesListParams) = ScreenInitSettin
             )
         }
     },
+    runCallOnInitBeforeNavigationTransition = true,
     reinitOnEachNavigation = true, // in this way favourites can refresh
 )

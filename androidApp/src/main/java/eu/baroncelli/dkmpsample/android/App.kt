@@ -1,10 +1,7 @@
 package eu.baroncelli.dkmpsample.android
 
 import android.app.Application
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
-import androidx.lifecycle.ProcessLifecycleOwner
+import androidx.lifecycle.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.DKMPViewModel
 import eu.baroncelli.dkmpsample.shared.viewmodel.getAndroidInstance
 
@@ -22,18 +19,19 @@ class DKMPApp : Application() {
 
 }
 
-class AppLifecycleObserver (private val model: DKMPViewModel) : LifecycleObserver {
+class AppLifecycleObserver (private val model: DKMPViewModel) : LifecycleEventObserver {
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onEnterForeground() {
-        if (model.stateFlow.value.recompositionIndex > 0) { // not calling at app startup
-            model.navigation.onReEnterForeground()
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        when (event) {
+            Lifecycle.Event.ON_START ->
+                if (model.stateFlow.value.recompositionIndex > 0) { // not calling at app startup
+                    model.navigation.onReEnterForeground()
+                }
+            Lifecycle.Event.ON_STOP ->
+                model.navigation.onEnterBackground()
+            else ->
+                return
         }
-    }
-
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onEnterBackground() {
-        model.navigation.onEnterBackground()
     }
 
 }

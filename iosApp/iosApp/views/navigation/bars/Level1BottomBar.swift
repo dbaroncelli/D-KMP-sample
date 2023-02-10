@@ -1,40 +1,41 @@
 //
 //  Level1BottomBar.swift
+//  iosApp
 //
 //  Created by Daniele Baroncelli on 16/03/21.
+//  Copyright © 2021 orgName. All rights reserved.
 //
 
 import SwiftUI
 import shared
 
 
-extension Navigation {
-
-    // this is the bottom horizontal navigation bar for 1-Pane visualization
-    // (used by small devices and in Portrait mode)
+// this is the bottom horizontal navigation bar for 1-Pane visualization
+// (used by small devices and in Portrait mode)
     
-    @ViewBuilder func level1ButtonBar(selectedTab: ScreenIdentifier) -> some View {
-
+struct Level1ButtonBar: View {
+    @EnvironmentObject var appObj: AppObservableObject
+        
+    var body: some View {
+        let level1ScreenIdentifier = appObj.localNavigationState.level1ScreenIdentifier
         Spacer()
         BottomBarButton(
             itemLabel: "All Countries",
             iconName: "list.bullet",
-            selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.allcountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allcountries) }
         )
         Spacer()
         BottomBarButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
-            selected: selectedTab.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.favoritecountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
         )
         Spacer()
-
-    }
         
+    }
 }
-
 
 
 

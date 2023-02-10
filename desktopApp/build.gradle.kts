@@ -1,4 +1,3 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
@@ -13,11 +12,6 @@ kotlin {
         }
     }
     sourceSets {
-        all {
-            languageSettings.apply {
-                useExperimentalAnnotation("androidx.compose.ui.ExperimentalComposeUiApi")
-            }
-        }
         val jvmMain by getting {
             dependencies {
                 implementation(project(":composables"))

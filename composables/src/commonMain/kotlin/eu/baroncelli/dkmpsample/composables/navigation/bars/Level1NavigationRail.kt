@@ -24,7 +24,8 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 
 @Composable
 fun Navigation.Level1NavigationRail(
-    selectedTab: ScreenIdentifier
+    selectedTab: ScreenIdentifier,
+    navigateByLevel1Menu: (Level1Navigation) -> Unit
 ) {
     Column(
         modifier = Modifier

@@ -7,6 +7,8 @@ import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListS
 import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListTwoPaneDefaultDetail
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
@@ -15,7 +17,8 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDe
 
 @Composable
 fun Navigation.ScreenPicker(
-    screenIdentifier: ScreenIdentifier
+    screenIdentifier: ScreenIdentifier,
+    navigate: (Screen, ScreenParams?) -> Unit
 ) {
 
     when (screenIdentifier.screen) {
@@ -31,6 +34,9 @@ fun Navigation.ScreenPicker(
             CountryDetailScreen(
                 countryDetailState = stateProvider.get(screenIdentifier)
             )
+
+        else ->
+            return
 
     }
 

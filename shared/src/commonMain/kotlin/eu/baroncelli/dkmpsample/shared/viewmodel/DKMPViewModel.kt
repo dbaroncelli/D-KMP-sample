@@ -5,7 +5,6 @@ import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.native.concurrent.ThreadLocal
 
-@ThreadLocal
 val debugLogger by lazy { DebugLogger("D-KMP SAMPLE") }
 
 

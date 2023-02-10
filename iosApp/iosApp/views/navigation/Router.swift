@@ -12,110 +12,73 @@ import shared
 
 let twopaneWidthThreshold : CGFloat = 1000
 
-extension Navigation {
-
-    func isTwoPane() -> Bool {
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-        if width < height || width < twopaneWidthThreshold {
-            return false
+struct LocalNavigationState {
+    var level1ScreenIdentifier: ScreenIdentifier
+    var path: [ScreenIdentifier] { // path is the backstack without the level1ScreenIdentifier
+        didSet {
+            NSLog("UI NAVIGATION RECOMPOSITION: URI changed "+level1ScreenIdentifier.URI+" / "+self.path.map{$0.URI}.joined(separator: " / "))
         }
-        return true
     }
-    
-    
-    @ViewBuilder func router() -> some View {
-
-        ZStack {
-            ForEach(self.level1ScreenIdentifiers, id: \.self.URI) { screenIdentifier in
-                if !self.isTwoPane() {
-                    self.onePane(screenIdentifier)
-                        .opacity(screenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
-                } else {
-                    self.twoPane(screenIdentifier)
-                        .opacity(screenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
-                }
+    var topScreenIdentifier: ScreenIdentifier {
+        return path.isEmpty ? level1ScreenIdentifier : path.last!
+    }
+    var orientation = UIDevice.current.orientation
+    mutating func isOrientationChanged(_ newOrientation: UIDeviceOrientation) -> Bool {
+        if UIDevice.current.orientation != UIDeviceOrientation.faceDown && UIDevice.current.orientation != UIDeviceOrientation.faceUp {
+            if newOrientation != orientation {
+                self.orientation = newOrientation
+                return true
             }
         }
-        .navigationBarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
-        .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
-
+        return false
     }
-    
+}
 
+
+struct Router: View {
+    
+    var body: some View {
+        VStack {
+            //ForEach(self.level1ScreenIdentifiers, id: \.self.URI) { screenIdentifier in
+                if !isTwoPane() {
+                    OnePane()
+                        //.opacity(localNavigationState.level1ScreenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
+                } else {
+                    //TwoPane(navState: navState)
+                        //.opacity(localNavigationState.level1ScreenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
+                }
+            //}
+        }
+        .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
+    }
+}
+
+
+
+func isTwoPane() -> Bool {
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+    if width < height || width < twopaneWidthThreshold {
+        return false
+    }
+    return true
+}
+
+
+
+
+extension Navigation {
     
     func navigate(_ screen: Screen, _ params: ScreenParams?) -> ScreenIdentifier {
         return ScreenIdentifier.Factory().get(screen: screen, params: params)
     }
 
+    func navigateByLevel1Menu(_ appObj: AppObservableObject, level1Navigation: Level1Navigation) {
+        //NSLog("UI NAVIGATION RECOMPOSITION: navigate level 1 -> "+level1Navigation.screenIdentifier.URI)
+        appObj.localNavigationState = LocalNavigationState(
+            level1ScreenIdentifier: level1Navigation.screenIdentifier,
+            path: appObj.dkmpNav.getPath(level1ScreenIdentifier: level1Navigation.screenIdentifier) as! [ScreenIdentifier]
+        )
+    }
     
-}
-
-
-
-struct NavLink<Content: View>: View {
-    var linkFunction: () -> ScreenIdentifier
-    let content: () -> Content
-    
-    @EnvironmentObject var appObj: AppObservableObject
-    @State private var selected : Bool = false
-    var body: some View {
-        if appObj.dkmpNav.isTwoPane() {
-            Button(action: {
-                let screenIdentifier = linkFunction()
-                appObj.dkmpNav.navigateByScreenIdentifier(screenIdentifier: screenIdentifier)
-                self.selected = true
-            }) {
-                VStack(spacing: 0) {
-                    HStack(spacing: 0) {
-                        content()
-                        Image(systemName: "chevron.right").resizable().frame(width: 6, height: 12).foregroundColor(lightGreyColor)
-                    }
-                }
-            }
-        } else {
-            let isActive = Binding<Bool> (
-                get: {
-                    selected && appObj.dkmpNav.isInCurrentVerticalBackstack(screenIdentifier: linkFunction())
-                },
-                set: { isActive in
-                    if isActive {
-                        let screenIdentifier = linkFunction()
-                        appObj.dkmpNav.navigateByScreenIdentifier(screenIdentifier: screenIdentifier)
-                        self.selected = true
-                    }
-                }
-            )
-            NavigationLink(
-                destination: LazyDestinationView(
-                    appObj.dkmpNav.screenPicker(linkFunction())
-                        .navigationBarTitle(appObj.dkmpNav.getTitle(screenIdentifier: linkFunction()), displayMode: .inline)
-                        .onDisappear {
-                            let screenIdentifier = linkFunction()
-                            //print("onDisappear: "+screenIdentifier.URI)
-                            if appObj.dkmpNav.isInCurrentVerticalBackstack(screenIdentifier: screenIdentifier) {
-                                //print("confimed disappear")
-                                self.selected = false
-                                isActive.wrappedValue = false
-                                appObj.dkmpNav.exitScreen(screenIdentifier: screenIdentifier, triggerRecomposition: false)
-                            }
-                        }
-                ),
-                isActive: isActive
-            ) {
-                content()
-            }
-        }
-    }
-}
-
-
-struct LazyDestinationView<Content: View>: View {
-    let build: () -> Content
-    init(_ build: @autoclosure @escaping () -> Content) {
-        self.build = build
-    }
-    var body: Content {
-        build()
-    }
 }

@@ -7,10 +7,17 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
 rootProject.name = "D-KMP-sample"
 
 include(":androidApp")
 include(":desktopApp")
 include(":composables")
-include(":webApp")
 include(":shared")

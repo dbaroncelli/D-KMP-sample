@@ -2,9 +2,10 @@ package eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 import io.ktor.client.HttpClient
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.call.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.get
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
 class ApiClient {
@@ -12,11 +13,8 @@ class ApiClient {
     val baseUrl = "https://covidvax.org"
 
     val client = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(Json {
-                useAlternativeNames = false // currently needed as a workaround for this bug:
-                                            // https://github.com/Kotlin/kotlinx.serialization/issues/1450#issuecomment-841214332
-                                            // it should get fixed in kotlinx-serialization-json:1.2.2
+        install(ContentNegotiation) {
+            json(Json {
                 ignoreUnknownKeys = true
             })
         }
@@ -34,7 +32,7 @@ class ApiClient {
         try {
             // please notice, Ktor Client is switching to a background thread under the hood
             // so the http call doesn't happen on the main thread, even if the coroutine has been launched on Dispatchers.Main
-            val resp = client.get<T>(url)
+            val resp = client.get(url).body<T>()
             debugLogger.log("$url API SUCCESS")
             return resp
         } catch (e: Exception) {

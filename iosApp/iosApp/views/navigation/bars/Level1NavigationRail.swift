@@ -10,25 +10,26 @@ import SwiftUI
 import shared
 
 
-extension Navigation {
-
-    // this is the left vertical navigation bar for 2-Pane visualization
-    // (used by bigger devices in landscape mode)
+// this is the left vertical navigation bar for 2-Pane visualization
+// (used by bigger devices in landscape mode)
     
-    @ViewBuilder func level1NavigationRail(selectedTab: ScreenIdentifier) -> some View {
-
+struct Level1NavigationRail: View {
+    @EnvironmentObject var appObj: AppObservableObject
+        
+    var body: some View {
+        let level1ScreenIdentifier = appObj.localNavigationState.level1ScreenIdentifier
         Spacer()
         NavigationRailButton(
             itemLabel: "All Countries",
             iconName: "list.bullet",
-            selected: selectedTab.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.allcountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj: appObj, level1Navigation: Level1Navigation.allcountries) }
         )
         NavigationRailButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
-            selected: selectedTab.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onClick: { self.navigateByLevel1Menu(level1NavigationItem: Level1Navigation.favoritecountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj: appObj, level1Navigation: Level1Navigation.favoritecountries) }
         )
         Spacer()
 
