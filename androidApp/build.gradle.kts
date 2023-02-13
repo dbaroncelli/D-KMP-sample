@@ -12,8 +12,8 @@ dependencies {
     implementation(project(":shared"))
     implementation("androidx.activity:activity-compose:1.7.0-alpha04")
     implementation("androidx.lifecycle:lifecycle-process:2.5.1")
-    implementation("androidx.appcompat:appcompat:1.6.0")
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
     implementation(compose.runtime)
 }
 

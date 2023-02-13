@@ -23,13 +23,13 @@ struct Level1NavigationRail: View {
             itemLabel: "All Countries",
             iconName: "list.bullet",
             selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj: appObj, level1Navigation: Level1Navigation.allcountries) }
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allcountries) }
         )
         NavigationRailButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
             selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj: appObj, level1Navigation: Level1Navigation.favoritecountries) }
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
         )
         Spacer()
 

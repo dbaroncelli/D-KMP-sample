@@ -12,15 +12,21 @@ actual fun Navigation.HandleBackButton(
     saveableStateHolder: SaveableStateHolder,
     localNavigationState: MutableState<LocalNavigationState>
 ) {
-    BackHandler { // catching the back button to update the DKMPViewModel
+    BackHandler(!localNavigationState.value.nextBackQuitsApp) { // catching the back button
         val navState = localNavigationState.value
         val originScreenIdentifier = navState.topScreenIdentifier
-        exitScreen(originScreenIdentifier) // shared state changed
+        exitScreen(originScreenIdentifier) // change the shared state
         debugLogger.log("UI NAVIGATION RECOMPOSITION: back button from "+originScreenIdentifier.URI)
         if (navState.path.isEmpty()) {
-            localNavigationState.value = navState.copy(level1ScreenIdentifier = stateManager.currentLevel1ScreenIdentifier!!)
+            localNavigationState.value = navState.copy(
+                level1ScreenIdentifier = stateManager.currentLevel1ScreenIdentifier!!,
+                nextBackQuitsApp = nextBackQuitsApp
+            )
         } else {
-            localNavigationState.value = navState.copy(path = navState.path - originScreenIdentifier )
+            localNavigationState.value = navState.copy(
+                path = (navState.path - originScreenIdentifier).toMutableList(),
+                nextBackQuitsApp = nextBackQuitsApp
+            )
         }
         debugLogger.log("    to "+localNavigationState.value.level1ScreenIdentifier.URI)
         saveableStateHolder.removeState(originScreenIdentifier)

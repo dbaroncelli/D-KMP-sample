@@ -38,10 +38,9 @@ struct OnePane: View {
     
     var body: some View {
         NavigationStack(path: $appObj.localNavigationState.path) {
-            //let _ = NSLog("onePane top URI "+(appObj.localNavigationState.topScreenIdentifier.URI))
-            //let _ = NSLog("onePane level1ScreenIdentifier "+appObj.localNavigationState.level1ScreenIdentifier.URI)
             appObj.dkmpNav.screenPicker(requestedSId: appObj.localNavigationState.level1ScreenIdentifier, navState: appObj.localNavigationState)
                 .navigationDestination(for: ScreenIdentifier.self) { sId in
+                    let _ = appObj.dkmpNav.navigateToScreen(screenIdentifier: sId)
                     appObj.dkmpNav.screenPicker(requestedSId: sId, navState: appObj.localNavigationState)
                 }
         }

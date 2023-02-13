@@ -2,7 +2,6 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
-import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
@@ -37,6 +36,5 @@ fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSett
             )
         }
     },
-    runCallOnInitBeforeNavigationTransition = true,
-    reinitOnEachNavigation = true, // in this way favourites can refresh
+    callOnInitAtEachNavigation = true, // in this way favourites can refresh
 )

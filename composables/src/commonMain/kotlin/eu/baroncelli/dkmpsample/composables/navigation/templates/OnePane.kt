@@ -8,6 +8,7 @@ import eu.baroncelli.dkmpsample.composables.navigation.*
 import eu.baroncelli.dkmpsample.composables.navigation.bars.Level1BottomBar
 import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
+import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 @Composable
 fun Navigation.OnePane(

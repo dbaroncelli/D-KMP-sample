@@ -8,5 +8,5 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 @Composable
 expect fun Navigation.HandleBackButton(
     saveableStateHolder: SaveableStateHolder,
-    localNavigationState: MutableState<LocalNavigationState>
+    localNavigationState: MutableState<LocalNavigationState>,
 )

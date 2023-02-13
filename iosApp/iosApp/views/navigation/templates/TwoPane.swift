@@ -51,6 +51,24 @@ extension Navigation {
     
 }
 
+struct TwoPane: View {
+    @EnvironmentObject var appObj: AppObservableObject
+    
+    var body: some View {
+        NavigationStack(path: $appObj.localNavigationState.path) {
+            appObj.dkmpNav.screenPicker(requestedSId: appObj.localNavigationState.level1ScreenIdentifier, navState: appObj.localNavigationState)
+                .navigationDestination(for: ScreenIdentifier.self) { sId in
+                    appObj.dkmpNav.screenPicker(requestedSId: sId, navState: appObj.localNavigationState)
+                }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Level1ButtonBar()
+            }
+        }
+    }
+}
+
 
 func twoPaneMasterScreen(_ navState: LocalNavigationState) -> ScreenIdentifier {
     if (navState.path.count > 1) {

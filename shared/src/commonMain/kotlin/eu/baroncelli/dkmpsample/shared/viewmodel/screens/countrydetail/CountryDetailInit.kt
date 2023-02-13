@@ -26,5 +26,5 @@ fun StateManager.initCountryDetail(params: CountryDetailParams) = ScreenInitSett
                 countryInfo = countryInfo,
             )
         }
-    }
+    },
 )

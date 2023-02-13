@@ -34,20 +34,15 @@ struct LocalNavigationState {
     }
 }
 
-
 struct Router: View {
     
     var body: some View {
         VStack {
-            //ForEach(self.level1ScreenIdentifiers, id: \.self.URI) { screenIdentifier in
-                if !isTwoPane() {
-                    OnePane()
-                        //.opacity(localNavigationState.level1ScreenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
-                } else {
-                    //TwoPane(navState: navState)
-                        //.opacity(localNavigationState.level1ScreenIdentifier.URI == self.currentLevel1ScreenIdentifier.URI ? 1 : 0)
-                }
-            //}
+            if !isTwoPane() {
+                OnePane()
+            } else {
+                TwoPane()
+            }
         }
         .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
     }
@@ -69,12 +64,19 @@ func isTwoPane() -> Bool {
 
 extension Navigation {
     
+    func getStartNavigationState() -> LocalNavigationState {
+        let screenIdentifier = getStartScreenIdentifier()
+        selectLevel1Navigation(level1ScreenIdentifier: screenIdentifier)
+        return LocalNavigationState(level1ScreenIdentifier: screenIdentifier, path: [])
+    }
+    
     func navigate(_ screen: Screen, _ params: ScreenParams?) -> ScreenIdentifier {
         return ScreenIdentifier.Factory().get(screen: screen, params: params)
     }
 
     func navigateByLevel1Menu(_ appObj: AppObservableObject, level1Navigation: Level1Navigation) {
         //NSLog("UI NAVIGATION RECOMPOSITION: navigate level 1 -> "+level1Navigation.screenIdentifier.URI)
+        selectLevel1Navigation(level1ScreenIdentifier: level1Navigation.screenIdentifier)
         appObj.localNavigationState = LocalNavigationState(
             level1ScreenIdentifier: level1Navigation.screenIdentifier,
             path: appObj.dkmpNav.getPath(level1ScreenIdentifier: level1Navigation.screenIdentifier) as! [ScreenIdentifier]
