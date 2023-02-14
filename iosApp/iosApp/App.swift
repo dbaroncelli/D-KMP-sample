@@ -12,6 +12,8 @@ import shared
 struct iosApp: App {
     @StateObject var appObj = AppObservableObject()
     @Environment(\.scenePhase) var scenePhase
+    @State var orientation = UIDevice.current.orientation
+    
     var body: some Scene {
         WindowGroup {
             Router()
@@ -25,10 +27,23 @@ struct iosApp: App {
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
-                    if appObj.localNavigationState.isOrientationChanged(UIDevice.current.orientation) {
+                    if isOrientationChanged(UIDevice.current.orientation) {
                             appObj.dkmpNav.onChangeOrientation()
                     }
                 }
         }
     }
+    
+    
+    func isOrientationChanged(_ newOrientation: UIDeviceOrientation) -> Bool {
+        if UIDevice.current.orientation != UIDeviceOrientation.faceDown && UIDevice.current.orientation != UIDeviceOrientation.faceUp {
+            if newOrientation != orientation {
+                orientation = newOrientation
+                return true
+            }
+        }
+        return false
+    }
+    
+    
 }

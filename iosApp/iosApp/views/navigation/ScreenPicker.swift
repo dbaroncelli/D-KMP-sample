@@ -8,12 +8,13 @@
 import SwiftUI
 import shared
 
+
+
 extension Navigation {
     
-    @ViewBuilder func screenPicker(requestedSId: ScreenIdentifier, navState: LocalNavigationState) -> some View {
+    
+    @ViewBuilder func screenPicker(requestedSId: ScreenIdentifier) -> some View {
         
-        let currentSId = navState.topScreenIdentifier
-
         VStack {
         
             switch requestedSId.screen {
@@ -43,15 +44,16 @@ extension Navigation {
         }
         .navigationTitle(getTitle(screenIdentifier: requestedSId))
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear { if requestedSId.URI == currentSId.URI {
+        .onAppear { if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
             NSLog("  onAppear: "+requestedSId.URI)
         } }
-        .onDisappear { if requestedSId.URI == currentSId.URI {
+        .onDisappear { if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
             self.exitScreen(screenIdentifier: requestedSId)
         } }
         
         
     }
+    
     
     
     @ViewBuilder func twoPaneDefaultDetail(_ sId: ScreenIdentifier) -> some View {

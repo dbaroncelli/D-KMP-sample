@@ -14,13 +14,14 @@ class AppObservableObject: ObservableObject {
         return self.appState.getNavigation(model: self.model)
     }
     @Published var appState : AppState
-    @Published var localNavigationState : LocalNavigationState
+    @Published var localNavigationState : NavigationState
+    
 
 
     init() {
         // "getDefaultAppState" and "onChange" are iOS-only DKMPViewModel's extension functions, defined in shared/iosMain
         self.appState = model.getDefaultAppState()
-        self.localNavigationState = model.navigation.getStartNavigationState()
+        self.localNavigationState = model.navigation.navigationState
         model.onChange { newState in
             self.appState = newState
             NSLog("APP STATE RECOMPOSITION: index #"+String(newState.recompositionIndex))

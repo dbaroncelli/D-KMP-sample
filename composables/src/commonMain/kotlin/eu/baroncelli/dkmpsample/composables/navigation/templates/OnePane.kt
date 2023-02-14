@@ -8,12 +8,13 @@ import eu.baroncelli.dkmpsample.composables.navigation.*
 import eu.baroncelli.dkmpsample.composables.navigation.bars.Level1BottomBar
 import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
+import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 @Composable
 fun Navigation.OnePane(
     saveableStateHolder: SaveableStateHolder,
-    localNavigationState: MutableState<LocalNavigationState>
+    localNavigationState: MutableState<NavigationState>
 ) {
     val screenIdentifier = localNavigationState.value.topScreenIdentifier
     val title = getTitle(screenIdentifier)

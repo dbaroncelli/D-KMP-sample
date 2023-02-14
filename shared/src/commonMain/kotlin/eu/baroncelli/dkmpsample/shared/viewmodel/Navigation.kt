@@ -2,20 +2,39 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 
+data class NavigationState (
+    val level1ScreenIdentifier : ScreenIdentifier,
+    var path : MutableList<ScreenIdentifier>, // path is the backstack without the level1ScreenIdentifier
+    val nextBackQuitsApp: Boolean
+) {
+    val topScreenIdentifier = if (path.isEmpty()) level1ScreenIdentifier else path.last()
+}
+
+
 class Navigation(val stateManager : StateManager) {
 
     val stateProvider by lazy { StateProvider(stateManager) }
     val events by lazy { Events(stateManager) }
+
+    var navigationState = getStartNavigationState()
+
+    val nextBackQuitsApp : Boolean
+        get() = stateManager.level1Backstack.size + stateManager.currentVerticalBackstack.size == 2
 
     var savedLevel1URI
         get() = stateManager.dataRepository.localSettings.savedLevel1URI
         set(value) { stateManager.dataRepository.localSettings.savedLevel1URI = value }
 
 
-
     fun getTitle(screenIdentifier: ScreenIdentifier) : String {
         val screenInitSettings = screenIdentifier.getScreenInitSettings(stateManager)
         return screenInitSettings.title
+    }
+
+    fun getStartNavigationState() : NavigationState {
+        val screenIdentifier = getStartScreenIdentifier()
+        selectLevel1Navigation(screenIdentifier)
+        return NavigationState(screenIdentifier, mutableListOf(), nextBackQuitsApp)
     }
 
     fun getStartScreenIdentifier() : ScreenIdentifier {
@@ -26,11 +45,17 @@ class Navigation(val stateManager : StateManager) {
         return startScreenIdentifier
     }
 
-    val nextBackQuitsApp : Boolean
-        get() = stateManager.level1Backstack.size + stateManager.currentVerticalBackstack.size == 2
+    fun updateNavigationState() {
+        navigationState = NavigationState(
+            level1ScreenIdentifier = stateManager.currentLevel1ScreenIdentifier!!,
+            path = getPath(stateManager.currentLevel1ScreenIdentifier!!),
+            nextBackQuitsApp = nextBackQuitsApp
+        )
+        if (navigationSettings.saveLastLevel1Screen && navigationState.topScreenIdentifier.screen.navigationLevel==1) {
+            savedLevel1URI = navigationState.topScreenIdentifier.URI
+        }
+    }
 
-
-    // it gets the path when switching to a different level1ScreenIdentifier vertical navigation
     fun getPath(level1ScreenIdentifier: ScreenIdentifier) : MutableList<ScreenIdentifier> {
         val path = mutableListOf<ScreenIdentifier>()
         val verticalNavigationLevel = stateManager.verticalNavigationLevels[level1ScreenIdentifier.URI]
@@ -39,11 +64,9 @@ class Navigation(val stateManager : StateManager) {
                 path.add( verticalNavigationLevel[it]!! )
             }
         }
-        if (navigationSettings.saveLastLevel1Screen) {
-            savedLevel1URI = level1ScreenIdentifier.URI
-        }
         return path
     }
+
 
 
     // NAVIGATION FUNCTIONS
@@ -52,11 +75,13 @@ class Navigation(val stateManager : StateManager) {
         if (isInAnyVerticalNavigationLevel(screenIdentifier)) {
             return
         }
+        debugLogger.log("UI NAVIGATION RECOMPOSITION: navigate -> "+screenIdentifier.URI)
         addScreenToBackstack(screenIdentifier)
+        updateNavigationState()
     }
 
     fun selectLevel1Navigation(level1ScreenIdentifier: ScreenIdentifier) {
-        debugLogger.log("selectLevel1Navigation: "+level1ScreenIdentifier.URI)
+        debugLogger.log("UI NAVIGATION RECOMPOSITION: navigate level 1 -> "+level1ScreenIdentifier.URI)
         cleanCurrentVerticalBackstacks()
         stateManager.level1Backstack.removeAll { it.URI == level1ScreenIdentifier.URI }
         if (navigationSettings.alwaysQuitOnHomeScreen) {
@@ -75,6 +100,7 @@ class Navigation(val stateManager : StateManager) {
                 addScreenToBackstack(it)
             }
         }
+        updateNavigationState()
     }
 
     fun cleanCurrentVerticalBackstacks() {
@@ -97,8 +123,6 @@ class Navigation(val stateManager : StateManager) {
     }
 
 
-
-
     // ADD SCREEN TO BACKSTACK
 
     fun addScreenToBackstack(screenIdentifier: ScreenIdentifier) {
@@ -109,13 +133,14 @@ class Navigation(val stateManager : StateManager) {
     }
 
 
+
+
     // EXIT SCREEN
 
     fun exitScreen(screenIdentifier: ScreenIdentifier) {
         if (!stateManager.currentVerticalBackstack.any { it.URI == screenIdentifier.URI }) {
             return
         }
-        debugLogger.log("exitScreen: "+screenIdentifier.URI)
         if (screenIdentifier.screen.navigationLevel == 1) {
             stateManager.level1Backstack.removeLast()
             stateManager.verticalNavigationLevels.remove(screenIdentifier.URI)
@@ -134,12 +159,14 @@ class Navigation(val stateManager : StateManager) {
                 stateManager.removeScreen(screenIdentifier)
             }
         }
+        debugLogger.log("UI NAVIGATION RECOMPOSITION: back to "+stateManager.currentScreenIdentifier.URI)
         val newScreenInitSettings = stateManager.currentScreenIdentifier.getScreenInitSettings(stateManager)
         if (newScreenInitSettings.callOnInitAtEachNavigation) {
             stateManager.runInScreenScope(screenIdentifier) {
                 newScreenInitSettings.callOnInit(stateManager)
             }
         }
+        updateNavigationState()
     }
 
     fun isInAnyVerticalNavigationLevel(screenIdentifier: ScreenIdentifier) : Boolean {
@@ -156,12 +183,11 @@ class Navigation(val stateManager : StateManager) {
 
 
 
-
     fun onReEnterForeground() {
         // not called at app startup, but only when reentering the app after it was in background
         debugLogger.log("onReEnterForeground: recomposition is triggered")
         val reinitializedScreens = stateManager.reinitScreenScopes()
-        stateManager.triggerRecomposition()
+        stateManager.triggerAppStateRecomposition()
         reinitializedScreens.forEach {
             it.getScreenInitSettings(stateManager).apply {
                 if (callOnInitAlsoAfterBackground) {
@@ -178,7 +204,7 @@ class Navigation(val stateManager : StateManager) {
 
     fun onChangeOrientation() {
         debugLogger.log("onChangeOrientation: recomposition is triggered")
-        stateManager.triggerRecomposition()
+        stateManager.triggerAppStateRecomposition()
     }
 
 

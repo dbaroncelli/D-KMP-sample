@@ -11,12 +11,13 @@ import eu.baroncelli.dkmpsample.composables.navigation.*
 import eu.baroncelli.dkmpsample.composables.navigation.bars.Level1NavigationRail
 import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
+import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 
 @Composable
 fun Navigation.TwoPane(
     saveableStateHolder: SaveableStateHolder,
-    localNavigationState: MutableState<LocalNavigationState>
+    localNavigationState: MutableState<NavigationState>
 ) {
     val title = getTitle(localNavigationState.value.topScreenIdentifier)
     val masterScreenIdentifier = twoPaneMasterScreen(localNavigationState)
@@ -53,7 +54,7 @@ fun Navigation.TwoPane(
 }
 
 
-fun Navigation.twoPaneMasterScreen(localNavigationState: MutableState<LocalNavigationState>) : ScreenIdentifier {
+fun Navigation.twoPaneMasterScreen(localNavigationState: MutableState<NavigationState>) : ScreenIdentifier {
     if (localNavigationState.value.path.size > 1) {
         return localNavigationState.value.path[localNavigationState.value.path.size-2]
     } else {
@@ -61,7 +62,7 @@ fun Navigation.twoPaneMasterScreen(localNavigationState: MutableState<LocalNavig
     }
 }
 
-fun Navigation.twoPaneDetailScreen(localNavigationState: MutableState<LocalNavigationState>) : ScreenIdentifier? {
+fun Navigation.twoPaneDetailScreen(localNavigationState: MutableState<NavigationState>) : ScreenIdentifier? {
     if (localNavigationState.value.path.size > 1) {
         return localNavigationState.value.path.last()
     } else {

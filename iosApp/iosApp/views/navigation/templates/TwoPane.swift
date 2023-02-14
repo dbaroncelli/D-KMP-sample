@@ -12,7 +12,7 @@ import shared
 
 extension Navigation {
     
-    @ViewBuilder func twoPane(_ navState: LocalNavigationState) -> some View {
+    @ViewBuilder func twoPane(_ navState: NavigationState) -> some View {
         
         NavigationView {
             /*
@@ -51,11 +51,14 @@ extension Navigation {
     
 }
 
+
 struct TwoPane: View {
     @EnvironmentObject var appObj: AppObservableObject
     
     var body: some View {
-        NavigationStack(path: $appObj.localNavigationState.path) {
+        Text("test")
+        /*
+        NavigationStack(path: $appObj.localNavigationState.path as! Binding<[ScreenIdentifier]>) {
             appObj.dkmpNav.screenPicker(requestedSId: appObj.localNavigationState.level1ScreenIdentifier, navState: appObj.localNavigationState)
                 .navigationDestination(for: ScreenIdentifier.self) { sId in
                     appObj.dkmpNav.screenPicker(requestedSId: sId, navState: appObj.localNavigationState)
@@ -66,11 +69,12 @@ struct TwoPane: View {
                 Level1ButtonBar()
             }
         }
+         */
     }
 }
 
-
-func twoPaneMasterScreen(_ navState: LocalNavigationState) -> ScreenIdentifier {
+/*
+func twoPaneMasterScreen(_ navState: NavigationState) -> ScreenIdentifier {
     if (navState.path.count > 1) {
         return navState.path[navState.path.count-2]
     } else {
@@ -78,10 +82,11 @@ func twoPaneMasterScreen(_ navState: LocalNavigationState) -> ScreenIdentifier {
     }
 }
 
-func twoPaneDetailScreen(_ navState: LocalNavigationState) -> ScreenIdentifier? {
+func twoPaneDetailScreen(_ navState: NavigationState) -> ScreenIdentifier? {
     if (navState.path.count > 1) {
         return navState.path.last
     } else {
         return nil
     }
 }
+*/

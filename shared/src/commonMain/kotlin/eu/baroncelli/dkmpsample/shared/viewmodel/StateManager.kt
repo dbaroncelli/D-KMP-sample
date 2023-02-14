@@ -30,7 +30,7 @@ class StateManager(repo: Repository) {
     internal val dataRepository by lazy { repo }
 
 
-    fun triggerRecomposition() {
+    fun triggerAppStateRecomposition() {
         mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
     }
 
@@ -80,7 +80,7 @@ class StateManager(repo: Repository) {
                 screenIdentifier = currentVerticalNavigationLevelsMap[i]!!
                 screenStatesMap[screenIdentifier.URI] = update(screenState)
                 debugLogger.log("state updated @ /${screenIdentifier.URI}")
-                triggerRecomposition()
+                triggerAppStateRecomposition()
                 return
             }
         }

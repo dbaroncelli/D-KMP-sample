@@ -12,27 +12,6 @@ import shared
 
 let twopaneWidthThreshold : CGFloat = 1000
 
-struct LocalNavigationState {
-    var level1ScreenIdentifier: ScreenIdentifier
-    var path: [ScreenIdentifier] { // path is the backstack without the level1ScreenIdentifier
-        didSet {
-            NSLog("UI NAVIGATION RECOMPOSITION: URI changed "+level1ScreenIdentifier.URI+" / "+self.path.map{$0.URI}.joined(separator: " / "))
-        }
-    }
-    var topScreenIdentifier: ScreenIdentifier {
-        return path.isEmpty ? level1ScreenIdentifier : path.last!
-    }
-    var orientation = UIDevice.current.orientation
-    mutating func isOrientationChanged(_ newOrientation: UIDeviceOrientation) -> Bool {
-        if UIDevice.current.orientation != UIDeviceOrientation.faceDown && UIDevice.current.orientation != UIDeviceOrientation.faceUp {
-            if newOrientation != orientation {
-                self.orientation = newOrientation
-                return true
-            }
-        }
-        return false
-    }
-}
 
 struct Router: View {
     
@@ -46,6 +25,7 @@ struct Router: View {
         }
         .toolbarColor(backgroundUIColor: UIColor(customBgColor), tintUIColor: .white)
     }
+    
 }
 
 
@@ -64,23 +44,13 @@ func isTwoPane() -> Bool {
 
 extension Navigation {
     
-    func getStartNavigationState() -> LocalNavigationState {
-        let screenIdentifier = getStartScreenIdentifier()
-        selectLevel1Navigation(level1ScreenIdentifier: screenIdentifier)
-        return LocalNavigationState(level1ScreenIdentifier: screenIdentifier, path: [])
-    }
-    
     func navigate(_ screen: Screen, _ params: ScreenParams?) -> ScreenIdentifier {
         return ScreenIdentifier.Factory().get(screen: screen, params: params)
     }
 
     func navigateByLevel1Menu(_ appObj: AppObservableObject, level1Navigation: Level1Navigation) {
-        //NSLog("UI NAVIGATION RECOMPOSITION: navigate level 1 -> "+level1Navigation.screenIdentifier.URI)
-        selectLevel1Navigation(level1ScreenIdentifier: level1Navigation.screenIdentifier)
-        appObj.localNavigationState = LocalNavigationState(
-            level1ScreenIdentifier: level1Navigation.screenIdentifier,
-            path: appObj.dkmpNav.getPath(level1ScreenIdentifier: level1Navigation.screenIdentifier) as! [ScreenIdentifier]
-        )
+        selectLevel1Navigation(level1ScreenIdentifier: level1Navigation.screenIdentifier) // change navigationState
+        appObj.localNavigationState = navigationState
     }
     
 }
