@@ -5,8 +5,7 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
 
 For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
-
-<img width="500" src="https://user-images.githubusercontent.com/5320104/118643793-4c424900-b7dd-11eb-85c7-1f55b06da6aa.png"></img>
+<img width="500" src="https://user-images.githubusercontent.com/5320104/219509473-773b9830-11a9-434c-afb4-9c1f2a684eeb.png"></img>
 
 **Note**: in order to run the sample you should use the latest **Android Studio** [Canary build](https://developer.android.com/studio/preview).
 
