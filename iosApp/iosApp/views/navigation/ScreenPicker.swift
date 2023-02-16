@@ -28,13 +28,7 @@ extension Navigation {
                 
             case .countrydetail:
                 CountryDetailScreen(
-                    countryDetailState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! CountryDetailState,
-                    ontestScreenOpened: { name in self.navigate(.level3screen, Level3ScreenParams(name: name)) }
-                )
-                
-            case .level3screen:
-                Level3Screen(
-                    level3ScreenState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! Level3ScreenState
+                    countryDetailState: self.stateProvider.getToCast(screenIdentifier: requestedSId) as! CountryDetailState
                 )
                 
             default:

@@ -17,7 +17,6 @@
 		6442C360265BF1ED00B0D26E /* Level1NavigationRail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6442C35F265BF1ED00B0D26E /* Level1NavigationRail.swift */; };
 		64884FA7260163D900AD1112 /* Level1BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64884FA6260163D900AD1112 /* Level1BottomBar.swift */; };
 		64A9E0D22641D8E00065309C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A9E0D12641D8DE0065309C /* Router.swift */; };
-		64F98D12268F67AE00C9E503 /* Level3Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F98D11268F67AE00C9E503 /* Level3Screen.swift */; };
 		64F9CB4C25FCE90300527AD8 /* AppObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */; };
 		64F9CB4D25FCE90300527AD8 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB4B25FCE90300527AD8 /* App.swift */; };
 		64F9CB5325FCE91300527AD8 /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9CB5125FCE91300527AD8 /* Toolbar.swift */; };
@@ -42,7 +41,6 @@
 		649CF508298C113A00B3AC6E /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		649CF50F2995B9C800B3AC6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		64A9E0D12641D8DE0065309C /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		64F98D11268F67AE00C9E503 /* Level3Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level3Screen.swift; sourceTree = "<group>"; };
 		64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppObservableObject.swift; sourceTree = "<group>"; };
 		64F9CB4B25FCE90300527AD8 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		64F9CB5125FCE91300527AD8 /* Toolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
@@ -120,18 +118,9 @@
 			children = (
 				64F9CB9C25FCF89F00527AD8 /* countrieslist */,
 				64F9CB9D25FCF8A700527AD8 /* countrydetail */,
-				64F98D10268F678F00C9E503 /* level3screen */,
 				6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */,
 			);
 			path = screens;
-			sourceTree = "<group>";
-		};
-		64F98D10268F678F00C9E503 /* level3screen */ = {
-			isa = PBXGroup;
-			children = (
-				64F98D11268F67AE00C9E503 /* Level3Screen.swift */,
-			);
-			path = level3screen;
 			sourceTree = "<group>";
 		};
 		64F9CB9C25FCF89F00527AD8 /* countrieslist */ = {
@@ -296,7 +285,6 @@
 				6442C360265BF1ED00B0D26E /* Level1NavigationRail.swift in Sources */,
 				6402EBF5264E7CE3009AC8FF /* ScreenPicker.swift in Sources */,
 				64F9CBA125FCF8D400527AD8 /* CountriesListHeader.swift in Sources */,
-				64F98D12268F67AE00C9E503 /* Level3Screen.swift in Sources */,
 				6402EBF3264E7CCC009AC8FF /* LoadingScreen.swift in Sources */,
 				64F9CB4D25FCE90300527AD8 /* App.swift in Sources */,
 				64F9CBA225FCF8D400527AD8 /* CountriesListRow.swift in Sources */,

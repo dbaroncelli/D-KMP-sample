@@ -17,7 +17,7 @@ class ScreenInitSettings(
     val initState: (ScreenIdentifier) -> ScreenState,
     val callOnInit: suspend (StateManager) -> Unit,
     val callOnInitAtEachNavigation: CallOnInitValues = CallOnInitValues.DONT_CALL,
-    /* By default (DONT_CALL), a screen doesn't get reinitialized if it becomes active again: its cached state is used.
+    /* By default (DONT_CALL), a screen doesn't get reinitialized when it becomes active again: its cached state is used.
        If you want to refresh it each time it becomes active, you want to call the "callOnInit" function again, selecting one of the 2 following values:
     use cases for callOnInitAtEachNavigation = CALL_AFTER_SHOWING_SCREEN:
         If "callOnInit" retrieves data from the network, you might want to first show the screen with the cached state,
