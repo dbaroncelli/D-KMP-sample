@@ -88,7 +88,6 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - :white_check_mark: the **Router.swift** file in the **composables/navigation** folder doesn't need to be modified
   - :hammer_and_wrench: in the **ScreenPicker.swift** file in the **views/navigation** folder, you should define the screen composables in your app
   - :hammer_and_wrench: in the **views/screens** folder: create a folder for each screen of the app, containing all SwiftUI views for that screen
-  - :white_check_mark: the **MainView.swift** file doesn't need to be modified
   - :white_check_mark: the **App.swift** file doesn't need to be modified
   - :white_check_mark: the **AppObservableObject.swift** file doesn't need to be modified
 <br>

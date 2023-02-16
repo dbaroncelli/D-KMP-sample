@@ -37,14 +37,14 @@ fun Navigation.Router() {
 fun Navigation.navigationProcessor(localNavigationState: MutableState<NavigationState>) : (Screen, ScreenParams?) -> Unit {
     return { screen, screenParams ->
         val screenIdentifier = ScreenIdentifier.get(screen, screenParams)
-        navigateToScreen(screenIdentifier) // change navigationState
-        localNavigationState.value = navigationState
+        navigateToScreen(screenIdentifier) // shared navigationState is updated
+        localNavigationState.value = navigationState // update localNavigationState
     }
 }
 
 fun Navigation.level1NavigationProcessor(localNavigationState: MutableState<NavigationState>) : (Level1Navigation) -> Unit {
     return {
-        selectLevel1Navigation(it.screenIdentifier) // change navigationState
-        localNavigationState.value = navigationState
+        selectLevel1Navigation(it.screenIdentifier) // shared navigationState is updated
+        localNavigationState.value = navigationState // update localNavigationState
     }
 }

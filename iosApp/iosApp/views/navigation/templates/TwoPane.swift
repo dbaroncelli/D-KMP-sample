@@ -10,83 +10,28 @@ import SwiftUI
 import shared
 
 
-extension Navigation {
-    
-    @ViewBuilder func twoPane(_ navState: NavigationState) -> some View {
-        
-        NavigationView {
-            /*
-            HStack {
-                VStack {
-                    level1NavigationRail(selectedTab: navigationLevelsMap[1]!)
-                }
-                .padding(.leading,30)
-                .frame(maxWidth: 120, maxHeight: .infinity)
-                .background(customBgColor)
-                .ignoresSafeArea()
-                
-                VStack {
-                    self.screenPicker(navigationLevelsMap[1]!)
-                }
-                .frame(width: 420)
-                
-                VStack {
-                    if navigationLevelsMap[2] == nil {
-                        twoPaneDefaultDetail(navigationLevelsMap[1]!)
-                    } else {
-                        self.screenPicker(navigationLevelsMap[2]!)
-                            .padding(20)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity)
-            .navigationBarTitle(getTitle(screenIdentifier: navigationLevelsMap[2] ?? navigationLevelsMap[1]!), displayMode: .inline)
-             */
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-        
-    }
-    
-    
-}
-
-
 struct TwoPane: View {
     @EnvironmentObject var appObj: AppObservableObject
+    var level1ScreenIdentifier : ScreenIdentifier
     
     var body: some View {
-        Text("test")
-        /*
-        NavigationStack(path: $appObj.localNavigationState.path as! Binding<[ScreenIdentifier]>) {
-            appObj.dkmpNav.screenPicker(requestedSId: appObj.localNavigationState.level1ScreenIdentifier, navState: appObj.localNavigationState)
+        NavigationSplitView(columnVisibility: .constant(.all)) {
+            Level1NavigationRail()
+                .padding(.leading, 28)
+                .padding(.trailing, 12)
+                .background(customBgColor)
+                .navigationSplitViewColumnWidth(ideal: 100)
+        } content: {
+            appObj.dkmpNav.screenPicker(requestedSId: level1ScreenIdentifier)
                 .navigationDestination(for: ScreenIdentifier.self) { sId in
-                    appObj.dkmpNav.screenPicker(requestedSId: sId, navState: appObj.localNavigationState)
+                    let _ = appObj.dkmpNav.navigateToScreenForIos(screenIdentifier: sId, level1ScreenIdentifier: level1ScreenIdentifier)
+                    appObj.dkmpNav.screenPicker(requestedSId: sId)
                 }
+                .navigationSplitViewColumnWidth(ideal: 420)
+        } detail: {
+            appObj.dkmpNav.twoPaneDefaultDetail(level1ScreenIdentifier: level1ScreenIdentifier)
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
-                Level1ButtonBar()
-            }
-        }
-         */
+        .navigationSplitViewStyle(.balanced)
     }
+    
 }
-
-/*
-func twoPaneMasterScreen(_ navState: NavigationState) -> ScreenIdentifier {
-    if (navState.path.count > 1) {
-        return navState.path[navState.path.count-2]
-    } else {
-        return navState.level1ScreenIdentifier
-    }
-}
-
-func twoPaneDetailScreen(_ navState: NavigationState) -> ScreenIdentifier? {
-    if (navState.path.count > 1) {
-        return navState.path.last
-    } else {
-        return nil
-    }
-}
-*/

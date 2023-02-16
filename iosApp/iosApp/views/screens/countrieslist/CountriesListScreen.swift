@@ -23,7 +23,6 @@ struct CountriesListScreen: View {
                             Text("empty list")
                         }
                     } else {
-                        // let _ = print("count: "+String(countriesListState.countriesListItems.count))
                         Section(header: CountriesListHeader()) {
                             ForEach (countriesListState.countriesListItems, id: \.name) { item in
                                 NavigationLink(value: onListItemClick(item.name) ) {
@@ -34,7 +33,7 @@ struct CountriesListScreen: View {
                                     )
                                 }
                             }
-                        }
+                         }
                     }
                 }
                 .listStyle(.insetGrouped)

@@ -17,24 +17,25 @@ struct Level1NavigationRail: View {
     @EnvironmentObject var appObj: AppObservableObject
         
     var body: some View {
-        let level1ScreenIdentifier = appObj.localNavigationState.level1ScreenIdentifier
-        Spacer()
-        NavigationRailButton(
-            itemLabel: "All Countries",
-            iconName: "list.bullet",
-            selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allcountries) }
-        )
-        NavigationRailButton(
-            itemLabel: "Favorites",
-            iconName: "star.fill",
-            selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
-        )
-        Spacer()
-
+        let level1ScreenIdentifier = appObj.localNavigationState.currentLevel1ScreenIdentifier
+        VStack {
+            Spacer()
+            NavigationRailButton(
+                itemLabel: "All Countries",
+                iconName: "list.bullet",
+                selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
+                onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allcountries) }
+            )
+            NavigationRailButton(
+                itemLabel: "Favorites",
+                iconName: "star.fill",
+                selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
+                onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
+            )
+            Spacer()
+        }
     }
-        
+    
 }
 
 

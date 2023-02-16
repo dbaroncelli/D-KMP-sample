@@ -1,13 +1,18 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 
 data class NavigationState (
-    val level1ScreenIdentifier : ScreenIdentifier,
-    var path : MutableList<ScreenIdentifier>, // path is the backstack without the level1ScreenIdentifier
+    val currentLevel1ScreenIdentifier : ScreenIdentifier,
+    var paths : MutableMap<String, MutableList<ScreenIdentifier>> = mutableMapOf(),
+    // in paths: key is the level1ScreenIdentifier URI, value is the vertical backstack without the level1ScreenIdentifier
     val nextBackQuitsApp: Boolean
 ) {
-    val topScreenIdentifier = if (path.isEmpty()) level1ScreenIdentifier else path.last()
+    val currentPath : MutableList<ScreenIdentifier>
+        get () = paths[currentLevel1ScreenIdentifier.URI]!!
+    val topScreenIdentifier : ScreenIdentifier
+        get () = if (currentPath.isEmpty()) currentLevel1ScreenIdentifier else currentPath.last()
 }
 
 
@@ -34,7 +39,7 @@ class Navigation(val stateManager : StateManager) {
     fun getStartNavigationState() : NavigationState {
         val screenIdentifier = getStartScreenIdentifier()
         selectLevel1Navigation(screenIdentifier)
-        return NavigationState(screenIdentifier, mutableListOf(), nextBackQuitsApp)
+        return NavigationState(screenIdentifier, mutableMapOf(screenIdentifier.URI to mutableListOf()), nextBackQuitsApp)
     }
 
     fun getStartScreenIdentifier() : ScreenIdentifier {
@@ -47,41 +52,54 @@ class Navigation(val stateManager : StateManager) {
 
     fun updateNavigationState() {
         navigationState = NavigationState(
-            level1ScreenIdentifier = stateManager.currentLevel1ScreenIdentifier!!,
-            path = getPath(stateManager.currentLevel1ScreenIdentifier!!),
+            currentLevel1ScreenIdentifier = stateManager.currentLevel1ScreenIdentifier!!,
+            paths = getPaths(),
             nextBackQuitsApp = nextBackQuitsApp
         )
         if (navigationSettings.saveLastLevel1Screen && navigationState.topScreenIdentifier.screen.navigationLevel==1) {
             savedLevel1URI = navigationState.topScreenIdentifier.URI
         }
+        debugLogger.log("UI NAVIGATION RECOMPOSITION: topScreenIdentifier URI -> "+navigationState.topScreenIdentifier.URI)
     }
 
-    fun getPath(level1ScreenIdentifier: ScreenIdentifier) : MutableList<ScreenIdentifier> {
-        val path = mutableListOf<ScreenIdentifier>()
-        val verticalNavigationLevel = stateManager.verticalNavigationLevels[level1ScreenIdentifier.URI]
-        verticalNavigationLevel?.keys?.sorted()?.forEach {
-            if (it>1) {
-                path.add( verticalNavigationLevel[it]!! )
+    fun getPaths() : MutableMap<String,MutableList<ScreenIdentifier>> {
+        val paths = mutableMapOf<String,MutableList<ScreenIdentifier>>()
+        stateManager.verticalNavigationLevels.values.forEach { levelsMap ->
+            val path = mutableListOf<ScreenIdentifier>()
+            levelsMap.keys.sorted().forEach {
+                if (it > 1) {
+                    path.add(levelsMap[it]!!)
+                }
             }
+            paths[levelsMap[1]!!.URI] = path
         }
-        return path
+        return paths
     }
 
 
 
     // NAVIGATION FUNCTIONS
 
-    fun navigateToScreen(screenIdentifier: ScreenIdentifier) {
-        if (isInAnyVerticalNavigationLevel(screenIdentifier)) {
+    // this function is called from iOS, and it calls the proper "navigateToScreen"
+    // only if it's the destination screenIdentifier is valid
+    fun navigateToScreenForIos(screenIdentifier: ScreenIdentifier, level1ScreenIdentifier: ScreenIdentifier) {
+        //debugLogger.log("navigateToScreenForIos: "+screenIdentifier.URI+" / level1ScreenIdentifier: "+level1ScreenIdentifier.URI)
+        if (level1ScreenIdentifier.URI != stateManager.currentLevel1ScreenIdentifier?.URI || stateManager.currentVerticalBackstack.any { it.URI==screenIdentifier.URI }) {
+            //debugLogger.log("navigateToScreenForIos: BLOCKED / shared side currentVerticalBackstack: "+stateManager.currentVerticalBackstack.map { it.URI })
             return
         }
-        debugLogger.log("UI NAVIGATION RECOMPOSITION: navigate -> "+screenIdentifier.URI)
+        navigateToScreen(screenIdentifier)
+    }
+
+    fun navigateToScreen(screenIdentifier: ScreenIdentifier) {
+        debugLogger.log("navigate -> "+screenIdentifier.URI)
         addScreenToBackstack(screenIdentifier)
         updateNavigationState()
     }
 
+
     fun selectLevel1Navigation(level1ScreenIdentifier: ScreenIdentifier) {
-        debugLogger.log("UI NAVIGATION RECOMPOSITION: navigate level 1 -> "+level1ScreenIdentifier.URI)
+        debugLogger.log("selectLevel1Navigation -> "+level1ScreenIdentifier.URI)
         cleanCurrentVerticalBackstacks()
         stateManager.level1Backstack.removeAll { it.URI == level1ScreenIdentifier.URI }
         if (navigationSettings.alwaysQuitOnHomeScreen) {
@@ -137,10 +155,18 @@ class Navigation(val stateManager : StateManager) {
 
     // EXIT SCREEN
 
-    fun exitScreen(screenIdentifier: ScreenIdentifier) {
-        if (!stateManager.currentVerticalBackstack.any { it.URI == screenIdentifier.URI }) {
+    // this function is called from iOS, and it calls the proper "exitScreen"
+    // only if the screenIdentifier to exit is valid
+    fun exitScreenForIos(screenIdentifier: ScreenIdentifier) {
+        //debugLogger.log("exitScreenForIos: " + screenIdentifier.URI)
+        if (screenIdentifier.URI != stateManager.currentScreenIdentifier.URI || nextBackQuitsApp) {
             return
         }
+        exitScreen(screenIdentifier)
+    }
+
+    fun exitScreen(screenIdentifier: ScreenIdentifier) {
+        debugLogger.log("exitScreen: "+screenIdentifier.URI)
         if (screenIdentifier.screen.navigationLevel == 1) {
             stateManager.level1Backstack.removeLast()
             stateManager.verticalNavigationLevels.remove(screenIdentifier.URI)
@@ -159,12 +185,9 @@ class Navigation(val stateManager : StateManager) {
                 stateManager.removeScreen(screenIdentifier)
             }
         }
-        debugLogger.log("UI NAVIGATION RECOMPOSITION: back to "+stateManager.currentScreenIdentifier.URI)
         val newScreenInitSettings = stateManager.currentScreenIdentifier.getScreenInitSettings(stateManager)
-        if (newScreenInitSettings.callOnInitAtEachNavigation) {
-            stateManager.runInScreenScope(screenIdentifier) {
-                newScreenInitSettings.callOnInit(stateManager)
-            }
+        if (newScreenInitSettings.callOnInitAtEachNavigation != CallOnInitValues.DONT_CALL) {
+            stateManager.runCallOnInit(stateManager.currentScreenIdentifier, newScreenInitSettings)
         }
         updateNavigationState()
     }
@@ -191,7 +214,7 @@ class Navigation(val stateManager : StateManager) {
         reinitializedScreens.forEach {
             it.getScreenInitSettings(stateManager).apply {
                 if (callOnInitAlsoAfterBackground) {
-                    stateManager.runInScreenScope { callOnInit(stateManager) }
+                    stateManager.runCallOnInit(it, this)
                 }
             }
         }
@@ -201,11 +224,5 @@ class Navigation(val stateManager : StateManager) {
         debugLogger.log("onEnterBackground: screen scopes are cancelled")
         stateManager.cancelScreenScopes()
     }
-
-    fun onChangeOrientation() {
-        debugLogger.log("onChangeOrientation: recomposition is triggered")
-        stateManager.triggerAppStateRecomposition()
-    }
-
 
 }

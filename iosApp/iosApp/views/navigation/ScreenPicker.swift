@@ -45,26 +45,27 @@ extension Navigation {
         .navigationTitle(getTitle(screenIdentifier: requestedSId))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear { if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
-            NSLog("  onAppear: "+requestedSId.URI)
+            NSLog("iOS side:  onAppear URI "+requestedSId.URI)
         } }
-        .onDisappear { if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
-            self.exitScreen(screenIdentifier: requestedSId)
-        } }
+        .onDisappear {
+            self.exitScreenForIos(screenIdentifier: requestedSId)
+        }
         
         
     }
     
     
     
-    @ViewBuilder func twoPaneDefaultDetail(_ sId: ScreenIdentifier) -> some View {
+    @ViewBuilder func twoPaneDefaultDetail(level1ScreenIdentifier: ScreenIdentifier) -> some View {
         
-        switch sId.screen {
+        switch level1ScreenIdentifier.screen {
 
         case .countrieslist: CountriesListTwoPaneDefaultDetail()
 
         default:
             EmptyView()
         }
+        
     }
     
     

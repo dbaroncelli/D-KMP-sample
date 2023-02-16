@@ -17,7 +17,7 @@ struct Level1ButtonBar: View {
     @EnvironmentObject var appObj: AppObservableObject
         
     var body: some View {
-        let level1ScreenIdentifier = appObj.localNavigationState.level1ScreenIdentifier
+        let level1ScreenIdentifier = appObj.localNavigationState.currentLevel1ScreenIdentifier
         Spacer()
         BottomBarButton(
             itemLabel: "All Countries",
@@ -33,8 +33,8 @@ struct Level1ButtonBar: View {
             onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
         )
         Spacer()
-        
     }
+    
 }
 
 

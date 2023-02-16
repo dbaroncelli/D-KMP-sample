@@ -1,6 +1,8 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.reflect.KClass
@@ -29,6 +31,7 @@ class StateManager(repo: Repository) {
 
     internal val dataRepository by lazy { repo }
 
+    var skipNextScreenUpdateRecomposition = false
 
     fun triggerAppStateRecomposition() {
         mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
@@ -41,23 +44,37 @@ class StateManager(repo: Repository) {
     fun initScreen(screenIdentifier: ScreenIdentifier) {
         debugLogger.log("initScreen: "+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
-        if (!isInTheStatesMap(screenIdentifier)) {
-            screenStatesMap[screenIdentifier.URI] = screenInitSettings.initState(screenIdentifier)
-        } else if (!screenInitSettings.callOnInitAtEachNavigation) {
-            return // in case the state is already in the map and the callOnInitAtEachNavigation is not enabled
-                    // we don't need to run the "callOnInit"
-        }
         if (screenScopesMap[screenIdentifier.URI] == null || !screenScopesMap[screenIdentifier.URI]!!.isActive) {
             screenScopesMap[screenIdentifier.URI]?.cancel()
             screenScopesMap[screenIdentifier.URI] = CoroutineScope(Job() + Dispatchers.Main)
         }
-        runInScreenScope(screenIdentifier) {
-            screenInitSettings.callOnInit(this)
+        var firstInit = false
+        if (!isInTheStatesMap(screenIdentifier)) {
+            firstInit = true
+            screenStatesMap[screenIdentifier.URI] = screenInitSettings.initState(screenIdentifier)
+        } else if (screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.DONT_CALL) {
+            return  // in case: the state is already in the map
+                    //          AND "callOnInitAtEachNavigation" is set to DONT_CALL
+                    //      => we don't need to run the "callOnInit" function
         }
+        runCallOnInit(screenIdentifier, screenInitSettings, firstInit)
     }
 
     fun isInTheStatesMap(screenIdentifier: ScreenIdentifier) : Boolean {
         return screenStatesMap.containsKey(screenIdentifier.URI)
+    }
+
+    fun runCallOnInit(screenIdentifier: ScreenIdentifier, screenInitSettings: ScreenInitSettings, firstInit : Boolean = false) {
+        if (!firstInit && screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN) {
+            runBlocking {
+                skipNextScreenUpdateRecomposition = true
+                screenInitSettings.callOnInit(this@StateManager)
+            }
+        } else {
+            runInScreenScope(screenIdentifier) {
+                screenInitSettings.callOnInit(this@StateManager)
+            }
+        }
     }
 
 
@@ -80,6 +97,10 @@ class StateManager(repo: Repository) {
                 screenIdentifier = currentVerticalNavigationLevelsMap[i]!!
                 screenStatesMap[screenIdentifier.URI] = update(screenState)
                 debugLogger.log("state updated @ /${screenIdentifier.URI}")
+                if (skipNextScreenUpdateRecomposition) {
+                    skipNextScreenUpdateRecomposition = false
+                    return
+                }
                 triggerAppStateRecomposition()
                 return
             }

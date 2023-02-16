@@ -13,6 +13,7 @@ import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 @Composable
 fun Navigation.TwoPane(
@@ -54,17 +55,14 @@ fun Navigation.TwoPane(
 }
 
 
-fun Navigation.twoPaneMasterScreen(localNavigationState: MutableState<NavigationState>) : ScreenIdentifier {
-    if (localNavigationState.value.path.size > 1) {
-        return localNavigationState.value.path[localNavigationState.value.path.size-2]
-    } else {
-        return localNavigationState.value.level1ScreenIdentifier
-    }
+
+fun Navigation.twoPaneMasterScreen(navState: MutableState<NavigationState>) : ScreenIdentifier {
+    return navState.value.currentLevel1ScreenIdentifier
 }
 
-fun Navigation.twoPaneDetailScreen(localNavigationState: MutableState<NavigationState>) : ScreenIdentifier? {
-    if (localNavigationState.value.path.size > 1) {
-        return localNavigationState.value.path.last()
+fun Navigation.twoPaneDetailScreen(navState: MutableState<NavigationState>) : ScreenIdentifier? {
+    if (navState.value.topScreenIdentifier.screen.navigationLevel > 1) {
+        return navState.value.topScreenIdentifier
     } else {
         return null
     }

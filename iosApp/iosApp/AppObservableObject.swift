@@ -24,7 +24,7 @@ class AppObservableObject: ObservableObject {
         self.localNavigationState = model.navigation.navigationState
         model.onChange { newState in
             self.appState = newState
-            NSLog("APP STATE RECOMPOSITION: index #"+String(newState.recompositionIndex))
+            NSLog("D-KMP SAMPLE: APP STATE RECOMPOSITION: index #"+String(newState.recompositionIndex))
         }
     }
 

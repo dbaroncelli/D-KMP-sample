@@ -5,6 +5,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesM
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.serialization.Serializable
 
@@ -36,5 +37,8 @@ fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSett
             )
         }
     },
-    callOnInitAtEachNavigation = true, // in this way favourites can refresh
+    callOnInitAtEachNavigation = CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN
+        // enabling in this way favourites can refresh at each navigation
+        // CALL_BEFORE_SHOWING_SCREEN is used, as favourites come from the local storage and not from the network
+        // (for more information about "callOnInitAtEachNavigation" values, look at "ScreenInitSettings" class definition)
 )

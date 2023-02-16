@@ -16,8 +16,8 @@ actual fun Navigation.HandleBackButton(
     BackHandler(!localNavigationState.value.nextBackQuitsApp) { // catching the back button
         val navState = localNavigationState.value
         val originScreenIdentifier = navState.topScreenIdentifier
-        exitScreen(originScreenIdentifier) // change navigationState
-        localNavigationState.value = navigationState
+        exitScreen(originScreenIdentifier) // shared navigationState is updated
+        localNavigationState.value = navigationState // update localNavigationState
         saveableStateHolder.removeState(originScreenIdentifier)
     }
 }
