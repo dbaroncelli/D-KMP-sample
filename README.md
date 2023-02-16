@@ -81,7 +81,7 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 
 ### iOS
 
-<img width="307" alt="Schermata 2021-06-26 alle 16 53 55" src="https://user-images.githubusercontent.com/5320104/123515587-496a2c00-d698-11eb-81b9-6fe3174d3c02.png"></img>
+<img width="307" alt="ios-files" src="https://user-images.githubusercontent.com/5320104/219498843-a2db7d84-6bd8-40f9-a730-79732d320d8a.png"></img>
   - :hammer_and_wrench: the **Level1BottomBar.swift**  and **Level1NavigationRail.swift** files in the **composables/navigation/bars** folder should be modified to custom the Navigation bars items
   - :white_check_mark: the **TopBar.swift** file in the **composables/navigation/bars** folder doesn't need to be modified
   - :white_check_mark: the **OnePane.swift**  and **TwoPane.swift** files in the **composables/navigation/templates** folder don't need to be modified
