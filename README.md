@@ -7,8 +7,6 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 
 <img width="500" src="https://user-images.githubusercontent.com/5320104/219511497-0c494b86-2716-420d-bbc7-fe50c552667a.png"></img>
 
-**Note**: in order to run the sample you should use the latest **Android Studio** [Canary build](https://developer.android.com/studio/preview).
-
 ## Key features of the D-KMP architecture:
 
 - it uses the latest **declarative UI** toolkits: **Compose** for *Android* and **SwiftUI** for *iOS*
@@ -17,6 +15,9 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - it implements the **MVI pattern** and the *unidirectional data flow*
 - it implements the **CQRS pattern**, by providing **Command** functions (via _Events_ and _Navigation_) and **Query** functions (via _StateProviders_)
 - it uses Kotlin's **StateFlow** to trigger UI layer recompositions
+- the navigation state is managed in the shared code, but exposed to the UI layer:
+  - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation pattern (_NavigationStack_ and/or _NavigationSplitView_)
+  - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
