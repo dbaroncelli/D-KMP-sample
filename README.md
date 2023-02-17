@@ -16,7 +16,7 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - it implements the **CQRS pattern**, by providing **Command** functions (via _Events_ and _Navigation_) and **Query** functions (via _StateProviders_)
 - it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 - the **navigation state** is processed in the **shared code**, and then exposed to the **UI layer**:
-  - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation pattern (_NavigationStack_ and/or _NavigationSplitView_)
+  - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation patterns (_NavigationStack_ and/or _NavigationSplitView_)
   - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
 
 ## Data sources used by this sample:
