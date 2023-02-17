@@ -3,8 +3,6 @@
 This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
 (*the **Web** version will be added at a later stage, when "Compose for Web" becomes [more mature](#web-not-yet-implemented)*)
 
-For more info on the D-KMP Architecture, please read the relevant [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
-
 <img width="500" src="https://user-images.githubusercontent.com/5320104/219511497-0c494b86-2716-420d-bbc7-fe50c552667a.png"></img>
 
 ## Key features of the D-KMP architecture:
@@ -18,6 +16,8 @@ For more info on the D-KMP Architecture, please read the relevant [Medium articl
 - the **navigation state** is processed in the **shared code**, and then exposed to the **UI layer**:
   - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation patterns (_NavigationStack_ and/or _NavigationSplitView_)
   - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
+
+you can find more background info on the D-KMP Architecture on this [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
