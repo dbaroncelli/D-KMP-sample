@@ -103,4 +103,4 @@ If you want to create your own app using the D-KMP Architecture, here are the in
 <br>
 
 ### Web (not yet implemented)
-  - The best technology to implement a Web App in Kotlin will be **Compose for Web** backed by **Kotlin/Wasm**. However Kotlin/Wasm is still at a very early stage: the first version was just released in February 2023, with [Kotlin 1.8.20](https://kotlinlang.org/docs/whatsnew-eap.html#new-kotlin-wasm-target). **Compose For Web** allows us to build Compose projects seamlessly for the Web, using the same composables we are already using for the Desktop and Android.
+  - The best technology to implement a Web App in Kotlin will be **Compose for Web** backed by **Kotlin/Wasm**. However _Kotlin/Wasm_ is still at a very early stage: the first version was just released in February 2023, with [Kotlin 1.8.20](https://kotlinlang.org/docs/whatsnew-eap.html#new-kotlin-wasm-target). _Compose For Web_ and _Kotlin/Wasm_ will allow us to build Compose projects seamlessly for the Web, using the same composables we are already using for the Desktop and Android.
