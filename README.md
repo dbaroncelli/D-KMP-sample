@@ -27,7 +27,7 @@ Declarative UIs with Kotlin MultiPlatform (D-KMP)](https://danielebaroncelli.med
 - **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **local settings** (using [MultiplaformSettings](https://github.com/russhwolf/multiplatform-settings))
 
-#### other popular KMP libraries for connecting to other data sources:
+#### these are other data sources, not used by this sample, for which popular KMP libraries exist:
 - **realtime db** (using [Firestore](https://github.com/GitLiveApp/firebase-kotlin-sdk))
 - **graphQL** (using [Apollo GraphQL](https://github.com/apollographql/apollo-android))
 - **device bluetooth** (using [Kable]( https://github.com/JuulLabs/kable))
