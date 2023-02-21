@@ -17,10 +17,10 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
   - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation patterns (_NavigationStack_ and/or _NavigationSplitView_)
   - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
 
-you can find more info on these articles:
-- [D-KMP sample now leverages iOS 16 navigation](https://danielebaroncelli.medium.com/d-kmp-sample-now-leverages-ios-16-navigation-cebbb81ba2e7) (february 2023)
-- [The future of apps:
-Declarative UIs with Kotlin MultiPlatform (D-KMP)](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343) (november 2020)
+_you can find more info on these articles:_
+- _[D-KMP sample now leverages iOS 16 navigation](https://danielebaroncelli.medium.com/d-kmp-sample-now-leverages-ios-16-navigation-cebbb81ba2e7) (february 2023)_
+- _[The future of apps:
+Declarative UIs with Kotlin MultiPlatform (D-KMP)](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343) (november 2020)_
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
