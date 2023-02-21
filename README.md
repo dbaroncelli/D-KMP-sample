@@ -17,14 +17,17 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
   - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation patterns (_NavigationStack_ and/or _NavigationSplitView_)
   - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
 
-you can find more background info on the D-KMP Architecture on this [Medium article](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343).
+you can find more info on these articles:
+- [D-KMP sample now leverages iOS 16 navigation](https://danielebaroncelli.medium.com/d-kmp-sample-now-leverages-ios-16-navigation-cebbb81ba2e7) (february 2023)
+- [The future of apps:
+Declarative UIs with Kotlin MultiPlatform (D-KMP)](https://danielebaroncelli.medium.com/the-future-of-apps-declarative-uis-with-kotlin-multiplatform-d-kmp-part-1-3-c0e1530a5343) (november 2020)
 
 ## Data sources used by this sample:
 - **webservices** (using [Ktor Http Client](https://ktor.io/docs/client.html))
 - **local db** (using [SqlDelight](https://github.com/cashapp/sqldelight))
 - **local settings** (using [MultiplaformSettings](https://github.com/russhwolf/multiplatform-settings))
 
-#### other popular KMP libraries for connecting to different data sources:
+#### other popular KMP libraries for connecting to other data sources:
 - **realtime db** (using [Firestore](https://github.com/GitLiveApp/firebase-kotlin-sdk))
 - **graphQL** (using [Apollo GraphQL](https://github.com/apollographql/apollo-android))
 - **device bluetooth** (using [Kable]( https://github.com/JuulLabs/kable))
