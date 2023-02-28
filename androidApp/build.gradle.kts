@@ -14,10 +14,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-process:2.5.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.2")
-    implementation(compose.runtime)
 }
 
 android {
+    namespace = "eu.baroncelli.dkmpsample"
     compileSdk = extra["android.compileSdk"].toString().toInt()
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
@@ -52,5 +52,4 @@ android {
     buildFeatures {
         compose = true
     }
-    namespace = "eu.baroncelli.dkmpsample"
 }

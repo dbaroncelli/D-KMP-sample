@@ -29,12 +29,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":shared"))
-                implementation(compose.foundation)
-                implementation(compose.ui)
-                implementation(compose.uiTooling)
-                implementation(compose.material)
-                implementation(compose.materialIconsExtended)
-                implementation(compose.runtime)
+                api(compose.foundation)
+                api(compose.ui)
+                api(compose.uiTooling)
+                api(compose.material)
+                api(compose.materialIconsExtended)
+                api(compose.runtime)
             }
         }
         val androidMain by getting {
@@ -46,6 +46,7 @@ kotlin {
 }
 
 android {
+    namespace = "eu.baroncelli.dkmpsample.composables"
     compileSdk = extra["android.compileSdk"].toString().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     compileOptions {
@@ -61,5 +62,4 @@ android {
             isMinifyEnabled = true
         }
     }
-    namespace = "eu.baroncelli.dkmpsample.composables"
 }

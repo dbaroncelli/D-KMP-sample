@@ -91,6 +91,7 @@ kotlin {
 }
 
 android {
+    namespace = "eu.baroncelli.dkmpsample.shared"
     compileSdk = extra["android.compileSdk"].toString().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
@@ -101,7 +102,6 @@ android {
             isMinifyEnabled = true
         }
     }
-    namespace = "eu.baroncelli.dkmpsample.shared"
 }
 
 sqldelight {
