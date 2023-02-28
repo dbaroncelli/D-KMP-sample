@@ -92,7 +92,7 @@ kotlin {
 
 android {
     compileSdk = extra["android.compileSdk"].toString().toInt()
-    sourceSets["main"].manifest.srcFile("src/ androidMain/AndroidManifest.xml")
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = extra["android.minSdk"].toString().toInt()
     }
