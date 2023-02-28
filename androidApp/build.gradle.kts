@@ -4,7 +4,7 @@ version = "1.0-SNAPSHOT"
 plugins {
     id("com.android.application")
     kotlin("android")
-    id("org.jetbrains.compose") version Versions.mppCompose
+    id("org.jetbrains.compose")
 }
 
 dependencies {
@@ -18,11 +18,11 @@ dependencies {
 }
 
 android {
-    compileSdk = Versions.compile_sdk
+    compileSdk = extra["android.compileSdk"].toString().toInt()
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
-        minSdk = Versions.min_sdk
-        targetSdk = Versions.target_sdk
+        minSdk = extra["android.minSdk"].toString().toInt()
+        targetSdk = extra["android.targetSdk"].toString().toInt()
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

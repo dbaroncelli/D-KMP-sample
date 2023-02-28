@@ -8,7 +8,6 @@ plugins {
     id("com.squareup.sqldelight")
 }
 
-
 kotlin {
     android ()
     listOf(
@@ -27,47 +26,42 @@ kotlin {
         }
     }
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                optIn("kotlin.time.ExperimentalTime")
-                optIn("com.russhwolf.settings.ExperimentalSettingsImplementation")            }
-        }
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-                implementation("io.ktor:ktor-client-core:${Versions.ktor}")
-                implementation("io.ktor:ktor-client-logging:${Versions.ktor}")
-                implementation("io.ktor:ktor-client-content-negotiation:${Versions.ktor}")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}")
-                implementation("com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatform_settings}")
+                implementation("io.ktor:ktor-client-core:"+extra["ktor.version"])
+                implementation("io.ktor:ktor-client-logging:"+extra["ktor.version"])
+                implementation("io.ktor:ktor-client-content-negotiation:"+extra["ktor.version"])
+                implementation("io.ktor:ktor-serialization-kotlinx-json:"+extra["ktor.version"])
+                implementation("com.russhwolf:multiplatform-settings-no-arg:"+extra["multiplatformSettings.version"])
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("com.russhwolf:multiplatform-settings-test:${Versions.multiplatform_settings}")
+                implementation("com.russhwolf:multiplatform-settings-test:"+extra["multiplatformSettings.version"])
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:${Versions.ktor}")
-                implementation("com.squareup.sqldelight:android-driver:${Versions.sql_delight}")
+                implementation("io.ktor:ktor-client-okhttp:"+extra["ktor.version"])
+                implementation("com.squareup.sqldelight:android-driver:"+extra["sqlDelight.version"])
             }
         }
         val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
-                implementation("com.squareup.sqldelight:sqlite-driver:${Versions.sql_delight}")
+                implementation("com.squareup.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
             }
         }
         val desktopMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-apache:${Versions.ktor}")
-                implementation("com.squareup.sqldelight:sqlite-driver:${Versions.sql_delight}")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
+                implementation("io.ktor:ktor-client-apache:"+extra["ktor.version"])
+                implementation("com.squareup.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
             }
         }
         val desktopTest by getting
@@ -80,8 +74,8 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:${Versions.ktor}")
-                implementation("com.squareup.sqldelight:native-driver:${Versions.sql_delight}")
+                implementation("io.ktor:ktor-client-darwin:"+extra["ktor.version"])
+                implementation("com.squareup.sqldelight:native-driver:"+extra["sqlDelight.version"])
             }
         }
         val iosX64Test by getting
@@ -97,10 +91,10 @@ kotlin {
 }
 
 android {
-    compileSdk = Versions.compile_sdk
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    compileSdk = extra["android.compileSdk"].toString().toInt()
+    sourceSets["main"].manifest.srcFile("src/ androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = Versions.min_sdk
+        minSdk = extra["android.minSdk"].toString().toInt()
     }
     buildTypes {
         getByName("release") {

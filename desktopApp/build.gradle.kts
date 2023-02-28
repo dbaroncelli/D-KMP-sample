@@ -2,7 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version Versions.mppCompose
+    id("org.jetbrains.compose")
 }
 
 kotlin {

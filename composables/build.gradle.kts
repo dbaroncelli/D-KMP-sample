@@ -1,12 +1,10 @@
-import org.jetbrains.compose.compose
-
 group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("org.jetbrains.compose") version Versions.mppCompose
+    id("org.jetbrains.compose")
 }
 
 dependencies {
@@ -48,7 +46,7 @@ kotlin {
 }
 
 android {
-    compileSdk = Versions.compile_sdk
+    compileSdk = extra["android.compileSdk"].toString().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -56,7 +54,7 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
     defaultConfig {
-        minSdk = Versions.min_sdk
+        minSdk = extra["android.minSdk"].toString().toInt()
     }
     buildTypes {
         getByName("release") {
