@@ -15,7 +15,7 @@ This is the official sample of the **D-KMP architecture**, presenting a simple m
 - it uses Kotlin's **StateFlow** to trigger UI layer recompositions
 - the **navigation state** is processed in the **shared code**, and then exposed to the **UI layer**:
   - on **SwiftUI** it seamlessly integrates with the new iOS 16 navigation patterns (_NavigationStack_ and/or _NavigationSplitView_)
-  - on **Compose** it's a very simple data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
+  - on **Compose** it's a "remembered" data class which works on any platform (unlike _Jetpack Navigation_, which only works on Android)
 
 _you can find more info on these articles:_
 - _[D-KMP sample now leverages iOS 16 navigation](https://danielebaroncelli.medium.com/d-kmp-sample-now-leverages-ios-16-navigation-cebbb81ba2e7) (february 2023)_
