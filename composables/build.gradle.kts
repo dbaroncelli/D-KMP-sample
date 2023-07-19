@@ -12,9 +12,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(18))
-    }
+    jvmToolchain(18)
     android {
         compilations.all {
             kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"

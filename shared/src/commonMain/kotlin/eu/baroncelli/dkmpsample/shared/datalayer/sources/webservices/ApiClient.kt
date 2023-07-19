@@ -10,7 +10,7 @@ import kotlinx.serialization.json.Json
 
 class ApiClient {
 
-    val baseUrl = "https://covidvax.org"
+    val baseUrl = "https://baroncelli.eu"
 
     val client = HttpClient {
         install(ContentNegotiation) {

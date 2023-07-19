@@ -8,7 +8,9 @@ plugins {
     id("com.squareup.sqldelight")
 }
 
+
 kotlin {
+    jvmToolchain(18)
     android ()
     listOf(
         iosX64(),
@@ -20,17 +22,13 @@ kotlin {
             binaryOption("bundleId", "eu.baroncelli.dkmpsample.shared")
         }
     }
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
-    }
+    jvm("desktop")
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
                 implementation("io.ktor:ktor-client-core:"+extra["ktor.version"])
                 implementation("io.ktor:ktor-client-logging:"+extra["ktor.version"])
                 implementation("io.ktor:ktor-client-content-negotiation:"+extra["ktor.version"])
@@ -59,9 +57,10 @@ kotlin {
         }
         val desktopMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.2")
                 implementation("io.ktor:ktor-client-apache:"+extra["ktor.version"])
                 implementation("com.squareup.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
+                implementation("ch.qos.logback:logback-classic:1.4.7")
             }
         }
         val desktopTest by getting
