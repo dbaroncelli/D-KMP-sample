@@ -104,7 +104,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
-        isCoreLibraryDesugaringEnabled = true
     }
 }
 
