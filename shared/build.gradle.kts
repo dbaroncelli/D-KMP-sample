@@ -8,6 +8,9 @@ plugins {
     id("com.squareup.sqldelight")
 }
 
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+}
 
 kotlin {
     jvmToolchain(18)
@@ -95,6 +98,11 @@ android {
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
         minSdk = extra["android.minSdk"].toString().toInt()
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
+        isCoreLibraryDesugaringEnabled = true
     }
     buildTypes {
         getByName("release") {
