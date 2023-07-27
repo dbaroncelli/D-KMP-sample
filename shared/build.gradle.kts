@@ -14,7 +14,7 @@ dependencies {
 
 kotlin {
     jvmToolchain(18)
-    android ()
+    androidTarget()
     listOf(
         iosX64(),
         iosArm64(),
@@ -103,6 +103,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
         isCoreLibraryDesugaringEnabled = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = extra["compose.compiler.version"].toString()
     }
     buildTypes {
         getByName("release") {

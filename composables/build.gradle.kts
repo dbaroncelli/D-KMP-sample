@@ -13,7 +13,7 @@ dependencies {
 
 kotlin {
     jvmToolchain(18)
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
         }
@@ -51,6 +51,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
         isCoreLibraryDesugaringEnabled = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = extra["compose.compiler.version"].toString()
     }
     defaultConfig {
         minSdk = extra["android.minSdk"].toString().toInt()

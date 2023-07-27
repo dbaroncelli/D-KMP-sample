@@ -46,6 +46,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_18
         isCoreLibraryDesugaringEnabled = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = extra["compose.compiler.version"].toString()
+    }
     kotlinOptions {
         jvmTarget = "18"
     }
