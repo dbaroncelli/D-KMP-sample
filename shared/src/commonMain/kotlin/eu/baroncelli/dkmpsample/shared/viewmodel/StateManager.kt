@@ -30,8 +30,6 @@ class StateManager(repo: Repository) {
 
     internal val dataRepository by lazy { repo }
 
-
-
     // INIT SCREEN
 
     fun initScreen(screenIdentifier: ScreenIdentifier) {
@@ -82,7 +80,7 @@ class StateManager(repo: Repository) {
         //debugLogger.log("currentVerticalNavigationLevelsMap: "+currentVerticalNavigationLevelsMap.values.map { it.URI } )
 
         lateinit var screenIdentifier : ScreenIdentifier
-        var screenState : T?
+        var screenState : MutableStateFlow<T>?
         for(i in currentVerticalNavigationLevelsMap.keys.sortedDescending()) {
             screenState = screenStatesMap[currentVerticalNavigationLevelsMap[i]?.URI]?.value as? T
             if (screenState != null) {
