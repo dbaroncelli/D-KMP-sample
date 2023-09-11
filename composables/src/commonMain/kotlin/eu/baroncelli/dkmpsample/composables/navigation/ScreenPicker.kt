@@ -2,6 +2,8 @@ package eu.baroncelli.dkmpsample.composables.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import eu.baroncelli.dkmpsample.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListScreen
 import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListTwoPaneDefaultDetail
@@ -10,9 +12,10 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
-
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 
 
 @Composable
@@ -23,17 +26,21 @@ fun Navigation.ScreenPicker(
 
     when (screenIdentifier.screen) {
 
-        CountriesList ->
+        CountriesList -> {
+            val state by stateProvider.get<CountriesListState>(screenIdentifier).collectAsState()
             CountriesListScreen(
-                countriesListState = stateProvider.get(screenIdentifier),
+                countriesListState = state,
                 onListItemClick = { navigate(CountryDetail, CountryDetailParams(countryName = it)) },
                 onFavoriteIconClick = { events.selectFavorite(countryName = it) },
             )
+        }
 
-        CountryDetail ->
+        CountryDetail -> {
+            val state by stateProvider.get<CountryDetailState>(screenIdentifier).collectAsState()
             CountryDetailScreen(
-                countryDetailState = stateProvider.get(screenIdentifier)
+                countryDetailState = state
             )
+        }
 
         else ->
             return
