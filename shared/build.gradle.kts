@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.android.library")
     id("app.cash.sqldelight")
+    id("co.touchlab.skie")
 }
 
 dependencies {

@@ -14,6 +14,7 @@ pluginManagement {
         id("com.android.library").version(extra["android.gradlePlugin"] as String)
         id("org.jetbrains.compose").version(extra["compose.version"] as String)
         id("app.cash.sqldelight").version(extra["sqlDelight.version"] as String)
+        id("co.touchlab.skie").version("0.4.20")
     }
 }
 

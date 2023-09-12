@@ -10,4 +10,5 @@ plugins {
     id("com.android.library") apply false
     id("org.jetbrains.compose") apply false
     id("app.cash.sqldelight") apply false
+    id("co.touchlab.skie") apply false
 }
