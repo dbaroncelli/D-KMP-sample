@@ -29,9 +29,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
                 implementation("io.ktor:ktor-client-core:"+extra["ktor.version"])
                 implementation("io.ktor:ktor-client-logging:"+extra["ktor.version"])
                 implementation("io.ktor:ktor-client-content-negotiation:"+extra["ktor.version"])
@@ -60,7 +60,7 @@ kotlin {
         }
         val desktopMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
                 implementation("io.ktor:ktor-client-apache:"+extra["ktor.version"])
                 implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
                 implementation("ch.qos.logback:logback-classic:1.4.7")
