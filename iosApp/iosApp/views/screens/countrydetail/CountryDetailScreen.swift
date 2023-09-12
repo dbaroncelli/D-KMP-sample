@@ -8,10 +8,17 @@ import SwiftUI
 import shared
 
 struct CountryDetailScreen: View {
-    var countryDetailState: CountryDetailState
+    @ObservedObject var observableScreenState: ObservableScreenState
+    
+    init(
+        observableScreenState: ObservableScreenState
+    ) {
+        self.observableScreenState = observableScreenState
+    }
     
     var body: some View {
         VStack {
+            let countryDetailState = self.observableScreenState.state as! CountryDetailState
             if countryDetailState.isLoading {
                 LoadingScreen()
             } else {
