@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24B2BBFF2AB0E6FE00CCDC8E /* ObservableScreenState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B2BBFE2AB0E6FE00CCDC8E /* ObservableScreenState.swift */; };
 		6402EBF3264E7CCC009AC8FF /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */; };
 		6402EBF5264E7CE3009AC8FF /* ScreenPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */; };
 		6402EBF8264EA1AE009AC8FF /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6402EBF7264EA1AE009AC8FF /* NavigationBar.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24B2BBFE2AB0E6FE00CCDC8E /* ObservableScreenState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableScreenState.swift; sourceTree = "<group>"; };
 		6402EBF2264E7CCC009AC8FF /* LoadingScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		6402EBF4264E7CE3009AC8FF /* ScreenPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenPicker.swift; sourceTree = "<group>"; };
 		6402EBF7264EA1AE009AC8FF /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				6402EBF9264F0462009AC8FF /* views */,
 				64F9CB4B25FCE90300527AD8 /* App.swift */,
 				64F9CB4A25FCE90300527AD8 /* AppObservableObject.swift */,
+				24B2BBFE2AB0E6FE00CCDC8E /* ObservableScreenState.swift */,
 				7555FF84242A565B00829871 /* Assets.xcassets */,
 				7555FF86242A565B00829871 /* Preview Content */,
 			);
@@ -284,6 +287,7 @@
 				64A9E0D22641D8E00065309C /* Router.swift in Sources */,
 				6442C360265BF1ED00B0D26E /* Level1NavigationRail.swift in Sources */,
 				6402EBF5264E7CE3009AC8FF /* ScreenPicker.swift in Sources */,
+				24B2BBFF2AB0E6FE00CCDC8E /* ObservableScreenState.swift in Sources */,
 				64F9CBA125FCF8D400527AD8 /* CountriesListHeader.swift in Sources */,
 				6402EBF3264E7CCC009AC8FF /* LoadingScreen.swift in Sources */,
 				64F9CB4D25FCE90300527AD8 /* App.swift in Sources */,
