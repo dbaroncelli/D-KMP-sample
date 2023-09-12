@@ -1,15 +1,6 @@
 group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
-allprojects {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    }
-}
-
 plugins {
     kotlin("plugin.serialization") apply false
     kotlin("multiplatform") apply false
