@@ -7,10 +7,10 @@ class ObservableScreenState: ObservableObject {
     var requestedSId: ScreenIdentifier
     private var stateProvider: StateProvider
     
-    init(requestedSId: ScreenIdentifier, stateProvider: StateProvider) {
+    init(requestedSId: ScreenIdentifier, stateProvider: StateProvider, state: (any ScreenState)? = nil) {
         self.requestedSId = requestedSId
         self.stateProvider = stateProvider
-        self.state = stateProvider.getToCast(screenIdentifier: requestedSId).value
+        self.state = state ?? stateProvider.getToCast(screenIdentifier: requestedSId).value
     }
     
     

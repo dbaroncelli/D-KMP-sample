@@ -57,15 +57,21 @@ struct CountriesListScreen: View {
 
 
 
-//struct CountryListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationStack {
-//            CountriesListScreen(
-//                countriesListState: CountriesListState(isLoading: false, countriesListItems: [CountriesListItem(_data: CountryListData(name: "AAAAAAAA", population: 1000, firstDoses: 700, fullyVaccinated: 530)), CountriesListItem(_data: CountryListData(name: "BBBBBBBB", population: 1000, firstDoses: 654, fullyVaccinated: 432)), CountriesListItem(_data: CountryListData(name: "CCCCCCCC", population: 1000, firstDoses: 557, fullyVaccinated: 398))], favoriteCountries: [:]),
-//                stateHashCode: 1,
-//                onListItemClick: { name in ScreenIdentifier.Factory().self.getByURI(URI: "countrieslist:listType=ALL")! },
-//                onFavoriteIconClick: { name in print() }
-//            )
-//        }
-//    }
-//}
+struct CountryListView_Previews: PreviewProvider {
+    static var previews: some View {
+        let model : DKMPViewModel = DKMPViewModel.Factory().getIosInstance()
+        NavigationStack {
+            CountriesListScreen(
+                observableScreenState: ObservableScreenState(
+                    requestedSId: ScreenIdentifier.companion.get(
+                        screen: Screen.countrieslist,
+                        params: CountriesListParams.init(listType: CountriesListType.all)
+                    ),
+                    stateProvider: model.navigation.stateProvider,
+                    state: CountriesListState(isLoading: false, countriesListItems: [CountriesListItem(_data: CountryListData(name: "AAAAAAAA", population: 1000, firstDoses: 700, fullyVaccinated: 530)), CountriesListItem(_data: CountryListData(name: "BBBBBBBB", population: 1000, firstDoses: 654, fullyVaccinated: 432)), CountriesListItem(_data: CountryListData(name: "CCCCCCCC", population: 1000, firstDoses: 557, fullyVaccinated: 398))], favoriteCountries: [:])),
+                onListItemClick: { name in ScreenIdentifier.Factory().self.getByURI(URI: "countrieslist:listType=ALL")! },
+                onFavoriteIconClick: { name in print() }
+            )
+        }
+    }
+}
