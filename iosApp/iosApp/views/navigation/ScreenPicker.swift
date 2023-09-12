@@ -11,13 +11,13 @@ import shared
 class ObservableScreenState: ObservableObject {
     @Published var state: (any ScreenState)
 
-    private var requestedSId: ScreenIdentifier
+    var requestedSId: ScreenIdentifier
     private var stateProvider: StateProvider
     
     init(requestedSId: ScreenIdentifier, stateProvider: StateProvider) {
         self.requestedSId = requestedSId
         self.stateProvider = stateProvider
-        self.state = stateProvider.getToCast(screenIdentifier: requestedSId).value as! any ScreenState
+        self.state = stateProvider.getToCast(screenIdentifier: requestedSId).value
     }
     
     
@@ -30,12 +30,11 @@ class ObservableScreenState: ObservableObject {
 }
 
 extension Navigation {
-    
-    @ViewBuilder func screenPicker(requestedSId: ScreenIdentifier) -> some View {
-        let screenState = ObservableScreenState(requestedSId: requestedSId, stateProvider: self.stateProvider)
-
+        
+    @ViewBuilder func screenPicker(screenState: ObservableScreenState) -> some View {
+        
         VStack {
-            switch requestedSId.screen {
+            switch screenState.requestedSId.screen {
                 
             case .countrieslist:
                 CountriesListScreen(
@@ -54,15 +53,15 @@ extension Navigation {
             }
             
         }
-        .navigationTitle(getTitle(screenIdentifier: requestedSId))
+        .navigationTitle(getTitle(screenIdentifier: screenState.requestedSId))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
-                NSLog("iOS side:  onAppear URI "+requestedSId.URI)
+            if screenState.requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
+                NSLog("iOS side:  onAppear URI "+screenState.requestedSId.URI)
             }
         }
         .onDisappear {
-            self.exitScreenForIos(screenIdentifier: requestedSId)
+            self.exitScreenForIos(screenIdentifier: screenState.requestedSId)
         }
         .task {
             await screenState.collectScreenStateFlow()

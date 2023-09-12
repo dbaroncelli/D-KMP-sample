@@ -10,6 +10,7 @@ import shared
 
 class AppObservableObject: ObservableObject {
     let model : DKMPViewModel = DKMPViewModel.Factory().getIosInstance()
+    var screenStates: [ScreenIdentifier:ObservableScreenState] = [:]
     var dkmpNav : Navigation {
         return self.model.navigation
     }
@@ -22,5 +23,11 @@ class AppObservableObject: ObservableObject {
         self.localNavigationState = model.navigation.navigationState
     }
 
+    func getObservableScreenState(screenIdentifier: ScreenIdentifier) -> ObservableScreenState {
+        if screenStates[screenIdentifier] == nil{
+            screenStates[screenIdentifier] = ObservableScreenState(requestedSId: screenIdentifier, stateProvider: dkmpNav.stateProvider)
+        }
+        return screenStates[screenIdentifier]!
+    }
 
 }

@@ -17,10 +17,10 @@ struct OnePane: View {
 
     var body: some View {
         NavigationStack(path: ($appObj.localNavigationState.paths.getPath(level1URI: level1ScreenIdentifier.URI))) {
-            appObj.dkmpNav.screenPicker(requestedSId: level1ScreenIdentifier)
+            appObj.dkmpNav.screenPicker(screenState: appObj.getObservableScreenState(screenIdentifier: level1ScreenIdentifier))
                 .navigationDestination(for: ScreenIdentifier.self) { sId in
                     let _ = appObj.dkmpNav.navigateToScreenForIos(screenIdentifier: sId, level1ScreenIdentifier: level1ScreenIdentifier)
-                    appObj.dkmpNav.screenPicker(requestedSId: sId)
+                    appObj.dkmpNav.screenPicker(screenState: appObj.getObservableScreenState(screenIdentifier: sId))
                 }
         }
     }
