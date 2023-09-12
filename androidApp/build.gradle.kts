@@ -7,6 +7,10 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+kotlin {
+    jvmToolchain(18)
+}
+
 dependencies {
     implementation(project(":composables"))
     implementation(project(":shared"))
@@ -42,15 +46,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
         isCoreLibraryDesugaringEnabled = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = extra["android.composeCompiler"].toString()
-    }
-    kotlinOptions {
-        jvmTarget = "18"
     }
     buildFeatures {
         compose = true

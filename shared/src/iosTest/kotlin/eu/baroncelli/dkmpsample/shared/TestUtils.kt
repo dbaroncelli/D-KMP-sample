@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlin.coroutines.CoroutineContext
-import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
+import app.cash.sqldelight.drivers.native.NativeSqliteDriver
 import mylocal.db.LocalDb
 
 actual val testCoroutineContext: CoroutineContext =

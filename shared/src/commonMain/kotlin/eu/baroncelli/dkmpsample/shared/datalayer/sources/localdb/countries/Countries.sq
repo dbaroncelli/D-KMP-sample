@@ -1,3 +1,6 @@
+import kotlin.Int;
+import kotlin.Boolean;
+
 CREATE TABLE Countries (
     name TEXT NOT NULL PRIMARY KEY,
     population INTEGER AS Int NOT NULL,
