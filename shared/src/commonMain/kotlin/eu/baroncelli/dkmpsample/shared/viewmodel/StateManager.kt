@@ -80,7 +80,7 @@ class StateManager(repo: Repository) {
         //debugLogger.log("currentVerticalNavigationLevelsMap: "+currentVerticalNavigationLevelsMap.values.map { it.URI } )
 
         lateinit var screenIdentifier : ScreenIdentifier
-        var screenState : MutableStateFlow<T>?
+        var screenState : T?
         for(i in currentVerticalNavigationLevelsMap.keys.sortedDescending()) {
             screenState = screenStatesMap[currentVerticalNavigationLevelsMap[i]?.URI]?.value as? T
             if (screenState != null) {
