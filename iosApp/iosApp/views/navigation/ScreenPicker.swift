@@ -33,15 +33,15 @@ extension Navigation {
             }
             
         }
-        .navigationTitle(getTitle(screenIdentifier: requestedSId))
+        .navigationTitle(getTitle(screenIdentifier: screenState.requestedSId))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
-                NSLog("iOS side:  onAppear URI "+requestedSId.URI)
+            if screenState.requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
+                NSLog("iOS side:  onAppear URI "+screenState.requestedSId.URI)
             }
         }
         .onDisappear {
-            self.exitScreenForIos(screenIdentifier: requestedSId)
+            self.exitScreenForIos(screenIdentifier: screenState.requestedSId)
         }
         .task {
             await appObj.collectScreenStateFlow(sID: requestedSId)
