@@ -12,13 +12,18 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.Countries
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryInfo
-import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.*
+import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class ViewModelTests {
 
+    private val testDispatcher: TestDispatcher = UnconfinedTestDispatcher()
     lateinit var vm: DKMPViewModel
     val navigation: Navigation
         get() = vm.navigation
@@ -29,14 +34,20 @@ class ViewModelTests {
 
 
     @BeforeTest
-    fun setUp() = runTest {
-        vm = DKMPViewModel(getTestRepository())
+    fun setUp() {
+        Dispatchers.setMain(testDispatcher)
+    }
+
+    @AfterTest
+    fun tearDown() {
+        Dispatchers.resetMain()
     }
 
     @Test
     fun testCountriesListStateUpdate() = runTest {
+        vm = DKMPViewModel(getTestRepository())
         val screenIdentifier = ScreenIdentifier.get(CountriesList, CountriesListParams(CountriesListType.ALL))
-        navigation.addScreenToBackstack(screenIdentifier)!!.join()
+        navigation.addScreenToBackstack(screenIdentifier)?.join()
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(favoriteCountries = mapOf("Italy" to true))
         }
@@ -46,13 +57,14 @@ class ViewModelTests {
 
     @Test
     fun testCountryDetailStateUpdate() = runTest {
+        vm = DKMPViewModel(getTestRepository())
         stateManager.dataRepository.localDb.setCountriesList(
             listOf(
                 CountryListData(name = "Germany")
             )
         )
         val screenIdentifier = ScreenIdentifier.get(CountryDetail, CountryDetailParams("Germany"))
-        navigation.addScreenToBackstack(screenIdentifier)!!.join()
+        navigation.addScreenToBackstack(screenIdentifier)?.join()
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(countryInfo = CountryInfo(_extraData = CountryExtraData(vaccines = "Pfizer, Moderna, AstraZeneca")))
         }
