@@ -55,12 +55,12 @@ class Navigation(val stateManager: StateManager) {
             startScreenIdentifier = try {
                 ScreenIdentifier.getByURI(savedLevel1URI) ?: startScreenIdentifier
             } catch (e: ScreenParamsDeserializationException) {
-                stateManager.dataRepository.localSettings.clear()
-                throw ScreenParamsDeserializationException(
-                    "Failed to deserialize params for screen: ${startScreenIdentifier.screen.asString}. " +
-                            "Local settings have been reset. Please restart the app.",
-                    e
+                debugLogger.log(
+                    "Warning: Failed to deserialize params for screen: ${startScreenIdentifier.screen.asString}. " +
+                            "Retrying with default params for screen"
                 )
+                stateManager.dataRepository.localSettings.clear()
+                ScreenIdentifier.getByURI(savedLevel1URI)!!
             }
         }
         return startScreenIdentifier
