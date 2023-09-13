@@ -12,10 +12,9 @@ import eu.baroncelli.dkmpsample.composables.navigation.templates.TwoPane
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
-import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenParams
 
 @Composable
 fun Navigation.Router() {

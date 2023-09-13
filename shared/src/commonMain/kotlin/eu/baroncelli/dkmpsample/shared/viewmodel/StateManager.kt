@@ -9,7 +9,6 @@ import kotlin.reflect.KClass
 
 
 interface ScreenState
-interface ScreenParams
 
 class StateManager(repo: Repository) {
 

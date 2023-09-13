@@ -5,7 +5,7 @@ import com.russhwolf.settings.long
 import com.russhwolf.settings.string
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 
-class MySettings(s: Settings) {
+class MySettings(private val s: Settings) {
 
 
     // here we define all our local settings properties,
@@ -14,5 +14,5 @@ class MySettings(s: Settings) {
     var listCacheTimestamp by s.long(defaultValue = 0)
     var savedLevel1URI by s.string(defaultValue = Level1Navigation.AllCountries.screenIdentifier.URI)
 
-
+    fun clear() = s.clear()
 }

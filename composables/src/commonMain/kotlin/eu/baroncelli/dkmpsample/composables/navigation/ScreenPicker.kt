@@ -9,13 +9,13 @@ import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListT
 import eu.baroncelli.dkmpsample.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
-import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CountryDetailParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountriesList
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountryDetail
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 
 

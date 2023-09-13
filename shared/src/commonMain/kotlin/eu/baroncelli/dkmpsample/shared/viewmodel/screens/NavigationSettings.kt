@@ -2,7 +2,6 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountriesList
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType.ALL
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType.FAVORITES
 

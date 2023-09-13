@@ -2,20 +2,16 @@ package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist
 
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
-import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CountriesListParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
-import kotlinx.serialization.Serializable
 
 // INIZIALIZATION settings for this screen
 // this is what should be implemented:
 // - a data class implementing the ScreenParams interface, which defines the parameters to the passed to the screen
 // - Navigation extension function taking the ScreenParams class as an argument, return the ScreenInitSettings for this screen
 // to understand the initialization behaviour, read the comments in the ScreenInitSettings.kt file
-
-@Serializable // Note: ScreenParams should always be set as Serializable
-data class CountriesListParams(val listType: CountriesListType) : ScreenParams
 
 fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSettings(
     title = "Countries: " + params.listType.name,
