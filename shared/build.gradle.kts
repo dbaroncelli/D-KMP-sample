@@ -43,6 +43,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
                 implementation("com.russhwolf:multiplatform-settings-test:"+extra["multiplatformSettings.version"])
             }
         }

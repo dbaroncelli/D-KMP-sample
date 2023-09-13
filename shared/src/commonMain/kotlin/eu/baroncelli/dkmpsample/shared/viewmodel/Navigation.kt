@@ -2,6 +2,7 @@ package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
+import kotlinx.coroutines.Job
 
 data class NavigationState (
     val currentLevel1ScreenIdentifier : ScreenIdentifier,
@@ -143,11 +144,11 @@ class Navigation(val stateManager : StateManager) {
 
     // ADD SCREEN TO BACKSTACK
 
-    fun addScreenToBackstack(screenIdentifier: ScreenIdentifier) {
+    fun addScreenToBackstack(screenIdentifier: ScreenIdentifier): Job? {
         debugLogger.log("addScreenToBackstack: "+screenIdentifier.URI)
         stateManager.currentVerticalBackstack.add(screenIdentifier)
         stateManager.currentVerticalNavigationLevelsMap[screenIdentifier.screen.navigationLevel] = screenIdentifier
-        stateManager.initScreen(screenIdentifier)
+        return stateManager.initScreen(screenIdentifier)
     }
 
 
