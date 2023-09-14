@@ -20,7 +20,7 @@ suspend fun Repository.getCountryInfo(country: String): CountryInfo = withRepoCo
     //  - CountriesListData (read from the localDb)
     //  - CountriesExtraData (read from the runtimeCache)
     CountryInfo(
-        localDb.getCountriesList().first{it.name==country},
+        localDb.getCountriesList().first { it.name == country },
         runtimeCache.countryExtraData[country],
     )
 }

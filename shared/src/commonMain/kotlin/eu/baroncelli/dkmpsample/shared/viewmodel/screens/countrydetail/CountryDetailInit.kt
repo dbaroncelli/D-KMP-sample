@@ -1,7 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail
 
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountryInfo
-import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
@@ -14,7 +13,7 @@ import kotlinx.serialization.Serializable
 @Serializable // Note: ScreenParams should always be set as Serializable
 data class CountryDetailParams(val countryName: String) : ScreenParams
 
-fun StateManager.initCountryDetail(params: CountryDetailParams) = ScreenInitSettings (
+fun StateManager.initCountryDetail(params: CountryDetailParams) = ScreenInitSettings(
     title = params.countryName,
     initState = { CountryDetailState(isLoading = true) },
     callOnInit = {

@@ -9,21 +9,23 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.unit.dp
 import eu.baroncelli.dkmpsample.composables.navigation.templates.OnePane
 import eu.baroncelli.dkmpsample.composables.navigation.templates.TwoPane
-import eu.baroncelli.dkmpsample.shared.viewmodel.*
+import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
+import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
+import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-
 
 
 @Composable
 fun Navigation.Router() {
 
     val screenUIsStateHolder = rememberSaveableStateHolder()
-    val localNavigationState = remember { mutableStateOf( navigationState ) }
+    val localNavigationState = remember { mutableStateOf(navigationState) }
 
     val twopaneWidthThreshold = 1000.dp
     BoxWithConstraints {
-        if (maxWidth < maxHeight || maxWidth<twopaneWidthThreshold) {
+        if (maxWidth < maxHeight || maxWidth < twopaneWidthThreshold) {
             OnePane(screenUIsStateHolder, localNavigationState)
         } else {
             TwoPane(screenUIsStateHolder, localNavigationState)
@@ -34,7 +36,7 @@ fun Navigation.Router() {
 
 }
 
-fun Navigation.navigationProcessor(localNavigationState: MutableState<NavigationState>) : (Screen, ScreenParams?) -> Unit {
+fun Navigation.navigationProcessor(localNavigationState: MutableState<NavigationState>): (Screen, ScreenParams?) -> Unit {
     return { screen, screenParams ->
         val screenIdentifier = ScreenIdentifier.get(screen, screenParams)
         navigateToScreen(screenIdentifier) // shared navigationState is updated
@@ -42,7 +44,7 @@ fun Navigation.navigationProcessor(localNavigationState: MutableState<Navigation
     }
 }
 
-fun Navigation.level1NavigationProcessor(localNavigationState: MutableState<NavigationState>) : (Level1Navigation) -> Unit {
+fun Navigation.level1NavigationProcessor(localNavigationState: MutableState<NavigationState>): (Level1Navigation) -> Unit {
     return {
         selectLevel1Navigation(it.screenIdentifier) // shared navigationState is updated
         localNavigationState.value = navigationState // update localNavigationState

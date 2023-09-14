@@ -4,14 +4,15 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import eu.baroncelli.dkmpsample.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListScreen
 import eu.baroncelli.dkmpsample.composables.screens.countrieslist.CountriesListTwoPaneDefaultDetail
+import eu.baroncelli.dkmpsample.composables.screens.countrydetail.CountryDetailScreen
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountriesList
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountryDetail
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.selectFavorite
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
@@ -50,7 +51,6 @@ fun Navigation.ScreenPicker(
 }
 
 
-
 @Composable
 fun Navigation.TwoPaneDefaultDetail(
     screenIdentifier: ScreenIdentifier
@@ -61,7 +61,7 @@ fun Navigation.TwoPaneDefaultDetail(
         CountriesList ->
             CountriesListTwoPaneDefaultDetail()
 
-        else -> Box{}
+        else -> Box {}
     }
 
 }

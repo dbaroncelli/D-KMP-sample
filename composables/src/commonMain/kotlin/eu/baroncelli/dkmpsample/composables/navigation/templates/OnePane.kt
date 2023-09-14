@@ -4,12 +4,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.saveable.SaveableStateHolder
-import eu.baroncelli.dkmpsample.composables.navigation.*
+import eu.baroncelli.dkmpsample.composables.navigation.ScreenPicker
 import eu.baroncelli.dkmpsample.composables.navigation.bars.Level1BottomBar
 import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
+import eu.baroncelli.dkmpsample.composables.navigation.level1NavigationProcessor
+import eu.baroncelli.dkmpsample.composables.navigation.navigationProcessor
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
-import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 @Composable
 fun Navigation.OnePane(
@@ -25,6 +26,11 @@ fun Navigation.OnePane(
                 ScreenPicker(screenIdentifier, navigationProcessor(localNavigationState))
             }
         },
-        bottomBar = { if (screenIdentifier.screen.navigationLevel == 1) Level1BottomBar(screenIdentifier, level1NavigationProcessor(localNavigationState)) }
+        bottomBar = {
+            if (screenIdentifier.screen.navigationLevel == 1) Level1BottomBar(
+                screenIdentifier,
+                level1NavigationProcessor(localNavigationState)
+            )
+        }
     )
 }

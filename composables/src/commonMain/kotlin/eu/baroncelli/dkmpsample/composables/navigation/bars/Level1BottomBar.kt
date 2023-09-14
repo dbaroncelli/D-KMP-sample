@@ -1,9 +1,9 @@
 package eu.baroncelli.dkmpsample.composables.navigation.bars
 
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star

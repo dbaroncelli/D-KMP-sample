@@ -4,46 +4,52 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.navigationSettings
 import kotlinx.coroutines.Job
 
-data class NavigationState (
-    val currentLevel1ScreenIdentifier : ScreenIdentifier,
-    var paths : MutableMap<String, MutableList<ScreenIdentifier>> = mutableMapOf(),
+data class NavigationState(
+    val currentLevel1ScreenIdentifier: ScreenIdentifier,
+    var paths: MutableMap<String, MutableList<ScreenIdentifier>> = mutableMapOf(),
     // in paths: key is the level1ScreenIdentifier URI, value is the vertical backstack without the level1ScreenIdentifier
     val nextBackQuitsApp: Boolean
 ) {
-    val currentPath : MutableList<ScreenIdentifier>
-        get () = paths[currentLevel1ScreenIdentifier.URI]!!
-    val topScreenIdentifier : ScreenIdentifier
-        get () = if (currentPath.isEmpty()) currentLevel1ScreenIdentifier else currentPath.last()
+    val currentPath: MutableList<ScreenIdentifier>
+        get() = paths[currentLevel1ScreenIdentifier.URI]!!
+    val topScreenIdentifier: ScreenIdentifier
+        get() = if (currentPath.isEmpty()) currentLevel1ScreenIdentifier else currentPath.last()
 }
 
 
-class Navigation(val stateManager : StateManager) {
+class Navigation(val stateManager: StateManager) {
 
     val stateProvider by lazy { StateProvider(stateManager) }
     val events by lazy { Events(stateManager) }
 
     var navigationState = getStartNavigationState()
 
-    val nextBackQuitsApp : Boolean
+    val nextBackQuitsApp: Boolean
         get() = stateManager.level1Backstack.size + stateManager.currentVerticalBackstack.size == 2
 
     var savedLevel1URI
         get() = stateManager.dataRepository.localSettings.savedLevel1URI
-        set(value) { stateManager.dataRepository.localSettings.savedLevel1URI = value }
+        set(value) {
+            stateManager.dataRepository.localSettings.savedLevel1URI = value
+        }
 
 
-    fun getTitle(screenIdentifier: ScreenIdentifier) : String {
+    fun getTitle(screenIdentifier: ScreenIdentifier): String {
         val screenInitSettings = screenIdentifier.getScreenInitSettings(stateManager)
         return screenInitSettings.title
     }
 
-    fun getStartNavigationState() : NavigationState {
+    fun getStartNavigationState(): NavigationState {
         val screenIdentifier = getStartScreenIdentifier()
         selectLevel1Navigation(screenIdentifier)
-        return NavigationState(screenIdentifier, mutableMapOf(screenIdentifier.URI to mutableListOf()), nextBackQuitsApp)
+        return NavigationState(
+            screenIdentifier,
+            mutableMapOf(screenIdentifier.URI to mutableListOf()),
+            nextBackQuitsApp
+        )
     }
 
-    fun getStartScreenIdentifier() : ScreenIdentifier {
+    fun getStartScreenIdentifier(): ScreenIdentifier {
         var startScreenIdentifier = navigationSettings.homeScreen.screenIdentifier
         if (navigationSettings.saveLastLevel1Screen) {
             startScreenIdentifier = ScreenIdentifier.getByURI(savedLevel1URI) ?: startScreenIdentifier
@@ -57,14 +63,14 @@ class Navigation(val stateManager : StateManager) {
             paths = getPaths(),
             nextBackQuitsApp = nextBackQuitsApp
         )
-        if (navigationSettings.saveLastLevel1Screen && navigationState.topScreenIdentifier.screen.navigationLevel==1) {
+        if (navigationSettings.saveLastLevel1Screen && navigationState.topScreenIdentifier.screen.navigationLevel == 1) {
             savedLevel1URI = navigationState.topScreenIdentifier.URI
         }
-        debugLogger.log("UI NAVIGATION RECOMPOSITION: topScreenIdentifier URI -> "+navigationState.topScreenIdentifier.URI)
+        debugLogger.log("UI NAVIGATION RECOMPOSITION: topScreenIdentifier URI -> " + navigationState.topScreenIdentifier.URI)
     }
 
-    fun getPaths() : MutableMap<String,MutableList<ScreenIdentifier>> {
-        val paths = mutableMapOf<String,MutableList<ScreenIdentifier>>()
+    fun getPaths(): MutableMap<String, MutableList<ScreenIdentifier>> {
+        val paths = mutableMapOf<String, MutableList<ScreenIdentifier>>()
         stateManager.verticalNavigationLevels.values.forEach { levelsMap ->
             val path = mutableListOf<ScreenIdentifier>()
             levelsMap.keys.sorted().forEach {
@@ -78,14 +84,13 @@ class Navigation(val stateManager : StateManager) {
     }
 
 
-
     // NAVIGATION FUNCTIONS
 
     // this function is called from iOS, and it calls the proper "navigateToScreen"
     // only if it's the destination screenIdentifier is valid
     fun navigateToScreenForIos(screenIdentifier: ScreenIdentifier, level1ScreenIdentifier: ScreenIdentifier) {
         //debugLogger.log("navigateToScreenForIos: "+screenIdentifier.URI+" / level1ScreenIdentifier: "+level1ScreenIdentifier.URI)
-        if (level1ScreenIdentifier.URI != stateManager.currentLevel1ScreenIdentifier?.URI || stateManager.currentVerticalBackstack.any { it.URI==screenIdentifier.URI }) {
+        if (level1ScreenIdentifier.URI != stateManager.currentLevel1ScreenIdentifier?.URI || stateManager.currentVerticalBackstack.any { it.URI == screenIdentifier.URI }) {
             //debugLogger.log("navigateToScreenForIos: BLOCKED / shared side currentVerticalBackstack: "+stateManager.currentVerticalBackstack.map { it.URI })
             return
         }
@@ -93,14 +98,14 @@ class Navigation(val stateManager : StateManager) {
     }
 
     fun navigateToScreen(screenIdentifier: ScreenIdentifier) {
-        debugLogger.log("navigate -> "+screenIdentifier.URI)
+        debugLogger.log("navigate -> " + screenIdentifier.URI)
         addScreenToBackstack(screenIdentifier)
         updateNavigationState()
     }
 
 
     fun selectLevel1Navigation(level1ScreenIdentifier: ScreenIdentifier) {
-        debugLogger.log("selectLevel1Navigation -> "+level1ScreenIdentifier.URI)
+        debugLogger.log("selectLevel1Navigation -> " + level1ScreenIdentifier.URI)
         cleanCurrentVerticalBackstacks()
         stateManager.level1Backstack.removeAll { it.URI == level1ScreenIdentifier.URI }
         if (navigationSettings.alwaysQuitOnHomeScreen) {
@@ -145,13 +150,11 @@ class Navigation(val stateManager : StateManager) {
     // ADD SCREEN TO BACKSTACK
 
     fun addScreenToBackstack(screenIdentifier: ScreenIdentifier): Job? {
-        debugLogger.log("addScreenToBackstack: "+screenIdentifier.URI)
+        debugLogger.log("addScreenToBackstack: " + screenIdentifier.URI)
         stateManager.currentVerticalBackstack.add(screenIdentifier)
         stateManager.currentVerticalNavigationLevelsMap[screenIdentifier.screen.navigationLevel] = screenIdentifier
         return stateManager.initScreen(screenIdentifier)
     }
-
-
 
 
     // EXIT SCREEN
@@ -167,7 +170,7 @@ class Navigation(val stateManager : StateManager) {
     }
 
     fun exitScreen(screenIdentifier: ScreenIdentifier) {
-        debugLogger.log("exitScreen: "+screenIdentifier.URI)
+        debugLogger.log("exitScreen: " + screenIdentifier.URI)
         if (screenIdentifier.screen.navigationLevel == 1) {
             stateManager.level1Backstack.removeLast()
             stateManager.verticalNavigationLevels.remove(screenIdentifier.URI)
@@ -175,13 +178,15 @@ class Navigation(val stateManager : StateManager) {
             stateManager.removeScreen(screenIdentifier)
             stateManager.currentVerticalBackstack.add(stateManager.currentLevel1ScreenIdentifier!!)
             if (!stateManager.isInTheStatesMap(stateManager.currentLevel1ScreenIdentifier!!)) {
-                stateManager.verticalNavigationLevels[stateManager.currentLevel1ScreenIdentifier!!.URI] = mutableMapOf(1 to stateManager.currentLevel1ScreenIdentifier!!)
+                stateManager.verticalNavigationLevels[stateManager.currentLevel1ScreenIdentifier!!.URI] =
+                    mutableMapOf(1 to stateManager.currentLevel1ScreenIdentifier!!)
                 stateManager.initScreen(stateManager.level1Backstack.last())
             }
         } else {
             stateManager.currentVerticalNavigationLevelsMap.remove(screenIdentifier.screen.navigationLevel)
             stateManager.currentVerticalBackstack.removeAll { it.URI == screenIdentifier.URI }
-            stateManager.currentVerticalNavigationLevelsMap[stateManager.currentScreenIdentifier.screen.navigationLevel] = stateManager.currentScreenIdentifier // set new currentScreenIdentifier, after the removal
+            stateManager.currentVerticalNavigationLevelsMap[stateManager.currentScreenIdentifier.screen.navigationLevel] =
+                stateManager.currentScreenIdentifier // set new currentScreenIdentifier, after the removal
             if (!isInAnyVerticalNavigationLevel(screenIdentifier)) {
                 stateManager.removeScreen(screenIdentifier)
             }
@@ -193,7 +198,7 @@ class Navigation(val stateManager : StateManager) {
         updateNavigationState()
     }
 
-    fun isInAnyVerticalNavigationLevel(screenIdentifier: ScreenIdentifier) : Boolean {
+    fun isInAnyVerticalNavigationLevel(screenIdentifier: ScreenIdentifier): Boolean {
         stateManager.verticalNavigationLevels.forEach { verticalNavigation ->
             verticalNavigation.value.forEach {
                 if (it.value.URI == screenIdentifier.URI) {
@@ -203,8 +208,6 @@ class Navigation(val stateManager : StateManager) {
         }
         return false
     }
-
-
 
 
     fun onReEnterForeground() {

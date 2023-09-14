@@ -33,38 +33,38 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-                implementation("io.ktor:ktor-client-core:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-client-logging:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-client-content-negotiation:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-serialization-kotlinx-json:"+extra["ktor.version"])
-                implementation("com.russhwolf:multiplatform-settings-no-arg:"+extra["multiplatformSettings.version"])
+                implementation("io.ktor:ktor-client-core:" + extra["ktor.version"])
+                implementation("io.ktor:ktor-client-logging:" + extra["ktor.version"])
+                implementation("io.ktor:ktor-client-content-negotiation:" + extra["ktor.version"])
+                implementation("io.ktor:ktor-serialization-kotlinx-json:" + extra["ktor.version"])
+                implementation("com.russhwolf:multiplatform-settings-no-arg:" + extra["multiplatformSettings.version"])
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-                implementation("com.russhwolf:multiplatform-settings-test:"+extra["multiplatformSettings.version"])
+                implementation("com.russhwolf:multiplatform-settings-test:" + extra["multiplatformSettings.version"])
             }
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-okhttp:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:android-driver:"+extra["sqlDelight.version"])
+                implementation("io.ktor:ktor-client-okhttp:" + extra["ktor.version"])
+                implementation("app.cash.sqldelight:android-driver:" + extra["sqlDelight.version"])
             }
         }
         val androidUnitTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
-                implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
+                implementation("app.cash.sqldelight:sqlite-driver:" + extra["sqlDelight.version"])
             }
         }
         val desktopMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
-                implementation("io.ktor:ktor-client-apache:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
+                implementation("io.ktor:ktor-client-apache:" + extra["ktor.version"])
+                implementation("app.cash.sqldelight:sqlite-driver:" + extra["sqlDelight.version"])
                 implementation("ch.qos.logback:logback-classic:1.4.7")
             }
         }
@@ -78,8 +78,8 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:native-driver:"+extra["sqlDelight.version"])
+                implementation("io.ktor:ktor-client-darwin:" + extra["ktor.version"])
+                implementation("app.cash.sqldelight:native-driver:" + extra["sqlDelight.version"])
             }
         }
         val iosX64Test by getting

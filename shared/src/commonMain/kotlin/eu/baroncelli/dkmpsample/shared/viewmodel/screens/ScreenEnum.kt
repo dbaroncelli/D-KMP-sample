@@ -10,7 +10,7 @@ import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.initCount
 
 enum class Screen(
     val asString: String,
-    val navigationLevel : Int = 1,
+    val navigationLevel: Int = 1,
     val initSettings: StateManager.(ScreenIdentifier) -> ScreenInitSettings,
 ) {
     CountriesList("countrieslist", 1, { initCountriesList(it.params()) }),

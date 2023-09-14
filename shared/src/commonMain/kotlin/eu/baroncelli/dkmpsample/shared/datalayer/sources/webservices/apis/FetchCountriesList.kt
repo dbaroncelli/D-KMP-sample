@@ -12,6 +12,6 @@ suspend fun ApiClient.fetchCountriesList(): CountriesListResponse? {
 
 @Serializable
 data class CountriesListResponse(
-    @SerialName("data") val data : List<CountryListData>,
-    @SerialName("err") val error : String? = null,
+    @SerialName("data") val data: List<CountryListData>,
+    @SerialName("err") val error: String? = null,
 )

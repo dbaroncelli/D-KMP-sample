@@ -1,10 +1,10 @@
 package eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices
 
 import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
-import io.ktor.client.HttpClient
+import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.request.get
+import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
@@ -27,8 +27,8 @@ class ApiClient {
     }
 
 
-    suspend inline fun <reified T:Any> getResponse(endpoint : String): T? {
-        val url = baseUrl+endpoint
+    suspend inline fun <reified T : Any> getResponse(endpoint: String): T? {
+        val url = baseUrl + endpoint
         try {
             // please notice, Ktor Client is switching to a background thread under the hood
             // so the http call doesn't happen on the main thread, even if the coroutine has been launched on Dispatchers.Main
@@ -36,7 +36,7 @@ class ApiClient {
             debugLogger.log("$url API SUCCESS")
             return resp
         } catch (e: Exception) {
-            debugLogger.log("$url API FAILED: "+e.message )
+            debugLogger.log("$url API FAILED: " + e.message)
         }
         return null
     }

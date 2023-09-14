@@ -5,7 +5,7 @@ import com.russhwolf.settings.long
 import com.russhwolf.settings.string
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Level1Navigation
 
-class MySettings (s : Settings) {
+class MySettings(s: Settings) {
 
 
     // here we define all our local settings properties,

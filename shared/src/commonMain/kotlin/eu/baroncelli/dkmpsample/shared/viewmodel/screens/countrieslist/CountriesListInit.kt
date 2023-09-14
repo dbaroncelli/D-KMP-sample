@@ -4,7 +4,6 @@ import eu.baroncelli.dkmpsample.shared.datalayer.functions.getCountriesListData
 import eu.baroncelli.dkmpsample.shared.datalayer.functions.getFavoriteCountriesMap
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenParams
 import eu.baroncelli.dkmpsample.shared.viewmodel.StateManager
-import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.CallOnInitValues
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.ScreenInitSettings
 import kotlinx.serialization.Serializable
@@ -18,7 +17,7 @@ import kotlinx.serialization.Serializable
 @Serializable // Note: ScreenParams should always be set as Serializable
 data class CountriesListParams(val listType: CountriesListType) : ScreenParams
 
-fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSettings (
+fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSettings(
     title = "Countries: " + params.listType.name,
     initState = { CountriesListState(isLoading = true) },
     callOnInit = {
@@ -38,7 +37,7 @@ fun StateManager.initCountriesList(params: CountriesListParams) = ScreenInitSett
         }
     },
     callOnInitAtEachNavigation = CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN
-        // enabling in this way favourites can refresh at each navigation
-        // CALL_BEFORE_SHOWING_SCREEN is used, as favourites come from the local storage and not from the network
-        // (for more information about "callOnInitAtEachNavigation" values, look at "ScreenInitSettings" class definition)
+    // enabling in this way favourites can refresh at each navigation
+    // CALL_BEFORE_SHOWING_SCREEN is used, as favourites come from the local storage and not from the network
+    // (for more information about "callOnInitAtEachNavigation" values, look at "ScreenInitSettings" class definition)
 )

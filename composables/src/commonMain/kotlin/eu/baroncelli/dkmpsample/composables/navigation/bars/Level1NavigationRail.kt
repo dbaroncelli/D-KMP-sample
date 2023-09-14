@@ -3,7 +3,10 @@ package eu.baroncelli.dkmpsample.composables.navigation.bars
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentColor
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
@@ -11,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
@@ -50,11 +52,15 @@ fun Navigation.Level1NavigationRail(
 }
 
 
-
 @Composable
-fun ColumnScope.NavigationRailItem(icon : @Composable () -> Unit , label :  @Composable () -> Unit, selected : Boolean, onClick : () -> Unit) {
+fun ColumnScope.NavigationRailItem(
+    icon: @Composable () -> Unit,
+    label: @Composable () -> Unit,
+    selected: Boolean,
+    onClick: () -> Unit
+) {
     CompositionLocalProvider(
-        LocalContentColor provides if (selected) MaterialTheme.colors.background else  MaterialTheme.colors.primaryVariant
+        LocalContentColor provides if (selected) MaterialTheme.colors.background else MaterialTheme.colors.primaryVariant
     ) {
         Row(
             modifier = Modifier
