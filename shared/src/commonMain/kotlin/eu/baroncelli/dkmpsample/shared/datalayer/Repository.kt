@@ -1,7 +1,9 @@
 package eu.baroncelli.dkmpsample.shared.datalayer
 
+import app.cash.sqldelight.adapter.primitive.IntColumnAdapter
 import com.russhwolf.settings.Settings
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
+import eu.baroncelli.dkmpsample.shared.datalayer.sources.localdb.countries.Countries
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.localsettings.MySettings
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.runtimecache.CacheObjects
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.ApiClient
@@ -11,7 +13,7 @@ import mylocal.db.LocalDb
 class Repository(val sqlDriver: SqlDriver, val settings: Settings = Settings(), val useDefaultDispatcher: Boolean = true) {
 
     internal val webservices by lazy { ApiClient() }
-    internal val localDb by lazy { LocalDb(sqlDriver) }
+    internal val localDb by lazy { LocalDb(sqlDriver, Countries.Adapter(IntColumnAdapter,IntColumnAdapter,IntColumnAdapter)) }
     internal val localSettings by lazy { MySettings(settings) }
     internal val runtimeCache get() = CacheObjects
 

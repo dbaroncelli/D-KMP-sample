@@ -7,11 +7,15 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+kotlin {
+    jvmToolchain(18)
+}
+
 dependencies {
     implementation(project(":composables"))
     implementation(project(":shared"))
     implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.lifecycle:lifecycle-process:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-process:2.6.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 }
@@ -42,15 +46,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
         isCoreLibraryDesugaringEnabled = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = extra["android.composeCompiler"].toString()
-    }
-    kotlinOptions {
-        jvmTarget = "18"
     }
     buildFeatures {
         compose = true

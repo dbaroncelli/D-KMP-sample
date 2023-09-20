@@ -6,11 +6,7 @@ plugins {
 }
 
 kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "18"
-        }
-    }
+    jvm()
     sourceSets {
         val jvmMain by getting {
             dependencies {

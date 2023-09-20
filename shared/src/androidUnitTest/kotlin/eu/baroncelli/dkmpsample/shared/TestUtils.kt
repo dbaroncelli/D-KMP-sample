@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.shared
 
 import com.russhwolf.settings.MapSettings
-import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher

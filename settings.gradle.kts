@@ -13,7 +13,15 @@ pluginManagement {
         id("com.android.application").version(extra["android.gradlePlugin"] as String)
         id("com.android.library").version(extra["android.gradlePlugin"] as String)
         id("org.jetbrains.compose").version(extra["compose.version"] as String)
-        id("com.squareup.sqldelight").version(extra["sqlDelight.version"] as String)
+        id("app.cash.sqldelight").version(extra["sqlDelight.version"] as String)
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 

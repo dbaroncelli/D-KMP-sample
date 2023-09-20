@@ -1,6 +1,6 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
-import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
+import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import mylocal.db.LocalDb
 import java.io.File

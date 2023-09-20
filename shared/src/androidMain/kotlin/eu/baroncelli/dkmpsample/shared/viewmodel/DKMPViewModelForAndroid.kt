@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.shared.viewmodel
 
 import android.content.Context
-import com.squareup.sqldelight.android.AndroidSqliteDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import eu.baroncelli.dkmpsample.shared.datalayer.Repository
 import mylocal.db.LocalDb
 
