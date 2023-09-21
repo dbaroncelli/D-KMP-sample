@@ -1,12 +1,9 @@
 package eu.baroncelli.dkmpsample.composables.navigation.bars
 
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
@@ -22,14 +19,14 @@ fun Navigation.Level1BottomBar(
     selectedTab: ScreenIdentifier,
     navigateByLevel1Menu: (Level1Navigation) -> Unit
 ) {
-    BottomAppBar(content = {
-        BottomNavigationItem(
+    NavigationBar(content = {
+        NavigationBarItem(
             icon = { Icon(Icons.Default.Menu, "ALL") },
             label = { Text("All Countries", fontSize = 13.sp) },
             selected = selectedTab.URI == Level1Navigation.AllCountries.screenIdentifier.URI,
             onClick = { navigateByLevel1Menu(Level1Navigation.AllCountries) }
         )
-        BottomNavigationItem(
+        NavigationBarItem(
             icon = { Icon(Icons.Default.Star, "FAVORITES") },
             label = { Text("Favourites", fontSize = 13.sp) },
             selected = selectedTab.URI == Level1Navigation.FavoriteCountries.screenIdentifier.URI,

@@ -1,7 +1,7 @@
 package eu.baroncelli.dkmpsample.composables.navigation.templates
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.saveable.SaveableStateHolder
@@ -13,7 +13,6 @@ import eu.baroncelli.dkmpsample.composables.navigation.bars.TopBar
 import eu.baroncelli.dkmpsample.shared.viewmodel.Navigation
 import eu.baroncelli.dkmpsample.shared.viewmodel.NavigationState
 import eu.baroncelli.dkmpsample.shared.viewmodel.ScreenIdentifier
-import eu.baroncelli.dkmpsample.shared.viewmodel.debugLogger
 
 @Composable
 fun Navigation.TwoPane(
@@ -25,11 +24,11 @@ fun Navigation.TwoPane(
     val detailScreenIdentifier = twoPaneDetailScreen(localNavigationState)
     Scaffold(
         topBar = { TopBar(title) },
-        content = {
-            Row {
+        content = { contentPadding ->
+            Row(Modifier.padding(contentPadding)) {
                 Column(Modifier
                     .fillMaxHeight()
-                    .width(80.dp)) {
+                    .width(100.dp)) {
                         Level1NavigationRail(masterScreenIdentifier, level1NavigationProcessor(localNavigationState))
                 }
                 Column(Modifier

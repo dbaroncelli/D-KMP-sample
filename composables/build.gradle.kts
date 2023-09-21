@@ -30,7 +30,7 @@ kotlin {
                 api(compose.foundation)
                 api(compose.ui)
                 api(compose.uiTooling)
-                api(compose.material)
+                api(compose.material3)
                 api(compose.materialIconsExtended)
                 api(compose.runtime)
             }

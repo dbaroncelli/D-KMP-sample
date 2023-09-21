@@ -1,8 +1,8 @@
 package eu.baroncelli.dkmpsample.composables.screens.countrydetail
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -30,9 +30,9 @@ fun CountryDetailScreen(
             Spacer(modifier = Modifier.size(24.dp))
 
             if (data.vaccinesList!=null) {
-                Text(text = "Vaccines:", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
+                Text(text = "Vaccines:", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
                 for (vaccine in data.vaccinesList!!) {
-                    Text(text = "   ‣ $vaccine", style = MaterialTheme.typography.body1)
+                    Text(text = "   ‣ $vaccine", style = MaterialTheme.typography.bodyLarge)
                 }
             }
         }
@@ -45,10 +45,10 @@ fun CountryDetailScreen(
 @Composable
 fun DataElement(label : String, value : String = "", percentage : String = "") {
     Row {
-        Text(text = "$label: ", style = MaterialTheme.typography.body1, fontWeight = FontWeight.Bold)
-        Text(text = value, style = MaterialTheme.typography.body1)
+        Text(text = "$label: ", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+        Text(text = value, style = MaterialTheme.typography.bodyLarge)
         if (percentage!="") {
-            Text(text = " ($percentage)", style = MaterialTheme.typography.body1)
+            Text(text = " ($percentage)", style = MaterialTheme.typography.bodyLarge)
         }
     }
 }
