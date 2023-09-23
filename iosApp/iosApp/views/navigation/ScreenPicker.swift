@@ -8,23 +8,26 @@
 import SwiftUI
 import shared
 
-extension Navigation {
-        
-    @ViewBuilder func screenPicker(screenState: ObservableScreenState) -> some View {
+struct ScreenPicker: View {
+    
+    let navigation: Navigation
+    @ObservedObject var screenState: ObservableScreenState
+    
+    var body: some View {
         
         VStack {
             switch screenState.requestedSId.screen {
                 
             case .countrieslist:
                 CountriesListScreen(
-                    observableScreenState: screenState,
-                    onListItemClick: { name in self.navigate(.countrydetail, CountryDetailParams(countryName: name)) },
-                    onFavoriteIconClick: { name in self.events.selectFavorite(countryName: name) }
+                    state: screenState.state as! CountriesListState,
+                    onListItemClick: { name in navigation.navigate(.countrydetail, CountryDetailParams(countryName: name)) },
+                    onFavoriteIconClick: { name in navigation.events.selectFavorite(countryName: name) }
                 )
                 
             case .countrydetail:
                 CountryDetailScreen(
-                    observableScreenState: screenState
+                    state: screenState.state as! CountryDetailState
                 )
                 
             default:
@@ -32,24 +35,28 @@ extension Navigation {
             }
             
         }
-        .navigationTitle(getTitle(screenIdentifier: screenState.requestedSId))
+        .navigationTitle(navigation.getTitle(screenIdentifier: screenState.requestedSId))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if screenState.requestedSId.URI == self.navigationState.topScreenIdentifier.URI {
+            if screenState.requestedSId.URI == navigation.navigationState.topScreenIdentifier.URI {
                 NSLog("iOS side:  onAppear URI "+screenState.requestedSId.URI)
             }
         }
         .onDisappear {
-            self.exitScreenForIos(screenIdentifier: screenState.requestedSId)
+            navigation.exitScreenForIos(screenIdentifier: screenState.requestedSId)
         }
         .task {
             await screenState.collectScreenStateFlow()
         }
         
     }
+}
+
+extension Navigation {
     
-    
-    
+    @ViewBuilder func screenPicker(screenState: ObservableScreenState) -> some View {
+        ScreenPicker(navigation: self, screenState: screenState)
+    }
     
     @ViewBuilder func twoPaneDefaultDetail(level1ScreenIdentifier: ScreenIdentifier) -> some View {
         
