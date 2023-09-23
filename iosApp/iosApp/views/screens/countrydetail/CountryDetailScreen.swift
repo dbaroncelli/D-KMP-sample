@@ -8,21 +8,14 @@ import SwiftUI
 import shared
 
 struct CountryDetailScreen: View {
-    @ObservedObject var observableScreenState: ObservableScreenState
-    
-    init(
-        observableScreenState: ObservableScreenState
-    ) {
-        self.observableScreenState = observableScreenState
-    }
-    
+    let state: CountryDetailState
+
     var body: some View {
         VStack {
-            let countryDetailState = self.observableScreenState.state as! CountryDetailState
-            if countryDetailState.isLoading {
+            if state.isLoading {
                 LoadingScreen()
             } else {
-                let data = countryDetailState.countryInfo
+                let data = state.countryInfo
                 ScrollView(.vertical) {
                     VStack(alignment: .leading, spacing: 5) {
                         DataElement(label: "total population", value: data.population)
