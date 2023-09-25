@@ -11,21 +11,25 @@ import shared
 class AppObservableObject: ObservableObject {
     let model : DKMPViewModel = DKMPViewModel.Factory().getIosInstance()
     var dkmpNav : Navigation {
-        return self.appState.getNavigation(model: self.model)
+        return self.model.navigation
     }
-    @Published var appState : AppState
     @Published var localNavigationState : NavigationState
+    @Published var screenStates = [ScreenIdentifier: any ScreenState]()
+
     
-
-
     init() {
-        // "getDefaultAppState" and "onChange" are iOS-only DKMPViewModel's extension functions, defined in shared/iosMain
-        self.appState = model.getDefaultAppState()
         self.localNavigationState = model.navigation.navigationState
-        model.onChange { newState in
-            self.appState = newState
-            NSLog("D-KMP SAMPLE: APP STATE RECOMPOSITION: index #"+String(newState.recompositionIndex))
+    }
+
+    @MainActor // collecting the screen's Kotlin StateFlow (seamlessly, thanks to the SKIE plugin)
+    func collectScreenStateFlow(sID: ScreenIdentifier) async {
+        for await state in model.navigation.stateProvider.getScreenStateFlow(screenIdentifier: sID) {
+            self.screenStates[sID] = state
         }
+    }
+    
+    func getScreenState(sID: ScreenIdentifier) -> ScreenState {
+        return screenStates[sID] ?? model.navigation.stateProvider.getScreenStateFlow(screenIdentifier: sID).value
     }
 
 

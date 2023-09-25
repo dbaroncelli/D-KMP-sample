@@ -19,7 +19,7 @@ struct iosApp: App {
                 .environmentObject(appObj)
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
-                        appObj.dkmpNav.onReEnterForeground()
+                        appObj.dkmpNav.onEnterForeground()
                     }
                     else if newPhase == .background {
                         appObj.dkmpNav.onEnterBackground()

@@ -14,8 +14,6 @@ class DKMPViewModel (repo: Repository) {
         // factory methods are defined in the platform-specific shared code (androidMain and iosMain)
     }
 
-    val stateFlow: StateFlow<AppState>
-        get() = stateManager.mutableStateFlow
 
     private val stateManager by lazy { StateManager(repo) }
     val navigation by lazy { Navigation(stateManager) }

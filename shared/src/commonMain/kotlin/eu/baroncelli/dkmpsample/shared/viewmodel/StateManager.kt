@@ -13,10 +13,9 @@ interface ScreenParams
 
 class StateManager(repo: Repository) {
 
-    internal val mutableStateFlow = MutableStateFlow(AppState())
-
-    val screenStatesMap : MutableMap<URI,ScreenState> = mutableMapOf() // map of screen states currently in memory
+    val screenStatesMap : MutableMap<URI,MutableStateFlow<ScreenState>> = mutableMapOf() // map of screen states currently in memory
     val screenScopesMap : MutableMap<URI,CoroutineScope> = mutableMapOf() // map of coroutine scopes associated to current screen states
+
 
     val level1Backstack: MutableList<ScreenIdentifier> = mutableListOf() // list elements are only NavigationLevel1 screenIdentifiers
     val currentVerticalBackstack: MutableList<ScreenIdentifier> = mutableListOf() // list elements are the screenIdentifiers of the current vertical backstack
@@ -30,12 +29,6 @@ class StateManager(repo: Repository) {
         get() = verticalNavigationLevels[currentLevel1ScreenIdentifier?.URI] ?: mutableMapOf()
 
     internal val dataRepository by lazy { repo }
-
-    var skipNextScreenUpdateRecomposition = false
-
-    fun triggerAppStateRecomposition() {
-        mutableStateFlow.value = AppState(mutableStateFlow.value.recompositionIndex+1)
-    }
 
 
 
@@ -51,7 +44,7 @@ class StateManager(repo: Repository) {
         var firstInit = false
         if (!isInTheStatesMap(screenIdentifier)) {
             firstInit = true
-            screenStatesMap[screenIdentifier.URI] = screenInitSettings.initState(screenIdentifier)
+            screenStatesMap[screenIdentifier.URI] = MutableStateFlow(screenInitSettings.initState(screenIdentifier))
         } else if (screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.DONT_CALL) {
             return  // in case: the state is already in the map
                     //          AND "callOnInitAtEachNavigation" is set to DONT_CALL
@@ -67,7 +60,6 @@ class StateManager(repo: Repository) {
     fun runCallOnInit(screenIdentifier: ScreenIdentifier, screenInitSettings: ScreenInitSettings, firstInit : Boolean = false) {
         if (!firstInit && screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN) {
             runBlocking {
-                skipNextScreenUpdateRecomposition = true
                 screenInitSettings.callOnInit(this@StateManager)
             }
         } else {
@@ -92,16 +84,11 @@ class StateManager(repo: Repository) {
         lateinit var screenIdentifier : ScreenIdentifier
         var screenState : T?
         for(i in currentVerticalNavigationLevelsMap.keys.sortedDescending()) {
-            screenState = screenStatesMap[currentVerticalNavigationLevelsMap[i]?.URI] as? T
+            screenState = screenStatesMap[currentVerticalNavigationLevelsMap[i]?.URI]?.value as? T
             if (screenState != null) {
                 screenIdentifier = currentVerticalNavigationLevelsMap[i]!!
-                screenStatesMap[screenIdentifier.URI] = update(screenState)
+                screenStatesMap[screenIdentifier.URI]!!.value = update(screenState)
                 debugLogger.log("state updated @ /${screenIdentifier.URI}")
-                if (skipNextScreenUpdateRecomposition) {
-                    skipNextScreenUpdateRecomposition = false
-                    return
-                }
-                triggerAppStateRecomposition()
                 return
             }
         }
@@ -153,16 +140,4 @@ class StateManager(repo: Repository) {
         }
     }
 
-}
-
-
-
-// APPSTATE DATA CLASS DEFINITION
-
-data class AppState (
-    val recompositionIndex : Int = 0,
-) {
-    fun getNavigation(model: DKMPViewModel) : Navigation {
-        return model.navigation
-    }
 }

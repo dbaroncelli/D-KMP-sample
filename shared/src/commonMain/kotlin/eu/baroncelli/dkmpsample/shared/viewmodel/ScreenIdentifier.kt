@@ -23,7 +23,7 @@ class ScreenIdentifier private constructor(
         }
         fun getByURI(URI: String): ScreenIdentifier? {
             val parts = URI.split(":")
-            Screen.values().forEach {
+            Screen.entries.forEach {
                 if (it.asString == parts[0]) {
                     return ScreenIdentifier(it, null, parts[1])
                 }
@@ -72,7 +72,7 @@ class ScreenIdentifier private constructor(
     }
 
     fun level1VerticalBackstackEnabled() : Boolean {
-        Level1Navigation.values().forEach {
+        Level1Navigation.entries.forEach {
             if (it.screenIdentifier.URI == this.URI && it.rememberVerticalStack) {
                 return true
             }

@@ -22,10 +22,10 @@ struct TwoPane: View {
                 .background(customBgColor)
                 .navigationSplitViewColumnWidth(ideal: 100)
         } content: {
-            appObj.dkmpNav.screenPicker(requestedSId: level1ScreenIdentifier)
+            appObj.dkmpNav.screenPicker(requestedSId: level1ScreenIdentifier, appObj: appObj)
                 .navigationDestination(for: ScreenIdentifier.self) { sId in
                     let _ = appObj.dkmpNav.navigateToScreenForIos(screenIdentifier: sId, level1ScreenIdentifier: level1ScreenIdentifier)
-                    appObj.dkmpNav.screenPicker(requestedSId: sId)
+                    appObj.dkmpNav.screenPicker(requestedSId: sId, appObj: appObj)
                 }
                 .navigationSplitViewColumnWidth(ideal: 420)
         } detail: {

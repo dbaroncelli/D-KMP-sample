@@ -206,11 +206,9 @@ class Navigation(val stateManager : StateManager) {
 
 
 
-    fun onReEnterForeground() {
-        // not called at app startup, but only when reentering the app after it was in background
-        debugLogger.log("onReEnterForeground: recomposition is triggered")
+    fun onEnterForeground() {
+        debugLogger.log("onEnterForeground: screen scopes are reinitialized")
         val reinitializedScreens = stateManager.reinitScreenScopes()
-        stateManager.triggerAppStateRecomposition()
         reinitializedScreens.forEach {
             it.getScreenInitSettings(stateManager).apply {
                 if (callOnInitAlsoAfterBackground) {

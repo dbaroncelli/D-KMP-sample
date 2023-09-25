@@ -58,12 +58,9 @@ struct Router: View {
 
 
 func getAllLevel1ScreenIdentifiers() -> [ScreenIdentifier] {
-    var screenIdentifiers : [ScreenIdentifier] = []
-    let iterator = Level1Navigation.values().iterator()
-    while iterator.hasNext() {
-        screenIdentifiers.append((iterator.next_() as! Level1Navigation).screenIdentifier)
+    return Level1Navigation.allCases.map { l1Navigation in
+        l1Navigation.screenIdentifier
     }
-    return screenIdentifiers
 }
 
 
