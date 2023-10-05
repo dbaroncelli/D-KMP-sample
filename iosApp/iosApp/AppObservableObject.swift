@@ -27,11 +27,11 @@ class AppObservableObject: ObservableObject {
         for await state in model.navigation.stateProvider.getScreenStateFlow(screenIdentifier: sID) {
             self.screenStates[sID] = state
         }
+        return screenStates[screenIdentifier]!
     }
     
     func getScreenState(sID: ScreenIdentifier) -> ScreenState {
         return screenStates[sID] ?? model.navigation.stateProvider.getScreenStateFlow(screenIdentifier: sID).value
     }
-
 
 }
