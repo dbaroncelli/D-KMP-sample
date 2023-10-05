@@ -50,14 +50,13 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
                 implementation("io.ktor:ktor-client-okhttp:"+extra["ktor.version"])
                 implementation("app.cash.sqldelight:android-driver:"+extra["sqlDelight.version"])
             }
         }
         val androidUnitTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
                 implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
             }
         }

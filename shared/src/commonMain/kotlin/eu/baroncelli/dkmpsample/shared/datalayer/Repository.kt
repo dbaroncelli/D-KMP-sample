@@ -10,7 +10,7 @@ import eu.baroncelli.dkmpsample.shared.datalayer.sources.webservices.ApiClient
 import kotlinx.coroutines.*
 import mylocal.db.LocalDb
 
-class Repository(val sqlDriver: SqlDriver, val settings: Settings = Settings(), val useDefaultDispatcher: Boolean = true) {
+class Repository(val sqlDriver: SqlDriver, val settings: Settings = Settings()) {
 
     internal val webservices by lazy { ApiClient() }
     internal val localDb by lazy { LocalDb(sqlDriver, Countries.Adapter(IntColumnAdapter,IntColumnAdapter,IntColumnAdapter)) }
@@ -19,12 +19,8 @@ class Repository(val sqlDriver: SqlDriver, val settings: Settings = Settings(), 
 
     // we run each repository function on a Dispatchers.Default coroutine
     // we pass useDefaultDispatcher=false just for the TestRepository instance
-    suspend fun <T> withRepoContext (block: suspend () -> T) : T {
-        return if (useDefaultDispatcher) {
-            withContext(Dispatchers.Default) {
-                block()
-            }
-        } else {
+    suspend fun <T> withRepoContext(block: suspend () -> T): T {
+        return withContext(Dispatchers.Default) {
             block()
         }
     }
