@@ -29,7 +29,6 @@ fun Navigation.ScreenPicker(
     when (screenIdentifier.screen) {
 
         CountriesList -> {
-            val state by stateProvider.get<CountriesListState>(screenIdentifier).collectAsState()
             CountriesListScreen(
                 countriesListState = state as CountriesListState,
                 onListItemClick = { navigate(CountryDetail, CountryDetailParams(countryName = it)) },
@@ -38,7 +37,6 @@ fun Navigation.ScreenPicker(
         }
 
         CountryDetail -> {
-            val state by stateProvider.get<CountryDetailState>(screenIdentifier).collectAsState()
             CountryDetailScreen(
                 countryDetailState = state as CountryDetailState
             )
