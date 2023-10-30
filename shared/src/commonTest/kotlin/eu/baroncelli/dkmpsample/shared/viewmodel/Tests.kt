@@ -40,7 +40,7 @@ class ViewModelTests {
 
     @AfterTest
     fun tearDown() {
-        Dispatchers.resetMain()
+//        Dispatchers.resetMain()
     }
 
     @Test
