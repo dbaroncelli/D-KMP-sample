@@ -53,6 +53,7 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
                 implementation("io.ktor:ktor-client-okhttp:"+extra["ktor.version"])
                 implementation("app.cash.sqldelight:android-driver:"+extra["sqlDelight.version"])
+                implementation("org.slf4j:slf4j-nop:2.0.9")
             }
         }
         val androidUnitTest by getting {
