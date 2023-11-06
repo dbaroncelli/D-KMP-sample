@@ -2,9 +2,9 @@ group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 kotlin {
@@ -14,19 +14,19 @@ kotlin {
 dependencies {
     implementation(project(":composables"))
     implementation(project(":shared"))
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.lifecycle:lifecycle-process:2.6.2")
-    implementation("com.google.android.material:material:1.9.0")
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.android.material)
+    coreLibraryDesugaring(libs.android.desugar.jdk)
 }
 
 android {
     namespace = "eu.baroncelli.dkmpsample"
-    compileSdk = extra["android.compileSdk"].toString().toInt()
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "eu.baroncelli.dkmpsample"
-        minSdk = extra["android.minSdk"].toString().toInt()
-        targetSdk = extra["android.targetSdk"].toString().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -49,7 +49,7 @@ android {
         isCoreLibraryDesugaringEnabled = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = extra["android.composeCompiler"].toString()
+        kotlinCompilerExtensionVersion = libs.versions.android.compose.compiler.get()
     }
     buildFeatures {
         compose = true
