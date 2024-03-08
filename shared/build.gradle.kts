@@ -1,21 +1,24 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("plugin.serialization")
-    id("com.android.library")
-    id("app.cash.sqldelight")
-    id("co.touchlab.skie")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kotlinSerialization)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.sqlDelight)
+    alias(libs.plugins.skie)
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    coreLibraryDesugaring(libs.android.desugar.jdk)
 }
 
 kotlin {
     jvmToolchain(18)
     androidTarget()
+    jvm("desktop")
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,87 +29,64 @@ kotlin {
             binaryOption("bundleId", "eu.baroncelli.dkmpsample.shared")
         }
     }
-    jvm("desktop")
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-                implementation("io.ktor:ktor-client-core:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-client-logging:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-client-content-negotiation:"+extra["ktor.version"])
-                implementation("io.ktor:ktor-serialization-kotlinx-json:"+extra["ktor.version"])
-                implementation("com.russhwolf:multiplatform-settings-no-arg:"+extra["multiplatformSettings.version"])
-                implementation("app.cash.sqldelight:primitive-adapters:"+extra["sqlDelight.version"])
-            }
+
+        commonMain.dependencies {
+            implementation(libs.kotlinx.datetime)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.ktor.core)
+            implementation(libs.ktor.logging)
+            implementation(libs.ktor.contentNegotiation)
+            implementation(libs.ktor.serialization)
+            implementation(libs.multiplatformSettings)
+            implementation(libs.sqlDelight.common)
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
-                implementation("com.russhwolf:multiplatform-settings-test:"+extra["multiplatformSettings.version"])
-            }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.multiplatformSettings.test)
         }
-        val androidMain by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-                implementation("io.ktor:ktor-client-okhttp:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:android-driver:"+extra["sqlDelight.version"])
-                implementation("org.slf4j:slf4j-nop:2.0.9")
-            }
+        androidMain.dependencies {
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.ktor.android)
+            implementation(libs.sqlDelight.android)
+            implementation(libs.slf4j)
         }
         val androidUnitTest by getting {
             dependencies {
-                implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
+                implementation(libs.sqlDelight.jvm)
             }
         }
         val desktopMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")
-                implementation("io.ktor:ktor-client-apache:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:sqlite-driver:"+extra["sqlDelight.version"])
-                implementation("ch.qos.logback:logback-classic:1.4.7")
+                implementation(libs.kotlinx.coroutines.jvm)
+                implementation(libs.ktor.jvm)
+                implementation(libs.sqlDelight.jvm)
+                implementation(libs.logback)
             }
         }
-        val desktopTest by getting
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                implementation("io.ktor:ktor-client-darwin:"+extra["ktor.version"])
-                implementation("app.cash.sqldelight:native-driver:"+extra["sqlDelight.version"])
-            }
+        // val desktopTest by getting { dependencies { }}
+        iosMain.dependencies {
+            implementation(libs.ktor.ios)
+            implementation(libs.sqlDelight.ios)
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            iosSimulatorArm64Test.dependsOn(this)
-        }
+        // iosTest.dependencies {}
     }
 }
 
 android {
     namespace = "eu.baroncelli.dkmpsample.shared"
-    compileSdk = extra["android.compileSdk"].toString().toInt()
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = extra["android.minSdk"].toString().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = extra["android.composeCompiler"].toString()
+        kotlinCompilerExtensionVersion = libs.versions.android.compose.compiler.get()
     }
     buildTypes {
         getByName("release") {
@@ -121,5 +101,12 @@ sqldelight {
             packageName.set("mylocal.db")
             srcDirs("src/commonMain/kotlin")
         }
+    }
+}
+
+
+tasks.withType<KotlinCompile>().configureEach {
+    kotlinOptions {
+        freeCompilerArgs += "-Xexpect-actual-classes"
     }
 }

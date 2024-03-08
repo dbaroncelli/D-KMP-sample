@@ -2,13 +2,13 @@ group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.jetbrainsCompose)
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    coreLibraryDesugaring(libs.android.desugar.jdk)
 }
 
 kotlin {
@@ -37,7 +37,7 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.activity:activity-compose:1.7.2")
+                implementation(libs.androidx.activity.compose)
             }
         }
     }
@@ -45,16 +45,16 @@ kotlin {
 
 android {
     namespace = "eu.baroncelli.dkmpsample.composables"
-    compileSdk = extra["android.compileSdk"].toString().toInt()
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = extra["android.composeCompiler"].toString()
+        kotlinCompilerExtensionVersion = libs.versions.android.compose.compiler.get()
     }
     defaultConfig {
-        minSdk = extra["android.minSdk"].toString().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
     buildTypes {
         getByName("release") {
