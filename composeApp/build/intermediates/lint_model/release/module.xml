@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="/Users/daniele/Dev/KMP/D-KMP-sample/composables"
+    name=":composables"
+    type="LIBRARY"
+    maven="eu.baroncelli.dkmpsample:composables:"
+    agpVersion="8.2.0"
+    buildFolder="build"
+    bootClassPath="/Users/daniele/Library/Android/sdk/platforms/android-34/android.jar:/Users/daniele/Library/Android/sdk/build-tools/34.0.0/core-lambda-stubs.jar"
+    javaSourceLevel="18"
+    compileTarget="android-34">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

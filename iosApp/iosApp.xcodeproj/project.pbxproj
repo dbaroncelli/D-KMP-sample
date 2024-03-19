@@ -64,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55B49A060A900B703D7972F4 /* xcschemes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = xcschemes;
+			path = iosApp.xcodeproj/project.xcworkspace/xcuserdata/daniele.xcuserdatad/xcschemes;
+			sourceTree = "<group>";
+		};
 		6402EBF6264EA172009AC8FF /* styling */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +156,7 @@
 				7555FF7D242A565900829871 /* iosApp */,
 				7555FFB0242A642200829871 /* Frameworks */,
 				649CF508298C113A00B3AC6E /* iosApp.app */,
+				55B49A060A900B703D7972F4 /* xcschemes */,
 			);
 			sourceTree = "<group>";
 		};

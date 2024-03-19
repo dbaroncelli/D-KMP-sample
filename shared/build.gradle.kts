@@ -78,15 +78,15 @@ kotlin {
 android {
     namespace = "eu.baroncelli.dkmpsample.shared"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_18
+        targetCompatibility = JavaVersion.VERSION_18
+    }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.android.compose.compiler.get()
     }
     buildTypes {
         getByName("release") {

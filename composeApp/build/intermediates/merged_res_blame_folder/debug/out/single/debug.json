@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "eu.baroncelli.dkmpsample.composeApp-merged_res-60:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "eu.baroncelli.dkmpsample.composeApp-androidMain-61:/mipmap-hdpi/ic_launcher.png"
+    }
+]

@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "eu.baroncelli.dkmpsample.composeApp-mergeDebugResources-58:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "/Users/daniele/.gradle/caches/transforms-3/931cfc8fb4cccfde12e1e19a987983c5/transformed/appcompat-1.6.1/res/values-watch-v20/values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

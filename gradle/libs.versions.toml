@@ -1,24 +1,23 @@
 [versions]
-kotlin="1.9.20"
-compose="1.5.10" # KOTLIN vs COMPOSE compatibility table: https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility
+kotlin="1.9.23"
+compose="1.6.1" # KOTLIN vs COMPOSE compatibility table: https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
 android-targetSdk="34"
 android-compileSdk="34"
 android-minSdk="24"
-android-compose-compiler="1.5.3" # KOTLIN vs ANDROID COMPOSE COMPILER compatibility table: https://developer.android.com/jetpack/androidx/releases/compose-kotlin#pre-release_kotlin_compatibility
-android-gradle-plugin="8.1.2"
-android-material = "1.10.0"
+android-gradle-plugin="8.2.0"
+android-material = "1.11.0"
 android-desugar-jdk = "2.0.4"
-androidx-activity-compose = "1.8.0"
-androidx-lifecycle = "2.6.2"
-kotlinx-coroutines = "1.7.3"
-kotlinx-serialization = "1.6.0"
-kotlinx-datetime = "0.4.1"
-ktor="2.3.4" # 2.3.5 is buggy, we wait for 2.3.6
+androidx-activity-compose = "1.8.2"
+androidx-lifecycle = "2.7.0"
+kotlinx-coroutines = "1.8.0"
+kotlinx-serialization = "1.6.3"
+kotlinx-datetime = "0.5.0"
+ktor="2.3.9"
 skie="0.5.3"
 multiplatformSettings="1.0.0"
-sqlDelight="2.0.0"
+sqlDelight="2.0.1"
 slf4j = "2.0.9"
-logback = "1.4.8"
+logback = "1.4.14"
 
 
 [libraries]
@@ -51,8 +50,6 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 [plugins]
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 androidApplication = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 androidLibrary = { id = "com.android.library", version.ref = "android-gradle-plugin" }

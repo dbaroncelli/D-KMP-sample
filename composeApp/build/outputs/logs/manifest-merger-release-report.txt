@@ -1,0 +1,14 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml:2:1-12
+INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml:2:1-12
+	package
+		INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml
+uses-sdk
+INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml
+INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/daniele/Dev/KMP/D-KMP-sample/composables/src/androidMain/AndroidManifest.xml

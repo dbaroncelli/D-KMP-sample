@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -17,7 +19,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "D-KMP-sample"
 
-include(":androidApp")
-include(":desktopApp")
-include(":composables")
+
+include(":composeApp")
 include(":shared")
