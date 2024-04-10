@@ -1,6 +1,0 @@
-# compiler: R8
-# compiler_version: 8.2.33
-# common_typos_disable
-# {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: e3b0c44
-# pg_map_hash: SHA-256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
