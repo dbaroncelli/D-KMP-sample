@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">D-KMP Sample</string>
-    <style name="Theme.NoActionBar" parent="Theme.Material3.Light.NoActionBar">
-
-    </style>
-</resources>
