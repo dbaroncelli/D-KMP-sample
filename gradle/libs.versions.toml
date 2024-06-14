@@ -1,21 +1,21 @@
 [versions]
-kotlin="1.9.23"
-compose="1.6.1" # KOTLIN vs COMPOSE compatibility table: https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-compatibility-and-versioning.html#kotlin-compatibility
+kotlin="2.0.0"
+compose="1.6.10"
 android-targetSdk="34"
 android-compileSdk="34"
 android-minSdk="24"
 android-gradle-plugin="8.2.0"
-android-material = "1.11.0"
+android-material = "1.12.0"
 android-desugar-jdk = "2.0.4"
-androidx-activity-compose = "1.8.2"
-androidx-lifecycle = "2.7.0"
+androidx-activity-compose = "1.9.0"
+androidx-lifecycle = "2.8.2"
 kotlinx-coroutines = "1.8.0"
 kotlinx-serialization = "1.6.3"
 kotlinx-datetime = "0.5.0"
-ktor="2.3.9"
-skie="0.5.3"
+ktor="2.3.11"
+skie="0.8.2"
 multiplatformSettings="1.0.0"
-sqlDelight="2.0.1"
+sqlDelight="2.0.2"
 slf4j = "2.0.9"
 logback = "1.4.14"
 
@@ -54,5 +54,6 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 androidApplication = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 androidLibrary = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 sqlDelight = { id = "app.cash.sqldelight", version.ref = "sqlDelight" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
