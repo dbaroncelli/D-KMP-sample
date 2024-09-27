@@ -11,21 +11,21 @@ import shared
 extension Navigation {
 
     @ViewBuilder func screenPicker(requestedSId: ScreenIdentifier, appObj: AppObservableObject) -> some View {
-            
+        
         VStack {
             
             let state = appObj.getScreenState(sID: requestedSId)
             
             switch requestedSId.screen {
                 
-            case .countrieslist:
+            case .countriesList:
                 CountriesListScreen(
                     countriesListState: state as! CountriesListState,
-                    onListItemClick: { name in self.navigate(.countrydetail, CountryDetailParams(countryName: name)) },
+                    onListItemClick: { name in self.navigate(.countryDetail, CountryDetailParams(countryName: name)) },
                     onFavoriteIconClick: { name in self.events.selectFavorite(countryName: name) }
                 )
                 
-            case .countrydetail:
+            case .countryDetail:
                 CountryDetailScreen(
                     countryDetailState: state as! CountryDetailState
                 )
@@ -54,7 +54,7 @@ extension Navigation {
         
         switch level1ScreenIdentifier.screen {
             
-        case .countrieslist: CountriesListTwoPaneDefaultDetail()
+        case .countriesList: CountriesListTwoPaneDefaultDetail()
             
         default:
             EmptyView()

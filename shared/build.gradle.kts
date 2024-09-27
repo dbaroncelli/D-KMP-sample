@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 group = "eu.baroncelli.dkmpsample"
 version = "1.0-SNAPSHOT"
 
@@ -27,6 +25,13 @@ kotlin {
         it.binaries.framework {
             baseName = "shared"
             binaryOption("bundleId", "eu.baroncelli.dkmpsample.shared")
+        }
+    }
+    targets.configureEach {
+        compilations.configureEach {
+            compileTaskProvider.get().compilerOptions {
+                freeCompilerArgs.add("-Xexpect-actual-classes")
+            }
         }
     }
     sourceSets {
@@ -81,12 +86,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_18
         targetCompatibility = JavaVersion.VERSION_18
+        isCoreLibraryDesugaringEnabled = true
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
     }
     buildTypes {
         getByName("release") {
@@ -101,12 +104,5 @@ sqldelight {
             packageName.set("mylocal.db")
             srcDirs("src/commonMain/kotlin")
         }
-    }
-}
-
-
-tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        freeCompilerArgs += "-Xexpect-actual-classes"
     }
 }

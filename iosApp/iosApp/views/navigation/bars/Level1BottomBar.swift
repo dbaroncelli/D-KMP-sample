@@ -22,15 +22,15 @@ struct Level1ButtonBar: View {
         BottomBarButton(
             itemLabel: "All Countries",
             iconName: "list.bullet",
-            selected: level1ScreenIdentifier.URI==Level1Navigation.allcountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allcountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.allCountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.allCountries) }
         )
         Spacer()
         BottomBarButton(
             itemLabel: "Favorites",
             iconName: "star.fill",
-            selected: level1ScreenIdentifier.URI==Level1Navigation.favoritecountries.screenIdentifier.URI,
-            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoritecountries) }
+            selected: level1ScreenIdentifier.URI==Level1Navigation.favoriteCountries.screenIdentifier.URI,
+            onClick: { appObj.dkmpNav.navigateByLevel1Menu(appObj, level1Navigation: Level1Navigation.favoriteCountries) }
         )
         Spacer()
     }
