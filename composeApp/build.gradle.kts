@@ -17,13 +17,13 @@ dependencies {
 kotlin {
     jvmToolchain(18)
     androidTarget {
-        compilations.all {
-            kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        compilerOptions {
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
         }
     }
     jvm("desktop") {
-        compilations.all {
-            kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        compilerOptions {
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
         }
     }
     sourceSets {

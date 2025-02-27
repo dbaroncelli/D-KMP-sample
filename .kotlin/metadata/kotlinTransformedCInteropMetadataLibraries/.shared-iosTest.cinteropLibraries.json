@@ -10,8 +10,23 @@
     "sourceSetName": "appleMain"
   },
   {
-    "moduleId": "io.ktor:ktor-utils:2.3.11",
-    "file": "/Users/daniele/Dev/KMP/D-KMP-sample/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-utils-2.3.11-iosMain-cinterop/io.ktor_ktor-utils-cinterop-threadUtils-TE4abA.klib",
+    "moduleId": "io.ktor:ktor-network:3.1.0",
+    "file": "/Users/daniele/Dev/KMP/D-KMP-sample/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-network-3.1.0-iosMain-cinterop/io.ktor_ktor-network-cinterop-network-B693-Q.klib",
+    "sourceSetName": "iosMain"
+  },
+  {
+    "moduleId": "io.ktor:ktor-network:3.1.0",
+    "file": "/Users/daniele/Dev/KMP/D-KMP-sample/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-network-3.1.0-iosMain-cinterop/io.ktor_ktor-network-cinterop-un-B693-Q.klib",
+    "sourceSetName": "iosMain"
+  },
+  {
+    "moduleId": "io.ktor:ktor-utils:3.1.0",
+    "file": "/Users/daniele/Dev/KMP/D-KMP-sample/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-utils-3.1.0-iosMain-cinterop/io.ktor_ktor-utils-cinterop-threadUtils-KiCD0Q.klib",
+    "sourceSetName": "iosMain"
+  },
+  {
+    "moduleId": "io.ktor:ktor-io:3.1.0",
+    "file": "/Users/daniele/Dev/KMP/D-KMP-sample/.kotlin/metadata/kotlinTransformedCInteropMetadataLibraries/io.ktor-ktor-io-3.1.0-iosMain-cinterop/io.ktor_ktor-io-cinterop-mutex-VebtWA.klib",
     "sourceSetName": "iosMain"
   }
 ]
