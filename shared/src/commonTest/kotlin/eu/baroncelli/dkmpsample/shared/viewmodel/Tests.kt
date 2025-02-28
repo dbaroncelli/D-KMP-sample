@@ -4,10 +4,13 @@ import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryExtraData
 import eu.baroncelli.dkmpsample.shared.datalayer.objects.CountryListData
 import eu.baroncelli.dkmpsample.shared.datalayer.sources.localdb.countries.setCountriesList
 import eu.baroncelli.dkmpsample.shared.getTestRepository
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.*
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
-import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.*
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountriesList
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.Screen.CountryDetail
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListState
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrieslist.CountriesListType
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailParams
+import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryDetailState
 import eu.baroncelli.dkmpsample.shared.viewmodel.screens.countrydetail.CountryInfo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -30,7 +33,6 @@ class ViewModelTests {
         get() = navigation.stateManager
 
 
-
     @BeforeTest
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
@@ -38,13 +40,13 @@ class ViewModelTests {
 
     @AfterTest
     fun tearDown() {
-        Dispatchers.resetMain()
+//        Dispatchers.resetMain()
     }
 
     @Test
     fun testCountriesListStateUpdate() = runTest {
         val screenIdentifier = ScreenIdentifier.get(CountriesList, CountriesListParams(CountriesListType.ALL))
-        navigation.addScreenToBackstack(screenIdentifier)
+        navigation.addScreenToBackstack(screenIdentifier)?.join()
         stateManager.updateScreen(CountriesListState::class) {
             it.copy(favoriteCountries = mapOf("Italy" to true))
         }
@@ -55,10 +57,12 @@ class ViewModelTests {
     @Test
     fun testCountryDetailStateUpdate() = runTest {
         stateManager.dataRepository.localDb.setCountriesList(
-            listOf(CountryListData(name = "Germany"))
+            listOf(
+                CountryListData(name = "Germany")
+            )
         )
         val screenIdentifier = ScreenIdentifier.get(CountryDetail, CountryDetailParams("Germany"))
-        navigation.addScreenToBackstack(screenIdentifier)
+        navigation.addScreenToBackstack(screenIdentifier)?.join()
         stateManager.updateScreen(CountryDetailState::class) {
             it.copy(countryInfo = CountryInfo(_extraData = CountryExtraData(vaccines = "Pfizer, Moderna, AstraZeneca")))
         }
