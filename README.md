@@ -1,7 +1,10 @@
 # D-KMP architecture - official sample
 
-This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
-(*the **Web** version will be added at a later stage, when "Compose for Web" and "Kotlin/Wasm" become [more mature](#web-not-yet-implemented)*)
+This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.
+The business logic is written in Koltin and shared among the different platforms.
+<br>
+Please notice that the D-KMP architecture was conceived in 2020, when Compose Multiplatform still didn't exist.
+Since the May 2025, [Compose Multiplatform is stable and production-ready for Android, iOS and Desktop](https://blog.jetbrains.com/kotlin/2025/05/compose-multiplatform-1-8-0-released-compose-multiplatform-for-ios-is-stable-and-production-ready/), so using Compose Multiplatform (sharing both UI and business logic) has become the preferred Kotlin MultiPlatform solution.
 
 <img width="500" src="https://user-images.githubusercontent.com/5320104/219511497-0c494b86-2716-420d-bbc7-fe50c552667a.png"></img>
 
@@ -104,7 +107,3 @@ If you want to create your own app using the D-KMP Architecture, here are the in
   - **The composables are used by both Android and Desktop apps:**
     - look at the description on the [Android section](#android) above
 <br>
-
-### Web (not yet implemented)
-  - The best technology to implement a Web App in Kotlin will be **Compose for Web** backed by **Kotlin/Wasm**. However _Kotlin/Wasm_ is still at a very early stage: the first version was just released in February 2023, with [Kotlin 1.8.20](https://kotlinlang.org/docs/whatsnew-eap.html#new-kotlin-wasm-target).
-- _Compose For Web_ and _Kotlin/Wasm_ will allow us to build Compose projects seamlessly for the Web, using the same composables we are already using for the Desktop and Android.
