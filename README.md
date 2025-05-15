@@ -1,7 +1,7 @@
 # D-KMP architecture - official sample
 
 This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
-The business logic is fully shared (and written in Kotlin). The UI is platform-specific: _Compose_ for **Android** and **Desktop** and in _SwiftUI_ for **iOS**.<br>
+The business logic is fully shared (and written in Kotlin). The UI is platform-specific: _Compose_ for **Android** and **Desktop**, _SwiftUI_ for **iOS**.<br>
 <br>
 **UPDATE MAY 2025:**<br>
 _Please notice that the D-KMP architecture was conceived in 2020, when nobody expected that Compose would have become a first-class UI toolkit also for iOS.<br>
