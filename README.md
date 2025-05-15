@@ -1,6 +1,6 @@
 # D-KMP architecture - official sample
 
-This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
+This is the official sample of the **D-KMP architecture**, where **D** stands for _declarative UI_ and **KMP** stands for _Kotlin MultiPlatform_. It presents a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
 The business logic is fully shared (and written in Kotlin). The UI is platform-specific: _Compose_ for **Android** and **Desktop**, _SwiftUI_ for **iOS**.<br>
 <br>
 **UPDATE MAY 2025:**<br>
