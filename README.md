@@ -1,10 +1,10 @@
 # D-KMP architecture - official sample
 
 This is the official sample of the **D-KMP architecture**, presenting a simple master/detail app, for **Android**, **iOS** and **Desktop**.<br>
-Only the business logic is written (and shared) in Kotlin. The UI of each platform is kept native (_SwiftUI in case of iOS_).<br>
+Only the business logic is written (and shared) in Kotlin. The UI of each platform is kept native (_SwiftUI_ in case of **iOS**).<br>
 <br>
-Please notice that the D-KMP architecture was conceived in 2020, when Compose Multiplatform still didn't exist.<br>
-Since the May 2025, [Compose Multiplatform is stable and production-ready for Android, iOS and Desktop](https://blog.jetbrains.com/kotlin/2025/05/compose-multiplatform-1-8-0-released-compose-multiplatform-for-ios-is-stable-and-production-ready/), so using Compose Multiplatform (sharing both UI and business logic) has become the preferred Kotlin MultiPlatform solution.<br>
+(_Please notice that the D-KMP architecture was conceived in 2020, when Compose Multiplatform still didn't exist.<br>
+Since the May 2025, [Compose Multiplatform is stable and production-ready for Android, iOS and Desktop](https://blog.jetbrains.com/kotlin/2025/05/compose-multiplatform-1-8-0-released-compose-multiplatform-for-ios-is-stable-and-production-ready/), so using Compose Multiplatform (sharing both UI and business logic) has become the preferred Kotlin MultiPlatform solution._)<br>
 
 <img width="500" src="https://user-images.githubusercontent.com/5320104/219511497-0c494b86-2716-420d-bbc7-fe50c552667a.png"></img>
 
