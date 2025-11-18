@@ -9,7 +9,7 @@ _The D-KMP architecture was conceived in 2020, when nobody expected that Compose
 All information about writing apps with Compose MultiPlatform can be found on the [official CMP website](https://www.jetbrains.com/compose-multiplatform/) by JetBrains._<br>
 <br>
 **UPDATE NOVEMBER 2025:**<br>
-_Navigation3 is now finally available also to CMP, providing the very much awaited official multiplatform navigation library!<br>
+_[Navigation3](https://developer.android.com/jetpack/androidx/releases/navigation3) is now finally available also to CMP, providing the very much awaited CMP-optimized navigation library!<br>
 Google is now also mentioning Compose Multiplatform on the [KMP section of the Android website](https://developer.android.com/kotlin/multiplatform), listing all the Jetpack libraries available for KMP/CMP. The path cannot be clearer. It doesn't make anymore sense to duplicate the UI for each platform. Compose has all that's needed for a robust and maintanable multiplatform app. By the end of 2026, Compose is also expected to become production ready for Web/Wasm._
 
 <img width="500" src="https://user-images.githubusercontent.com/5320104/219511497-0c494b86-2716-420d-bbc7-fe50c552667a.png"></img>
