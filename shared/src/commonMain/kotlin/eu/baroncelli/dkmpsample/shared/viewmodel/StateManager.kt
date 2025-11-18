@@ -34,7 +34,7 @@ class StateManager(repo: Repository) {
 
     // INIT SCREEN
 
-    fun initScreen(screenIdentifier: ScreenIdentifier) {
+    fun initScreen(screenIdentifier: ScreenIdentifier): Job? {
         debugLogger.log("initScreen: "+screenIdentifier.URI)
         val screenInitSettings = screenIdentifier.getScreenInitSettings(this)
         if (screenScopesMap[screenIdentifier.URI] == null || !screenScopesMap[screenIdentifier.URI]!!.isActive) {
@@ -46,22 +46,23 @@ class StateManager(repo: Repository) {
             firstInit = true
             screenStatesMap[screenIdentifier.URI] = MutableStateFlow(screenInitSettings.initState(screenIdentifier))
         } else if (screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.DONT_CALL) {
-            return  // in case: the state is already in the map
+            return null  // in case: the state is already in the map
                     //          AND "callOnInitAtEachNavigation" is set to DONT_CALL
                     //      => we don't need to run the "callOnInit" function
         }
-        runCallOnInit(screenIdentifier, screenInitSettings, firstInit)
+        return runCallOnInit(screenIdentifier, screenInitSettings, firstInit)
     }
 
     fun isInTheStatesMap(screenIdentifier: ScreenIdentifier) : Boolean {
         return screenStatesMap.containsKey(screenIdentifier.URI)
     }
 
-    fun runCallOnInit(screenIdentifier: ScreenIdentifier, screenInitSettings: ScreenInitSettings, firstInit : Boolean = false) {
-        if (!firstInit && screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN) {
+    fun runCallOnInit(screenIdentifier: ScreenIdentifier, screenInitSettings: ScreenInitSettings, firstInit : Boolean = false): Job? {
+        return if (!firstInit && screenInitSettings.callOnInitAtEachNavigation == CallOnInitValues.CALL_BEFORE_SHOWING_SCREEN) {
             runBlocking {
                 screenInitSettings.callOnInit(this@StateManager)
             }
+            null
         } else {
             runInScreenScope(screenIdentifier) {
                 screenInitSettings.callOnInit(this@StateManager)
@@ -125,10 +126,10 @@ class StateManager(repo: Repository) {
     }
 
     // we run each event function on a Dispatchers.Main coroutine
-    fun runInScreenScope (screenIdentifier: ScreenIdentifier? = null, block: suspend () -> Unit) {
+    fun runInScreenScope (screenIdentifier: ScreenIdentifier? = null, block: suspend () -> Unit): Job? {
         val URI = screenIdentifier?.URI ?: currentScreenIdentifier.URI
         val screenScope = screenScopesMap[URI]
-        screenScope?.launch {
+        return screenScope?.launch {
             block()
         }
     }
